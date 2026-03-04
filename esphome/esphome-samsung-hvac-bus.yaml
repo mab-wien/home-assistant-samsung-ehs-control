@@ -184,11 +184,10 @@ samsung_ac:
 
         # Technician sensors (enabled)
         - name: Compressor Current
-          id: compressor_current
-          message: 0x823A
-          unit_of_measurement: "A"
-          state_class: measurement
-          accuracy_decimals: 1
+            message: 0x823B
+            unit_of_measurement: "A"
+            filters:
+            - multiply: 0.005
 
         - name: Compressor Load
           id: compressor_load
