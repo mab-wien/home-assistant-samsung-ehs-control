@@ -1,12 +1,11 @@
 # ESPHome configuration for Samsung EHS heat pump HVAC bus
-# v3: fixes Flow Temperature scaling, stabilizes Compressor Current, adds sanity filter for Main EEV1.
+# v4: adds confirmed technician registers from your logs + "night active" + silent inference
 #
-# Observations from your screenshot:
-# - Flow Temperature shows ~420°C -> almost certainly raw value 420 = 42.0°C (0.1°C scaling)
-# - Evaporator/Discharge temps are now correct after 0.1 scaling (25.5°C / 30.0°C)
-# - Compressor Current became NA because the value was filtered out (likely 0 or out-of-range).
-#   This version makes the filter more permissive and only drops obvious invalid values.
-# - Main EEV1 is NOT a temperature; it's typically "steps" (0..~2000). Values like 270-300 are normal.
+# Confirmed by your ESPHome logs:
+# - Variable 823b = 561  -> Compressor current (needs scaling) fileciteturn5file5
+# - Variable 823f = 200  -> Main EEV step fileciteturn5file5
+# - Variable 8233 = 120  -> Control/State code fileciteturn5file10
+# - Variable 8236 = 38   -> Order/Command frequency (Hz) fileciteturn5file7
 
 esphome:
   name: !secret name
@@ -14,6 +13,9 @@ esphome:
 
 esp32:
   board: m5stack-atom
+  # Optional (silence ESPHome notice):
+  # framework:
+  #   type: esp-idf
 
 web_server:
   port: 80
@@ -36,6 +38,11 @@ wifi:
 
 captive_portal:
 
+# Needed for "Night active" / time-window sensors
+time:
+  - platform: homeassistant
+    id: ha_time
+
 uart:
   tx_pin: GPIO19
   rx_pin: GPIO22
@@ -52,6 +59,7 @@ samsung_ac:
   debug_log_messages: false
 
   devices:
+    # Indoor / Hydro unit
     - address: "20.00.00"
       capabilities:
         horizontal_swing: false
@@ -76,6 +84,7 @@ samsung_ac:
         name: "mode"
       automatic_cleaning:
         name: "automatic clean"
+
       room_temperature_offset: -1.4
 
       custom_sensor:
@@ -97,6 +106,7 @@ samsung_ac:
           unit_of_measurement: W
           accuracy_decimals: 1
 
+    # Outdoor unit
     - address: "10.00.00"
       error_code:
         name: error_code
@@ -146,14 +156,22 @@ samsung_ac:
           unit_of_measurement: Hz
           accuracy_decimals: 1
 
+        # CONFIRMED in log: 8236 appears as "order/command" frequency (Hz) fileciteturn5file7
+        - name: Order Compressor Frequency
+          id: order_compressor_frequency
+          message: 0x8236
+          device_class: frequency
+          state_class: measurement
+          unit_of_measurement: Hz
+          accuracy_decimals: 1
+
         - name: Fan Speed
           id: fan_speed_rpm
           message: 0x823D
           state_class: measurement
           unit_of_measurement: RPM
-          accuracy_decimals: 1
+          accuracy_decimals: 0
 
-        # FIX: raw value seems to be in 0.1°C steps (e.g. 420 -> 42.0°C)
         - name: Flow Temperature
           id: flow_temperature
           message: 0x82E0
@@ -167,7 +185,7 @@ samsung_ac:
                 if (isnan(x) || x < -20.0 || x > 90.0) return NAN;
                 return x;
 
-        # EEV is typically "steps" (no decimal). Keep as-is, just sanity filter.
+        # EEV opening/step (steps, no decimals)
         - name: Main EEV1
           id: main_eev1
           message: 0x8229
@@ -178,16 +196,27 @@ samsung_ac:
                 if (isnan(x) || x < 0.0 || x > 3000.0) return NAN;
                 return x;
 
+        # CONFIRMED in log: 823F = 200 fileciteturn5file5
+        - name: Main EEV Step
+          id: main_eev_step
+          message: 0x823F
+          state_class: measurement
+          accuracy_decimals: 0
+          filters:
+            - lambda: |-
+                if (isnan(x) || x < 0.0 || x > 5000.0) return NAN;
+                return x;
+
         - name: Operation Mode
           id: operation_mode
           message: 0x8001
 
-        # Technician sensors (enabled)
-        - name: Compressor Current
-          message: 0x823B
-          unit_of_measurement: "A"
-          filters:
-            - multiply: 0.005
+        # CONFIRMED in log: 8233 = 120 fileciteturn5file10
+        - name: Control State Code
+          id: control_state_code
+          message: 0x8233
+          state_class: measurement
+          accuracy_decimals: 0
 
         - name: Compressor Load
           id: compressor_load
@@ -226,13 +255,19 @@ samsung_ac:
                 if (isnan(x) || x < -40.0 || x > 80.0) return NAN;
                 return x;
 
-        - name: Condenser Temperature
-          id: condenser_temp
-          message: 0x8235
-          unit_of_measurement: "°C"
-          device_class: temperature
+        # Compressor current: CONFIRMED at 0x823B in your logs (raw 561) fileciteturn5file5
+        - name: Compressor Current
+          id: compressor_current
+          message: 0x823B
+          unit_of_measurement: "A"
           state_class: measurement
-          accuracy_decimals: 1
+          accuracy_decimals: 2
+          filters:
+            # raw/200 => A  (561 -> 2.805 A)
+            - multiply: 0.005
+            - lambda: |-
+                if (isnan(x) || x <= 0.0 || x > 60.0) return NAN;
+                return x;
 
 sensor:
   - platform: template
@@ -258,3 +293,20 @@ sensor:
       }
     update_interval: 30s
     accuracy_decimals: 2
+
+binary_sensor:
+  # Simple "night window" indicator (adjust hours if you want)
+  - platform: template
+    name: "Night Window Active (20-06)"
+    lambda: |-
+      auto now = id(ha_time).now();
+      if (!now.is_valid()) return false;
+      int h = now.hour;
+      return (h >= 20) || (h < 6);
+
+  # Silent/Quiet inference: typically fan rpm drops strongly (e.g., ~560 -> ~280 in your tests)
+  - platform: template
+    name: "Silent Active (Inferred)"
+    lambda: |-
+      if (isnan(id(fan_speed_rpm).state) || isnan(id(target_compressor_frequency).state)) return false;
+      return (id(fan_speed_rpm).state <= 320) || (id(target_compressor_frequency).state <= 45);
