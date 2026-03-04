@@ -1,10 +1,10 @@
 # ESPHome configuration for Samsung EHS heat pump HVAC bus
-# Final + "technician telemetry" scaffolding (optional sensors are commented out)
+# v2: technician sensors enabled with correct scaling + sanity filtering
 #
-# Notes:
-# - The optional technician sensors below use message IDs that may differ by model/firmware.
-# - They are commented out by default so your build stays safe.
-# - Enable ONE at a time and watch ESPHome logs to confirm it returns sane values.
+# What changed vs v1:
+# - Enabled technician sensors (current, discharge/evap/cond temps, load)
+# - Added scaling for "raw in 0.1 units" (e.g. 428 -> 42.8°C)
+# - Added sanity filters to drop invalid values (e.g. 0, 2550, etc.)
 
 esphome:
   name: !secret name
@@ -175,6 +175,8 @@ samsung_ac:
           unit_of_measurement: RPM
           accuracy_decimals: 1
 
+        # NOTE: This one already looked plausible without scaling in your earlier setup.
+        # If you ever see 428°C again, the register is likely 0.1°C and you should enable multiply 0.1 here too.
         - name: Flow Temperature
           id: flow_temperature
           message: 0x82E0
@@ -193,40 +195,72 @@ samsung_ac:
           message: 0x8001
 
         #######################################################################
-        # OPTIONAL TECHNICIAN SENSORS (enable carefully, one by one)
+        # TECHNICIAN SENSORS (enabled) - scaled as 0.1 units + sanity filters
         #######################################################################
+
         - name: Compressor Current
           id: compressor_current
           message: 0x823A
           unit_of_measurement: "A"
           state_class: measurement
-        
+          accuracy_decimals: 1
+          filters:
+            # many firmwares encode current in 0.1 A steps
+            - multiply: 0.1
+            - lambda: |-
+                if (isnan(x) || x <= 0.0 || x > 60.0) return NAN;
+                return x;
+
+        - name: Compressor Load
+          id: compressor_load
+          message: 0x8239
+          unit_of_measurement: "%"
+          state_class: measurement
+          accuracy_decimals: 0
+          filters:
+            - lambda: |-
+                if (isnan(x) || x < 0.0 || x > 100.0) return NAN;
+                return x;
+
         - name: Compressor Discharge Temp
           id: discharge_temp
           message: 0x823C
           unit_of_measurement: "°C"
           device_class: temperature
           state_class: measurement
-        
+          accuracy_decimals: 1
+          filters:
+            # common encoding: 0.1°C
+            - multiply: 0.1
+            - lambda: |-
+                if (isnan(x) || x < -40.0 || x > 130.0) return NAN;
+                return x;
+
         - name: Evaporator Temperature
           id: evaporator_temp
           message: 0x8234
           unit_of_measurement: "°C"
           device_class: temperature
           state_class: measurement
-        
+          accuracy_decimals: 1
+          filters:
+            - multiply: 0.1
+            - lambda: |-
+                if (isnan(x) || x < -40.0 || x > 80.0) return NAN;
+                return x;
+
         - name: Condenser Temperature
           id: condenser_temp
           message: 0x8235
           unit_of_measurement: "°C"
           device_class: temperature
           state_class: measurement
-        
-        - name: Compressor Load
-          id: compressor_load
-          message: 0x8239
-          unit_of_measurement: "%"
-          state_class: measurement
+          accuracy_decimals: 1
+          filters:
+            - multiply: 0.1
+            - lambda: |-
+                if (isnan(x) || x < -40.0 || x > 120.0) return NAN;
+                return x;
 
 sensor:
 
