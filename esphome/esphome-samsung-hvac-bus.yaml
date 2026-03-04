@@ -189,11 +189,6 @@ samsung_ac:
           unit_of_measurement: "A"
           state_class: measurement
           accuracy_decimals: 1
-          filters:
-            - multiply: 0.1
-            - lambda: |-
-                if (isnan(x) || x <= 0.0 || x > 100.0) return NAN;
-                return x;
 
         - name: Compressor Load
           id: compressor_load
@@ -239,11 +234,6 @@ samsung_ac:
           device_class: temperature
           state_class: measurement
           accuracy_decimals: 1
-          filters:
-            - multiply: 0.1
-            - lambda: |-
-                if (isnan(x) || x < -40.0 || x > 120.0) return NAN;
-                return x;
 
 sensor:
   - platform: template
