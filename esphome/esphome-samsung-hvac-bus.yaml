@@ -184,9 +184,9 @@ samsung_ac:
 
         # Technician sensors (enabled)
         - name: Compressor Current
-            message: 0x823B
-            unit_of_measurement: "A"
-            filters:
+          message: 0x823B
+          unit_of_measurement: "A"
+          filters:
             - multiply: 0.005
 
         - name: Compressor Load
