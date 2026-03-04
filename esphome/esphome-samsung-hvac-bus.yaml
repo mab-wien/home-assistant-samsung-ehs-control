@@ -1,6 +1,10 @@
-
 # ESPHome configuration for Samsung EHS heat pump HVAC bus
-# Includes stability improvements and safe COP calculations
+# Final + "technician telemetry" scaffolding (optional sensors are commented out)
+#
+# Notes:
+# - The optional technician sensors below use message IDs that may differ by model/firmware.
+# - They are commented out by default so your build stays safe.
+# - Enable ONE at a time and watch ESPHome logs to confirm it returns sane values.
 
 esphome:
   name: !secret name
@@ -50,6 +54,7 @@ samsung_ac:
 
   devices:
 
+    # Indoor / Hydro unit
     - address: "20.00.00"
 
       capabilities:
@@ -107,6 +112,7 @@ samsung_ac:
           unit_of_measurement: W
           accuracy_decimals: 1
 
+    # Outdoor unit
     - address: "10.00.00"
 
       error_code:
@@ -147,6 +153,7 @@ samsung_ac:
           unit_of_measurement: W
 
         - name: Compressor Frequency
+          id: compressor_frequency
           message: 0x8238
           device_class: frequency
           state_class: measurement
@@ -154,6 +161,7 @@ samsung_ac:
           accuracy_decimals: 1
 
         - name: Target Compressor Frequency
+          id: target_compressor_frequency
           message: 0x8237
           device_class: frequency
           state_class: measurement
@@ -161,24 +169,64 @@ samsung_ac:
           accuracy_decimals: 1
 
         - name: Fan Speed
+          id: fan_speed_rpm
           message: 0x823D
           state_class: measurement
           unit_of_measurement: RPM
           accuracy_decimals: 1
 
         - name: Flow Temperature
+          id: flow_temperature
           message: 0x82E0
           unit_of_measurement: "°C"
           device_class: temperature
           state_class: measurement
 
         - name: Main EEV1
+          id: main_eev1
           message: 0x8229
           state_class: measurement
           accuracy_decimals: 1
 
         - name: Operation Mode
+          id: operation_mode
           message: 0x8001
+
+        #######################################################################
+        # OPTIONAL TECHNICIAN SENSORS (enable carefully, one by one)
+        #######################################################################
+        # - name: Compressor Current
+        #   id: compressor_current
+        #   message: 0x823A
+        #   unit_of_measurement: "A"
+        #   state_class: measurement
+        #
+        # - name: Compressor Discharge Temp
+        #   id: discharge_temp
+        #   message: 0x823C
+        #   unit_of_measurement: "°C"
+        #   device_class: temperature
+        #   state_class: measurement
+        #
+        # - name: Evaporator Temperature
+        #   id: evaporator_temp
+        #   message: 0x8234
+        #   unit_of_measurement: "°C"
+        #   device_class: temperature
+        #   state_class: measurement
+        #
+        # - name: Condenser Temperature
+        #   id: condenser_temp
+        #   message: 0x8235
+        #   unit_of_measurement: "°C"
+        #   device_class: temperature
+        #   state_class: measurement
+        #
+        # - name: Compressor Load
+        #   id: compressor_load
+        #   message: 0x8239
+        #   unit_of_measurement: "%"
+        #   state_class: measurement
 
 sensor:
 
