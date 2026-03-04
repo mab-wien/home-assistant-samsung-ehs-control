@@ -195,38 +195,38 @@ samsung_ac:
         #######################################################################
         # OPTIONAL TECHNICIAN SENSORS (enable carefully, one by one)
         #######################################################################
-        # - name: Compressor Current
-        #   id: compressor_current
-        #   message: 0x823A
-        #   unit_of_measurement: "A"
-        #   state_class: measurement
-        #
-        # - name: Compressor Discharge Temp
-        #   id: discharge_temp
-        #   message: 0x823C
-        #   unit_of_measurement: "°C"
-        #   device_class: temperature
-        #   state_class: measurement
-        #
-        # - name: Evaporator Temperature
-        #   id: evaporator_temp
-        #   message: 0x8234
-        #   unit_of_measurement: "°C"
-        #   device_class: temperature
-        #   state_class: measurement
-        #
-        # - name: Condenser Temperature
-        #   id: condenser_temp
-        #   message: 0x8235
-        #   unit_of_measurement: "°C"
-        #   device_class: temperature
-        #   state_class: measurement
-        #
-        # - name: Compressor Load
-        #   id: compressor_load
-        #   message: 0x8239
-        #   unit_of_measurement: "%"
-        #   state_class: measurement
+        - name: Compressor Current
+          id: compressor_current
+          message: 0x823A
+          unit_of_measurement: "A"
+          state_class: measurement
+        
+        - name: Compressor Discharge Temp
+          id: discharge_temp
+          message: 0x823C
+          unit_of_measurement: "°C"
+          device_class: temperature
+          state_class: measurement
+        
+        - name: Evaporator Temperature
+          id: evaporator_temp
+          message: 0x8234
+          unit_of_measurement: "°C"
+          device_class: temperature
+          state_class: measurement
+        
+        - name: Condenser Temperature
+          id: condenser_temp
+          message: 0x8235
+          unit_of_measurement: "°C"
+          device_class: temperature
+          state_class: measurement
+        
+        - name: Compressor Load
+          id: compressor_load
+          message: 0x8239
+          unit_of_measurement: "%"
+          state_class: measurement
 
 sensor:
 
