@@ -1,10 +1,12 @@
 # ESPHome configuration for Samsung EHS heat pump HVAC bus
-# v2: technician sensors enabled with correct scaling + sanity filtering
+# v3: fixes Flow Temperature scaling, stabilizes Compressor Current, adds sanity filter for Main EEV1.
 #
-# What changed vs v1:
-# - Enabled technician sensors (current, discharge/evap/cond temps, load)
-# - Added scaling for "raw in 0.1 units" (e.g. 428 -> 42.8°C)
-# - Added sanity filters to drop invalid values (e.g. 0, 2550, etc.)
+# Observations from your screenshot:
+# - Flow Temperature shows ~420°C -> almost certainly raw value 420 = 42.0°C (0.1°C scaling)
+# - Evaporator/Discharge temps are now correct after 0.1 scaling (25.5°C / 30.0°C)
+# - Compressor Current became NA because the value was filtered out (likely 0 or out-of-range).
+#   This version makes the filter more permissive and only drops obvious invalid values.
+# - Main EEV1 is NOT a temperature; it's typically "steps" (0..~2000). Values like 270-300 are normal.
 
 esphome:
   name: !secret name
@@ -45,55 +47,38 @@ external_components:
     components: [samsung_ac]
 
 samsung_ac:
-
-  # Keep telemetry active even when the heat pump is idle
   non_nasa_keepalive: true
-
   debug_log_undefined_messages: false
   debug_log_messages: false
 
   devices:
-
-    # Indoor / Hydro unit
     - address: "20.00.00"
-
       capabilities:
         horizontal_swing: false
 
       room_temperature:
         name: "temperature"
-
       target_temperature:
         name: "target temperature"
-
       water_temperature:
         name: "Warm water"
-
       water_outlet_target:
         name: "Water Outlet Target"
-
       water_target_temperature:
         name: "Hot Water Target Temperature"
-
       water_heater_mode:
         name: "Hotwater Mode"
-
       power:
         name: "power"
-
       water_heater_power:
         name: "Water Heater Power"
-
       mode:
         name: "mode"
-
       automatic_cleaning:
         name: "automatic clean"
-
       room_temperature_offset: -1.4
 
       custom_sensor:
-
         - name: Total Produced Energy
           id: total_produced_energy
           message: 0x4427
@@ -112,29 +97,22 @@ samsung_ac:
           unit_of_measurement: W
           accuracy_decimals: 1
 
-    # Outdoor unit
     - address: "10.00.00"
-
       error_code:
         name: error_code
 
       outdoor_instantaneous_power:
         name: "Outdoor Instantaneous Power"
-
       outdoor_cumulative_energy:
         name: "Outdoor Cumulative Energy"
-
       outdoor_current:
         name: "Outdoor Current"
-
       outdoor_voltage:
         name: "Outdoor Voltage"
-
       outdoor_temperature:
         name: "Outdoor temperature"
 
       custom_sensor:
-
         - name: Total Consumed Energy
           id: total_consumed_energy
           message: 0x8414
@@ -175,29 +153,36 @@ samsung_ac:
           unit_of_measurement: RPM
           accuracy_decimals: 1
 
-        # NOTE: This one already looked plausible without scaling in your earlier setup.
-        # If you ever see 428°C again, the register is likely 0.1°C and you should enable multiply 0.1 here too.
+        # FIX: raw value seems to be in 0.1°C steps (e.g. 420 -> 42.0°C)
         - name: Flow Temperature
           id: flow_temperature
           message: 0x82E0
           unit_of_measurement: "°C"
           device_class: temperature
           state_class: measurement
+          accuracy_decimals: 1
+          filters:
+            - multiply: 0.1
+            - lambda: |-
+                if (isnan(x) || x < -20.0 || x > 90.0) return NAN;
+                return x;
 
+        # EEV is typically "steps" (no decimal). Keep as-is, just sanity filter.
         - name: Main EEV1
           id: main_eev1
           message: 0x8229
           state_class: measurement
-          accuracy_decimals: 1
+          accuracy_decimals: 0
+          filters:
+            - lambda: |-
+                if (isnan(x) || x < 0.0 || x > 3000.0) return NAN;
+                return x;
 
         - name: Operation Mode
           id: operation_mode
           message: 0x8001
 
-        #######################################################################
-        # TECHNICIAN SENSORS (enabled) - scaled as 0.1 units + sanity filters
-        #######################################################################
-
+        # Technician sensors (enabled)
         - name: Compressor Current
           id: compressor_current
           message: 0x823A
@@ -205,10 +190,9 @@ samsung_ac:
           state_class: measurement
           accuracy_decimals: 1
           filters:
-            # many firmwares encode current in 0.1 A steps
             - multiply: 0.1
             - lambda: |-
-                if (isnan(x) || x <= 0.0 || x > 60.0) return NAN;
+                if (isnan(x) || x <= 0.0 || x > 100.0) return NAN;
                 return x;
 
         - name: Compressor Load
@@ -230,7 +214,6 @@ samsung_ac:
           state_class: measurement
           accuracy_decimals: 1
           filters:
-            # common encoding: 0.1°C
             - multiply: 0.1
             - lambda: |-
                 if (isnan(x) || x < -40.0 || x > 130.0) return NAN;
@@ -263,7 +246,6 @@ samsung_ac:
                 return x;
 
 sensor:
-
   - platform: template
     name: Total COP
     lambda: |-
