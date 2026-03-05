@@ -268,6 +268,46 @@ samsung_ac:
             - lambda: |-
                 if (isnan(x) || x <= 0.0 || x > 60.0) return NAN;
                 return x;
+        # zusätzliche Diagnose-Sensoren (Outdoor Unit)
+        - name: High Pressure
+          id: high_pressure
+          message: 0x8206
+          unit_of_measurement: "bar"
+          accuracy_decimals: 1
+          filters:
+            - multiply: 0.1
+
+        - name: Low Pressure
+          id: low_pressure
+          message: 0x8208
+          unit_of_measurement: "bar"
+          accuracy_decimals: 1
+          filters:
+            - multiply: 0.1
+
+        - name: Outdoor Fan Step
+          id: fan_step
+          message: 0x8226
+        # Heizkurve / Water Law
+        - name: Water Law Target
+          id: water_law_target
+          message: 0x4248
+          unit_of_measurement: "°C"
+
+        - name: Water Law Current
+          id: water_law_current
+          message: 0x427F
+          unit_of_measurement: "°C"
+
+        - name: Zone1 Water Target
+          id: zone1_water_target
+          message: 0x42D8
+          unit_of_measurement: "°C"
+
+        - name: Zone2 Water Target
+          id: zone2_water_target
+          message: 0x42D9
+          unit_of_measurement: "°C"
 
 sensor:
   - platform: template
