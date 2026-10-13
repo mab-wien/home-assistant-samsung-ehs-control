@@ -1,4 +1,6 @@
 # Samsung EHS / Beormund NASA Vollausbau – sprechende Namen DIREKT in ESPHome.
+# Erweiterung: Diagnose-Leseproben FSV 1061-1064 (unbestaetigte NASA-Adressen)
+# und Heizwasser-Vorlaufabweichung. FSV 6031 nicht lesbar ohne bestaetigten Code.
 # Alle 91 FSV-Readonly-Entitaeten UND 91 interne FSV-Quellen sind aussagekraeftig benannt.
 # Auch saemtliche NEU hinzugekommenen NASA-Telemetrie- und Diagnosedaten sind deutsch benannt.
 # Bisherige Sensornamen aus der urspruenglichen Integration bleiben erhalten (Automatisierungen).
@@ -1109,6 +1111,102 @@ sensor:
     lambda: |-
       return id(dhw_target).state;
 
+  # NEUE FSV 1061-1064: reine LESEPROBES (kein number: / keine Schreibfunktion).
+  # Das Basisprojekt Beormund unterstuetzt diese FSV noch nicht offiziell.
+  # Register 0x431E-0x4321 aus einer Community-Datenliste; Zuweisung NICHT bestaetigt.
+  # 0xFFFF / -1 und andere unplausible Antworten werden als unknown behandelt.
+  # Die Quelle meldete an einer anderen Anlage -1; deshalb KEINE unbestaetigten
+  # Rueckschluesse aus scheinbaren Hysterese-Werten ziehen.
+  - platform: samsung_nasa
+    message: 0x431E
+    nasa_mode: FSV
+    nasa_label: VAR_IN_FSV_1061
+    nasa_device_id: samsung_indoor
+    name: 'FSV 1061 - Vorlauftemperatur Hysterese Heizen (Test)'
+    id: fsv_1061_probe
+    entity_category: diagnostic
+    state_class: measurement
+    unit_of_measurement: '°C'
+    device_class: temperature
+    accuracy_decimals: 1
+    filters:
+      - lambda: |-
+          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+          if (raw < 10 || raw > 70) return NAN;
+          return raw * 0.1f;
+
+  - platform: samsung_nasa
+    message: 0x431F
+    nasa_mode: FSV
+    nasa_label: VAR_IN_FSV_1062
+    nasa_device_id: samsung_indoor
+    name: 'FSV 1062 - Vorlauftemperatur Hysterese Kühlen (Test)'
+    id: fsv_1062_probe
+    entity_category: diagnostic
+    state_class: measurement
+    unit_of_measurement: '°C'
+    device_class: temperature
+    accuracy_decimals: 1
+    filters:
+      - lambda: |-
+          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+          if (raw < 10 || raw > 70) return NAN;
+          return raw * 0.1f;
+
+  - platform: samsung_nasa
+    message: 0x4320
+    nasa_mode: FSV
+    nasa_label: VAR_IN_FSV_1063
+    nasa_device_id: samsung_indoor
+    name: 'FSV 1063 - Raumtemperatur Hysterese Heizen (Test)'
+    id: fsv_1063_probe
+    entity_category: diagnostic
+    state_class: measurement
+    unit_of_measurement: '°C'
+    device_class: temperature
+    accuracy_decimals: 1
+    filters:
+      - lambda: |-
+          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+          if (raw < 10 || raw > 70) return NAN;
+          return raw * 0.1f;
+
+  - platform: samsung_nasa
+    message: 0x4321
+    nasa_mode: FSV
+    nasa_label: VAR_IN_FSV_1064
+    nasa_device_id: samsung_indoor
+    name: 'FSV 1064 - Raumtemperatur Hysterese Kühlen (Test)'
+    id: fsv_1064_probe
+    entity_category: diagnostic
+    state_class: measurement
+    unit_of_measurement: '°C'
+    device_class: temperature
+    accuracy_decimals: 1
+    filters:
+      - lambda: |-
+          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+          if (raw < 10 || raw > 70) return NAN;
+          return raw * 0.1f;
+
+  # FSV 6031 (Abschalten bei lange niedriger Verdichterfrequenz):
+  # KEIN verlaesslich zugeordneter NASA-Code; NICHT als falsche Entitaet anlegen.
+  # FSV 6022 (min. Laufzeit), 6041 (Thermostatsteuerung) ebenfalls nicht
+  # ohne Registeradresse abfragen. Zugriff per 'fsv: 6031' funktioniert NICHT;
+  # die Beormund-Validierung erlaubt FSV-Nummern derzeit nur bis 5094.
+
+  # Nützlicher Zusatz zur Taktdiagnose: positiv = VL ueber Soll.
+  - platform: template
+    name: 'Heizwasser Vorlaufabweichung Ist minus Soll'
+    id: hp_flow_above_target
+    unit_of_measurement: 'K'
+    state_class: measurement
+    accuracy_decimals: 2
+    update_interval: 15s
+    lambda: |-
+      if (!id(water_out).has_state() || !id(outlet_target).has_state()) return NAN;
+      return id(water_out).state - id(outlet_target).state;
+
   - platform: template
     name: 'FSV 1011 - Kühlbetrieb maximale Vorlauftemperatur'
     unit_of_measurement: '°C'
@@ -2141,3 +2239,17 @@ interval:
       - delay: 3s
       - samsung_nasa.request_read:
           id: [fsv_5081, fsv_5091, fsv_5094]
+      - delay: 3s
+      # 1061-1064: zusaetzliche, nur lesende PROBES mit unbestaetigten NASA-IDs
+      - samsung_nasa.request_read:
+          id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
+
+# Ohne einen neuen Flash koennen diese vier Testadressen erneut angefragt werden.
+# Button sendet ausschliesslich NASA READ, niemals WRITE.
+button:
+  - platform: template
+    name: 'FSV 1061-1064 - Hysterese-Testwerte erneut lesen'
+    entity_category: diagnostic
+    on_press:
+      - samsung_nasa.request_read:
+          id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
