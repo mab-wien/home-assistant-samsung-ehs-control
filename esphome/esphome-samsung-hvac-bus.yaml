@@ -103,7 +103,11 @@ number:
     nasa_device_id: samsung_indoor
     name: 'Water Outlet Target'
     id: outlet_target
-
+  - platform: samsung_nasa
+    message: 0x4248
+    nasa_device_id: samsung_indoor
+    name: 'Heizkurvenversatz'
+    id: water_law_target
   # FSV-Basiswerte: absichtlich nur lokal, nicht als beschreibbare HA-Entitaet.
   - platform: samsung_nasa
     fsv: 1011
@@ -765,11 +769,6 @@ sensor:
     nasa_device_id: samsung_indoor
     name: 'Water Law Current'
     id: water_law_current
-  - platform: samsung_nasa
-    message: 0x4248
-    nasa_device_id: samsung_indoor
-    name: 'Heizkurvenversatz'
-    id: water_law_target
   # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
     message: 0x42d8
