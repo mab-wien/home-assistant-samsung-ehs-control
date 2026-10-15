@@ -765,11 +765,10 @@ sensor:
     nasa_device_id: samsung_indoor
     name: 'Water Law Current'
     id: water_law_current
-  # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
     message: 0x4248
     nasa_device_id: samsung_indoor
-    name: 'Water Law Target'
+    name: 'Heizkurvenversatz'
     id: water_law_target
   # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
