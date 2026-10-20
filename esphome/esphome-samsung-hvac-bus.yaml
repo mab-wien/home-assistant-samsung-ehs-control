@@ -26,9 +26,64 @@ web_server:
     username: !secret web_username
     password: !secret web_password
 
+# Debug & Syslog startet AUS. Lokale INFO/WARN/ERROR bleiben verfuegbar.
+# Kein separater syslog:-Block: Versand ausschliesslich hinter der Schalterabfrage.
 logger:
-  logs:
-    component: ERROR
+  level: DEBUG
+  initial_level: INFO
+  on_message:
+    level: DEBUG
+    then:
+      - if:
+          condition:
+            lambda: |-
+              return id(debug_stream_enabled) && !id(syslog_forwarding_busy)
+                     && std::string(tag) != "udp";
+          then:
+            - lambda: |-
+                id(syslog_forwarding_busy) = true;
+            - udp.write:
+                id: syslog_udp
+                data: !lambda |-
+                  // BSD/RFC3164, facility local0. Keine Log-Aufrufe in diesem Callback!
+                  const int severity = level == 1 ? 3 : level == 2 ? 4 : level == 3 ? 6 : 7;
+                  auto clock = id(ha_time).now();
+                  std::string stamp = clock.is_valid() ? clock.strftime("%b %e %H:%M:%S")
+                                                       : "Jan  1 00:00:00";
+                  // ANSI-Farbcodes entfernen; eine Syslog-Nachricht pro Logzeile.
+                  std::string clean;
+                  const std::string raw(message);
+                  for (size_t i = 0; i < raw.size(); ++i) {
+                    if (raw[i] == '\x1b' && i + 1 < raw.size() && raw[i + 1] == '[') {
+                      i += 2;
+                      while (i < raw.size() && !(raw[i] >= '@' && raw[i] <= '~')) ++i;
+                    } else {
+                      clean += (raw[i] == '\n' || raw[i] == '\r') ? ' ' : raw[i];
+                    }
+                  }
+                  std::string packet = "<" + std::to_string(16 * 8 + severity) + ">" + stamp
+                                     + " " + App.get_name().c_str() + " " + tag + ": " + clean;
+                  // UDP-Komponente: maximal 508 Byte pro Datagramm.
+                  if (packet.size() > 508) packet.resize(508);
+                  return packet;
+            - lambda: |-
+                id(syslog_forwarding_busy) = false;
+
+globals:
+  - id: debug_stream_enabled
+    type: bool
+    restore_value: false
+    initial_value: 'false'
+  - id: syslog_forwarding_busy
+    type: bool
+    restore_value: false
+    initial_value: 'false'
+
+udp:
+  id: syslog_udp
+  addresses:
+    - !secret syslog_server_ip
+  port: 514
 
 mdns:
   disabled: false
@@ -76,8 +131,8 @@ external_components:
 
 samsung_nasa:
   nasa_controller_id: samsung_nasa_controller
-  debug_log_messages: true
-  debug_log_undefined_messages: true
+  debug_log_messages: false
+  debug_log_undefined_messages: false
   nasa_client: {}
   devices:
     - address: 20.00.00
@@ -599,6 +654,34 @@ select:
     internal: true
 
 switch:
+  - platform: template
+    name: 'Debug & Syslog'
+    id: debug_gesamt
+    icon: mdi:bug
+    entity_category: diagnostic
+    optimistic: true
+    restore_mode: ALWAYS_OFF
+    turn_on_action:
+      - logger.set_level: DEBUG
+      - lambda: |-
+          id(debug_stream_enabled) = true;
+          id(samsung_nasa_controller).set_debug_log_messages(true);
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(true);
+      - logger.log:
+          level: INFO
+          tag: syslog_control
+          format: 'Debug & Syslog EIN - UDP 514'
+    turn_off_action:
+      - lambda: |-
+          // Versand zuerst sperren: ab jetzt auch keine Warnungen/Fehler an Syslog.
+          id(debug_stream_enabled) = false;
+          id(samsung_nasa_controller).set_debug_log_messages(false);
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(false);
+      - logger.set_level: INFO
+      - logger.log:
+          level: INFO
+          tag: syslog_control
+          format: 'Debug & Syslog AUS - nur lokale Logs'
   - platform: samsung_nasa
     message: 0x4000
     nasa_device_id: samsung_indoor
