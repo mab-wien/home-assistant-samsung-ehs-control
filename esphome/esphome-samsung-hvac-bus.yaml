@@ -1,3 +1,5 @@
+# Ergaenzung 2026-10-20: fuenf passive NASA-Rohsensoren und drei Temperaturdifferenzen.
+# Vollstaendige ESPHome-Konfiguration auf Basis der aktuellen GitHub-YAML.
 # Samsung EHS / Beormund NASA Vollausbau – sprechende Namen DIREKT in ESPHome.
 # Erweiterung: Diagnose-Leseproben FSV 1061-1064 (unbestaetigte NASA-Adressen)
 # und Heizwasser-Vorlaufabweichung. FSV 6031 nicht lesbar ohne bestaetigten Code.
@@ -1110,6 +1112,113 @@ sensor:
     nasa_device_id: samsung_outdoor
     name: 'error_code'
     id: error_code
+
+  # EVI-Diagnose 2026-10-20: ausschliesslich passive STATUS-Lesesensoren.
+  # Ansteuerung ist KEINE gemessene mechanische Ventilstellung.
+  # Rohwerte ohne Skalierung: Bedeutung/Einheit am eigenen Modell verifizieren.
+  # 0x8223 bleibt absichtlich ohne Grad-Celsius-Einheit, bis Skalierung bestaetigt.
+  # Falls eine Nachricht nicht gesendet wird, bleibt die Entitaet unbekannt.
+  - platform: samsung_nasa
+    message: 0x822E
+    nasa_device_id: samsung_outdoor
+    nasa_mode: STATUS
+    name: 'EVI EEV Ansteuerung Rohwert'
+    id: evi_eev_raw
+    entity_category: diagnostic
+    accuracy_decimals: 0
+
+  - platform: samsung_nasa
+    message: 0x82FC
+    nasa_device_id: samsung_outdoor
+    nasa_mode: STATUS
+    name: 'EVI SOL EEV Ansteuerung Rohwert'
+    id: evi_sol_eev_raw
+    entity_category: diagnostic
+    accuracy_decimals: 0
+
+  - platform: samsung_nasa
+    message: 0x8022
+    nasa_device_id: samsung_outdoor
+    nasa_mode: STATUS
+    name: 'EVI SOL1 Status Rohwert'
+    id: evi_sol1_raw
+    entity_category: diagnostic
+    accuracy_decimals: 0
+
+  - platform: samsung_nasa
+    message: 0x8023
+    nasa_device_id: samsung_outdoor
+    nasa_mode: STATUS
+    name: 'EVI SOL2 Status Rohwert'
+    id: evi_sol2_raw
+    entity_category: diagnostic
+    accuracy_decimals: 0
+
+  - platform: samsung_nasa
+    message: 0x8223
+    nasa_device_id: samsung_outdoor
+    nasa_mode: STATUS
+    name: 'Heissgas Solltemperatur Rohwert'
+    id: target_discharge_raw
+    entity_category: diagnostic
+    accuracy_decimals: 0
+
+  # Abgeleitete Temperaturdifferenzen, nur waehrend Verdichterbetrieb.
+  # Verschiedene Busnachrichten treffen zeitversetzt ein: kein synchroner Messsatz.
+  # EVI-Delta ist KEINE Einspritzueberhitzung (Zwischendruck fehlt).
+  - platform: template
+    name: 'Heissgas Ueberhitzung berechnet'
+    id: dsh_calculated
+    unit_of_measurement: 'K'
+    state_class: measurement
+    entity_category: diagnostic
+    accuracy_decimals: 1
+    update_interval: 10s
+    lambda: |-
+      if (!id(compressor_frequency).has_state() ||
+          !std::isfinite(id(compressor_frequency).state) ||
+          id(compressor_frequency).state <= 0.0f) return NAN;
+      if (!id(discharge_temp).has_state() || !id(sat_high).has_state()) return NAN;
+      const float a = id(discharge_temp).state;
+      const float b = id(sat_high).state;
+      if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
+      return a - b;
+
+  - platform: template
+    name: 'Ansaug Ueberhitzung berechnet'
+    id: suction_superheat_calculated
+    unit_of_measurement: 'K'
+    state_class: measurement
+    entity_category: diagnostic
+    accuracy_decimals: 1
+    update_interval: 10s
+    lambda: |-
+      if (!id(compressor_frequency).has_state() ||
+          !std::isfinite(id(compressor_frequency).state) ||
+          id(compressor_frequency).state <= 0.0f) return NAN;
+      if (!id(suction).has_state() || !id(sat_low).has_state()) return NAN;
+      const float a = id(suction).state;
+      const float b = id(sat_low).state;
+      if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
+      return a - b;
+
+  - platform: template
+    name: 'EVI Temperaturdifferenz Austritt minus Eintritt'
+    id: evi_temperature_delta
+    unit_of_measurement: 'K'
+    state_class: measurement
+    entity_category: diagnostic
+    accuracy_decimals: 1
+    update_interval: 10s
+    lambda: |-
+      if (!id(compressor_frequency).has_state() ||
+          !std::isfinite(id(compressor_frequency).state) ||
+          id(compressor_frequency).state <= 0.0f) return NAN;
+      if (!id(eviout).has_state() || !id(eviin).has_state()) return NAN;
+      const float a = id(eviout).state;
+      const float b = id(eviin).state;
+      if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
+      return a - b;
 
   # Vorhandene Templates: gleiche sichtbare Namen wie bisher.
   - platform: template
