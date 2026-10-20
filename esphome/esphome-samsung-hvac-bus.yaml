@@ -65,7 +65,7 @@ logger:
                                      + " " + App.get_name().c_str() + " " + tag + ": " + clean;
                   // UDP-Komponente: maximal 508 Byte pro Datagramm.
                   if (packet.size() > 508) packet.resize(508);
-                  return packet;
+                  return std::vector<uint8_t>(packet.begin(), packet.end());
             - lambda: |-
                 id(syslog_forwarding_busy) = false;
 
@@ -83,7 +83,7 @@ udp:
   id: syslog_udp
   addresses:
     - !secret syslog_server_ip
-  port: !secret syslog_server_port
+  port: 514
 
 mdns:
   disabled: false
@@ -662,7 +662,6 @@ switch:
     optimistic: true
     restore_mode: ALWAYS_OFF
     turn_on_action:
-      - script.execute: debug_auto_off
       - logger.set_level: DEBUG
       - lambda: |-
           id(debug_stream_enabled) = true;
@@ -673,7 +672,6 @@ switch:
           tag: syslog_control
           format: 'Debug & Syslog EIN - UDP 514'
     turn_off_action:
-      - script.stop: debug_auto_off
       - lambda: |-
           // Versand zuerst sperren: ab jetzt auch keine Warnungen/Fehler an Syslog.
           id(debug_stream_enabled) = false;
@@ -2374,11 +2372,3 @@ button:
       - lambda: |-
           ESP_LOGW("reset_test", "Nur READ: frage NASA 0x8065 ab; kein WRITE und kein Reset. Antwort im NASA-Log pruefen.");
           id(samsung_nasa_controller).read({0x8065});
-
-# Watchdog lokal auf dem ESP, unabhaengig von HA und MCP.
-script:
-  - id: debug_auto_off
-    mode: restart
-    then:
-      - delay: 15min
-      - switch.turn_off: debug_gesamt
