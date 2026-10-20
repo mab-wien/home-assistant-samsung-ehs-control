@@ -75,8 +75,9 @@ external_components:
     components: [samsung_nasa]
 
 samsung_nasa:
-  debug_log_messages: false
-  debug_log_undefined_messages: false
+  nasa_controller_id: samsung_nasa_controller
+  debug_log_messages: true
+  debug_log_undefined_messages: true
   nasa_client: {}
   devices:
     - address: 20.00.00
@@ -2251,3 +2252,40 @@ button:
     on_press:
       - samsung_nasa.request_read:
           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
+
+  # EXPERIMENTELL: NASA 0x8065 = 1; Wirkung als K3-Reset nicht bestaetigt.
+  # Ausschliesslich manueller Aufruf. Keine automatische Fehlerquittierung.
+  - platform: template
+    name: 'E438 Reset-Test 0x8065'
+    id: e438_reset_test
+    icon: mdi:restart-alert
+    entity_category: diagnostic
+    on_press:
+      - lambda: |-
+          if (!id(error_code).has_state() || !id(compressor_frequency).has_state() ||
+              id(error_code).state != 438.0f || id(compressor_frequency).state != 0.0f) {
+            ESP_LOGW("reset_test", "Nicht gesendet: benoetigt E438 und Verdichter 0 Hz; Fehler=%.0f, Hz=%.1f",
+                     id(error_code).state, id(compressor_frequency).state);
+            return;
+          }
+          static uint32_t last_attempt = 0;
+          const uint32_t now_ms = millis();
+          if (last_attempt != 0 && (uint32_t)(now_ms - last_attempt) < 60000) {
+            ESP_LOGW("reset_test", "Nicht gesendet: 60 Sekunden Abstand zwischen Testversuchen erforderlich");
+            return;
+          }
+          last_attempt = now_ms;
+          ESP_LOGW("reset_test", "EXPERIMENT: NASA Request an 10.00.00: 0x8065 = 1; Resetwirkung NICHT bestaetigt");
+          id(samsung_nasa_controller).write("10.00.00", 0x8065, 1);
+
+  # Nur lesende NASA-Abfrage; keine Aenderung und kein Reset.
+  # Die read()-Methode der Komponente sendet an die NASA-Broadcastadresse.
+  - platform: template
+    name: 'NASA 0x8065 nur lesen'
+    id: outdoor_reset_read_test
+    icon: mdi:database-search
+    entity_category: diagnostic
+    on_press:
+      - lambda: |-
+          ESP_LOGW("reset_test", "Nur READ: frage NASA 0x8065 ab; kein WRITE und kein Reset. Antwort im NASA-Log pruefen.");
+          id(samsung_nasa_controller).read({0x8065});
