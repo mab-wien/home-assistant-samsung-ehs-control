@@ -83,7 +83,7 @@ udp:
   id: syslog_udp
   addresses:
     - !secret syslog_server_ip
-  port: 514
+  port: !secret syslog_server_port
 
 mdns:
   disabled: false
