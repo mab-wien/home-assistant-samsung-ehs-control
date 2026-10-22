@@ -1765,6 +1765,8 @@ sensor:
     name: 'NASA 0x8224'
     entity_category: diagnostic
     accuracy_decimals: 0
+    # Numerischer RAW-Verlauf; Bedeutung/Skalierung noch nicht bestaetigt.
+    state_class: measurement
   - platform: samsung_nasa
     message: 0x8225
     nasa_device_id: samsung_outdoor
@@ -1936,6 +1938,8 @@ sensor:
     name: 'NASA 0x82B2'
     entity_category: diagnostic
     accuracy_decimals: 0
+    # Numerischer RAW-Verlauf; Bedeutung/Skalierung noch nicht bestaetigt.
+    state_class: measurement
   - platform: samsung_nasa
     message: 0x82B5
     nasa_device_id: samsung_outdoor
