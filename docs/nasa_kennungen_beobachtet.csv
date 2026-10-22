@@ -1,0 +1,398 @@
+kennung;status;label_beormund;ehs_sentinel_name;ehs_typ;ehs_einheit;ehs_arithmetik;quellen;meldungen_20_10;verschiedene_werte;beispiele_roh;konfiguriert_als
+0x4203;konfiguriert;VAR_IN_TEMP_ROOM_F;NASA_CURRENT_TEMP;;;;;;;;Inneneinheit Raumtemperatur Rohwert (intern)
+0x4237;konfiguriert;VAR_IN_TEMP_WATER_TANK_F;NASA_INDOOR_DHW_CURRENT_TEMP;;;;;;;;Warm water
+0x4236;konfiguriert;VAR_IN_TEMP_WATER_IN_F;NASA_INDOOR_WATER_IN_TEMP;;;;;;;;Heizwasser Rücklauf Tw1
+0x4238;konfiguriert;VAR_IN_TEMP_WATER_OUT_F;NASA_INDOOR_WATER_OUT_TEMP;;;;;;;;Heizwasser Vorlauf Tw2
+0x4239;konfiguriert;VAR_IN_TEMP_WATER_OUT2_F;VAR_IN_TEMP_WATER_OUT2_F;;;;;;;;Heizwasser Temperatur nach Zusatzheizer Tw3
+0x42E9;konfiguriert;VAR_IN_FLOW_SENSOR_CALC;VAR_IN_FLOW_SENSOR_CALC;;;;;;;;Heizwasser Volumenstrom
+0x42E8;konfiguriert;VAR_IN_FLOW_SENSOR_VOLTAGE;VAR_IN_FLOW_SENSOR_VOLTAGE;;;;;;;;Durchflusssensor Messsignal (NASA)
+0x40C4;konfiguriert;ENUM_IN_WATERPUMP_PWM_VALUE;ENUM_IN_WATERPUMP_PWM_VALUE;;;;;;;;Heizwasserpumpe PWM Ansteuerung
+0x4002;konfiguriert;ENUM_IN_OPERATION_MODE_REAL;NASA_INDOOR_REAL_OPMODE;;;;;;;;Inneneinheit Betriebsart Code
+0x4205;konfiguriert;VAR_IN_TEMP_EVA_IN_F;NASA_EVA_IN_TEMP;;;;;;;;Inneneinheit Wärmetauscher Eintrittstemperatur
+0x4206;konfiguriert;VAR_IN_TEMP_EVA_OUT_F;NASA_EVA_OUT_TEMP;;;;;;;;Inneneinheit Wärmetauscher Austrittstemperatur
+0x42D4;konfiguriert;VAR_IN_TEMP_ROOM_ZONE2_F;VAR_IN_TEMP_ZONE2_F;;;;;;;;Zone 2 Raumtemperatur
+0x427F;konfiguriert;VAR_IN_TEMP_WATER_LAW_F;VAR_IN_TEMP_WATER_LAW_F;;;;;;;;Water Law Current
+0x42D8;konfiguriert;VAR_IN_TEMP_WATER_OUTLET_ZONE1_F;VAR_IN_TEMP_WATER_OUTLET_ZONE1_F;;;;;;;;Zone1 Water Target
+0x42D9;konfiguriert;VAR_IN_TEMP_WATER_OUTLET_ZONE2_F;VAR_IN_TEMP_WATER_OUTLET_ZONE2_F;;;;;;;;Zone2 Water Target
+0x4427;konfiguriert;NASA_TOTAL_GEN_POWER;LVAR_IN_TOTAL_GENERATED_POWER;;;;;;;;Total Produced Energy
+0x4426;konfiguriert;NASA_GEN_POWER_LAST_MINUTE;LVAR_IN_GENERATED_POWER_LAST_MINUTE;;;;;;;;Current Produced Energy
+0x4423;konfiguriert;NASA_MINUTE_SINCE_INSTALL;LVAR_IN_MINUTES_SINCE_INSTALLATION;;;;;;;;Tage seit Inbetriebnahme
+0x4424;konfiguriert;NASA_MINUTES_ACTIVE;LVAR_IN_MINUTES_ACTIVE;;;;;;;;Aktive Betriebsstunden seit Inbetriebnahme
+0x4284;konfiguriert;NASA_INDOOR_POWER_CONSUMPTION;NASA_INDOOR_POWER_CONSUMPTION;;;;;;;;Inneneinheit Leistungsaufnahme (NASA)
+0x8414;konfiguriert;NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT_ACCUM;NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT_ACCUM;;;;;;;;Total Consumed Energy
+0x8414;konfiguriert;NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT_ACCUM;NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT_ACCUM;;;;;;;;Outdoor Cumulative Energy
+0x8413;konfiguriert;LVAR_OUT_CONTROL_WATTMETER_1W_1MIN_SUM;NASA_OUTDOOR_CONTROL_WATTMETER_ALL_UNIT;;;;;;;;Power consumption
+0x8238;konfiguriert;VAR_OUT_CONTROL_CFREQ_COMP1;NASA_OUTDOOR_COMP1_RUN_HZ;;;;;;;;Compressor Frequency
+0x8237;konfiguriert;VAR_OUT_CONTROL_TARGET_CFREQ_COMP1;NASA_OUTDOOR_COMP1_TARGET_HZ;;;;;;;;Target Compressor Frequency
+0x8236;konfiguriert;VAR_OUT_CONTROL_ORDER_CFREQ_COMP1;NASA_OUTDOOR_COMP1_ORDER_HZ;;;;;;;;Order Compressor Frequency
+0x823D;konfiguriert;VAR_OUT_LOAD_FANRPM1;NASA_OUTDOOR_FAN_RPM1;;;;;;;;Fan Speed
+0x82E0;konfiguriert;VAR_OUT_SENSOR_TW2;NASA_OUTDOOR_TW2_TEMP;;;;;;;;Flow Temperature
+0x8229;konfiguriert;VAR_OUT_LOAD_OUTEEV1;NASA_OUTDOOR_MAINEEV1;;;;;;;;Main EEV1
+0x823F;konfiguriert;NASA_OUTDOOR_CONTROL_PRIME_UNIT;NASA_OUTDOOR_CONTROL_PRIME_UNIT;;;;;;;;Main EEV Step
+0x8001;konfiguriert;ENUM_OUT_OPERATION_ODU_MODE;NASA_OUTDOOR_OPERATION_STATUS;;;;;;;;Operation Mode
+0x8233;konfiguriert;NASA_OUTDOOR_OPERATION_CAPA_SUM;NASA_OUTDOOR_OPERATION_CAPA_SUM;;;;;;;;Control State Code
+0x8239;konfiguriert;VAR_OUT___;;;;;;;;;Compressor Load
+0x820A;konfiguriert;VAR_OUT_SENSOR_DISCHARGE1;NASA_OUTDOOR_DISCHARGE_TEMP1;;;;;;;;Compressor Discharge Temp
+0x8234;konfiguriert;VAR_OUT___;;;;;;;;;Evaporator Temperature
+0x823B;konfiguriert;VAR_OUT_SENSOR_DCLINK_VOLTAGE;NASA_OUTDOOR_DCLINK1_VOLT;;;;;;;;Wechselrichter Gleichspannungszwischenkreis
+0x8206;konfiguriert;VAR_OUT_SENSOR_HIGHPRESS;NASA_OUTDOOR_HIGH_PRESS;;;;;;;;High Pressure
+0x8208;konfiguriert;VAR_OUT_SENSOR_LOWPRESS;NASA_OUTDOOR_LOW_PRESS;;;;;;;;Low Pressure
+0x8226;konfiguriert;VAR_OUT_LOAD_FANSTEP1;NASA_OUTDOOR_FAN_STEP1;;;;;;;;Outdoor Fan Step
+0x8204;konfiguriert;VAR_OUT_SENSOR_AIROUT;NASA_OUTDOOR_OUT_TEMP;;;;;;;;Outdoor temperature
+0x8217;konfiguriert;VAR_OUT_SENSOR_COMPRESSOR_CT1;NASA_OUTDOOR_CT1;;;;;;;;Outdoor Current
+0x24FC;konfiguriert;LVAR_NM___;;;;;;;;;Outdoor Voltage
+0x8411;konfiguriert;NASA_OUTDOOR_CONTROL_WATTMETER_1UNIT;NASA_OUTDOOR_CONTROL_WATTMETER_1UNIT;;;;;;;;Outdoor Instantaneous Power
+0x8218;konfiguriert;VAR_OUT_SENSOR_CONDOUT;NASA_OUTDOOR_COND_OUT1;;;;;;;;Außenwärmetauscher Austrittstemperatur
+0x821A;konfiguriert;VAR_OUT_SENSOR_SUCTION;NASA_OUTDOOR_SUCTION1_TEMP;;;;;;;;Verdichter Ansaugtemperatur
+0x821C;konfiguriert;VAR_OUT_SENSOR_DOUBLETUBE;NASA_OUTDOOR_DOUBLE_TUBE;;;;;;;;Doppelrohr Wärmetauscher Temperatur
+0x821E;konfiguriert;VAR_OUT_SENSOR_EVIIN;NASA_OUTDOOR_EVI_IN;;;;;;;;EVI Einspritzkreislauf Eintrittstemperatur
+0x8220;konfiguriert;VAR_OUT_SENSOR_EVIOUT;NASA_OUTDOOR_EVI_OUT;;;;;;;;EVI Einspritzkreislauf Austrittstemperatur
+0x8254;konfiguriert;VAR_OUT_SENSOR_IPM1;NASA_OUTDOOR_IPM_TEMP1;;;;;;;;Wechselrichter Leistungsmodul IPM1 Temperatur
+0x827A;konfiguriert;VAR_OUT_CONTROL_DSH1;VAR_OUT_CONTROL_DSH1;;;;;;;;Verdichter Überhitzungsfühler DSH1 Temperatur
+0x8280;konfiguriert;VAR_OUT_SENSOR_TOP1;NASA_OUTDOOR_TOP_SENSOR_TEMP1;;;;;;;;Verdichter Gehäusetemperatur TOP1
+0x829F;konfiguriert;VAR_OUT_SENSOR_SAT_TEMP_HIGH_PRESSURE;NASA_OUTDOOR_HIGH_PRESS_TEMP;;;;;;;;Kältekreis Hochdruck Sättigungstemperatur
+0x82A0;konfiguriert;VAR_OUT_SENSOR_SAT_TEMP_LOW_PRESSURE;NASA_OUTDOOR_LOW_PRESS_TEMP;;;;;;;;Kältekreis Niederdruck Sättigungstemperatur
+0x82DF;konfiguriert;VAR_OUT_SENSOR_TW1;NASA_OUTDOOR_TW1_TEMP;;;;;;;;Heizwasser Rücklauf Tw1 Außeneinheit Spiegelwert
+0x8240;konfiguriert;NASA_OUTDOOR_ODU_CAPA1;NASA_OUTDOOR_ODU_CAPA1;;;;;;;;Außeneinheit gemeldete Leistung
+0x8000;konfiguriert;ENUM_OUT_OPERATION_SERVICE_OP;ENUM_OUT_OPERATION_SERVICE_OP;;;;;;;;Außeneinheit Servicebetriebsart Code
+0x8061;konfiguriert;ENUM_OUT_DEICE_STEP_INDOOR;NASA_OUTDOOR_INDOOR_DEFROST_STEP;;;;;;;;Abtauung Ablaufcode
+0x8235;konfiguriert;VAR_OUT_ERROR_CODE;VAR_OUT_ERROR_CODE;;;;;;;;error_code
+0x822E;konfiguriert;VAR_OUT_LOAD_EVIEEV;NASA_OUTDOOR_EVIEEV;;;;;;;;EVI EEV Ansteuerung Rohwert
+0x82FC;konfiguriert;VAR_OUT_LOAD_EVI_SOL_EEV;VAR_OUT_LOAD_EVI_SOL_EEV;;;;;;;;EVI SOL EEV Ansteuerung Rohwert
+0x8022;konfiguriert;ENUM_OUT_LOAD_EVI_SOL1;NASA_OUTDOOR_EVI_SOL1_VALVE;;;;;;;;EVI SOL1 Status Rohwert
+0x8023;konfiguriert;ENUM_OUT_LOAD_EVI_SOL2;NASA_OUTDOOR_EVI_SOL2_VALVE;;;;;;;;EVI SOL2 Status Rohwert
+0x8223;konfiguriert;VAR_OUT_CONTROL_TARGET_DISCHARGE;NASA_OUTDOOR_TARGET_DISCHARGE;;;;;;;;Heissgas Solltemperatur Rohwert
+0x431E;konfiguriert;;;;;;;;;;FSV 1061 - Vorlauftemperatur Hysterese Heizen (Test)
+0x431F;konfiguriert;;;;;;;;;;FSV 1062 - Vorlauftemperatur Hysterese Kühlen (Test)
+0x4320;konfiguriert;;;;;;;;;;FSV 1063 - Raumtemperatur Hysterese Heizen (Test)
+0x4321;konfiguriert;;;;;;;;;;FSV 1064 - Raumtemperatur Hysterese Kühlen (Test)
+0x4067;konfiguriert;ENUM_IN_3WAY_VALVE;NASA_DHW_VALVE;;;;;;;;Dreiwegeventil Warmwasserstellung
+0x402E;konfiguriert;ENUM_IN_STATE_DEFROST_MODE;NASA_INDOOR_DEFROST_STATUS;;;;;;;;Abtauung aktiv
+0x4028;konfiguriert;ENUM_IN_STATE_THERMO;ENUM_IN_STATE_THERMO;;;;;;;;Thermoanforderung aktiv
+0x406C;konfiguriert;ENUM_IN_BACKUP_HEATER;ENUM_IN_BACKUP_HEATER;;;;;;;;Elektrische Zusatzheizung Status
+0x4087;konfiguriert;ENUM_IN_BOOSTER_HEATER;ENUM_IN_BOOSTER_HEATER;;;;;;;;Warmwasser Heizstab Status
+0x4089;konfiguriert;ENUM_IN_STATE_WATER_PUMP;ENUM_IN_STATE_WATER_PUMP;;;;;;;;Heizwasserpumpe aktiv
+0x406F;konfiguriert;ENUM_IN_REFERENCE_EHS_TEMP;NASA_DHW_REFERENCE_TEMP;;;;;;;;Vorlauftemperatur als Regelreferenz aktiv
+0x8010;konfiguriert;ENUM_OUT_LOAD_COMP1;NASA_OUTDOOR_COMP1_STATUS;;;;;;;;Verdichter in Betrieb
+0x8017;konfiguriert;ENUM_OUT_LOAD_HOTGAS;NASA_OUTDOOR_HOTGAS1;;;;;;;;Heißgasventil Status
+0x8019;konfiguriert;ENUM_OUT_LOAD_LIQUID;NASA_OUTDOOR_LIQUID_BYPASS_VALVE;;;;;;;;Kältemittel Flüssigkeitsventil Status
+0x8021;konfiguriert;ENUM_OUT_LOAD_EVI_BYPASS;NASA_OUTDOOR_EVI_BYPASS_VALVE;;;;;;;;EVI Bypassventil Status
+0x801A;konfiguriert;ENUM_OUT_LOAD_4WAY;NASA_OUTDOOR_4WAY_VALVE;;;;;;;;Kältemittel Vierwegeventil Status
+0x80AF;konfiguriert;ENUM_OUT_LOAD_BASEHEATER;NASA_OUTDOOR_BASE_HEATER;;;;;;;;Außeneinheit Bodenheizung Status
+0x80D7;konfiguriert;ENUM_OUT_LOAD_PHEHEATER;ENUM_OUT_LOAD_PHEHEATER;;;;;;;;Plattenwärmetauscher Zusatzheizung Status
+0x4201;konfiguriert;VAR_IN_TEMP_TARGET_F;NASA_SET_TEMP;;;;;;;;target temperature
+0x4235;konfiguriert;VAR_IN_TEMP_WATER_HEATER_TARGET_F;NASA_INDOOR_DHW_SET_TEMP;;;;;;;;Hot Water Target Temperature
+0x4247;konfiguriert;VAR_IN_TEMP_WATER_OUTLET_TARGET_F;NASA_INDOOR_SETTEMP_WATEROUT;;;;;;;;Water Outlet Target
+0x4248;konfiguriert;VAR_IN_TEMP_WATER_LAW_TARGET_F;VAR_IN_TEMP_WATER_LAW_TARGET_F;;;;;;;;Heizkurvenversatz
+0x424A;konfiguriert;VAR_IN_FSV_1011;VAR_IN_FSV_1011;;;;;;;;FSV 1011 - Kühlbetrieb maximale Vorlauftemperatur (intern)
+0x424B;konfiguriert;VAR_IN_FSV_1012;VAR_IN_FSV_1012;;;;;;;;FSV 1012 - Kühlbetrieb minimale Vorlauftemperatur (intern)
+0x424C;konfiguriert;VAR_IN_FSV_1021;VAR_IN_FSV_1021;;;;;;;;FSV 1021 - Kühlbetrieb maximale Raumtemperatur (intern)
+0x424D;konfiguriert;VAR_IN_FSV_1022;VAR_IN_FSV_1022;;;;;;;;FSV 1022 - Kühlbetrieb minimale Raumtemperatur (intern)
+0x424E;konfiguriert;VAR_IN_FSV_1031;VAR_IN_FSV_1031;;;;;;;;FSV 1031 - Heizbetrieb maximale Vorlauftemperatur (intern)
+0x424F;konfiguriert;VAR_IN_FSV_1032;VAR_IN_FSV_1032;;;;;;;;FSV 1032 - Heizbetrieb minimale Vorlauftemperatur (intern)
+0x4250;konfiguriert;VAR_IN_FSV_1041;VAR_IN_FSV_1041;;;;;;;;FSV 1041 - Heizbetrieb maximale Raumtemperatur (intern)
+0x4251;konfiguriert;VAR_IN_FSV_1042;VAR_IN_FSV_1042;;;;;;;;FSV 1042 - Heizbetrieb minimale Raumtemperatur (intern)
+0x4252;konfiguriert;VAR_IN_FSV_1051;VAR_IN_FSV_1051;;;;;;;;FSV 1051 - Warmwasserspeicher maximale Temperatur (intern)
+0x4253;konfiguriert;VAR_IN_FSV_1052;VAR_IN_FSV_1052;;;;;;;;FSV 1052 - Warmwasserspeicher minimale Temperatur (intern)
+0x4254;konfiguriert;VAR_IN_FSV_2011;VAR_IN_FSV_2011;;;;;;;;FSV 2011 - Heizkurve Außentemperatur bei Kälte (intern)
+0x4255;konfiguriert;VAR_IN_FSV_2012;VAR_IN_FSV_2012;;;;;;;;FSV 2012 - Heizkurve Außentemperatur bei Wärme (intern)
+0x4256;konfiguriert;VAR_IN_FSV_2021;VAR_IN_FSV_2021;;;;;;;;FSV 2021 - Heizkurve WL1 Vorlauf bei Kälte (intern)
+0x4257;konfiguriert;VAR_IN_FSV_2022;VAR_IN_FSV_2022;;;;;;;;FSV 2022 - Heizkurve WL1 Vorlauf bei Wärme (intern)
+0x4258;konfiguriert;VAR_IN_FSV_2031;VAR_IN_FSV_2031;;;;;;;;FSV 2031 - Heizkurve WL2 Vorlauf bei Kälte (intern)
+0x4259;konfiguriert;VAR_IN_FSV_2032;VAR_IN_FSV_2032;;;;;;;;FSV 2032 - Heizkurve WL2 Vorlauf bei Wärme (intern)
+0x425A;konfiguriert;VAR_IN_FSV_2051;VAR_IN_FSV_2051;;;;;;;;FSV 2051 - Kühlkurve Außentemperatur untere Grenze (intern)
+0x425B;konfiguriert;VAR_IN_FSV_2052;VAR_IN_FSV_2052;;;;;;;;FSV 2052 - Kühlkurve Außentemperatur obere Grenze (intern)
+0x425C;konfiguriert;VAR_IN_FSV_2061;VAR_IN_FSV_2061;;;;;;;;FSV 2061 - Kühlkurve WL1 maximale Vorlauftemperatur (intern)
+0x425D;konfiguriert;VAR_IN_FSV_2062;VAR_IN_FSV_2062;;;;;;;;FSV 2062 - Kühlkurve WL1 minimale Vorlauftemperatur (intern)
+0x425E;konfiguriert;VAR_IN_FSV_2071;VAR_IN_FSV_2071;;;;;;;;FSV 2071 - Kühlkurve WL2 maximale Vorlauftemperatur (intern)
+0x425F;konfiguriert;VAR_IN_FSV_2072;VAR_IN_FSV_2072;;;;;;;;FSV 2072 - Kühlkurve WL2 minimale Vorlauftemperatur (intern)
+0x4260;konfiguriert;VAR_IN_FSV_3021;VAR_IN_FSV_3021;;;;;;;;FSV 3021 - Warmwasser maximale Wärmepumpentemperatur (intern)
+0x4261;konfiguriert;VAR_IN_FSV_3022;VAR_IN_FSV_3022;;;;;;;;FSV 3022 - Warmwasser Ausschalthysterese (intern)
+0x4262;konfiguriert;VAR_IN_FSV_3023;VAR_IN_FSV_3023;;;;;;;;FSV 3023 - Warmwasser Einschalthysterese (intern)
+0x4263;konfiguriert;VAR_IN_FSV_3024;VAR_IN_FSV_3024;;;;;;;;FSV 3024 - Raumheizung Mindestlaufzeit (intern)
+0x4264;konfiguriert;VAR_IN_FSV_3025;VAR_IN_FSV_3025;;;;;;;;FSV 3025 - Warmwasser Wärmepumpe maximale Laufzeit (intern)
+0x4265;konfiguriert;VAR_IN_FSV_3026;VAR_IN_FSV_3026;;;;;;;;FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser (intern)
+0x4266;konfiguriert;VAR_IN_FSV_3032;VAR_IN_FSV_3032;;;;;;;;FSV 3032 - Warmwasser Heizstab Einschaltverzögerung (intern)
+0x4267;konfiguriert;VAR_IN_FSV_3033;VAR_IN_FSV_3033;;;;;;;;FSV 3033 - Warmwasser Heizstab Temperaturüberschwingung (intern)
+0x4269;konfiguriert;VAR_IN_FSV_3043;VAR_IN_FSV_3043;;;;;;;;FSV 3043 - Warmwasser thermische Desinfektion Startstunde (intern)
+0x426A;konfiguriert;VAR_IN_FSV_3044;VAR_IN_FSV_3044;;;;;;;;FSV 3044 - Warmwasser thermische Desinfektion Zieltemperatur (intern)
+0x426B;konfiguriert;VAR_IN_FSV_3045;VAR_IN_FSV_3045;;;;;;;;FSV 3045 - Warmwasser thermische Desinfektion Dauer (intern)
+0x426C;konfiguriert;VAR_IN_FSV_3052;VAR_IN_FSV_3052;;;;;;;;FSV 3052 - Warmwasser Timer-Aus Zeitdauer (intern)
+0x42CE;konfiguriert;VAR_IN_FSV_3046;VAR_IN_FSV_3046;;;;;;;;FSV 3046 - Warmwasser thermische Desinfektion Zeitlimit (intern)
+0x42ED;konfiguriert;VAR_IN_FSV_3081;VAR_IN_FSV_3081;;;;;;;;FSV 3081 - Zusatzheizung Stufe 1 Nennleistung (intern)
+0x42EE;konfiguriert;VAR_IN_FSV_3082;VAR_IN_FSV_3082;;;;;;;;FSV 3082 - Zusatzheizung Stufe 2 Nennleistung (intern)
+0x42EF;konfiguriert;VAR_IN_FSV_3083;VAR_IN_FSV_3083;;;;;;;;FSV 3083 - Warmwasser Heizstab Nennleistung (intern)
+0x426D;konfiguriert;VAR_IN_FSV_4012;VAR_IN_FSV_4012;;;;;;;;FSV 4012 - Außentemperatur für Vorrangregelung (intern)
+0x426E;konfiguriert;VAR_IN_FSV_4013;VAR_IN_FSV_4013;;;;;;;;FSV 4013 - Heizung Abschalttemperatur außen (intern)
+0x4270;konfiguriert;VAR_IN_FSV_4024;VAR_IN_FSV_4024;;;;;;;;FSV 4024 - Zusatzheizung Außentemperaturschwelle (intern)
+0x4271;konfiguriert;VAR_IN_FSV_4025;VAR_IN_FSV_4025;;;;;;;;FSV 4025 - Zusatzheizung Abtauunterstützung Temperaturschwelle (intern)
+0x4272;konfiguriert;VAR_IN_FSV_4033;VAR_IN_FSV_4033;;;;;;;;FSV 4033 - Externe Wärmequelle Außentemperaturschwelle (intern)
+0x4286;konfiguriert;VAR_IN_FSV_4042_TARGET_DELTA_TEMP_HEATING;VAR_IN_FSV_4042;;;;;;;;FSV 4042 - Mischventil Heizen Sollspreizung (intern)
+0x4287;konfiguriert;VAR_IN_FSV_4043_TARGET_DELTA_TEMP_COOLING;VAR_IN_FSV_4043;;;;;;;;FSV 4043 - Mischventil Kühlen Sollspreizung (intern)
+0x40C1;konfiguriert;ENUM_IN_FSV_4044;ENUM_IN_FSV_4044;;;;;;;;FSV 4044 - Mischventil Regelfaktor (intern)
+0x4288;konfiguriert;VAR_IN_FSV_4045_MIXING_VALVE_CONTROL_INTERVAL;VAR_IN_FSV_4045;;;;;;;;FSV 4045 - Mischventil Regelintervall (intern)
+0x4289;konfiguriert;VAR_IN_FSV_4046_MIXING_VALVE_RUNNING_TIME;VAR_IN_FSV_4046;;;;;;;;FSV 4046 - Mischventil Stellzeit (intern)
+0x4273;konfiguriert;VAR_IN_FSV_5011_WATEROUT_TEMP_COOLING;VAR_IN_FSV_5011;;;;;;;;FSV 5011 - Smart Grid Kühlung Vorlauftemperatur (intern)
+0x4275;konfiguriert;VAR_IN_FSV_5013_WATEROUT_TEMP_HEATING;VAR_IN_FSV_5013;;;;;;;;FSV 5013 - Smart Grid Heizung Vorlauftemperatur (intern)
+0x4276;konfiguriert;VAR_IN_FSV_5014_ROOM_TEMP_HEATING;VAR_IN_FSV_5014;;;;;;;;FSV 5014 - Smart Grid Heizung Raumtemperatur (intern)
+0x4277;konfiguriert;VAR_IN_FSV_5015_COOL_WL1_TEMP;VAR_IN_FSV_5015;;;;;;;;FSV 5015 - Smart Grid Kühlkurve WL1 Temperatur (intern)
+0x4278;konfiguriert;VAR_IN_FSV_5016_COOL_WL2_TEMP;VAR_IN_FSV_5016;;;;;;;;FSV 5016 - Smart Grid Kühlkurve WL2 Temperatur (intern)
+0x4279;konfiguriert;VAR_IN_FSV_5017_HEAT_WL1_TEMP;VAR_IN_FSV_5017;;;;;;;;FSV 5017 - Smart Grid Heizkurve WL1 Temperatur (intern)
+0x427A;konfiguriert;VAR_IN_FSV_5018_HEAT_WL2_TEMP;VAR_IN_FSV_5018;;;;;;;;FSV 5018 - Smart Grid Heizkurve WL2 Temperatur (intern)
+0x427B;konfiguriert;VAR_IN_FSV_5019_DHW_TANK_TEMP;VAR_IN_FSV_5019;;;;;;;;FSV 5019 - Smart Grid Warmwasser Speichertemperatur (intern)
+0x427C;konfiguriert;VAR_IN_FSV_5021_DHW_SAVING_TEMP;VAR_IN_FSV_5021;;;;;;;;FSV 5021 - Warmwasser Sparbetrieb Temperaturabsenkung (intern)
+0x42F0;konfiguriert;VAR_IN_FSV_5023;VAR_IN_FSV_5023;;;;;;;;FSV 5023 - Warmwasser Sparbetrieb Thermo-Ein Temperatur (intern)
+0x42DB;konfiguriert;VAR_IN_FSV_5082;VAR_IN_FSV_5082;;;;;;;;FSV 5082 - Photovoltaik Kühlung Temperaturversatz (intern)
+0x42DC;konfiguriert;VAR_IN_FSV_5083;VAR_IN_FSV_5083;;;;;;;;FSV 5083 - Photovoltaik Heizung Temperaturversatz (intern)
+0x42DD;konfiguriert;VAR_IN_FSV_5092;VAR_IN_FSV_5092;;;;;;;;FSV 5092 - Smart Grid Heizung Temperaturänderung (intern)
+0x42DE;konfiguriert;VAR_IN_FSV_5093;VAR_IN_FSV_5093;;;;;;;;FSV 5093 - Smart Grid Warmwasser Temperaturänderung (intern)
+0x428A;konfiguriert;VAR_IN_FSV_4052_PUMP_TARGET_DELTA_TEMP;VAR_IN_FSV_4052;;;;;;;;FSV 4052 - Inverterpumpe Sollspreizung (intern)
+0x40C3;konfiguriert;ENUM_IN_FSV_4053;ENUM_IN_FSV_4053;;;;;;;;FSV 4053 - Inverterpumpe Regelfaktor (intern)
+0x4001;konfiguriert;ENUM_IN_OPERATION_MODE;NASA_INDOOR_OPMODE;;;;;;;;mode
+0x4066;konfiguriert;ENUM_IN_WATER_HEATER_MODE;NASA_DHW_OPMODE;;;;;;;;Hotwater Mode
+0x406F;konfiguriert;ENUM_IN_REFERENCE_EHS_TEMP;NASA_DHW_REFERENCE_TEMP;;;;;;;;Temperature Reference
+0x4093;konfiguriert;ENUM_IN_FSV_2041;ENUM_IN_FSV_2041;;;;;;;;FSV 2041 - Heizkurve WL1 oder WL2 Auswahl (intern)
+0x4094;konfiguriert;ENUM_IN_FSV_2081;ENUM_IN_FSV_2081;;;;;;;;FSV 2081 - Kühlkurve WL1 oder WL2 Auswahl (intern)
+0x4095;konfiguriert;ENUM_IN_FSV_2091;ENUM_IN_FSV_2091;;;;;;;;FSV 2091 - Externer Raumthermostat Zone 1 (intern)
+0x4096;konfiguriert;ENUM_IN_FSV_2092;ENUM_IN_FSV_2092;;;;;;;;FSV 2092 - Externer Raumthermostat Zone 2 (intern)
+0x4127;konfiguriert;ENUM_IN_FSV_2093;ENUM_IN_FSV_2093;;;;;;;;FSV 2093 - Raumtemperaturregelung Betriebsart (intern)
+0x4097;konfiguriert;ENUM_IN_FSV_3011;ENUM_IN_FSV_3011;;;;;;;;FSV 3011 - Warmwasserbereitung aktivierte Betriebsart (intern)
+0x409A;konfiguriert;ENUM_IN_FSV_3042;ENUM_IN_FSV_3042;;;;;;;;FSV 3042 - Warmwasser thermische Desinfektion Wochentag (intern)
+0x409C;konfiguriert;ENUM_IN_FSV_3061;ENUM_IN_FSV_3061;;;;;;;;FSV 3061 - Solarthermie oder Warmwasserthermostat aktiviert (intern)
+0x409D;konfiguriert;ENUM_IN_FSV_3071;ENUM_IN_FSV_3071;;;;;;;;FSV 3071 - Dreiwegeventil Ausrichtung (intern)
+0x409E;konfiguriert;ENUM_IN_FSV_4011;ENUM_IN_FSV_4011;;;;;;;;FSV 4011 - Vorrang Raumheizung oder Warmwasser (intern)
+0x409F;konfiguriert;ENUM_IN_FSV_4021;ENUM_IN_FSV_4021;;;;;;;;FSV 4021 - Elektrische Zusatzheizung Betriebsart (intern)
+0x40A0;konfiguriert;ENUM_IN_FSV_4022;ENUM_IN_FSV_4022;;;;;;;;FSV 4022 - Zusatzheizung und Warmwasser Heizstab Priorität (intern)
+0x40C0;konfiguriert;ENUM_IN_FSV_4041;ENUM_IN_FSV_4041;;;;;;;;FSV 4041 - Mischventil Installation und Betriebsart (intern)
+0x40C2;konfiguriert;ENUM_IN_FSV_4051;ENUM_IN_FSV_4051;;;;;;;;FSV 4051 - Inverterpumpe PWM Regelmodus (intern)
+0x4000;konfiguriert;ENUM_IN_OPERATION_POWER;NASA_POWER;;;;;;;;power
+0x4065;konfiguriert;ENUM_IN_WATER_HEATER_POWER;NASA_DHW_POWER;;;;;;;;Water Heater Power
+0x4111;konfiguriert;;;;;;;;;;automatic clean
+0x4098;konfiguriert;ENUM_IN_FSV_3031;ENUM_IN_FSV_3031;;;;;;;;FSV 3031 - Warmwasser Heizstab Freigabe (intern)
+0x4099;konfiguriert;ENUM_IN_FSV_3041;ENUM_IN_FSV_3041;;;;;;;;FSV 3041 - Warmwasser thermische Desinfektion aktiv (intern)
+0x409B;konfiguriert;ENUM_IN_FSV_3051;ENUM_IN_FSV_3051;;;;;;;;FSV 3051 - Warmwasser Timer-Aus aktiviert (intern)
+0x40A1;konfiguriert;ENUM_IN_FSV_4023;ENUM_IN_FSV_4023;;;;;;;;FSV 4023 - Zusatzheizung Kältekompensation (intern)
+0x40A2;konfiguriert;ENUM_IN_FSV_4031;ENUM_IN_FSV_4031;;;;;;;;FSV 4031 - Externe Wärmequelle Freigabe (intern)
+0x40A3;konfiguriert;ENUM_IN_FSV_4032;ENUM_IN_FSV_4032;;;;;;;;FSV 4032 - Externe Wärmequelle Priorität (intern)
+0x411A;konfiguriert;ENUM_IN_FSV_4061;ENUM_IN_FSV_4061;;;;;;;;FSV 4061 - Zonenregelung aktiviert (intern)
+0x4128;konfiguriert;ENUM_IN_FSV_5022;ENUM_IN_FSV_5022;;;;;;;;FSV 5022 - Warmwasser Sparbetrieb aktiviert (intern)
+0x40A4;konfiguriert;ENUM_IN_FSV_5041;ENUM_IN_FSV_5041;;;;;;;;FSV 5041 - Netzbetreiber Fernsteuerung aktiviert (intern)
+0x40A7;konfiguriert;ENUM_IN_FSV_5051;ENUM_IN_FSV_5051;;;;;;;;FSV 5051 - Verdichter Frequenzbegrenzungsfunktion aktiviert (intern)
+0x411B;konfiguriert;ENUM_IN_FSV_5081;ENUM_IN_FSV_5081;;;;;;;;FSV 5081 - Photovoltaiksteuerung aktiviert (intern)
+0x411C;konfiguriert;ENUM_IN_FSV_5091;ENUM_IN_FSV_5091;;;;;;;;FSV 5091 - Smart Grid Regelung aktiviert (intern)
+0x411D;konfiguriert;ENUM_IN_FSV_5094;ENUM_IN_FSV_5094;;;;;;;;FSV 5094 - Smart Grid Warmwasser Betriebsart (intern)
+0x4067;konfiguriert;ENUM_IN_3WAY_VALVE;NASA_DHW_VALVE;;;;;;;;Dreiwegeventil Stellung
+0x4002;konfiguriert;ENUM_IN_OPERATION_MODE_REAL;NASA_INDOOR_REAL_OPMODE;;;;;;;;Inneneinheit Betriebsart
+0x8001;konfiguriert;ENUM_OUT_OPERATION_ODU_MODE;NASA_OUTDOOR_OPERATION_STATUS;;;;;;;;Außeneinheit Betriebszustand
+0x8000;konfiguriert;ENUM_OUT_OPERATION_SERVICE_OP;ENUM_OUT_OPERATION_SERVICE_OP;;;;;;;;Außeneinheit Servicebetriebsart
+0x8061;konfiguriert;ENUM_OUT_DEICE_STEP_INDOOR;NASA_OUTDOOR_INDOOR_DEFROST_STEP;;;;;;;;Abtauung Ablaufstatus
+0x8235;konfiguriert;VAR_OUT_ERROR_CODE;VAR_OUT_ERROR_CODE;;;;;;;;Samsung Fehlerbeschreibung
+0x0000;beobachtet_nicht_konfiguriert;NASA_IM_MASTER_NOTIFY;NASA_IM_MASTER_NOTIFY;;;;62.00.91;1;1;2;
+0x0202;beobachtet_nicht_konfiguriert;VAR_AD_ERROR_CODE1;NASA_ERROR_CODE1;VAR;;;10.00.00 20.00.00;30;3;0 438 65535;
+0x0207;beobachtet_nicht_konfiguriert;VAR_AD_INSTALL_NUMBER_INDOOR;NASA_OUTDOOR_INDOORCOUNT;VAR;;;10.00.00;6;1;1;
+0x0210;beobachtet_nicht_konfiguriert;NASA_NET_ADDRESS;NASA_NET_ADDRESS;;;;10.00.00;1;1;45479;
+0x0217;beobachtet_nicht_konfiguriert;NASA_PNP_NET_ADDRESS;NASA_PNP_NET_ADDRESS;;;;20.ff.ff;1;1;45479;
+0x0402;beobachtet_nicht_konfiguriert;LVAR_AD_ADDRESS_RMC;NASA_RMCADDRESS;LVAR;;;20.00.00;1;1;10485760;
+0x0409;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_ALL;NASA_ALL_REMOTE_LEVEL;LVAR;;;20.00.00;1;1;0;
+0x040A;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_OPERATION_POWER;NASA_LEVEL_POWER;LVAR;;;20.00.00;1;1;0;
+0x040B;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_OPERATION_MODE;NASA_LEVEL_OPMODE;LVAR;;value & 0xFF;20.00.00;1;1;0;
+0x040C;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_FAN_MODE;NASA_LEVEL_FANSPEED;LVAR;;;20.00.00;1;1;0;
+0x040D;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_FAN_DIRECTION;NASA_LEVEL_AIRSWING;LVAR;;;20.00.00;1;1;0;
+0x040E;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_TEMP_TARGET;NASA_LEVEL_SETTEMP;LVAR;;;20.00.00;1;1;0;
+0x0410;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_OPERATION_MODE_ONLY;NASA_LEVEL_OPMODE_LIMIT;LVAR;;;10.00.00 20.00.00;30;1;0;
+0x0411;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_COOL_MODE_UPPER;NASA_LEVEL_COOL_HIGH_TEMP_LIMIT;LVAR;;(value & 0xFFFF0000u) >> 16) / 10.0;20.00.00;1;1;19660800;
+0x0412;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_COOL_MODE_LOWER;NASA_LEVEL_COOL_LOW_TEMP_LIMIT;LVAR;;(value & 0xFFFF0000u) >> 16) / 10.0;20.00.00;1;1;3276800;
+0x0413;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_HEAT_MODE_UPPER;NASA_LEVEL_HEAT_HIGH_TEMP_LIMIT;LVAR;;(value & 0xFFFF0000u) >> 16) / 10.0;20.00.00;1;1;36044800;
+0x0414;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_HEAT_MODE_LOWER;NASA_LEVEL_HEAT_LOW_TEMP_LIMIT;LVAR;;(value & 0xFFFF0000u) >> 16) / 10.0;20.00.00;1;1;9830400;
+0x0415;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_CONTACT_CONTROL;NASA_LEVEL_OUT_POINT_INPUT;LVAR;;;20.00.00;1;1;5242880;
+0x0416;beobachtet_nicht_konfiguriert;LVAR_AD_INSTALL_LEVEL_KEY_OPERATION_INPUT;NASA_LEVEL_KEY_INPUT;LVAR;;;20.00.00;1;1;0;
+0x0417;beobachtet_nicht_konfiguriert;LVAR_AD___;NASA_PNP_CONFIRM_ADDRESS;LVAR;;;20.ff.ff;1;1;2097152;
+0x0418;beobachtet_nicht_konfiguriert;LVAR_AD___;NASA_PNP_RANDOM_ADDRESS;LVAR;;;20.ff.ff;1;1;2144553;
+0x0419;beobachtet_nicht_konfiguriert;LVAR_AD___;NASA_PNP_SETUP_ADDRESS;LVAR;;;20.ff.ff;1;1;2097152;
+0x041B;beobachtet_nicht_konfiguriert;LVAR_AD___;;;;;10.00.00;27;1;2162687;
+0x0608;beobachtet_nicht_konfiguriert;STR_AD_DBCODE_MICOM_MAIN;NASA_MICOM_CODE;STR;;;10.00.00;3;2;10 13;
+0x060C;beobachtet_nicht_konfiguriert;STR_AD_DBCODE_EEPROM;NASA_EEPROM_CODE;STR;;;10.00.00;3;1;7;
+0x2000;beobachtet_nicht_konfiguriert;NASA_IM_MASTER;NASA_IM_MASTER;;;;10.00.00;1;1;84;
+0x2003;beobachtet_nicht_konfiguriert;NASA_ADDRESSING;NASA_ADDRESSING;;;;10.00.00;1;1;2;
+0x2004;beobachtet_nicht_konfiguriert;NASA_PNP;NASA_PNP;ENUM;;;10.00.00 20.ff.ff;3;2;0 1;
+0x200F;beobachtet_nicht_konfiguriert;ENUM_NM_NETWORK_POSITINON_LAYER;NASA_LAYER;ENUM;;;10.00.00;1;1;1;
+0x2012;beobachtet_nicht_konfiguriert;ENUM_NM__;;;;;10.00.00;1;1;2;
+0x2015;beobachtet_nicht_konfiguriert;ENUM_NM__;;;;;10.00.00;1;1;1;
+0x20FF;beobachtet_nicht_konfiguriert;ENUM_NM__;;;;;10.00.00;2;1;0;
+0x22F7;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;7;3;0 14 15;
+0x22F9;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;7;1;0;
+0x22FA;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;3;1;0;
+0x22FB;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;7;6;41 42 55 76 79 98;
+0x22FC;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;3;2;144 858;
+0x22FD;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;7;1;0;
+0x22FE;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;3;2;1 5;
+0x22FF;beobachtet_nicht_konfiguriert;VAR_NM___;;;;;10.00.00 20.00.00;3;2;2 3;
+0x2400;beobachtet_nicht_konfiguriert;NASA_ALL_LAYER_DEVICE_COUNT;NASA_ALL_LAYER_DEVICE_COUNT;LVAR;;;10.00.00;4;1;-16515073;
+0x2401;beobachtet_nicht_konfiguriert;LVAR_NM___;;;;;10.00.00;4;1;65536;
+0x24FB;beobachtet_nicht_konfiguriert;LVAR_NM___;;;;;10.00.00 20.00.00;3;1;0;
+0x4006;beobachtet_nicht_konfiguriert;NASA_FANSPEED;NASA_FANSPEED;ENUM;;;20.00.00;2;1;3;
+0x400F;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4010;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4015;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;1;
+0x4019;beobachtet_nicht_konfiguriert;ENUM_IN___;NASA_USE_DISCHARGE_TEMP;ENUM;;;20.00.00;1;1;0;
+0x401B;beobachtet_nicht_konfiguriert;ENUM_IN___;NASA_USE_CENTUAL_CONTROL;ENUM;;;20.00.00;1;1;1;
+0x4023;beobachtet_nicht_konfiguriert;NASA_USE_SPI;NASA_USE_SPI;ENUM;;;20.00.00;1;1;0;
+0x4024;beobachtet_nicht_konfiguriert;NASA_USE_FILTER_WARNING_TIME;NASA_USE_FILTER_WARNING_TIME;ENUM;;;20.00.00;1;1;1;
+0x4027;beobachtet_nicht_konfiguriert;NASA_FILTER_WARNING;NASA_FILTER_WARNING;ENUM;;;20.00.00;1;1;0;
+0x4029;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x402A;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x402B;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x402D;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4031;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4035;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;2;1;0;
+0x4043;beobachtet_nicht_konfiguriert;NASA_CONTROL_SPI;NASA_CONTROL_SPI;ENUM;;;20.00.00;1;1;0;
+0x4046;beobachtet_nicht_konfiguriert;NASA_CONTROL_SILENCE;NASA_CONTROL_SILENCE;ENUM;;;20.00.00;2;1;0;
+0x4047;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;1;
+0x4048;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x404F;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;255;
+0x4051;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;2;1;0;
+0x4059;beobachtet_nicht_konfiguriert;;;;;;20.00.00;2;1;0;
+0x405F;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4060;beobachtet_nicht_konfiguriert;ENUM_IN_ALTERNATIVE_MODE;NASA_ALTERNATIVE_MODE;ENUM;;;20.00.00;1;1;0;
+0x4068;beobachtet_nicht_konfiguriert;ENUM_IN_SOLAR_PUMP;NASA_SOLAR_PUMP;ENUM;;;20.00.00;2;1;0;
+0x4069;beobachtet_nicht_konfiguriert;ENUM_IN_THERMOSTAT1;ENUM_IN_THERMOSTAT1;ENUM;;;20.00.00;2;1;0;
+0x406A;beobachtet_nicht_konfiguriert;ENUM_IN_THERMOSTAT2;ENUM_IN_THERMOSTAT2;ENUM;;;20.00.00;2;1;0;
+0x406B;beobachtet_nicht_konfiguriert;NASA_SMART_GRID;NASA_SMART_GRID;ENUM;;;20.00.00;2;1;0;
+0x406D;beobachtet_nicht_konfiguriert;ENUM_IN_OUTING_MODE;NASA_INDOOR_OUT_GOING;ENUM;;;20.00.00;1;1;0;
+0x4070;beobachtet_nicht_konfiguriert;ENUM_IN_DISCHAGE_TEMP_CONTROL;NASA_DISCHARGE_TEMP_ENABLE;ENUM;;;20.00.00;1;1;0;
+0x4073;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4074;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;2;1;0;
+0x4077;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x407B;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x407D;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x407E;beobachtet_nicht_konfiguriert;ENUM_IN_LOUVER_LR_SWING;NASA_AIRFLOW_LEFTRIGHT;ENUM;;;20.00.00;1;1;0;
+0x4085;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x4086;beobachtet_nicht_konfiguriert;NASA_TEST_MODE_ENABLED;;;;;20.00.00;2;1;0;
+0x408A;beobachtet_nicht_konfiguriert;ENUM_IN_2WAY_VALVE;ENUM_IN_2WAY_VALVE;ENUM;;;20.00.00;2;1;0;
+0x40B5;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x40C5;beobachtet_nicht_konfiguriert;ENUM_IN_THERMOSTAT_WATER_HEATER;ENUM_IN_THERMOSTAT_WATER_HEATER;ENUM;;;20.00.00;2;1;0;
+0x40C6;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;2;1;0;
+0x40E3;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;10.00.00;6;1;255;
+0x4117;beobachtet_nicht_konfiguriert;ENUM_IN___;;;;;20.00.00;1;1;0;
+0x411E;beobachtet_nicht_konfiguriert;ENUM_IN_OPERATION_POWER_ZONE2;ENUM_IN_OPERATION_POWER_ZONE2;ENUM;;;20.00.00;2;1;0;
+0x4124;beobachtet_nicht_konfiguriert;ENUM_IN_SG_READY_MODE_STATE;ENUM_IN_SG_READY_MODE_STATE;ENUM;;;20.00.00;1;1;0;
+0x4125;beobachtet_nicht_konfiguriert;ENUM_IN_FSV_LOAD_SAVE;;;;;20.00.00;2;1;0;
+0x4202;beobachtet_nicht_konfiguriert;VAR_IN_TEMP_DISCHARGE_REQUEST;;;;;20.00.00;3;3;0 300 340;
+0x4204;beobachtet_nicht_konfiguriert;VAR_IN___;NASA_MODIFIED_CURRENT_TEMP;VAR;;value / 10;20.00.00;6;5;240 260 268 295 65016;
+0x420C;beobachtet_nicht_konfiguriert;NASA_INDOOR_OUTER_TEMP;NASA_INDOOR_OUTER_TEMP;VAR;;value / 10;20.00.00;6;4;56 57 62 89;
+0x4211;beobachtet_nicht_konfiguriert;VAR_IN_CAPACITY_REQUEST;NASA_INDOOR_CAPACITY;VAR;;value / 8.5;20.00.00;2;1;0;
+0x4212;beobachtet_nicht_konfiguriert;VAR_IN_CAPACITY_ABSOLUTE;NASA_INDOOR_ABSOLUTE_CAPACITY;VAR;;value / 8.5;20.00.00;1;1;120;
+0x4213;beobachtet_nicht_konfiguriert;VAR_IN___;;;;;20.00.00;3;2;0 200;
+0x4217;beobachtet_nicht_konfiguriert;VAR_IN_EEV_VALUE_REAL_1;NASA_INODDR_CURRENT_EEV1;VAR;;;20.00.00;6;1;0;
+0x4229;beobachtet_nicht_konfiguriert;VAR_IN_MODEL_INFORMATION;NASA_INDOOR_MODEL_INFORMATION;VAR;;;20.00.00;1;1;115;
+0x423E;beobachtet_nicht_konfiguriert;VAR_IN___;;;;;20.00.00;6;1;65535;
+0x4274;beobachtet_nicht_konfiguriert;VAR_IN_FSV_5012_ROOM_TEMP_COOLING;VAR_IN_FSV_5012;VAR;;value / 10;20.00.00;2;1;300;
+0x428C;beobachtet_nicht_konfiguriert;VAR_IN_TEMP_MIXING_VALVE_F;VAR_IN_TEMP_MIXING_VALVE_F;VAR;;value / 10;20.00.00;7;1;65036;
+0x428D;beobachtet_nicht_konfiguriert;VAR_IN___;;;;;20.00.00;1;1;0;
+0x42D6;beobachtet_nicht_konfiguriert;VAR_IN_TEMP_TARGET_ZONE2_F;VAR_IN_TEMP_TARGET_ZONE2_F;VAR;;value / 10;20.00.00;2;1;300;
+0x42D7;beobachtet_nicht_konfiguriert;VAR_IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F;VAR_IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F;VAR;;value / 10;20.00.00;2;1;300;
+0x42F1;beobachtet_nicht_konfiguriert;VAR_OUT_COMP_FREQ_RATE_CONTROL;VAR_OUT_COMP_FREQ_RATE_CONTROL;VAR;;;20.00.00;2;1;0;
+0x4301;beobachtet_nicht_konfiguriert;VAR_IN___;;;;;20.00.00;2;1;1024;
+0x4401;beobachtet_nicht_konfiguriert;LVAR_IN___;;;;;20.00.00;7;4;0 14 109 110;
+0x440A;beobachtet_nicht_konfiguriert;LVAR_IN_DEVICE_STAUS_HEATPUMP_BOILER;LVAR_IN_DEVICE_STAUS_HEATPUMP_BOILER;LVAR;;(value & 0x00000002) / 2;20.00.00;1;1;0;
+0x440E;beobachtet_nicht_konfiguriert;LVAR_IN___;;;;;20.00.00;2;1;1024;
+0x440F;beobachtet_nicht_konfiguriert;NASA_ERROR_INOUT;NASA_ERROR_INOUT;LVAR;;;20.00.00;2;1;0;
+0x4604;beobachtet_nicht_konfiguriert;STR_IN_INSTALL_INDOOR_SETUP_INFO;NASA_INDOOR_ABLE_FUNCTION;STR;;;20.00.00;1;1;12;
+0x8003;beobachtet_nicht_konfiguriert;ENUM_OUT_OPERATION_HEATCOOL;NASA_OUTDOOR_OPERATION_MODE;ENUM;;;10.00.00;95;2;0 2;
+0x8005;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;255;
+0x800D;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;2;1;0;
+0x8031;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;95;2;0 1;
+0x8032;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;255;
+0x8033;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x803C;beobachtet_nicht_konfiguriert;ENUM_OUT_OPERATION_AUTO_INSPECT_STEP;ENUM_OUT_OPERATION_AUTO_INSPECT_STEP;ENUM;;;10.00.00;27;1;0;
+0x803F;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;93;2;0 43;
+0x8045;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x8046;beobachtet_nicht_konfiguriert;ENUM_OUT_OP_TEST_OP_COMPLETE;NASA_OUTDOOR_TEST_OP_COMPLETE;ENUM;;;10.00.00;2;1;1;
+0x8048;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;6;1;0;
+0x805E;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;93;1;0;
+0x8062;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_LOGICAL_DEFROST_STEP;NASA_OUTDOOR_LOGICAL_DEFROST_STEP;;;;10.00.00;93;1;0;
+0x8063;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;2;0 1;
+0x8065;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_SYSTEM_RESET;NASA_OUTDOOR_SYSTEM_RESET;ENUM;;;20.00.00;5;1;0;
+0x8066;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_OPMODELIMIT;NASA_OUTDOOR_OPMODELIMIT;ENUM;;;10.00.00;27;1;0;
+0x8075;beobachtet_nicht_konfiguriert;;;;;;10.00.00;93;1;255;
+0x8077;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x8078;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x8079;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x807A;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x807B;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x807C;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x807D;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x807E;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x807F;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;255;
+0x8081;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_EXT_CMD_OPERATION;NASA_OUTDOOR_EXT_CMD_OPERATION;ENUM;;;10.00.00;8;1;0;
+0x8083;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x808D;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;93;1;0;
+0x808E;beobachtet_nicht_konfiguriert;ENUM_OUT_OP_CHECK_REF_STEP;ENUM_OUT_OP_CHECK_REF_STEP;ENUM;;value & 0x0F;10.00.00;27;1;255;
+0x809C;beobachtet_nicht_konfiguriert;ENUM_OUT_CHECK_REF_RESULT;ENUM_OUT_CHECK_REF_RESULT;ENUM;;;10.00.00;6;1;0;
+0x809D;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_COOLONLY_MODEL;NASA_OUTDOOR_COOLONLY_MODEL;ENUM;;;10.00.00;8;1;0;
+0x80A7;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_DRED_LEVEL;NASA_OUTDOOR_DRED_LEVEL;ENUM;;;10.00.00;6;1;0;
+0x80A9;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00 20.00.00;28;1;0;
+0x80AA;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;6;1;1;
+0x80B1;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;27;1;0;
+0x80B2;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_CH_SWITCH_VALUE;NASA_OUTDOOR_CH_SWITCH_VALUE;ENUM;;;10.00.00;2;1;128;
+0x80B6;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;6;1;1;
+0x80BC;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;6;1;0;
+0x80BF;beobachtet_nicht_konfiguriert;;;;;;10.00.00;93;1;0;
+0x80CE;beobachtet_nicht_konfiguriert;ENUM_OUT___;;;;;10.00.00;28;1;0;
+0x80D8;beobachtet_nicht_konfiguriert;ENUM_OUT_EHS_WATEROUT_TYPE;ENUM_OUT_EHS_WATEROUT_TYPE;ENUM;;;10.00.00;7;1;1;
+0x8200;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_OPMODE_OPTION;NASA_OUTDOOR_OPMODE_OPTION;VAR;;;10.00.00;5;1;0;
+0x8202;beobachtet_nicht_konfiguriert;VAR_OUT_INSTALL_COMP_NUM;VAR_OUT_INSTALL_COMP_NUM;VAR;;;10.00.00;2;1;1;
+0x8224;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;1;0;
+0x8225;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;32;6;0 311 315 337 338 341;
+0x8227;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_FAN_STEP2;NASA_OUTDOOR_FAN_STEP2;VAR;;;10.00.00;1;1;0;
+0x8231;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_HEATING_PERCENT;NASA_OUTDOOR_HEATING_PERCENT;VAR;;;10.00.00;27;1;0;
+0x823C;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;1;1;0;
+0x8243;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;93;2;0 200;
+0x8244;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_OIL_RECOVERY_STEP;NASA_OUTDOOR_OIL_RECOVERY_STEP;;;;10.00.00;120;1;0;
+0x8245;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_OIL_BALANCE_STEP;NASA_OUTDOOR_OIL_BALANCE_STEP;;;;10.00.00;27;2;0 255;
+0x8247;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_DEFROST_STEP;NASA_OUTDOOR_DEFROST_STEP;ENUM;;;10.00.00;94;2;0 255;
+0x8248;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_SAFETY_START;NASA_OUTDOOR_SAFETY_START;VAR;;;10.00.00;121;2;0 255;
+0x8249;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;93;4;0 1 3 255;
+0x824B;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;1;1;0;
+0x824C;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;1;1;1197;
+0x825A;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;1;65535;
+0x825B;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;1;0;
+0x825C;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;1;3;
+0x825D;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;1;0;
+0x8278;beobachtet_nicht_konfiguriert;VAR_OUT_SENSOR_OCT1;NASA_OUTDOOR_OCT1;VAR;;;10.00.00;28;1;0;
+0x8287;beobachtet_nicht_konfiguriert;VAR_OUT_INSTALL_CAPA;NASA_OUTDOOR_HP;VAR;;value * 0.7457;10.00.00;2;1;5;
+0x8298;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_COOL_SUM_CAPA;NASA_OUTDOOR_COOL_SUM_CAPA;;;;10.00.00;95;1;0;
+0x829A;beobachtet_nicht_konfiguriert;VAR_OUT_SENSOR_SUCTION2_1SEC;NASA_OUTDOOR_SUCTION2_TEMP;VAR;;value / 10;10.00.00;27;1;940;
+0x829B;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_CT_RESTRICT_OPTION;NASA_OUTDOOR_CT_RESTRICT_OPTION;;;;10.00.00;2;1;255;
+0x82A2;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;2;1;0;
+0x82A8;beobachtet_nicht_konfiguriert;VAR_OUT_CONTROL_IDU_TOTAL_ABSCAPA;VAR_OUT_CONTROL_IDU_TOTAL_ABSCAPA;VAR;;value / 8.5;10.00.00;93;1;0;
+0x82A9;beobachtet_nicht_konfiguriert;VAR_OUT_CONTROL_IDU_TOTAL_ABSCAPA2;;;;;10.00.00;93;1;0;
+0x82AA;beobachtet_nicht_konfiguriert;;;;;;10.00.00;93;1;0;
+0x82B2;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;1;32767;
+0x82B5;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;2;0 25;
+0x82B8;beobachtet_nicht_konfiguriert;VAR_OUT_SENSOR_MIDPRESS;NASA_OUTDOOR_MID_PRESS;VAR;;(value / 10) * 0.980665;10.00.00;27;1;0;
+0x82BC;beobachtet_nicht_konfiguriert;VAR_OUT_PROJECT_CODE;NASA_OUTDOOR_PROJECT_CODE;VAR;;;10.00.00;29;1;0;
+0x82D1;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;29;1;65535;
+0x82D5;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_UPL_TP_COOL;NASA_OUTDOOR_UPL_TP_COOL;;;;10.00.00;1;1;32767;
+0x82D6;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_UPL_TP_HEAT;NASA_OUTDOOR_UPL_TP_HEAT;;;;10.00.00;1;1;32767;
+0x82D7;beobachtet_nicht_konfiguriert;;;;;;10.00.00;1;1;32767;
+0x82D8;beobachtet_nicht_konfiguriert;;;;;;10.00.00;1;1;32767;
+0x82DE;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_EVA_IN;NASA_OUTDOOR_EVA_IN;VAR;;value / 10;10.00.00;29;12;142 145 146 147 151 153;
+0x82E3;beobachtet_nicht_konfiguriert;VAR_OUT_PRODUCT_OPTION_CAPA;VAR_OUT_PRODUCT_OPTION_CAPA;VAR;;value / 10.0;10.00.00;27;1;140;
+0x82E8;beobachtet_nicht_konfiguriert;VAR_OUT_LOAD_MCU_HR_BYPASS_EEV;VAR_OUT_LOAD_MCU_HR_BYPASS_EEV;VAR;;;10.00.00;28;1;480;
+0x82ED;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;27;14;381 382 383 385 386 388;
+0x82F6;beobachtet_nicht_konfiguriert;VAR_OUT___;;;;;10.00.00;29;1;20;
+0x8401;beobachtet_nicht_konfiguriert;LVAR_OUT___;;;;;10.00.00;5;1;0;
+0x8404;beobachtet_nicht_konfiguriert;LVAR_OUT___;;;;;10.00.00;93;3;0 8388672 75497536;
+0x8405;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_COMP1_RUNNING_TIME;NASA_OUTDOOR_COMP1_RUNNING_TIME;LVAR;;;10.00.00;3;1;13537;
+0x8408;beobachtet_nicht_konfiguriert;LVAR_OUT___;;;;;10.00.00;27;2;24 152;
+0x8409;beobachtet_nicht_konfiguriert;LVAR_OUT___;;;;;10.00.00;5;1;0;
+0x840B;beobachtet_nicht_konfiguriert;LVAR_OUT_AUTO_INSPECT_RESULT0;LVAR_OUT_AUTO_INSPECT_RESULT0;LVAR;;;10.00.00;27;1;0;
+0x840C;beobachtet_nicht_konfiguriert;LVAR_OUT_AUTO_INSPECT_RESULT1;LVAR_OUT_AUTO_INSPECT_RESULT1;LVAR;;;10.00.00;27;1;0;
+0x8417;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_VARIABLE_SETUP_INFO;NASA_OUTDOOR_VARIABLE_SETUP_INFO;LVAR;;;10.00.00;5;1;3;
+0x841A;beobachtet_nicht_konfiguriert;LVAR_OUT___;;;;;10.00.00;27;1;65536;
+0x841F;beobachtet_nicht_konfiguriert;LVAR_OUT___;;;;;10.00.00;1;1;-1;
+0x8608;beobachtet_nicht_konfiguriert;STR_OUT___;;;;;10.00.00;3;1;12;
+0x860C;beobachtet_nicht_konfiguriert;STR_OUT___;;;;;10.00.00;2;1;5;
+0x860D;beobachtet_nicht_konfiguriert;NASA_OUTDOOR_MODELINFORMATION;NASA_OUTDOOR_MODELINFORMATION;STR;;;10.00.00;5;1;5;
+0xFFFF;beobachtet_nicht_konfiguriert;;;;;;ff.ff.ff;1;1;0;
