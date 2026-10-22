@@ -808,6 +808,1212 @@ switch:
     internal: true
 
 sensor:
+  # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
+  - platform: samsung_nasa
+    message: 0x0202
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x0202 AD_ERROR_CODE1'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0207
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x0207 AD_INSTALL_NUMBER_INDOOR'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0210
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0210 NET_ADDRESS'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0217
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x0217 PNP_NET_ADDRESS'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0401
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0401 AD_ADDRESS_MAIN'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0402
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0402 AD_ADDRESS_RMC'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0408
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0408 AD_ADDRESS_SETUP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0409
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0409 AD_INSTALL_LEVEL_ALL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x040A
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x040A AD_INSTALL_LEVEL_OPERATION_POWER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x040B
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x040B AD_INSTALL_LEVEL_OPERATION_MODE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x040C
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x040C AD_INSTALL_LEVEL_FAN_MODE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x040D
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x040D AD_INSTALL_LEVEL_FAN_DIRECTION'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x040E
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x040E AD_INSTALL_LEVEL_TEMP_TARGET'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0410
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x0410 AD_INSTALL_LEVEL_OPERATION_MODE_ONLY'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0411
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0411 AD_INSTALL_LEVEL_COOL_MODE_UPPER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0412
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0412 AD_INSTALL_LEVEL_COOL_MODE_LOWER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0413
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0413 AD_INSTALL_LEVEL_HEAT_MODE_UPPER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0414
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0414 AD_INSTALL_LEVEL_HEAT_MODE_LOWER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0415
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0415 AD_INSTALL_LEVEL_CONTACT_CONTROL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0416
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0416 AD_INSTALL_LEVEL_KEY_OPERATION_INPUT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0417
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0417'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0418
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0418'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x0419
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0419'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x041B
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x041B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2000
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2000 IM_MASTER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2003
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2003 ADDRESSING'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2004
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2004 PNP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x200F
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x200F NM_NETWORK_POSITINON_LAYER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2012
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2012'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2015
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2015'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x20FF
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x20FF'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22F7
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22F7'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22F8
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x22F8'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22F9
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22F9'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22FA
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22FA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22FB
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22FB'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22FC
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22FC'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22FD
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22FD'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22FE
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22FE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x22FF
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x22FF'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2400
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2400 ALL_LAYER_DEVICE_COUNT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x2401
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x2401'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x24FB
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x24FB'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4006
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4006 FANSPEED'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x400F
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x400F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4010
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4010'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4015
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4015'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4019
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4019'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x401B
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x401B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4023
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4023 USE_SPI'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4024
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4024 USE_FILTER_WARNING_TIME'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4027
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4027 FILTER_WARNING'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4029
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4029'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x402A
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x402A'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x402B
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x402B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x402D
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x402D'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4031
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4031'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4035
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4035'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4038
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4038 IN_STATE_HUMIDITY_PERCENT'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x4043
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4043 CONTROL_SPI'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4046
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4046 CONTROL_SILENCE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4047
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4047'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4048
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4048'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x404F
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x404F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4051
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4051'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4059
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4059'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x405F
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x405F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4060
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4060 IN_ALTERNATIVE_MODE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4068
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4068 IN_SOLAR_PUMP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4069
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4069 IN_THERMOSTAT1'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x406A
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x406A IN_THERMOSTAT2'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x406B
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x406B SMART_GRID'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x406D
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x406D IN_OUTING_MODE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4070
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4070 IN_DISCHAGE_TEMP_CONTROL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4073
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4073'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4074
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4074'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4077
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4077'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x407B
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x407B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x407D
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x407D'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x407E
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x407E IN_LOUVER_LR_SWING'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4085
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4085'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4086
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4086 TEST_MODE_ENABLED'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x408A
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x408A IN_2WAY_VALVE'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x40B5
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x40B5'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x40C5
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x40C5 IN_THERMOSTAT_WATER_HEATER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x40C6
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x40C6'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x40E3
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x40E3'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4117
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4117'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x411E
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x411E IN_OPERATION_POWER_ZONE2'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4124
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4124 IN_SG_READY_MODE_STATE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4125
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4125 IN_FSV_LOAD_SAVE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4202
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4202 IN_TEMP_DISCHARGE_REQUEST'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x4204
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4204'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x420C
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x420C INDOOR_OUTER_TEMP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4211
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4211 IN_CAPACITY_REQUEST'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4212
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4212 IN_CAPACITY_ABSOLUTE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4213
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4213'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4217
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4217 IN_EEV_VALUE_REAL_1'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4229
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4229 IN_MODEL_INFORMATION'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x423E
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x423E'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x428C
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x428C IN_TEMP_MIXING_VALVE_F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x428D
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x428D'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x42D6
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x42D6 IN_TEMP_TARGET_ZONE2_F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x42D7
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x42D7 IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x42F1
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x42F1 OUT_COMP_FREQ_RATE_CONTROL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4301
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4301'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4401
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4401'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x440A
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x440A IN_DEVICE_STAUS_HEATPUMP_BOILER'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x440E
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x440E'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x440F
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x440F ERROR_INOUT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8005
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8005'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8031
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8031'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8032
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8032'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8033
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8033'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x803C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x803C OUT_OPERATION_AUTO_INSPECT_STEP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x803F
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x803F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8045
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8045'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8046
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8046 OUT_OP_TEST_OP_COMPLETE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8048
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8048'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x805E
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x805E'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8062
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8062 OUTDOOR_LOGICAL_DEFROST_STEP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8063
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8063'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8065
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x8065 OUTDOOR_SYSTEM_RESET'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8066
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8066 OUTDOOR_OPMODELIMIT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8075
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8075'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8077
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8077'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8078
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8078'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8079
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8079'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x807A
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x807A'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x807B
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x807B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x807C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x807C'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x807D
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x807D'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x807E
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x807E'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x807F
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x807F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8081
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8081 OUTDOOR_EXT_CMD_OPERATION'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8083
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8083'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x808D
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x808D'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x808E
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x808E OUT_OP_CHECK_REF_STEP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x809C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x809C OUT_CHECK_REF_RESULT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x809D
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x809D OUTDOOR_COOLONLY_MODEL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80A7
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80A7 OUTDOOR_DRED_LEVEL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80A9
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80A9'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80AA
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80AA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80B1
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80B1'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80B2
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80B2 OUTDOOR_CH_SWITCH_VALUE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80B6
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80B6'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80BC
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80BC'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80BF
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80BF'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80CE
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80CE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x80D8
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x80D8 OUT_EHS_WATEROUT_TYPE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8200
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8200 OUTDOOR_OPMODE_OPTION'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8202
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8202 OUT_INSTALL_COMP_NUM'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8224
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8224'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8225
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8225'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8227
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8227 OUTDOOR_FAN_STEP2'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8231
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8231 OUTDOOR_HEATING_PERCENT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x823C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x823C'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8243
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8243'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8244
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8244 OUTDOOR_OIL_RECOVERY_STEP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8245
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8245 OUTDOOR_OIL_BALANCE_STEP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8247
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8247 OUTDOOR_DEFROST_STEP'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8248
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8248 OUTDOOR_SAFETY_START'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8249
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8249'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x824B
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x824B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x824C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x824C'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x825A
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x825A'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x825B
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x825B'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x825C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x825C'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x825D
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x825D'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8278
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8278 OUT_SENSOR_OCT1'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8287
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8287 OUT_INSTALL_CAPA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8298
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8298 OUTDOOR_COOL_SUM_CAPA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x829A
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x829A OUT_SENSOR_SUCTION2_1SEC'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x829B
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x829B OUTDOOR_CT_RESTRICT_OPTION'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82A2
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82A2'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82A8
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82A8 OUT_CONTROL_IDU_TOTAL_ABSCAPA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82A9
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82A9 OUT_CONTROL_IDU_TOTAL_ABSCAPA2'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82AA
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82AA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82B2
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82B2'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82B5
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82B5'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82B8
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82B8 OUT_SENSOR_MIDPRESS'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82BC
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82BC OUT_PROJECT_CODE'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82D1
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82D1'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82D5
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82D5 OUTDOOR_UPL_TP_COOL'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82D6
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82D6 OUTDOOR_UPL_TP_HEAT'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82D7
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82D7'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82D8
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82D8'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82DE
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82DE OUTDOOR_EVA_IN'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x82E3
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82E3 OUT_PRODUCT_OPTION_CAPA'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82E8
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82E8 OUT_LOAD_MCU_HR_BYPASS_EEV'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82ED
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82ED'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x82F6
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x82F6'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8401
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8401'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8404
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8404'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8405
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8405 OUTDOOR_COMP1_RUNNING_TIME'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8408
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8408'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8409
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8409'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x840B
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x840B OUT_AUTO_INSPECT_RESULT0'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x840C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x840C OUT_AUTO_INSPECT_RESULT1'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x8417
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8417 OUTDOOR_VARIABLE_SETUP_INFO'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x841A
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x841A'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x841F
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x841F'
+    entity_category: diagnostic
+    accuracy_decimals: 0
   - platform: template
     name: 'Freier Speicher'
     id: diag_freier_speicher
@@ -2293,6 +3499,17 @@ binary_sensor:
       return id(fan_speed_rpm).state <= 320 && id(target_compressor_frequency).state <= 45;
 
 text_sensor:
+  # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
+  - platform: samsung_nasa
+    message: 0x8003
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8003 OUT_OPERATION_HEATCOOL'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x800D
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x800D'
+    entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x4067
     nasa_device_id: samsung_indoor

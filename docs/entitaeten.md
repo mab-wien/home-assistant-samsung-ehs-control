@@ -1,11 +1,11 @@
 # Entitäten der Wärmepumpe
 
-Stand: Firmware vom 22.10.2026 (207 Entitäten in Home Assistant). Alle entity_ids beginnen mit `wp_`; der Anzeigename in HA ist
+Stand: Firmware vom 22.10.2026 (411 Entitäten in Home Assistant). Alle entity_ids beginnen mit `wp_`; der Anzeigename in HA ist
 „Wärmepumpe <Name>“. Schreibbare Entitäten (Zahl, Auswahl, Schalter, Taste) wirken direkt auf die Anlage.
 
 Erzeugt aus `esphome/esphome-samsung-hvac-bus.yaml` und der HA-Registry. Quelle „NASA 0x…“ = Kennung auf dem Samsung-Bus, „FSV“ = Feldeinstellung.
 
-## Diagnose & Bus (15)
+## Diagnose & Bus (219)
 
 | Name | entity_id | Art | Quelle | Einheit |
 |---|---|---|---|---|
@@ -19,7 +19,211 @@ Erzeugt aus `esphome/esphome-samsung-hvac-bus.yaml` und der HA-Registry. Quelle 
 | FSV 1061-1064 - Hysterese-Testwerte erneut lesen | `–` | Taste | berechnet (Template) |  |
 | FSV 5019 - Smart Grid Warmwasser Speichertemperatur | `–` | Sensor | berechnet (Template) | °C |
 | Inneneinheit Leistungsaufnahme (NASA) | `–` | Sensor | NASA 0x4284 |  |
+| NASA 0x0202 AD_ERROR_CODE1 | `–` | Sensor | NASA 0x0202 |  |
+| NASA 0x0207 AD_INSTALL_NUMBER_INDOOR | `–` | Sensor | NASA 0x0207 |  |
+| NASA 0x0210 NET_ADDRESS | `–` | Sensor | NASA 0x0210 |  |
+| NASA 0x0217 PNP_NET_ADDRESS | `–` | Sensor | NASA 0x0217 |  |
+| NASA 0x0401 AD_ADDRESS_MAIN | `–` | Sensor | NASA 0x0401 |  |
+| NASA 0x0402 AD_ADDRESS_RMC | `–` | Sensor | NASA 0x0402 |  |
+| NASA 0x0408 AD_ADDRESS_SETUP | `–` | Sensor | NASA 0x0408 |  |
+| NASA 0x0409 AD_INSTALL_LEVEL_ALL | `–` | Sensor | NASA 0x0409 |  |
+| NASA 0x040A AD_INSTALL_LEVEL_OPERATION_POWER | `–` | Sensor | NASA 0x040A |  |
+| NASA 0x040B AD_INSTALL_LEVEL_OPERATION_MODE | `–` | Sensor | NASA 0x040B |  |
+| NASA 0x040C AD_INSTALL_LEVEL_FAN_MODE | `–` | Sensor | NASA 0x040C |  |
+| NASA 0x040D AD_INSTALL_LEVEL_FAN_DIRECTION | `–` | Sensor | NASA 0x040D |  |
+| NASA 0x040E AD_INSTALL_LEVEL_TEMP_TARGET | `–` | Sensor | NASA 0x040E |  |
+| NASA 0x0410 AD_INSTALL_LEVEL_OPERATION_MODE_ONLY | `–` | Sensor | NASA 0x0410 |  |
+| NASA 0x0411 AD_INSTALL_LEVEL_COOL_MODE_UPPER | `–` | Sensor | NASA 0x0411 |  |
+| NASA 0x0412 AD_INSTALL_LEVEL_COOL_MODE_LOWER | `–` | Sensor | NASA 0x0412 |  |
+| NASA 0x0413 AD_INSTALL_LEVEL_HEAT_MODE_UPPER | `–` | Sensor | NASA 0x0413 |  |
+| NASA 0x0414 AD_INSTALL_LEVEL_HEAT_MODE_LOWER | `–` | Sensor | NASA 0x0414 |  |
+| NASA 0x0415 AD_INSTALL_LEVEL_CONTACT_CONTROL | `–` | Sensor | NASA 0x0415 |  |
+| NASA 0x0416 AD_INSTALL_LEVEL_KEY_OPERATION_INPUT | `–` | Sensor | NASA 0x0416 |  |
+| NASA 0x0417 | `–` | Sensor | NASA 0x0417 |  |
+| NASA 0x0418 | `–` | Sensor | NASA 0x0418 |  |
+| NASA 0x0419 | `–` | Sensor | NASA 0x0419 |  |
+| NASA 0x041B | `–` | Sensor | NASA 0x041B |  |
+| NASA 0x2000 IM_MASTER | `–` | Sensor | NASA 0x2000 |  |
+| NASA 0x2003 ADDRESSING | `–` | Sensor | NASA 0x2003 |  |
+| NASA 0x2004 PNP | `–` | Sensor | NASA 0x2004 |  |
+| NASA 0x200F NM_NETWORK_POSITINON_LAYER | `–` | Sensor | NASA 0x200F |  |
+| NASA 0x2012 | `–` | Sensor | NASA 0x2012 |  |
+| NASA 0x2015 | `–` | Sensor | NASA 0x2015 |  |
+| NASA 0x20FF | `–` | Sensor | NASA 0x20FF |  |
+| NASA 0x22F7 | `–` | Sensor | NASA 0x22F7 |  |
+| NASA 0x22F8 | `–` | Sensor | NASA 0x22F8 |  |
+| NASA 0x22F9 | `–` | Sensor | NASA 0x22F9 |  |
+| NASA 0x22FA | `–` | Sensor | NASA 0x22FA |  |
+| NASA 0x22FB | `–` | Sensor | NASA 0x22FB |  |
+| NASA 0x22FC | `–` | Sensor | NASA 0x22FC |  |
+| NASA 0x22FD | `–` | Sensor | NASA 0x22FD |  |
+| NASA 0x22FE | `–` | Sensor | NASA 0x22FE |  |
+| NASA 0x22FF | `–` | Sensor | NASA 0x22FF |  |
+| NASA 0x2400 ALL_LAYER_DEVICE_COUNT | `–` | Sensor | NASA 0x2400 |  |
+| NASA 0x2401 | `–` | Sensor | NASA 0x2401 |  |
+| NASA 0x24FB | `–` | Sensor | NASA 0x24FB |  |
+| NASA 0x4006 FANSPEED | `–` | Sensor | NASA 0x4006 |  |
+| NASA 0x400F | `–` | Sensor | NASA 0x400F |  |
+| NASA 0x4010 | `–` | Sensor | NASA 0x4010 |  |
+| NASA 0x4015 | `–` | Sensor | NASA 0x4015 |  |
+| NASA 0x4019 | `–` | Sensor | NASA 0x4019 |  |
+| NASA 0x401B | `–` | Sensor | NASA 0x401B |  |
+| NASA 0x4023 USE_SPI | `–` | Sensor | NASA 0x4023 |  |
+| NASA 0x4024 USE_FILTER_WARNING_TIME | `–` | Sensor | NASA 0x4024 |  |
+| NASA 0x4027 FILTER_WARNING | `–` | Sensor | NASA 0x4027 |  |
+| NASA 0x4029 | `–` | Sensor | NASA 0x4029 |  |
+| NASA 0x402A | `–` | Sensor | NASA 0x402A |  |
+| NASA 0x402B | `–` | Sensor | NASA 0x402B |  |
+| NASA 0x402D | `–` | Sensor | NASA 0x402D |  |
+| NASA 0x4031 | `–` | Sensor | NASA 0x4031 |  |
+| NASA 0x4035 | `–` | Sensor | NASA 0x4035 |  |
+| NASA 0x4038 IN_STATE_HUMIDITY_PERCENT | `–` | Sensor | NASA 0x4038 |  |
+| NASA 0x4043 CONTROL_SPI | `–` | Sensor | NASA 0x4043 |  |
+| NASA 0x4046 CONTROL_SILENCE | `–` | Sensor | NASA 0x4046 |  |
+| NASA 0x4047 | `–` | Sensor | NASA 0x4047 |  |
+| NASA 0x4048 | `–` | Sensor | NASA 0x4048 |  |
+| NASA 0x404F | `–` | Sensor | NASA 0x404F |  |
+| NASA 0x4051 | `–` | Sensor | NASA 0x4051 |  |
+| NASA 0x4059 | `–` | Sensor | NASA 0x4059 |  |
+| NASA 0x405F | `–` | Sensor | NASA 0x405F |  |
+| NASA 0x4060 IN_ALTERNATIVE_MODE | `–` | Sensor | NASA 0x4060 |  |
+| NASA 0x4068 IN_SOLAR_PUMP | `–` | Sensor | NASA 0x4068 |  |
+| NASA 0x4069 IN_THERMOSTAT1 | `–` | Sensor | NASA 0x4069 |  |
+| NASA 0x406A IN_THERMOSTAT2 | `–` | Sensor | NASA 0x406A |  |
+| NASA 0x406B SMART_GRID | `–` | Sensor | NASA 0x406B |  |
+| NASA 0x406D IN_OUTING_MODE | `–` | Sensor | NASA 0x406D |  |
+| NASA 0x4070 IN_DISCHAGE_TEMP_CONTROL | `–` | Sensor | NASA 0x4070 |  |
+| NASA 0x4073 | `–` | Sensor | NASA 0x4073 |  |
+| NASA 0x4074 | `–` | Sensor | NASA 0x4074 |  |
+| NASA 0x4077 | `–` | Sensor | NASA 0x4077 |  |
+| NASA 0x407B | `–` | Sensor | NASA 0x407B |  |
+| NASA 0x407D | `–` | Sensor | NASA 0x407D |  |
+| NASA 0x407E IN_LOUVER_LR_SWING | `–` | Sensor | NASA 0x407E |  |
+| NASA 0x4085 | `–` | Sensor | NASA 0x4085 |  |
+| NASA 0x4086 TEST_MODE_ENABLED | `–` | Sensor | NASA 0x4086 |  |
+| NASA 0x408A IN_2WAY_VALVE | `–` | Sensor | NASA 0x408A |  |
+| NASA 0x40B5 | `–` | Sensor | NASA 0x40B5 |  |
+| NASA 0x40C5 IN_THERMOSTAT_WATER_HEATER | `–` | Sensor | NASA 0x40C5 |  |
+| NASA 0x40C6 | `–` | Sensor | NASA 0x40C6 |  |
+| NASA 0x40E3 | `–` | Sensor | NASA 0x40E3 |  |
+| NASA 0x4117 | `–` | Sensor | NASA 0x4117 |  |
+| NASA 0x411E IN_OPERATION_POWER_ZONE2 | `–` | Sensor | NASA 0x411E |  |
+| NASA 0x4124 IN_SG_READY_MODE_STATE | `–` | Sensor | NASA 0x4124 |  |
+| NASA 0x4125 IN_FSV_LOAD_SAVE | `–` | Sensor | NASA 0x4125 |  |
+| NASA 0x4202 IN_TEMP_DISCHARGE_REQUEST | `–` | Sensor | NASA 0x4202 |  |
+| NASA 0x4204 | `–` | Sensor | NASA 0x4204 |  |
+| NASA 0x420C INDOOR_OUTER_TEMP | `–` | Sensor | NASA 0x420C |  |
+| NASA 0x4211 IN_CAPACITY_REQUEST | `–` | Sensor | NASA 0x4211 |  |
+| NASA 0x4212 IN_CAPACITY_ABSOLUTE | `–` | Sensor | NASA 0x4212 |  |
+| NASA 0x4213 | `–` | Sensor | NASA 0x4213 |  |
+| NASA 0x4217 IN_EEV_VALUE_REAL_1 | `–` | Sensor | NASA 0x4217 |  |
+| NASA 0x4229 IN_MODEL_INFORMATION | `–` | Sensor | NASA 0x4229 |  |
+| NASA 0x423E | `–` | Sensor | NASA 0x423E |  |
+| NASA 0x428C IN_TEMP_MIXING_VALVE_F | `–` | Sensor | NASA 0x428C |  |
+| NASA 0x428D | `–` | Sensor | NASA 0x428D |  |
+| NASA 0x42D6 IN_TEMP_TARGET_ZONE2_F | `–` | Sensor | NASA 0x42D6 |  |
+| NASA 0x42D7 IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F | `–` | Sensor | NASA 0x42D7 |  |
+| NASA 0x42F1 OUT_COMP_FREQ_RATE_CONTROL | `–` | Sensor | NASA 0x42F1 |  |
+| NASA 0x4301 | `–` | Sensor | NASA 0x4301 |  |
+| NASA 0x4401 | `–` | Sensor | NASA 0x4401 |  |
+| NASA 0x440A IN_DEVICE_STAUS_HEATPUMP_BOILER | `–` | Sensor | NASA 0x440A |  |
+| NASA 0x440E | `–` | Sensor | NASA 0x440E |  |
+| NASA 0x440F ERROR_INOUT | `–` | Sensor | NASA 0x440F |  |
+| NASA 0x8003 OUT_OPERATION_HEATCOOL | `–` | Text | NASA 0x8003 |  |
+| NASA 0x8005 | `–` | Sensor | NASA 0x8005 |  |
+| NASA 0x800D | `–` | Text | NASA 0x800D |  |
+| NASA 0x8031 | `–` | Sensor | NASA 0x8031 |  |
+| NASA 0x8032 | `–` | Sensor | NASA 0x8032 |  |
+| NASA 0x8033 | `–` | Sensor | NASA 0x8033 |  |
+| NASA 0x803C OUT_OPERATION_AUTO_INSPECT_STEP | `–` | Sensor | NASA 0x803C |  |
+| NASA 0x803F | `–` | Sensor | NASA 0x803F |  |
+| NASA 0x8045 | `–` | Sensor | NASA 0x8045 |  |
+| NASA 0x8046 OUT_OP_TEST_OP_COMPLETE | `–` | Sensor | NASA 0x8046 |  |
+| NASA 0x8048 | `–` | Sensor | NASA 0x8048 |  |
+| NASA 0x805E | `–` | Sensor | NASA 0x805E |  |
+| NASA 0x8062 OUTDOOR_LOGICAL_DEFROST_STEP | `–` | Sensor | NASA 0x8062 |  |
+| NASA 0x8063 | `–` | Sensor | NASA 0x8063 |  |
 | NASA 0x8065 nur lesen | `–` | Taste | berechnet (Template) |  |
+| NASA 0x8065 OUTDOOR_SYSTEM_RESET | `–` | Sensor | NASA 0x8065 |  |
+| NASA 0x8066 OUTDOOR_OPMODELIMIT | `–` | Sensor | NASA 0x8066 |  |
+| NASA 0x8075 | `–` | Sensor | NASA 0x8075 |  |
+| NASA 0x8077 | `–` | Sensor | NASA 0x8077 |  |
+| NASA 0x8078 | `–` | Sensor | NASA 0x8078 |  |
+| NASA 0x8079 | `–` | Sensor | NASA 0x8079 |  |
+| NASA 0x807A | `–` | Sensor | NASA 0x807A |  |
+| NASA 0x807B | `–` | Sensor | NASA 0x807B |  |
+| NASA 0x807C | `–` | Sensor | NASA 0x807C |  |
+| NASA 0x807D | `–` | Sensor | NASA 0x807D |  |
+| NASA 0x807E | `–` | Sensor | NASA 0x807E |  |
+| NASA 0x807F | `–` | Sensor | NASA 0x807F |  |
+| NASA 0x8081 OUTDOOR_EXT_CMD_OPERATION | `–` | Sensor | NASA 0x8081 |  |
+| NASA 0x8083 | `–` | Sensor | NASA 0x8083 |  |
+| NASA 0x808D | `–` | Sensor | NASA 0x808D |  |
+| NASA 0x808E OUT_OP_CHECK_REF_STEP | `–` | Sensor | NASA 0x808E |  |
+| NASA 0x809C OUT_CHECK_REF_RESULT | `–` | Sensor | NASA 0x809C |  |
+| NASA 0x809D OUTDOOR_COOLONLY_MODEL | `–` | Sensor | NASA 0x809D |  |
+| NASA 0x80A7 OUTDOOR_DRED_LEVEL | `–` | Sensor | NASA 0x80A7 |  |
+| NASA 0x80A9 | `–` | Sensor | NASA 0x80A9 |  |
+| NASA 0x80AA | `–` | Sensor | NASA 0x80AA |  |
+| NASA 0x80B1 | `–` | Sensor | NASA 0x80B1 |  |
+| NASA 0x80B2 OUTDOOR_CH_SWITCH_VALUE | `–` | Sensor | NASA 0x80B2 |  |
+| NASA 0x80B6 | `–` | Sensor | NASA 0x80B6 |  |
+| NASA 0x80BC | `–` | Sensor | NASA 0x80BC |  |
+| NASA 0x80BF | `–` | Sensor | NASA 0x80BF |  |
+| NASA 0x80CE | `–` | Sensor | NASA 0x80CE |  |
+| NASA 0x80D8 OUT_EHS_WATEROUT_TYPE | `–` | Sensor | NASA 0x80D8 |  |
+| NASA 0x8200 OUTDOOR_OPMODE_OPTION | `–` | Sensor | NASA 0x8200 |  |
+| NASA 0x8202 OUT_INSTALL_COMP_NUM | `–` | Sensor | NASA 0x8202 |  |
+| NASA 0x8224 | `–` | Sensor | NASA 0x8224 |  |
+| NASA 0x8225 | `–` | Sensor | NASA 0x8225 |  |
+| NASA 0x8227 OUTDOOR_FAN_STEP2 | `–` | Sensor | NASA 0x8227 |  |
+| NASA 0x8231 OUTDOOR_HEATING_PERCENT | `–` | Sensor | NASA 0x8231 |  |
+| NASA 0x823C | `–` | Sensor | NASA 0x823C |  |
+| NASA 0x8243 | `–` | Sensor | NASA 0x8243 |  |
+| NASA 0x8244 OUTDOOR_OIL_RECOVERY_STEP | `–` | Sensor | NASA 0x8244 |  |
+| NASA 0x8245 OUTDOOR_OIL_BALANCE_STEP | `–` | Sensor | NASA 0x8245 |  |
+| NASA 0x8247 OUTDOOR_DEFROST_STEP | `–` | Sensor | NASA 0x8247 |  |
+| NASA 0x8248 OUTDOOR_SAFETY_START | `–` | Sensor | NASA 0x8248 |  |
+| NASA 0x8249 | `–` | Sensor | NASA 0x8249 |  |
+| NASA 0x824B | `–` | Sensor | NASA 0x824B |  |
+| NASA 0x824C | `–` | Sensor | NASA 0x824C |  |
+| NASA 0x825A | `–` | Sensor | NASA 0x825A |  |
+| NASA 0x825B | `–` | Sensor | NASA 0x825B |  |
+| NASA 0x825C | `–` | Sensor | NASA 0x825C |  |
+| NASA 0x825D | `–` | Sensor | NASA 0x825D |  |
+| NASA 0x8278 OUT_SENSOR_OCT1 | `–` | Sensor | NASA 0x8278 |  |
+| NASA 0x8287 OUT_INSTALL_CAPA | `–` | Sensor | NASA 0x8287 |  |
+| NASA 0x8298 OUTDOOR_COOL_SUM_CAPA | `–` | Sensor | NASA 0x8298 |  |
+| NASA 0x829A OUT_SENSOR_SUCTION2_1SEC | `–` | Sensor | NASA 0x829A |  |
+| NASA 0x829B OUTDOOR_CT_RESTRICT_OPTION | `–` | Sensor | NASA 0x829B |  |
+| NASA 0x82A2 | `–` | Sensor | NASA 0x82A2 |  |
+| NASA 0x82A8 OUT_CONTROL_IDU_TOTAL_ABSCAPA | `–` | Sensor | NASA 0x82A8 |  |
+| NASA 0x82A9 OUT_CONTROL_IDU_TOTAL_ABSCAPA2 | `–` | Sensor | NASA 0x82A9 |  |
+| NASA 0x82AA | `–` | Sensor | NASA 0x82AA |  |
+| NASA 0x82B2 | `–` | Sensor | NASA 0x82B2 |  |
+| NASA 0x82B5 | `–` | Sensor | NASA 0x82B5 |  |
+| NASA 0x82B8 OUT_SENSOR_MIDPRESS | `–` | Sensor | NASA 0x82B8 |  |
+| NASA 0x82BC OUT_PROJECT_CODE | `–` | Sensor | NASA 0x82BC |  |
+| NASA 0x82D1 | `–` | Sensor | NASA 0x82D1 |  |
+| NASA 0x82D5 OUTDOOR_UPL_TP_COOL | `–` | Sensor | NASA 0x82D5 |  |
+| NASA 0x82D6 OUTDOOR_UPL_TP_HEAT | `–` | Sensor | NASA 0x82D6 |  |
+| NASA 0x82D7 | `–` | Sensor | NASA 0x82D7 |  |
+| NASA 0x82D8 | `–` | Sensor | NASA 0x82D8 |  |
+| NASA 0x82DE OUTDOOR_EVA_IN | `–` | Sensor | NASA 0x82DE |  |
+| NASA 0x82E3 OUT_PRODUCT_OPTION_CAPA | `–` | Sensor | NASA 0x82E3 |  |
+| NASA 0x82E8 OUT_LOAD_MCU_HR_BYPASS_EEV | `–` | Sensor | NASA 0x82E8 |  |
+| NASA 0x82ED | `–` | Sensor | NASA 0x82ED |  |
+| NASA 0x82F6 | `–` | Sensor | NASA 0x82F6 |  |
+| NASA 0x8401 | `–` | Sensor | NASA 0x8401 |  |
+| NASA 0x8404 | `–` | Sensor | NASA 0x8404 |  |
+| NASA 0x8405 OUTDOOR_COMP1_RUNNING_TIME | `–` | Sensor | NASA 0x8405 |  |
+| NASA 0x8408 | `–` | Sensor | NASA 0x8408 |  |
+| NASA 0x8409 | `–` | Sensor | NASA 0x8409 |  |
+| NASA 0x840B OUT_AUTO_INSPECT_RESULT0 | `–` | Sensor | NASA 0x840B |  |
+| NASA 0x840C OUT_AUTO_INSPECT_RESULT1 | `–` | Sensor | NASA 0x840C |  |
+| NASA 0x8417 OUTDOOR_VARIABLE_SETUP_INFO | `–` | Sensor | NASA 0x8417 |  |
+| NASA 0x841A | `–` | Sensor | NASA 0x841A |  |
+| NASA 0x841F | `–` | Sensor | NASA 0x841F |  |
 | NASA Rohbytes protokollieren | `–` | Schalter | berechnet (Template) |  |
 | Regelzustand Code | `–` | Sensor | NASA 0x8233 |  |
 | Samsung Fehlerbeschreibung | `–` | Text | NASA 0x8235 |  |
