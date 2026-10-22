@@ -21,7 +21,7 @@
 ## Namensschema (Vorschlag)
 - Anzeigename deutsch, ohne Geräte-Präfix: „Vorlauf Tw2“, „Verdichter Frequenz“, FSV als „FSV 4052 - …“.
 - entity_id `<domain>.wp_<name>` (ä→ae, ö→oe, ü→ue, ß→ss), FSV als `wp_fsv_NNNN`.
-- Vollständige Zuordnung: `entitaeten-umbenennung.csv` (204 Zeilen, Entwurf zur Durchsicht).
+- Vollständige Zuordnung: `umbenennung-wp-2026-10-22.csv` (204 Zeilen, Entwurf zur Durchsicht).
 - Gerät: `friendly_name` „Wärmepumpe“; `name`/Hostname bleibt `gg11esphomewp` (sonst ändern sich mDNS/OTA-Adresse).
 
 ## Ablauf

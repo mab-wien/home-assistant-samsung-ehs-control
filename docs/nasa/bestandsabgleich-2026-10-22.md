@@ -67,4 +67,4 @@ FSV 1061–1064 (0x431E–0x4321) sind unbestätigte Leseproben; FSV 6031 ist we
 | 0x82B5 | VAR_OUT___ | – | 10.00.00 | 27 | 2 | 0, 25 |
 | 0x8408 | LVAR_OUT___ | – | 10.00.00 | 27 | 2 | 24, 152 |
 
-Vollständige Liste (auch konstante Werte): `nasa_kennungen_beobachtet.csv`.
+Vollständige Liste (auch konstante Werte): `kennungen-beobachtet-2026-10-20.csv`.

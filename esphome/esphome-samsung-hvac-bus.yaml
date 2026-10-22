@@ -1,6 +1,6 @@
 # Samsung EHS (ClimateHub Mono) – NASA-Bus über ESPHome, Komponente: Fork mab-wien/esphome-samsung-nasa.
 # Bereinigt am 22.10.2026: deutsche Entitätsnamen ohne Präfix; HA-entity_ids einheitlich wp_* (Zuordnung:
-# docs/entitaeten-umbenennung.csv). FSV-Einstellungen bleiben internal; sichtbar sind nur Lesekopien.
+# docs/umbenennung-wp-2026-10-22.csv). FSV-Einstellungen bleiben internal; sichtbar sind nur Lesekopien.
 # Diagnose (Schalter „Debug & Syslog“) startet AUS, endet automatisch nach 20 min oder bei wenig freiem Speicher;
 # Syslog-Zeilen tragen Laufnummer q, am ESP verworfene (d) und gekürzte (k) Zeilen werden gezählt.
 # Zugangsdaten nur in secrets.yaml (nicht im Git). Firmware-Protokoll: docs/firmware.md.

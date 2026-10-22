@@ -1,38 +1,49 @@
-# Home Assistant Samsung EHS Control
+# Samsung EHS – ESPHome & Home Assistant
 
-Home Assistant integration and ESPHome configuration for monitoring and controlling **Samsung EHS heat pumps** via the HVAC communication bus.
+ESPHome-Konfiguration für eine Samsung-EHS-Wärmepumpe (ClimateHub Mono, Inneneinheit AE260RNWMGG, Außeneinheit
+AE140BXYDGG) am internen NASA-Bus (RS485) – Messwerte, FSV-Lesekopien und ausgewählte Steuerungen in Home Assistant.
 
-This project provides an ESPHome configuration and Home Assistant setup that allows direct access to internal Samsung EHS heat pump data using the HVAC bus interface (RS485).  
-It enables detailed monitoring, automation, and energy optimization of the heat pump system.
+## Aufbau
 
-## Features
-
-- 📡 Direct communication with the Samsung HVAC bus via ESPHome
-- 🌡 Access to internal sensors (temperatures, compressor frequency, fan speed, etc.)
-- ⚡ Real-time power consumption and produced energy monitoring
-- 📊 COP (Coefficient of Performance) calculation
-- 🏠 Full integration into Home Assistant dashboards
-- ☀️ Ready for PV surplus and smart energy automations
+| Pfad | Inhalt |
+|---|---|
+| [`esphome/esphome-samsung-hvac-bus.yaml`](esphome/esphome-samsung-hvac-bus.yaml) | vollständige Gerätekonfiguration (ESP32 M5Stack Atom) |
+| [`esphome/secrets.example.yaml`](esphome/secrets.example.yaml) | Vorlage für `secrets.yaml` (echte Werte nie ins Repo) |
+| [`docs/entitaeten.md`](docs/entitaeten.md) | alle Entitäten mit Name, entity_id (`wp_*`), Quelle und Einheit |
+| [`docs/diagnose.md`](docs/diagnose.md) | Debug-Mitschnitt, Rohbytes, Syslog-Format, NASA-Katalog |
+| [`docs/firmware.md`](docs/firmware.md) | Protokoll jeder geflashten Firmware (Commit, ESPHome-Version, Komponente) |
+| [`docs/nasa/`](docs/nasa/) | Bestandsabgleich der NASA-Kennungen und beobachtete, noch nicht eingebundene Werte |
+| [`docs/archiv/`](docs/archiv/) | abgeschlossene Umbauten (z. B. Umbenennung auf `wp_*` am 22.10.2026) |
 
 ## Hardware
 
-Typical setup:
-
-- ESP32 (e.g. M5Stack Atom)
-- RS485 interface module
-- Connection to Samsung EHS HVAC communication bus
+- ESP32 (M5Stack Atom) mit RS485-Modul, UART 9600 Baud, gerade Parität (GPIO19 TX, GPIO22 RX)
+- Anschluss am NASA-Bus der Inneneinheit
 
 ## Software
 
-- ESPHome
-- Home Assistant
-- Custom Samsung HVAC Bus component
+- ESPHome 2026.9.1
+- Komponente `samsung_nasa`: Fork [mab-wien/esphome-samsung-nasa](https://github.com/mab-wien/esphome-samsung-nasa)
+  (Basis Beormund), in der YAML auf einen festen Commit gesetzt – Builds sind reproduzierbar
+- Home Assistant über die ESPHome-API (verschlüsselt)
 
-## Disclaimer
+## Bauen und flashen
 
-This project communicates directly with the internal HVAC bus of the heat pump.  
-Use at your own risk. Always verify wiring and configuration before connecting to your system.
+Maßgeblich ist dieses Repository. Kompiliert wird in einem ESPHome-Container (gleiche Version wie oben), geflasht per OTA
+über WLAN; im Notfall per USB. Vor jedem Flash: `esphome config` und `compile`, danach Eintrag in
+[`docs/firmware.md`](docs/firmware.md) und Git-Tag `firmware-JJJJ-MM-TT` (Rückweg).
 
-## Project Status
+```bash
+docker run --rm -v "$PWD/esphome:/config" esphome/esphome:2026.9.1 compile esphome-samsung-hvac-bus.yaml
+docker run --rm --network host -v "$PWD/esphome:/config" esphome/esphome:2026.9.1 upload esphome-samsung-hvac-bus.yaml --device <IP>
+```
 
-Work in progress – improvements, testing and additional sensors are ongoing.
+## Namensschema
+
+Deutsche Anzeigenamen ohne Geräte-Präfix; entity_ids einheitlich `wp_<name>`, FSV-Lesekopien `wp_fsv_NNNN`.
+FSV-Einstellungen selbst bleiben `internal` (nicht schreibbar aus HA); sichtbar sind nur ihre Lesekopien.
+
+## Hinweis
+
+Das Projekt kommuniziert direkt mit dem internen Bus der Wärmepumpe. Schreibbare Entitäten wirken unmittelbar auf die
+Anlage. Nutzung auf eigene Verantwortung.
