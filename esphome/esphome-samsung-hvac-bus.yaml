@@ -808,6 +808,37 @@ switch:
     internal: true
 
 sensor:
+  # S-NET All Read, 22.10.2026: vier bisher fehlende Kennungen.
+  # FSV-Zuordnung aus Fremdkatalog + S-NET-Screenshot, noch kein isolierter Test.
+  # Absichtlich lesende, unskalierte Sensoren; keine Schreibsteuerung.
+  - platform: samsung_nasa
+    message: 0x40A5
+    nasa_device_id: samsung_indoor
+    id: wp_nasa_40a5
+    name: 'NASA 0x40A5 FSV 5042 Waermequelle Betriebsbegrenzung Rohwert'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x40A6
+    nasa_device_id: samsung_indoor
+    id: wp_nasa_40a6
+    name: 'NASA 0x40A6 FSV 5043 Kontaktlogik Benefit kWh Rohwert'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x412A
+    nasa_device_id: samsung_indoor
+    id: wp_nasa_412a
+    name: 'NASA 0x412A FSV 2094 unbekannt Rohwert'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+  - platform: samsung_nasa
+    message: 0x4274
+    nasa_device_id: samsung_indoor
+    id: wp_nasa_4274
+    name: 'NASA 0x4274 FSV 5012 Raumtemperatur Kuehlung Rohwert'
+    entity_category: diagnostic
+    accuracy_decimals: 0
   # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x0202
@@ -1820,9 +1851,24 @@ sensor:
   - platform: samsung_nasa
     message: 0x8278
     nasa_device_id: samsung_outdoor
+    id: wp_nasa_8278
     name: 'NASA 0x8278 OUT_SENSOR_OCT1'
     entity_category: diagnostic
     accuracy_decimals: 0
+  # S-NET-Abgleich 22.10.2026: OCT1 = Rohwert / 10; Rohsensor bleibt erhalten.
+  # Sensorposition nicht bestaetigt, daher keine physische Funktionsbezeichnung.
+  - platform: template
+    name: 'OCT1 Temperatur'
+    id: oct1_temperature
+    entity_category: diagnostic
+    device_class: temperature
+    state_class: measurement
+    unit_of_measurement: '°C'
+    accuracy_decimals: 1
+    update_interval: 10s
+    lambda: |-
+      if (!id(wp_nasa_8278).has_state()) return NAN;
+      return id(wp_nasa_8278).state / 10.0f;
   - platform: samsung_nasa
     message: 0x8287
     nasa_device_id: samsung_outdoor
