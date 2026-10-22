@@ -1,4 +1,4 @@
-# Bereinigung der Wärmepumpen-Entitäten – Plan (Entwurf 22.10.2026)
+# Bereinigung der Wärmepumpen-Entitäten – umgesetzt am 22.10.2026
 
 ## Ausgangslage
 - 204 Entitäten eines ESPHome-Geräts (`gg11esphomewp`, in HA „Wärmepumpe“, ESPHome 2026.9.1, Build 20.10.2026 07:19 UTC).
@@ -40,3 +40,8 @@
 ## Rückweg
 Git-Tag des alten YAML-Stands flashen; Registry-/Automations-/Dashboard-Sicherung wiederherstellen; DB-Umschreibung
 über die Zuordnungstabelle rückwärts.
+
+## Umsetzung 22.10.2026
+- 21:49 Flash per OTA vom Server; 156 Entitäten nur umbenannt (Name unverändert), 48 mit neuem Namen: ESPHome hatte die alten Einträge bereits entfernt – neue Entität erst auf die alte ID, dann auf die Ziel-ID umbenannt, damit der HA-Recorder den Verlauf mitnimmt.
+- Automationen (16), Dashboards (wp-diagnose, Wetter) und Energie-Einstellung angepasst; Geräteaktionen mit Registry-IDs umgeschrieben.
+- Zeitreihen-DB: Historie bleibt unter den alten IDs; die Analyse bezieht sie über `entity_alias.json` transparent ein (keine Umschreibung komprimierter Daten).

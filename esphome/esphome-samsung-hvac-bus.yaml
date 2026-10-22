@@ -1,15 +1,9 @@
-# Ergaenzung 2026-10-20: fuenf passive NASA-Rohsensoren und drei Temperaturdifferenzen.
-# Vollstaendige ESPHome-Konfiguration auf Basis der aktuellen GitHub-YAML.
-# Samsung EHS / Beormund NASA Vollausbau – sprechende Namen DIREKT in ESPHome.
-# Erweiterung: Diagnose-Leseproben FSV 1061-1064 (unbestaetigte NASA-Adressen)
-# und Heizwasser-Vorlaufabweichung. FSV 6031 nicht lesbar ohne bestaetigten Code.
-# Alle 91 FSV-Readonly-Entitaeten UND 91 interne FSV-Quellen sind aussagekraeftig benannt.
-# Auch saemtliche NEU hinzugekommenen NASA-Telemetrie- und Diagnosedaten sind deutsch benannt.
-# Bisherige Sensornamen aus der urspruenglichen Integration bleiben erhalten (Automatisierungen).
-# FSV-Einstellungen bleiben internal: true; nur Readonly-Spiegel sind in HA sichtbar.
-# ACHTUNG: Umbenannte neue ESPHome-Entitaeten koennen in HA neue Entity-IDs erhalten.
-# Vor Flash: ESPHome config + compile pruefen. Es wurden KEINE Betriebswerte geaendert.
-# Beormund NASA Client, gleiche ESP32/GPIO/WLAN/API/OTA-Konfiguration wie bisher.
+# Samsung EHS (ClimateHub Mono) – NASA-Bus über ESPHome, Komponente: Fork mab-wien/esphome-samsung-nasa.
+# Bereinigt am 22.10.2026: deutsche Entitätsnamen ohne Präfix; HA-entity_ids einheitlich wp_* (Zuordnung:
+# docs/entitaeten-umbenennung.csv). FSV-Einstellungen bleiben internal; sichtbar sind nur Lesekopien.
+# Diagnose (Schalter „Debug & Syslog“) startet AUS, endet automatisch nach 20 min oder bei wenig freiem Speicher;
+# Syslog-Zeilen tragen Laufnummer q, am ESP verworfene (d) und gekürzte (k) Zeilen werden gezählt.
+# Zugangsdaten nur in secrets.yaml (nicht im Git). Firmware-Protokoll: docs/firmware.md.
 
 esphome:
   min_version: 2026.5.0
@@ -39,8 +33,9 @@ logger:
       - if:
           condition:
             lambda: |-
-              return id(debug_stream_enabled) && !id(syslog_forwarding_busy)
-                     && std::string(tag) != "udp";
+              if (!id(debug_stream_enabled) || std::string(tag) == "udp") return false;
+              if (id(syslog_forwarding_busy)) { id(syslog_verworfen)++; return false; }
+              return true;
           then:
             - lambda: |-
                 id(syslog_forwarding_busy) = true;
@@ -63,10 +58,13 @@ logger:
                       clean += (raw[i] == '\n' || raw[i] == '\r') ? ' ' : raw[i];
                     }
                   }
+                  id(syslog_laufnummer)++;
                   std::string packet = "<" + std::to_string(16 * 8 + severity) + ">" + stamp
-                                     + " " + App.get_name().c_str() + " " + tag + ": " + clean;
-                  // UDP-Komponente: maximal 508 Byte pro Datagramm.
-                  if (packet.size() > 508) packet.resize(508);
+                                     + " " + App.get_name().c_str() + " " + tag + ": q="
+                                     + std::to_string(id(syslog_laufnummer)) + " d=" + std::to_string(id(syslog_verworfen))
+                                     + " k=" + std::to_string(id(syslog_gekuerzt)) + " " + clean;
+                  // UDP-Komponente: maximal 508 Byte pro Datagramm; Kürzung wird gezählt.
+                  if (packet.size() > 508) { packet.resize(508); id(syslog_gekuerzt)++; }
                   return std::vector<uint8_t>(packet.begin(), packet.end());
             - lambda: |-
                 id(syslog_forwarding_busy) = false;
@@ -80,6 +78,22 @@ globals:
     type: bool
     restore_value: false
     initial_value: 'false'
+  - id: syslog_laufnummer
+    type: uint32_t
+    restore_value: false
+    initial_value: '0'
+  - id: syslog_verworfen
+    type: uint32_t
+    restore_value: false
+    initial_value: '0'
+  - id: syslog_gekuerzt
+    type: uint32_t
+    restore_value: false
+    initial_value: '0'
+  - id: debug_start_ms
+    type: uint32_t
+    restore_value: false
+    initial_value: '0'
 
 udp:
   id: syslog_udp
@@ -128,7 +142,7 @@ uart:
 
 
 external_components:
-  - source: github://Beormund/esphome-samsung-nasa@main
+  - source: github://mab-wien/esphome-samsung-nasa@93bb8321b7702791a0eda7219cebb0730ba5d4bc   # Fork, Branch diagnose
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -149,17 +163,17 @@ number:
   - platform: samsung_nasa
     message: 0x4201
     nasa_device_id: samsung_indoor
-    name: 'target temperature'
+    name: 'Raum Solltemperatur'
     id: zone1_target
   - platform: samsung_nasa
     message: 0x4235
     nasa_device_id: samsung_indoor
-    name: 'Hot Water Target Temperature'
+    name: 'Warmwasser Solltemperatur'
     id: dhw_target
   - platform: samsung_nasa
     message: 0x4247
     nasa_device_id: samsung_indoor
-    name: 'Water Outlet Target'
+    name: 'Vorlauf Solltemperatur'
     id: outlet_target
   - platform: samsung_nasa
     message: 0x4248
@@ -558,17 +572,17 @@ select:
   - platform: samsung_nasa
     message: 0x4001
     nasa_device_id: samsung_indoor
-    name: 'mode'
+    name: 'Betriebsmodus'
     id: heat_mode
   - platform: samsung_nasa
     message: 0x4066
     nasa_device_id: samsung_indoor
-    name: 'Hotwater Mode'
+    name: 'Warmwasser Betriebsart'
     id: dhw_mode
   - platform: samsung_nasa
     message: 0x406f
     nasa_device_id: samsung_indoor
-    name: 'Temperature Reference'
+    name: 'Temperaturreferenz'
     id: temp_reference
   - platform: samsung_nasa
     fsv: 2041
@@ -666,6 +680,7 @@ switch:
     turn_on_action:
       - logger.set_level: DEBUG
       - lambda: |-
+          id(debug_start_ms) = millis();
           id(debug_stream_enabled) = true;
           id(samsung_nasa_controller).set_debug_log_messages(true);
           id(samsung_nasa_controller).set_debug_log_undefined_messages(true);
@@ -679,25 +694,39 @@ switch:
           id(debug_stream_enabled) = false;
           id(samsung_nasa_controller).set_debug_log_messages(false);
           id(samsung_nasa_controller).set_debug_log_undefined_messages(false);
+          id(samsung_nasa_controller).set_debug_log_messages_raw(false);
+          id(nasa_rohbytes).publish_state(false);
       - logger.set_level: INFO
       - logger.log:
           level: INFO
           tag: syslog_control
           format: 'Debug & Syslog AUS - nur lokale Logs'
+  - platform: template
+    name: 'NASA Rohbytes protokollieren'
+    id: nasa_rohbytes
+    icon: mdi:code-brackets
+    entity_category: diagnostic
+    optimistic: true
+    restore_mode: ALWAYS_OFF
+    # Wirkt nur bei eingeschaltetem „Debug & Syslog“; unveränderte Telegramme in nummerierten Teilen
+    turn_on_action:
+      - lambda: id(samsung_nasa_controller).set_debug_log_messages_raw(true);
+    turn_off_action:
+      - lambda: id(samsung_nasa_controller).set_debug_log_messages_raw(false);
   - platform: samsung_nasa
     message: 0x4000
     nasa_device_id: samsung_indoor
-    name: 'power'
+    name: 'Heizung Ein'
     id: heating_power
   - platform: samsung_nasa
     message: 0x4065
     nasa_device_id: samsung_indoor
-    name: 'Water Heater Power'
+    name: 'Warmwasser Ein'
     id: dhw_power
   - platform: samsung_nasa
     message: 0x4111
     nasa_device_id: samsung_indoor
-    name: 'automatic clean'
+    name: 'Automatische Reinigung'
     id: auto_clean
   - platform: samsung_nasa
     fsv: 3031
@@ -779,6 +808,21 @@ switch:
     internal: true
 
 sensor:
+  - platform: template
+    name: 'Freier Speicher'
+    id: diag_freier_speicher
+    unit_of_measurement: B
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    update_interval: 60s
+    lambda: return (float) esp_get_free_heap_size();
+  - platform: template
+    name: 'Syslog verworfene Zeilen'
+    id: diag_syslog_verworfen
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    update_interval: 60s
+    lambda: return (float) id(syslog_verworfen);
   - platform: samsung_nasa
     message: 0x4203
     nasa_device_id: samsung_indoor
@@ -788,7 +832,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x4237
     nasa_device_id: samsung_indoor
-    name: 'Warm water'
+    name: 'Warmwasser Temperatur'
     id: warm_water
   - platform: samsung_nasa
     message: 0x4236
@@ -853,13 +897,13 @@ sensor:
   - platform: samsung_nasa
     message: 0x427f
     nasa_device_id: samsung_indoor
-    name: 'Water Law Current'
+    name: 'Heizkurve Vorlauf Soll'
     id: water_law_current
   # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
     message: 0x42d8
     nasa_device_id: samsung_indoor
-    name: 'Zone1 Water Target'
+    name: 'Zone 1 Vorlauf Soll'
     id: zone1_water_target
     filters:
       - lambda: |-
@@ -869,7 +913,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x42d9
     nasa_device_id: samsung_indoor
-    name: 'Zone2 Water Target'
+    name: 'Zone 2 Vorlauf Soll'
     id: zone2_water_target
     filters:
       - lambda: |-
@@ -878,13 +922,13 @@ sensor:
   - platform: samsung_nasa
     message: 0x4427
     nasa_device_id: samsung_indoor
-    name: 'Total Produced Energy'
+    name: 'Wärme erzeugt gesamt'
     id: total_produced_energy
     accuracy_decimals: 1
   - platform: samsung_nasa
     message: 0x4426
     nasa_device_id: samsung_indoor
-    name: 'Current Produced Energy'
+    name: 'Wärmeleistung'
     id: instant_power_out
   - platform: samsung_nasa
     message: 0x4423
@@ -904,87 +948,87 @@ sensor:
   - platform: samsung_nasa
     message: 0x8414
     nasa_device_id: samsung_outdoor
-    name: 'Total Consumed Energy'
+    name: 'Strom verbraucht gesamt'
     id: total_consumed_energy
     accuracy_decimals: 1
   - platform: samsung_nasa
     message: 0x8414
     nasa_device_id: samsung_outdoor
-    name: 'Outdoor Cumulative Energy'
+    name: 'Außeneinheit Energie gesamt'
     id: outdoor_cumulative_energy
     accuracy_decimals: 1
   - platform: samsung_nasa
     message: 0x8413
     nasa_device_id: samsung_outdoor
-    name: 'Power consumption'
+    name: 'Leistungsaufnahme'
     id: instant_power_in
   - platform: samsung_nasa
     message: 0x8238
     nasa_device_id: samsung_outdoor
-    name: 'Compressor Frequency'
+    name: 'Verdichter Frequenz'
     id: compressor_frequency
     accuracy_decimals: 1
   - platform: samsung_nasa
     message: 0x8237
     nasa_device_id: samsung_outdoor
-    name: 'Target Compressor Frequency'
+    name: 'Verdichter Zielfrequenz'
     id: target_compressor_frequency
     accuracy_decimals: 1
   - platform: samsung_nasa
     message: 0x8236
     nasa_device_id: samsung_outdoor
-    name: 'Order Compressor Frequency'
+    name: 'Verdichter angeforderte Frequenz'
     id: order_compressor_frequency
     accuracy_decimals: 1
   - platform: samsung_nasa
     message: 0x823d
     nasa_device_id: samsung_outdoor
-    name: 'Fan Speed'
+    name: 'Lüfter Drehzahl'
     id: fan_speed_rpm
   - platform: samsung_nasa
     message: 0x82e0
     nasa_device_id: samsung_outdoor
-    name: 'Flow Temperature'
+    name: 'Vorlauftemperatur Samsung'
     id: flow_temperature
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8229
     nasa_device_id: samsung_outdoor
-    name: 'Main EEV1'
+    name: 'Haupt-EEV1'
     id: main_eev1
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x823f
     nasa_device_id: samsung_outdoor
-    name: 'Main EEV Step'
+    name: 'Haupt-EEV Schritt'
     id: main_eev_step
   - platform: samsung_nasa
     message: 0x8001
     nasa_device_id: samsung_outdoor
-    name: 'Operation Mode'
+    name: 'Betriebsmodus Code'
     id: operation_mode
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8233
     nasa_device_id: samsung_outdoor
-    name: 'Control State Code'
+    name: 'Regelzustand Code'
     id: control_state_code
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8239
     nasa_device_id: samsung_outdoor
-    name: 'Compressor Load'
+    name: 'Verdichter Last'
     id: compressor_load
   - platform: samsung_nasa
     message: 0x820a
     nasa_device_id: samsung_outdoor
-    name: 'Compressor Discharge Temp'
+    name: 'Verdichter Heißgastemperatur'
     id: discharge_temp
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8234
     nasa_device_id: samsung_outdoor
-    name: 'Evaporator Temperature'
+    name: 'Verdampfer Temperatur'
     id: evaporator_temp
     unit_of_measurement: "°C"
     device_class: temperature
@@ -1004,38 +1048,38 @@ sensor:
   - platform: samsung_nasa
     message: 0x8206
     nasa_device_id: samsung_outdoor
-    name: 'High Pressure'
+    name: 'Hochdruck'
     id: high_pressure
   - platform: samsung_nasa
     message: 0x8208
     nasa_device_id: samsung_outdoor
-    name: 'Low Pressure'
+    name: 'Niederdruck'
     id: low_pressure
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8226
     nasa_device_id: samsung_outdoor
-    name: 'Outdoor Fan Step'
+    name: 'Außeneinheit Lüfterstufe'
     id: fan_step
   - platform: samsung_nasa
     message: 0x8204
     nasa_device_id: samsung_outdoor
-    name: 'Outdoor temperature'
+    name: 'Außentemperatur'
     id: outdoor_temperature
   - platform: samsung_nasa
     message: 0x8217
     nasa_device_id: samsung_outdoor
-    name: 'Outdoor Current'
+    name: 'Außeneinheit Strom'
     id: outdoor_current
   - platform: samsung_nasa
     message: 0x24fc
     nasa_device_id: samsung_outdoor
-    name: 'Outdoor Voltage'
+    name: 'Außeneinheit Spannung'
     id: outdoor_voltage
   - platform: samsung_nasa
     message: 0x8411
     nasa_device_id: samsung_outdoor
-    name: 'Outdoor Instantaneous Power'
+    name: 'Außeneinheit Leistung'
     id: outdoor_instantaneous_power
   - platform: samsung_nasa
     message: 0x8218
@@ -1110,7 +1154,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8235
     nasa_device_id: samsung_outdoor
-    name: 'error_code'
+    name: 'Fehlercode'
     id: error_code
 
   # EVI-Diagnose 2026-10-20: ausschliesslich passive STATUS-Lesesensoren.
@@ -1158,7 +1202,7 @@ sensor:
     message: 0x8223
     nasa_device_id: samsung_outdoor
     nasa_mode: STATUS
-    name: 'Heissgas Solltemperatur Rohwert'
+    name: 'Heißgas Solltemperatur Rohwert'
     id: target_discharge_raw
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1167,7 +1211,7 @@ sensor:
   # Verschiedene Busnachrichten treffen zeitversetzt ein: kein synchroner Messsatz.
   # EVI-Delta ist KEINE Einspritzueberhitzung (Zwischendruck fehlt).
   - platform: template
-    name: 'Heissgas Ueberhitzung berechnet'
+    name: 'Heißgas Überhitzung berechnet'
     id: dsh_calculated
     unit_of_measurement: 'K'
     state_class: measurement
@@ -1185,7 +1229,7 @@ sensor:
       return a - b;
 
   - platform: template
-    name: 'Ansaug Ueberhitzung berechnet'
+    name: 'Ansaug Überhitzung berechnet'
     id: suction_superheat_calculated
     unit_of_measurement: 'K'
     state_class: measurement
@@ -1222,7 +1266,7 @@ sensor:
 
   # Vorhandene Templates: gleiche sichtbare Namen wie bisher.
   - platform: template
-    name: 'temperature'
+    name: 'Raumtemperatur'
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -1233,7 +1277,7 @@ sensor:
       return id(room_temp_raw).state - 1.4f;
 
   - platform: template
-    name: 'Total COP'
+    name: 'COP gesamt'
     unit_of_measurement: 'COP'
     accuracy_decimals: 2
     update_interval: 300s
@@ -1244,7 +1288,7 @@ sensor:
       return a / b;
 
   - platform: template
-    name: 'Instant COP'
+    name: 'COP momentan'
     accuracy_decimals: 2
     state_class: measurement
     update_interval: 30s
@@ -1283,7 +1327,7 @@ sensor:
       return q * dt * 69.77f; // L/min * Kelvin * 69.77 = W
 
   - platform: template
-    name: 'Vorlauf Solltemperatur nur lesen'
+    name: 'Vorlauf Solltemperatur (Anzeige)'
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -1293,7 +1337,7 @@ sensor:
       return id(outlet_target).state;
 
   - platform: template
-    name: 'Warmwasser Solltemperatur nur lesen'
+    name: 'Warmwasser Solltemperatur (Anzeige)'
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -2142,7 +2186,6 @@ binary_sensor:
     message: 0x80d7
     nasa_device_id: samsung_outdoor
     name: 'Plattenwärmetauscher Zusatzheizung Status'
-
   - platform: template
     name: 'FSV 3031 - Warmwasser Heizstab Freigabe'
     entity_category: diagnostic
@@ -2235,14 +2278,14 @@ binary_sensor:
       return id(fsv_5094).state;
 
   - platform: template
-    name: 'Night Window Active (20-06)'
+    name: 'Nachtfenster aktiv (20–06)'
     lambda: |-
       auto now = id(ha_time).now();
       if (!now.is_valid()) return false;
       return now.hour >= 20 || now.hour < 6;
 
   - platform: template
-    name: 'Silent Active (Inferred)'
+    name: 'Leisebetrieb aktiv (abgeleitet)'
     lambda: |-
       // Nur heuristische Niedriglast-Erkennung; kein echter Quiet-Modus-Status.
       if (!id(compressor_frequency).has_state() || id(compressor_frequency).state <= 0) return false;
@@ -2274,7 +2317,6 @@ text_sensor:
     message: 0x8235
     nasa_device_id: samsung_outdoor
     name: 'Samsung Fehlerbeschreibung'
-
   - platform: template
     name: 'FSV 2041 - Heizkurve WL1 oder WL2 Auswahl'
     entity_category: diagnostic
@@ -2392,6 +2434,21 @@ text_sensor:
 # FSV-Leseanforderungen (KEINE Schreibvorgaenge). Groesse je Batch begrenzt.
 # Bei 80+ FSV Werten kann der ESP32 ueberlastet werden; Vollversion erst nach RAM-Check.
 interval:
+  # Diagnose begrenzen: nach 20 min oder bei < 30 kB freiem Speicher automatisch aus (Grund im Log)
+  - interval: 10s
+    then:
+      - if:
+          condition:
+            lambda: |-
+              return id(debug_stream_enabled) &&
+                     (millis() - id(debug_start_ms) > 20UL * 60UL * 1000UL || esp_get_free_heap_size() < 30000);
+          then:
+            - logger.log:
+                level: WARN
+                tag: syslog_control
+                format: 'Diagnose automatisch beendet (Laufzeit %u s, freier Speicher %u Byte)'
+                args: ['(millis() - id(debug_start_ms)) / 1000', 'esp_get_free_heap_size()']
+            - switch.turn_off: debug_gesamt
   - interval: 24h
     startup_delay: 120s
     then:
