@@ -839,6 +839,19 @@ sensor:
     name: 'NASA 0x4274 FSV 5012 Raumtemperatur Kuehlung Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
+  # Lesekopie: S-NET 30 Grad C entspricht Rohwert 300 (22.10.2026).
+  - platform: template
+    name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
+    id: fsv_5012_readonly
+    entity_category: diagnostic
+    device_class: temperature
+    state_class: measurement
+    unit_of_measurement: '°C'
+    accuracy_decimals: 1
+    update_interval: 10s
+    lambda: |-
+      if (!id(wp_nasa_4274).has_state() || isnan(id(wp_nasa_4274).state)) return NAN;
+      return id(wp_nasa_4274).state / 10.0f;
   # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x0202
@@ -3545,6 +3558,30 @@ binary_sensor:
       return id(fan_speed_rpm).state <= 320 && id(target_compressor_frequency).state <= 45;
 
 text_sensor:
+  # Lesende Anzeigen; keine select-Plattform und damit keine Schreibsteuerung.
+  # FSV 5042: nur 0 = All durch S-NET bestaetigt; andere Codes neutral anzeigen.
+  - platform: template
+    name: 'FSV 5042 - Waermequelle bei Betriebsbegrenzung'
+    id: fsv_5042_readonly
+    entity_category: diagnostic
+    update_interval: 10s
+    lambda: |-
+      if (!id(wp_nasa_40a5).has_state() || isnan(id(wp_nasa_40a5).state)) return {};
+      const int value = static_cast<int>(id(wp_nasa_40a5).state);
+      if (value == 0) return std::string("Alle (All)");
+      return std::string("Unbekannt (") + std::to_string(value) + ")";
+  # FSV 5043: 1 = High im S-NET; 0 = Low gemaess Komponenten-Katalog.
+  - platform: template
+    name: 'FSV 5043 - Kontaktlogik Benefit kWh'
+    id: fsv_5043_readonly
+    entity_category: diagnostic
+    update_interval: 10s
+    lambda: |-
+      if (!id(wp_nasa_40a6).has_state() || isnan(id(wp_nasa_40a6).state)) return {};
+      const int value = static_cast<int>(id(wp_nasa_40a6).state);
+      if (value == 0) return std::string("Low");
+      if (value == 1) return std::string("High");
+      return std::string("Unbekannt (") + std::to_string(value) + ")";
   # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x8003
