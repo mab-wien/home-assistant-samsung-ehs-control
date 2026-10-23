@@ -11,4 +11,4 @@ Der zuletzt funktionierende Stand wird zusätzlich als Git-Tag `firmware-JJJJ-MM
 | 23.10.2026 02:09 | 22b44cf | 2026.9.1 (Container auf mab-rog02) | Fork @93bb832 | OTA vom Server | läuft; NASA-Zahlenwerte mit state_class (Kurven), Dauersender gedrosselt, Stand inkl. FSV 5012/5042/5043 und OCT1 aus GitHub |
 | 23.10.2026 02:21 | 06a0bab | 2026.9.1 (Container auf mab-rog02) | Fork @93bb832 | OTA vom Server | läuft; alle 352 Sensoren mit delta: 0 (nur echte Änderungen über WLAN), RAM 58 %, freier Heap ~67 kB |
 
-Seit 22.10.2026 ist die Komponente auf einen festen Commit des Forks festgelegt. Rückweg: Tag `firmware-2026-10-20`.
+Seit 22.10.2026 ist die Komponente auf einen festen Commit des Forks festgelegt. Rückweg: Tag `firmware-2026-10-23b` (ältere Tags am 23.10.2026 gelöscht; frühere Stände über den YAML-Commit in der Tabelle).
