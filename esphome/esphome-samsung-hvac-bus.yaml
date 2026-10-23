@@ -142,7 +142,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@93bb8321b7702791a0eda7219cebb0730ba5d4bc   # Fork, Branch diagnose
+  - source: github://mab-wien/esphome-samsung-nasa@0ad8fc319bd6186dfade08210cadab0304b858ab   # Fork, Branch diagnose
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -4367,6 +4367,62 @@ binary_sensor:
       return id(fan_speed_rpm).state <= 320 && id(target_compressor_frequency).state <= 45;
 
 text_sensor:
+  # --- NASA-Strukturen (23.10.2026): Inhalt als Text, wenn druckbar, sonst Hex; Bedeutung unbestätigt ---
+  - platform: samsung_nasa
+    message: 0x0600
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0600 AD_OPTION_BASIC'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x0601
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0601 AD_OPTION_INSTALL'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x0602
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0602 AD_OPTION_INSTALL_2'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x0603
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0603 AD_OPTION_CYCLE'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x0608
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x0608 AD_DBCODE_MICOM_MAIN Innen'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x0608
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x0608 AD_DBCODE_MICOM_MAIN Außen'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x060C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x060C AD_DBCODE_EEPROM'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x4604
+    nasa_device_id: samsung_indoor
+    name: 'NASA 0x4604 IN_INSTALL_INDOOR_SETUP_INFO'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x8608
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8608'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x860C
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x860C'
+    entity_category: diagnostic
+  - platform: samsung_nasa
+    message: 0x860D
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x860D OUTDOOR_MODELINFORMATION'
+    entity_category: diagnostic
   # Lesende Anzeigen; keine select-Plattform und damit keine Schreibsteuerung.
   # FSV 5042: nur 0 = All durch S-NET bestaetigt; andere Codes neutral anzeigen.
   - platform: template
