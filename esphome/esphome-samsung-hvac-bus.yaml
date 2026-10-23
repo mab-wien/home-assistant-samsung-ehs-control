@@ -3275,87 +3275,89 @@ sensor:
     filters:
       - delta: 0  # nur echte Änderungen senden
 
-  # NEUE FSV 1061-1064: reine LESEPROBES (kein number: / keine Schreibfunktion).
-  # Das Basisprojekt Beormund unterstuetzt diese FSV noch nicht offiziell.
-  # Register 0x431E-0x4321 aus einer Community-Datenliste; Zuweisung NICHT bestaetigt.
-  # 0xFFFF / -1 und andere unplausible Antworten werden als unknown behandelt.
-  # Die Quelle meldete an einer anderen Anlage -1; deshalb KEINE unbestaetigten
-  # Rueckschluesse aus scheinbaren Hysterese-Werten ziehen.
-  - platform: samsung_nasa
-    message: 0x431E
-    nasa_mode: FSV
-    nasa_label: VAR_IN_FSV_1061
-    nasa_device_id: samsung_indoor
-    name: 'FSV 1061 - Vorlauftemperatur Hysterese Heizen (Test)'
-    id: fsv_1061_probe
-    entity_category: diagnostic
-    state_class: measurement
-    unit_of_measurement: '°C'
-    device_class: temperature
-    accuracy_decimals: 1
-    filters:
-      - lambda: |-
-          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
-          if (raw < 10 || raw > 70) return NAN;
-          return raw * 0.1f;
-      - delta: 0  # nur echte Änderungen senden
+  # FSV 1061-1064 am 23.10.2026 auskommentiert: die Anlage antwortet auf 0x431E-0x4321 mit 65535
+  # (= nicht vorhanden, S-NET-Export). Für eine Setup-Erweiterung wieder einkommentieren.
+#   # NEUE FSV 1061-1064: reine LESEPROBES (kein number: / keine Schreibfunktion).
+#   # Das Basisprojekt Beormund unterstuetzt diese FSV noch nicht offiziell.
+#   # Register 0x431E-0x4321 aus einer Community-Datenliste; Zuweisung NICHT bestaetigt.
+#   # 0xFFFF / -1 und andere unplausible Antworten werden als unknown behandelt.
+#   # Die Quelle meldete an einer anderen Anlage -1; deshalb KEINE unbestaetigten
+#   # Rueckschluesse aus scheinbaren Hysterese-Werten ziehen.
+#   - platform: samsung_nasa
+#     message: 0x431E
+#     nasa_mode: FSV
+#     nasa_label: VAR_IN_FSV_1061
+#     nasa_device_id: samsung_indoor
+#     name: 'FSV 1061 - Vorlauftemperatur Hysterese Heizen (Test)'
+#     id: fsv_1061_probe
+#     entity_category: diagnostic
+#     state_class: measurement
+#     unit_of_measurement: '°C'
+#     device_class: temperature
+#     accuracy_decimals: 1
+#     filters:
+#       - lambda: |-
+#           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+#           if (raw < 10 || raw > 70) return NAN;
+#           return raw * 0.1f;
+#       - delta: 0  # nur echte Änderungen senden
 
-  - platform: samsung_nasa
-    message: 0x431F
-    nasa_mode: FSV
-    nasa_label: VAR_IN_FSV_1062
-    nasa_device_id: samsung_indoor
-    name: 'FSV 1062 - Vorlauftemperatur Hysterese Kühlen (Test)'
-    id: fsv_1062_probe
-    entity_category: diagnostic
-    state_class: measurement
-    unit_of_measurement: '°C'
-    device_class: temperature
-    accuracy_decimals: 1
-    filters:
-      - lambda: |-
-          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
-          if (raw < 10 || raw > 70) return NAN;
-          return raw * 0.1f;
-      - delta: 0  # nur echte Änderungen senden
+#   - platform: samsung_nasa
+#     message: 0x431F
+#     nasa_mode: FSV
+#     nasa_label: VAR_IN_FSV_1062
+#     nasa_device_id: samsung_indoor
+#     name: 'FSV 1062 - Vorlauftemperatur Hysterese Kühlen (Test)'
+#     id: fsv_1062_probe
+#     entity_category: diagnostic
+#     state_class: measurement
+#     unit_of_measurement: '°C'
+#     device_class: temperature
+#     accuracy_decimals: 1
+#     filters:
+#       - lambda: |-
+#           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+#           if (raw < 10 || raw > 70) return NAN;
+#           return raw * 0.1f;
+#       - delta: 0  # nur echte Änderungen senden
 
-  - platform: samsung_nasa
-    message: 0x4320
-    nasa_mode: FSV
-    nasa_label: VAR_IN_FSV_1063
-    nasa_device_id: samsung_indoor
-    name: 'FSV 1063 - Raumtemperatur Hysterese Heizen (Test)'
-    id: fsv_1063_probe
-    entity_category: diagnostic
-    state_class: measurement
-    unit_of_measurement: '°C'
-    device_class: temperature
-    accuracy_decimals: 1
-    filters:
-      - lambda: |-
-          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
-          if (raw < 10 || raw > 70) return NAN;
-          return raw * 0.1f;
-      - delta: 0  # nur echte Änderungen senden
+#   - platform: samsung_nasa
+#     message: 0x4320
+#     nasa_mode: FSV
+#     nasa_label: VAR_IN_FSV_1063
+#     nasa_device_id: samsung_indoor
+#     name: 'FSV 1063 - Raumtemperatur Hysterese Heizen (Test)'
+#     id: fsv_1063_probe
+#     entity_category: diagnostic
+#     state_class: measurement
+#     unit_of_measurement: '°C'
+#     device_class: temperature
+#     accuracy_decimals: 1
+#     filters:
+#       - lambda: |-
+#           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+#           if (raw < 10 || raw > 70) return NAN;
+#           return raw * 0.1f;
+#       - delta: 0  # nur echte Änderungen senden
 
-  - platform: samsung_nasa
-    message: 0x4321
-    nasa_mode: FSV
-    nasa_label: VAR_IN_FSV_1064
-    nasa_device_id: samsung_indoor
-    name: 'FSV 1064 - Raumtemperatur Hysterese Kühlen (Test)'
-    id: fsv_1064_probe
-    entity_category: diagnostic
-    state_class: measurement
-    unit_of_measurement: '°C'
-    device_class: temperature
-    accuracy_decimals: 1
-    filters:
-      - lambda: |-
-          const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
-          if (raw < 10 || raw > 70) return NAN;
-          return raw * 0.1f;
-      - delta: 0  # nur echte Änderungen senden
+#   - platform: samsung_nasa
+#     message: 0x4321
+#     nasa_mode: FSV
+#     nasa_label: VAR_IN_FSV_1064
+#     nasa_device_id: samsung_indoor
+#     name: 'FSV 1064 - Raumtemperatur Hysterese Kühlen (Test)'
+#     id: fsv_1064_probe
+#     entity_category: diagnostic
+#     state_class: measurement
+#     unit_of_measurement: '°C'
+#     device_class: temperature
+#     accuracy_decimals: 1
+#     filters:
+#       - lambda: |-
+#           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
+#           if (raw < 10 || raw > 70) return NAN;
+#           return raw * 0.1f;
+#       - delta: 0  # nur echte Änderungen senden
 
   # FSV 6031 (Abschalten bei lange niedriger Verdichterfrequenz):
   # KEIN verlaesslich zugeordneter NASA-Code; NICHT als falsche Entitaet anlegen.
@@ -4667,19 +4669,19 @@ interval:
       - samsung_nasa.request_read:
           id: [fsv_5081, fsv_5091, fsv_5094]
       - delay: 3s
-      # 1061-1064: zusaetzliche, nur lesende PROBES mit unbestaetigten NASA-IDs
-      - samsung_nasa.request_read:
-          id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
+#       # 1061-1064: zusaetzliche, nur lesende PROBES mit unbestaetigten NASA-IDs
+#       - samsung_nasa.request_read:
+#           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
 
-# Ohne einen neuen Flash koennen diese vier Testadressen erneut angefragt werden.
-# Button sendet ausschliesslich NASA READ, niemals WRITE.
+# # Ohne einen neuen Flash koennen diese vier Testadressen erneut angefragt werden.
+# # Button sendet ausschliesslich NASA READ, niemals WRITE.
 button:
-  - platform: template
-    name: 'FSV 1061-1064 - Hysterese-Testwerte erneut lesen'
-    entity_category: diagnostic
-    on_press:
-      - samsung_nasa.request_read:
-          id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
+#   - platform: template
+#     name: 'FSV 1061-1064 - Hysterese-Testwerte erneut lesen'
+#     entity_category: diagnostic
+#     on_press:
+#       - samsung_nasa.request_read:
+#           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
 
   # EXPERIMENTELL: NASA 0x8065 = 1; Wirkung als K3-Reset nicht bestaetigt.
   # Ausschliesslich manueller Aufruf. Keine automatische Fehlerquittierung.
