@@ -142,7 +142,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@99d84c91bacdb047a8dd2fee90cd92ae51e92700   # Fork, Branch diagnose
+  - source: github://mab-wien/esphome-samsung-nasa@cee28a452fed61ef18ad6421c2aab1701c8ddd3b   # Fork, Branch diagnose
     components: [samsung_nasa]
 
 samsung_nasa:
