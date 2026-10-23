@@ -6,3 +6,4 @@
 Laufender Katalog mit Verläufen: Dienst `nasa-katalog` auf dem Analyse-Server (siehe [`../diagnose.md`](../diagnose.md)).
 Fremdnamen sind Hinweise, keine bestätigten Zuordnungen.
 - [`bewertung-2026-10-23.md`](bewertung-2026-10-23.md): Darstellung als Kurve, Dauersender, erste Deutungen per Abgleich mit bekannten Sensoren (vermutet).
+- [`deutung-automatisch.md`](deutung-automatisch.md): nächtliche automatische Deutungshilfe (Korrelation, Ereignisse, Zähler) aus 7 Tagen HA-Verlauf.
