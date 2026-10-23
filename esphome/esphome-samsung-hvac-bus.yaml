@@ -818,6 +818,8 @@ sensor:
     name: 'NASA 0x40A5 FSV 5042 Waermequelle Betriebsbegrenzung Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x40A6
     nasa_device_id: samsung_indoor
@@ -825,6 +827,8 @@ sensor:
     name: 'NASA 0x40A6 FSV 5043 Kontaktlogik Benefit kWh Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x412A
     nasa_device_id: samsung_indoor
@@ -832,6 +836,8 @@ sensor:
     name: 'NASA 0x412A FSV 2094 unbekannt Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4274
     nasa_device_id: samsung_indoor
@@ -839,8 +845,10 @@ sensor:
     name: 'NASA 0x4274 FSV 5012 Raumtemperatur Kuehlung Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
-  # Lesekopie: S-NET 30 Grad C entspricht Rohwert 300 (22.10.2026).
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
+  # Lesekopie: S-NET 30 Grad C entspricht Rohwert 300 (22.10.2026).
   - platform: template
     name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
     id: fsv_5012_readonly
@@ -853,6 +861,8 @@ sensor:
     lambda: |-
       if (!id(wp_nasa_4274).has_state() || isnan(id(wp_nasa_4274).state)) return NAN;
       return id(wp_nasa_4274).state / 10.0f;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x0202
@@ -862,6 +872,7 @@ sensor:
     accuracy_decimals: 0
     filters:
       - filter_out: 65535
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0207
     nasa_device_id: samsung_outdoor
@@ -869,6 +880,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0210
     nasa_device_id: samsung_indoor
@@ -876,6 +889,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0217
     nasa_device_id: samsung_outdoor
@@ -883,6 +898,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0401
     nasa_device_id: samsung_indoor
@@ -890,6 +907,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0402
     nasa_device_id: samsung_indoor
@@ -897,6 +916,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0408
     nasa_device_id: samsung_indoor
@@ -904,6 +925,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0409
     nasa_device_id: samsung_indoor
@@ -911,6 +934,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x040A
     nasa_device_id: samsung_indoor
@@ -918,6 +943,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x040B
     nasa_device_id: samsung_indoor
@@ -925,6 +952,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x040C
     nasa_device_id: samsung_indoor
@@ -932,6 +961,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x040D
     nasa_device_id: samsung_indoor
@@ -939,6 +970,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x040E
     nasa_device_id: samsung_indoor
@@ -946,6 +979,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0410
     nasa_device_id: samsung_outdoor
@@ -953,6 +988,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0411
     nasa_device_id: samsung_indoor
@@ -960,6 +997,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0412
     nasa_device_id: samsung_indoor
@@ -967,6 +1006,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0413
     nasa_device_id: samsung_indoor
@@ -974,6 +1015,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0414
     nasa_device_id: samsung_indoor
@@ -981,6 +1024,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0415
     nasa_device_id: samsung_indoor
@@ -988,6 +1033,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0416
     nasa_device_id: samsung_indoor
@@ -995,6 +1042,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0417
     nasa_device_id: samsung_indoor
@@ -1002,6 +1051,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0418
     nasa_device_id: samsung_indoor
@@ -1009,6 +1060,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x0419
     nasa_device_id: samsung_indoor
@@ -1016,6 +1069,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x041B
     nasa_device_id: samsung_outdoor
@@ -1023,48 +1078,64 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2000
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2000 IM_MASTER'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2003
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2003 ADDRESSING'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2004
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2004 PNP'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x200F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x200F NM_NETWORK_POSITINON_LAYER'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2012
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2012'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2015
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2015'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x20FF
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x20FF'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22F7
     nasa_device_id: samsung_outdoor
@@ -1072,6 +1143,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22F8
     nasa_device_id: samsung_indoor
@@ -1079,6 +1152,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22F9
     nasa_device_id: samsung_outdoor
@@ -1086,6 +1161,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22FA
     nasa_device_id: samsung_outdoor
@@ -1093,6 +1170,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22FB
     nasa_device_id: samsung_outdoor
@@ -1100,6 +1179,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22FC
     nasa_device_id: samsung_outdoor
@@ -1107,6 +1188,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22FD
     nasa_device_id: samsung_outdoor
@@ -1114,6 +1197,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22FE
     nasa_device_id: samsung_outdoor
@@ -1121,6 +1206,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x22FF
     nasa_device_id: samsung_outdoor
@@ -1128,6 +1215,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2400
     nasa_device_id: samsung_outdoor
@@ -1135,6 +1224,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x2401
     nasa_device_id: samsung_outdoor
@@ -1142,6 +1233,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x24FB
     nasa_device_id: samsung_outdoor
@@ -1149,302 +1242,404 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4006
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4006 FANSPEED'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x400F
     nasa_device_id: samsung_indoor
     name: 'NASA 0x400F'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4010
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4010'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4015
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4015'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4019
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4019'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x401B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x401B'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4023
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4023 USE_SPI'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4024
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4024 USE_FILTER_WARNING_TIME'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4027
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4027 FILTER_WARNING'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4029
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4029'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x402A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x402A'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x402B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x402B'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x402D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x402D'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4031
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4031'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4035
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4035'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4038
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4038 IN_STATE_HUMIDITY_PERCENT'
     entity_category: diagnostic
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4043
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4043 CONTROL_SPI'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4046
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4046 CONTROL_SILENCE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4047
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4047'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4048
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4048'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x404F
     nasa_device_id: samsung_indoor
     name: 'NASA 0x404F'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4051
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4051'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4059
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4059'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x405F
     nasa_device_id: samsung_indoor
     name: 'NASA 0x405F'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4060
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4060 IN_ALTERNATIVE_MODE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4068
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4068 IN_SOLAR_PUMP'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4069
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4069 IN_THERMOSTAT1'
     entity_category: diagnostic
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x406A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x406A IN_THERMOSTAT2'
     entity_category: diagnostic
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x406B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x406B SMART_GRID'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x406D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x406D IN_OUTING_MODE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4070
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4070 IN_DISCHAGE_TEMP_CONTROL'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4073
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4073'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4074
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4074'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4077
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4077'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x407B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x407B'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x407D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x407D'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x407E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x407E IN_LOUVER_LR_SWING'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4085
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4085'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4086
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4086 TEST_MODE_ENABLED'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x408A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x408A IN_2WAY_VALVE'
     entity_category: diagnostic
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x40B5
     nasa_device_id: samsung_indoor
     name: 'NASA 0x40B5'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x40C5
     nasa_device_id: samsung_indoor
     name: 'NASA 0x40C5 IN_THERMOSTAT_WATER_HEATER'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x40C6
     nasa_device_id: samsung_indoor
     name: 'NASA 0x40C6'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x40E3
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x40E3'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4117
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4117'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x411E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x411E IN_OPERATION_POWER_ZONE2'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4124
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4124 IN_SG_READY_MODE_STATE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4125
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4125 IN_FSV_LOAD_SAVE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4202
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4202 IN_TEMP_DISCHARGE_REQUEST'
     entity_category: diagnostic
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4204
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4204'
     entity_category: diagnostic
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x420C
     nasa_device_id: samsung_indoor
@@ -1452,6 +1647,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4211
     nasa_device_id: samsung_indoor
@@ -1459,6 +1656,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4212
     nasa_device_id: samsung_indoor
@@ -1466,6 +1665,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4213
     nasa_device_id: samsung_indoor
@@ -1473,6 +1674,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4217
     nasa_device_id: samsung_indoor
@@ -1480,6 +1683,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4229
     nasa_device_id: samsung_indoor
@@ -1487,6 +1692,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x423E
     nasa_device_id: samsung_indoor
@@ -1494,6 +1701,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x428C
     nasa_device_id: samsung_indoor
@@ -1501,6 +1710,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x428D
     nasa_device_id: samsung_indoor
@@ -1508,6 +1719,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x42D6
     nasa_device_id: samsung_indoor
@@ -1515,6 +1728,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x42D7
     nasa_device_id: samsung_indoor
@@ -1522,6 +1737,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x42F1
     nasa_device_id: samsung_indoor
@@ -1529,6 +1746,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4301
     nasa_device_id: samsung_indoor
@@ -1536,6 +1755,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4401
     nasa_device_id: samsung_indoor
@@ -1543,6 +1764,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x440A
     nasa_device_id: samsung_indoor
@@ -1550,6 +1773,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x440E
     nasa_device_id: samsung_indoor
@@ -1557,6 +1782,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x440F
     nasa_device_id: samsung_indoor
@@ -1564,246 +1791,328 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8005
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8005'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8031
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8031'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8032
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8032'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8033
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8033'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x803C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x803C OUT_OPERATION_AUTO_INSPECT_STEP'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x803F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x803F'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8045
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8045'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8046
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8046 OUT_OP_TEST_OP_COMPLETE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8048
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8048'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x805E
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x805E'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8062
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8062 OUTDOOR_LOGICAL_DEFROST_STEP'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8063
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8063'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8065
     nasa_device_id: samsung_indoor
     name: 'NASA 0x8065 OUTDOOR_SYSTEM_RESET'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8066
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8066 OUTDOOR_OPMODELIMIT'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8075
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8075'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8077
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8077'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8078
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8078'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8079
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8079'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x807A
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807A'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x807B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807B'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x807C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807C'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x807D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807D'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x807E
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807E'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x807F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807F'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8081
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8081 OUTDOOR_EXT_CMD_OPERATION'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8083
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8083'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x808D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x808D'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x808E
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x808E OUT_OP_CHECK_REF_STEP'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x809C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x809C OUT_CHECK_REF_RESULT'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x809D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x809D OUTDOOR_COOLONLY_MODEL'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80A7
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80A7 OUTDOOR_DRED_LEVEL'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80A9
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80A9'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80AA
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80AA'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80B1
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80B1'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80B2
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80B2 OUTDOOR_CH_SWITCH_VALUE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80B6
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80B6'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80BC
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80BC'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80BF
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80BF'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80CE
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80CE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x80D8
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80D8 OUT_EHS_WATEROUT_TYPE'
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8200
     nasa_device_id: samsung_outdoor
@@ -1811,6 +2120,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8202
     nasa_device_id: samsung_outdoor
@@ -1818,6 +2129,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8224
     nasa_device_id: samsung_outdoor
@@ -1828,6 +2141,7 @@ sensor:
     state_class: measurement
     filters:
       - throttle_average: 60s  # Dauersender (~850/h), Doppel von 0x827A DSH1 x10
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8225
     nasa_device_id: samsung_outdoor
@@ -1835,6 +2149,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8227
     nasa_device_id: samsung_outdoor
@@ -1842,6 +2158,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8231
     nasa_device_id: samsung_outdoor
@@ -1849,6 +2167,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x823C
     nasa_device_id: samsung_outdoor
@@ -1856,6 +2176,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8243
     nasa_device_id: samsung_outdoor
@@ -1863,6 +2185,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8244
     nasa_device_id: samsung_outdoor
@@ -1870,6 +2194,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8245
     nasa_device_id: samsung_outdoor
@@ -1877,6 +2203,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8247
     nasa_device_id: samsung_outdoor
@@ -1884,6 +2212,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8248
     nasa_device_id: samsung_outdoor
@@ -1891,6 +2221,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8249
     nasa_device_id: samsung_outdoor
@@ -1898,6 +2230,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x824B
     nasa_device_id: samsung_outdoor
@@ -1905,6 +2239,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x824C
     nasa_device_id: samsung_outdoor
@@ -1912,6 +2248,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x825A
     nasa_device_id: samsung_outdoor
@@ -1919,6 +2257,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x825B
     nasa_device_id: samsung_outdoor
@@ -1926,6 +2266,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x825C
     nasa_device_id: samsung_outdoor
@@ -1933,6 +2275,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x825D
     nasa_device_id: samsung_outdoor
@@ -1940,6 +2284,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8278
     nasa_device_id: samsung_outdoor
@@ -1952,6 +2298,7 @@ sensor:
     state_class: measurement
     filters:
       - throttle_average: 60s  # springt im Sekundentakt zwischen 100 und 110 (OCT1 10,0 ↔ 11,0 °C)
+      - delta: 0  # nur echte Änderungen senden
   - platform: template
     name: 'OCT1 Temperatur'
     id: oct1_temperature
@@ -1964,6 +2311,8 @@ sensor:
     lambda: |-
       if (!id(wp_nasa_8278).has_state()) return NAN;
       return id(wp_nasa_8278).state / 10.0f;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8287
     nasa_device_id: samsung_outdoor
@@ -1971,6 +2320,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8298
     nasa_device_id: samsung_outdoor
@@ -1978,6 +2329,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x829A
     nasa_device_id: samsung_outdoor
@@ -1985,6 +2338,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x829B
     nasa_device_id: samsung_outdoor
@@ -1992,6 +2347,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82A2
     nasa_device_id: samsung_outdoor
@@ -1999,6 +2356,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82A8
     nasa_device_id: samsung_outdoor
@@ -2006,6 +2365,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82A9
     nasa_device_id: samsung_outdoor
@@ -2013,6 +2374,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82AA
     nasa_device_id: samsung_outdoor
@@ -2020,6 +2383,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82B2
     nasa_device_id: samsung_outdoor
@@ -2030,6 +2395,7 @@ sensor:
     state_class: measurement
     filters:
       - throttle_average: 60s  # Dauersender (~270/h), Doppel von 0x827A DSH1 x10
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82B5
     nasa_device_id: samsung_outdoor
@@ -2037,6 +2403,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82B8
     nasa_device_id: samsung_outdoor
@@ -2044,6 +2412,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82BC
     nasa_device_id: samsung_outdoor
@@ -2051,6 +2421,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82D1
     nasa_device_id: samsung_outdoor
@@ -2058,6 +2430,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82D5
     nasa_device_id: samsung_outdoor
@@ -2065,6 +2439,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82D6
     nasa_device_id: samsung_outdoor
@@ -2072,6 +2448,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82D7
     nasa_device_id: samsung_outdoor
@@ -2079,6 +2457,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82D8
     nasa_device_id: samsung_outdoor
@@ -2086,12 +2466,16 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82DE
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82DE OUTDOOR_EVA_IN'
     entity_category: diagnostic
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82E3
     nasa_device_id: samsung_outdoor
@@ -2099,6 +2483,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82E8
     nasa_device_id: samsung_outdoor
@@ -2106,6 +2492,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82ED
     nasa_device_id: samsung_outdoor
@@ -2113,6 +2501,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82F6
     nasa_device_id: samsung_outdoor
@@ -2120,6 +2510,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8401
     nasa_device_id: samsung_outdoor
@@ -2127,6 +2519,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8404
     nasa_device_id: samsung_outdoor
@@ -2134,6 +2528,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8405
     nasa_device_id: samsung_outdoor
@@ -2141,6 +2537,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8408
     nasa_device_id: samsung_outdoor
@@ -2148,6 +2546,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8409
     nasa_device_id: samsung_outdoor
@@ -2155,6 +2555,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x840B
     nasa_device_id: samsung_outdoor
@@ -2162,6 +2564,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x840C
     nasa_device_id: samsung_outdoor
@@ -2169,6 +2573,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8417
     nasa_device_id: samsung_outdoor
@@ -2176,6 +2582,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x841A
     nasa_device_id: samsung_outdoor
@@ -2183,6 +2591,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x841F
     nasa_device_id: samsung_outdoor
@@ -2190,6 +2600,8 @@ sensor:
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: template
     name: 'Freier Speicher'
     id: diag_freier_speicher
@@ -2198,6 +2610,8 @@ sensor:
     accuracy_decimals: 0
     update_interval: 60s
     lambda: return (float) esp_get_free_heap_size();
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: template
     name: 'Syslog verworfene Zeilen'
     id: diag_syslog_verworfen
@@ -2205,27 +2619,37 @@ sensor:
     accuracy_decimals: 0
     update_interval: 60s
     lambda: return (float) id(syslog_verworfen);
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4203
     nasa_device_id: samsung_indoor
     name: 'Inneneinheit Raumtemperatur Rohwert (intern)'
     id: room_temp_raw
     internal: true
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4237
     nasa_device_id: samsung_indoor
     name: 'Warmwasser Temperatur'
     id: warm_water
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4236
     nasa_device_id: samsung_indoor
     name: 'Heizwasser Rücklauf Tw1'
     id: water_in
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4238
     nasa_device_id: samsung_indoor
     name: 'Heizwasser Vorlauf Tw2'
     id: water_out
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
     message: 0x4239
@@ -2241,46 +2665,63 @@ sensor:
       - lambda: |-
           if (!std::isfinite(x) || x < -40.0 || x > 120.0) return NAN;
           return x;
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x42e9
     nasa_device_id: samsung_indoor
     name: 'Heizwasser Volumenstrom'
     id: water_flow
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x42e8
     nasa_device_id: samsung_indoor
     name: 'Durchflusssensor Messsignal (NASA)'
     id: flow_voltage
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x40c4
     nasa_device_id: samsung_indoor
     name: 'Heizwasserpumpe PWM Ansteuerung'
     id: pump_pwm
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4002
     nasa_device_id: samsung_indoor
     name: 'Inneneinheit Betriebsart Code'
     id: indoor_mode_code
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4205
     nasa_device_id: samsung_indoor
     name: 'Inneneinheit Wärmetauscher Eintrittstemperatur'
     id: evain
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4206
     nasa_device_id: samsung_indoor
     name: 'Inneneinheit Wärmetauscher Austrittstemperatur'
     id: evaout
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x42d4
     nasa_device_id: samsung_indoor
     name: 'Zone 2 Raumtemperatur'
     id: zone2_room
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x427f
     nasa_device_id: samsung_indoor
     name: 'Heizkurve Vorlauf Soll'
     id: water_law_current
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
     message: 0x42d8
@@ -2291,6 +2732,7 @@ sensor:
       - lambda: |-
           if (!std::isfinite(x) || x > 100.0 || x < -40.0) return NAN;
           return x;
+      - delta: 0  # nur echte Änderungen senden
   # Register/Skalierung modellabhaengig: gegen S-NET verifizieren.
   - platform: samsung_nasa
     message: 0x42d9
@@ -2301,111 +2743,150 @@ sensor:
       - lambda: |-
           if (!std::isfinite(x) || x > 100.0 || x < -40.0) return NAN;
           return x;
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4427
     nasa_device_id: samsung_indoor
     name: 'Wärme erzeugt gesamt'
     id: total_produced_energy
     accuracy_decimals: 1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4426
     nasa_device_id: samsung_indoor
     name: 'Wärmeleistung'
     id: instant_power_out
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4423
     nasa_device_id: samsung_indoor
     name: 'Tage seit Inbetriebnahme'
     id: since_install
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4424
     nasa_device_id: samsung_indoor
     name: 'Aktive Betriebsstunden seit Inbetriebnahme'
     id: active_since_install
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4284
     nasa_device_id: samsung_indoor
     name: 'Inneneinheit Leistungsaufnahme (NASA)'
     id: indoor_power_consumption
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8414
     nasa_device_id: samsung_outdoor
     name: 'Strom verbraucht gesamt'
     id: total_consumed_energy
     accuracy_decimals: 1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8414
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Energie gesamt'
     id: outdoor_cumulative_energy
     accuracy_decimals: 1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8413
     nasa_device_id: samsung_outdoor
     name: 'Leistungsaufnahme'
     id: instant_power_in
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8238
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Frequenz'
     id: compressor_frequency
     accuracy_decimals: 1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8237
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Zielfrequenz'
     id: target_compressor_frequency
     accuracy_decimals: 1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8236
     nasa_device_id: samsung_outdoor
     name: 'Verdichter angeforderte Frequenz'
     id: order_compressor_frequency
     accuracy_decimals: 1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x823d
     nasa_device_id: samsung_outdoor
     name: 'Lüfter Drehzahl'
     id: fan_speed_rpm
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82e0
     nasa_device_id: samsung_outdoor
     name: 'Vorlauftemperatur Samsung'
     id: flow_temperature
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8229
     nasa_device_id: samsung_outdoor
     name: 'Haupt-EEV1'
     id: main_eev1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x823f
     nasa_device_id: samsung_outdoor
     name: 'Haupt-EEV Schritt'
     id: main_eev_step
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8001
     nasa_device_id: samsung_outdoor
     name: 'Betriebsmodus Code'
     id: operation_mode
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8233
     nasa_device_id: samsung_outdoor
     name: 'Regelzustand Code'
     id: control_state_code
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8239
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Last'
     id: compressor_load
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x820a
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Heißgastemperatur'
     id: discharge_temp
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8234
@@ -2421,123 +2902,170 @@ sensor:
       - lambda: |-
           if (!std::isfinite(x) || x < -40.0 || x > 120.0) return NAN;
           return x;
+      - delta: 0  # nur echte Änderungen senden
   # Altcode 0x823B ist DC-Link-Spannung, NICHT Verdichterstrom.
   - platform: samsung_nasa
     message: 0x823b
     nasa_device_id: samsung_outdoor
     name: 'Wechselrichter Gleichspannungszwischenkreis'
     id: dc_link_voltage
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8206
     nasa_device_id: samsung_outdoor
     name: 'Hochdruck'
     id: high_pressure
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8208
     nasa_device_id: samsung_outdoor
     name: 'Niederdruck'
     id: low_pressure
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
   - platform: samsung_nasa
     message: 0x8226
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Lüfterstufe'
     id: fan_step
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8204
     nasa_device_id: samsung_outdoor
     name: 'Außentemperatur'
     id: outdoor_temperature
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8217
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Strom'
     id: outdoor_current
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x24fc
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Spannung'
     id: outdoor_voltage
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8411
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Leistung'
     id: outdoor_instantaneous_power
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8218
     nasa_device_id: samsung_outdoor
     name: 'Außenwärmetauscher Austrittstemperatur'
     id: condout
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x821a
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Ansaugtemperatur'
     id: suction
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x821c
     nasa_device_id: samsung_outdoor
     name: 'Doppelrohr Wärmetauscher Temperatur'
     id: doubletube
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x821e
     nasa_device_id: samsung_outdoor
     name: 'EVI Einspritzkreislauf Eintrittstemperatur'
     id: eviin
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8220
     nasa_device_id: samsung_outdoor
     name: 'EVI Einspritzkreislauf Austrittstemperatur'
     id: eviout
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8254
     nasa_device_id: samsung_outdoor
     name: 'Wechselrichter Leistungsmodul IPM1 Temperatur'
     id: ipm1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x827a
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Überhitzungsfühler DSH1 Temperatur'
     id: dsh1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8280
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Gehäusetemperatur TOP1'
     id: top1
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x829f
     nasa_device_id: samsung_outdoor
     name: 'Kältekreis Hochdruck Sättigungstemperatur'
     id: sat_high
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82a0
     nasa_device_id: samsung_outdoor
     name: 'Kältekreis Niederdruck Sättigungstemperatur'
     id: sat_low
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82df
     nasa_device_id: samsung_outdoor
     name: 'Heizwasser Rücklauf Tw1 Außeneinheit Spiegelwert'
     id: water_in_odumirror
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8240
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit gemeldete Leistung'
     id: outdoor_capacity
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8000
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Servicebetriebsart Code'
     id: outdoor_service_code
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8061
     nasa_device_id: samsung_outdoor
     name: 'Abtauung Ablaufcode'
     id: defrost_step_code
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8235
     nasa_device_id: samsung_outdoor
     name: 'Fehlercode'
     id: error_code
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   # EVI-Diagnose 2026-10-20: ausschliesslich passive STATUS-Lesesensoren.
   # Ansteuerung ist KEINE gemessene mechanische Ventilstellung.
@@ -2552,6 +3080,8 @@ sensor:
     id: evi_eev_raw
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x82FC
@@ -2561,6 +3091,8 @@ sensor:
     id: evi_sol_eev_raw
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x8022
@@ -2570,6 +3102,8 @@ sensor:
     id: evi_sol1_raw
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x8023
@@ -2579,6 +3113,8 @@ sensor:
     id: evi_sol2_raw
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x8223
@@ -2588,6 +3124,8 @@ sensor:
     id: target_discharge_raw
     entity_category: diagnostic
     accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   # Abgeleitete Temperaturdifferenzen, nur waehrend Verdichterbetrieb.
   # Verschiedene Busnachrichten treffen zeitversetzt ein: kein synchroner Messsatz.
@@ -2609,6 +3147,8 @@ sensor:
       const float b = id(sat_high).state;
       if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
       return a - b;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'Ansaug Überhitzung berechnet'
@@ -2627,6 +3167,8 @@ sensor:
       const float b = id(sat_low).state;
       if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
       return a - b;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'EVI Temperaturdifferenz Austritt minus Eintritt'
@@ -2645,6 +3187,8 @@ sensor:
       const float b = id(eviin).state;
       if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
       return a - b;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   # Vorhandene Templates: gleiche sichtbare Namen wie bisher.
   - platform: template
@@ -2657,6 +3201,8 @@ sensor:
     lambda: |-
       if (!std::isfinite(id(room_temp_raw).state)) return NAN;
       return id(room_temp_raw).state - 1.4f;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'COP gesamt'
@@ -2668,6 +3214,8 @@ sensor:
       float b = id(total_consumed_energy).state;
       if (!std::isfinite(a) || !std::isfinite(b) || b <= 0) return NAN;
       return a / b;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'COP momentan'
@@ -2680,6 +3228,8 @@ sensor:
       float b = id(instant_power_in).state;
       if (id(compressor_frequency).state <= 0 || !std::isfinite(a) || !std::isfinite(b) || b < 100) return NAN;
       return a / b;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'Heizwasser Spreizung Vorlauf minus Rücklauf'
@@ -2691,6 +3241,8 @@ sensor:
       float a = id(water_out).state, b = id(water_in).state;
       if (!std::isfinite(a) || !std::isfinite(b)) return NAN;
       return a - b;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'Heizwasser berechnete thermische Leistung'
@@ -2707,6 +3259,8 @@ sensor:
       if (!id(compressor_frequency).has_state() || id(compressor_frequency).state <= 0) return NAN;
       if (!std::isfinite(q) || !std::isfinite(dt) || q <= 0 || q > 120 || dt <= 0 || dt > 35) return NAN;
       return q * dt * 69.77f; // L/min * Kelvin * 69.77 = W
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'Vorlauf Solltemperatur (Anzeige)'
@@ -2717,6 +3271,8 @@ sensor:
     update_interval: 30s
     lambda: |-
       return id(outlet_target).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'Warmwasser Solltemperatur (Anzeige)'
@@ -2727,6 +3283,8 @@ sensor:
     update_interval: 30s
     lambda: |-
       return id(dhw_target).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   # NEUE FSV 1061-1064: reine LESEPROBES (kein number: / keine Schreibfunktion).
   # Das Basisprojekt Beormund unterstuetzt diese FSV noch nicht offiziell.
@@ -2751,6 +3309,7 @@ sensor:
           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
           if (raw < 10 || raw > 70) return NAN;
           return raw * 0.1f;
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x431F
@@ -2769,6 +3328,7 @@ sensor:
           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
           if (raw < 10 || raw > 70) return NAN;
           return raw * 0.1f;
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x4320
@@ -2787,6 +3347,7 @@ sensor:
           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
           if (raw < 10 || raw > 70) return NAN;
           return raw * 0.1f;
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: samsung_nasa
     message: 0x4321
@@ -2805,6 +3366,7 @@ sensor:
           const int16_t raw = static_cast<int16_t>(static_cast<uint16_t>(x));
           if (raw < 10 || raw > 70) return NAN;
           return raw * 0.1f;
+      - delta: 0  # nur echte Änderungen senden
 
   # FSV 6031 (Abschalten bei lange niedriger Verdichterfrequenz):
   # KEIN verlaesslich zugeordneter NASA-Code; NICHT als falsche Entitaet anlegen.
@@ -2823,6 +3385,8 @@ sensor:
     lambda: |-
       if (!id(water_out).has_state() || !id(outlet_target).has_state()) return NAN;
       return id(water_out).state - id(outlet_target).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1011 - Kühlbetrieb maximale Vorlauftemperatur'
@@ -2834,6 +3398,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1011).has_state()) return NAN;
       return id(fsv_1011).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1012 - Kühlbetrieb minimale Vorlauftemperatur'
@@ -2845,6 +3411,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1012).has_state()) return NAN;
       return id(fsv_1012).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1021 - Kühlbetrieb maximale Raumtemperatur'
@@ -2856,6 +3424,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1021).has_state()) return NAN;
       return id(fsv_1021).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1022 - Kühlbetrieb minimale Raumtemperatur'
@@ -2867,6 +3437,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1022).has_state()) return NAN;
       return id(fsv_1022).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1031 - Heizbetrieb maximale Vorlauftemperatur'
@@ -2878,6 +3450,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1031).has_state()) return NAN;
       return id(fsv_1031).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1032 - Heizbetrieb minimale Vorlauftemperatur'
@@ -2889,6 +3463,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1032).has_state()) return NAN;
       return id(fsv_1032).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1041 - Heizbetrieb maximale Raumtemperatur'
@@ -2900,6 +3476,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1041).has_state()) return NAN;
       return id(fsv_1041).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1042 - Heizbetrieb minimale Raumtemperatur'
@@ -2911,6 +3489,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1042).has_state()) return NAN;
       return id(fsv_1042).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1051 - Warmwasserspeicher maximale Temperatur'
@@ -2922,6 +3502,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1051).has_state()) return NAN;
       return id(fsv_1051).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 1052 - Warmwasserspeicher minimale Temperatur'
@@ -2933,6 +3515,8 @@ sensor:
     lambda: |-
       if (!id(fsv_1052).has_state()) return NAN;
       return id(fsv_1052).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2011 - Heizkurve Außentemperatur bei Kälte'
@@ -2944,6 +3528,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2011).has_state()) return NAN;
       return id(fsv_2011).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2012 - Heizkurve Außentemperatur bei Wärme'
@@ -2955,6 +3541,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2012).has_state()) return NAN;
       return id(fsv_2012).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2021 - Heizkurve WL1 Vorlauf bei Kälte'
@@ -2966,6 +3554,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2021).has_state()) return NAN;
       return id(fsv_2021).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2022 - Heizkurve WL1 Vorlauf bei Wärme'
@@ -2977,6 +3567,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2022).has_state()) return NAN;
       return id(fsv_2022).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2031 - Heizkurve WL2 Vorlauf bei Kälte'
@@ -2988,6 +3580,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2031).has_state()) return NAN;
       return id(fsv_2031).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2032 - Heizkurve WL2 Vorlauf bei Wärme'
@@ -2999,6 +3593,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2032).has_state()) return NAN;
       return id(fsv_2032).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2051 - Kühlkurve Außentemperatur untere Grenze'
@@ -3010,6 +3606,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2051).has_state()) return NAN;
       return id(fsv_2051).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2052 - Kühlkurve Außentemperatur obere Grenze'
@@ -3021,6 +3619,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2052).has_state()) return NAN;
       return id(fsv_2052).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2061 - Kühlkurve WL1 maximale Vorlauftemperatur'
@@ -3032,6 +3632,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2061).has_state()) return NAN;
       return id(fsv_2061).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2062 - Kühlkurve WL1 minimale Vorlauftemperatur'
@@ -3043,6 +3645,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2062).has_state()) return NAN;
       return id(fsv_2062).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2071 - Kühlkurve WL2 maximale Vorlauftemperatur'
@@ -3054,6 +3658,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2071).has_state()) return NAN;
       return id(fsv_2071).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 2072 - Kühlkurve WL2 minimale Vorlauftemperatur'
@@ -3065,6 +3671,8 @@ sensor:
     lambda: |-
       if (!id(fsv_2072).has_state()) return NAN;
       return id(fsv_2072).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3021 - Warmwasser maximale Wärmepumpentemperatur'
@@ -3076,6 +3684,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3021).has_state()) return NAN;
       return id(fsv_3021).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3022 - Warmwasser Ausschalthysterese'
@@ -3087,6 +3697,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3022).has_state()) return NAN;
       return id(fsv_3022).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3023 - Warmwasser Einschalthysterese'
@@ -3098,6 +3710,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3023).has_state()) return NAN;
       return id(fsv_3023).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3024 - Raumheizung Mindestlaufzeit'
@@ -3108,6 +3722,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3024).has_state()) return NAN;
       return id(fsv_3024).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3025 - Warmwasser Wärmepumpe maximale Laufzeit'
@@ -3118,6 +3734,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3025).has_state()) return NAN;
       return id(fsv_3025).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser'
@@ -3128,6 +3746,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3026).has_state()) return NAN;
       return id(fsv_3026).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3032 - Warmwasser Heizstab Einschaltverzögerung'
@@ -3138,6 +3758,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3032).has_state()) return NAN;
       return id(fsv_3032).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3033 - Warmwasser Heizstab Temperaturüberschwingung'
@@ -3149,6 +3771,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3033).has_state()) return NAN;
       return id(fsv_3033).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3043 - Warmwasser thermische Desinfektion Startstunde'
@@ -3159,6 +3783,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3043).has_state()) return NAN;
       return id(fsv_3043).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3044 - Warmwasser thermische Desinfektion Zieltemperatur'
@@ -3170,6 +3796,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3044).has_state()) return NAN;
       return id(fsv_3044).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3045 - Warmwasser thermische Desinfektion Dauer'
@@ -3180,6 +3808,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3045).has_state()) return NAN;
       return id(fsv_3045).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3052 - Warmwasser Timer-Aus Zeitdauer'
@@ -3190,6 +3820,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3052).has_state()) return NAN;
       return id(fsv_3052).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3046 - Warmwasser thermische Desinfektion Zeitlimit'
@@ -3200,6 +3832,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3046).has_state()) return NAN;
       return id(fsv_3046).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3081 - Zusatzheizung Stufe 1 Nennleistung'
@@ -3210,6 +3844,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3081).has_state()) return NAN;
       return id(fsv_3081).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3082 - Zusatzheizung Stufe 2 Nennleistung'
@@ -3220,6 +3856,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3082).has_state()) return NAN;
       return id(fsv_3082).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 3083 - Warmwasser Heizstab Nennleistung'
@@ -3230,6 +3868,8 @@ sensor:
     lambda: |-
       if (!id(fsv_3083).has_state()) return NAN;
       return id(fsv_3083).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4012 - Außentemperatur für Vorrangregelung'
@@ -3241,6 +3881,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4012).has_state()) return NAN;
       return id(fsv_4012).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4013 - Heizung Abschalttemperatur außen'
@@ -3252,6 +3894,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4013).has_state()) return NAN;
       return id(fsv_4013).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4024 - Zusatzheizung Außentemperaturschwelle'
@@ -3263,6 +3907,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4024).has_state()) return NAN;
       return id(fsv_4024).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4025 - Zusatzheizung Abtauunterstützung Temperaturschwelle'
@@ -3274,6 +3920,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4025).has_state()) return NAN;
       return id(fsv_4025).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4033 - Externe Wärmequelle Außentemperaturschwelle'
@@ -3285,6 +3933,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4033).has_state()) return NAN;
       return id(fsv_4033).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4042 - Mischventil Heizen Sollspreizung'
@@ -3296,6 +3946,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4042).has_state()) return NAN;
       return id(fsv_4042).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4043 - Mischventil Kühlen Sollspreizung'
@@ -3307,6 +3959,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4043).has_state()) return NAN;
       return id(fsv_4043).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4044 - Mischventil Regelfaktor'
@@ -3316,6 +3970,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4044).has_state()) return NAN;
       return id(fsv_4044).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4045 - Mischventil Regelintervall'
@@ -3326,6 +3982,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4045).has_state()) return NAN;
       return id(fsv_4045).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4046 - Mischventil Stellzeit'
@@ -3336,6 +3994,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4046).has_state()) return NAN;
       return id(fsv_4046).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5011 - Smart Grid Kühlung Vorlauftemperatur'
@@ -3347,6 +4007,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5011).has_state()) return NAN;
       return id(fsv_5011).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5013 - Smart Grid Heizung Vorlauftemperatur'
@@ -3358,6 +4020,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5013).has_state()) return NAN;
       return id(fsv_5013).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5014 - Smart Grid Heizung Raumtemperatur'
@@ -3369,6 +4033,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5014).has_state()) return NAN;
       return id(fsv_5014).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5015 - Smart Grid Kühlkurve WL1 Temperatur'
@@ -3380,6 +4046,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5015).has_state()) return NAN;
       return id(fsv_5015).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5016 - Smart Grid Kühlkurve WL2 Temperatur'
@@ -3391,6 +4059,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5016).has_state()) return NAN;
       return id(fsv_5016).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5017 - Smart Grid Heizkurve WL1 Temperatur'
@@ -3402,6 +4072,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5017).has_state()) return NAN;
       return id(fsv_5017).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5018 - Smart Grid Heizkurve WL2 Temperatur'
@@ -3413,6 +4085,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5018).has_state()) return NAN;
       return id(fsv_5018).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5019 - Smart Grid Warmwasser Speichertemperatur'
@@ -3424,6 +4098,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5019).has_state()) return NAN;
       return id(fsv_5019).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5021 - Warmwasser Sparbetrieb Temperaturabsenkung'
@@ -3435,6 +4111,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5021).has_state()) return NAN;
       return id(fsv_5021).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5023 - Warmwasser Sparbetrieb Thermo-Ein Temperatur'
@@ -3446,6 +4124,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5023).has_state()) return NAN;
       return id(fsv_5023).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5082 - Photovoltaik Kühlung Temperaturversatz'
@@ -3457,6 +4137,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5082).has_state()) return NAN;
       return id(fsv_5082).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5083 - Photovoltaik Heizung Temperaturversatz'
@@ -3468,6 +4150,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5083).has_state()) return NAN;
       return id(fsv_5083).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5092 - Smart Grid Heizung Temperaturänderung'
@@ -3479,6 +4163,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5092).has_state()) return NAN;
       return id(fsv_5092).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 5093 - Smart Grid Warmwasser Temperaturänderung'
@@ -3490,6 +4176,8 @@ sensor:
     lambda: |-
       if (!id(fsv_5093).has_state()) return NAN;
       return id(fsv_5093).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   - platform: template
     name: 'FSV 4052 - Inverterpumpe Sollspreizung'
     unit_of_measurement: '°C'
@@ -3500,6 +4188,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4052).has_state()) return NAN;
       return id(fsv_4052).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   - platform: template
     name: 'FSV 4053 - Inverterpumpe Regelfaktor'
@@ -3509,6 +4199,8 @@ sensor:
     lambda: |-
       if (!id(fsv_4053).has_state()) return NAN;
       return id(fsv_4053).state;
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
 
 binary_sensor:
