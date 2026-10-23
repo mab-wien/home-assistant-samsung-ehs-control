@@ -5,7 +5,7 @@
 | Entität | Wirkung |
 |---|---|
 | `switch.wp_debug_syslog` („Debug & Syslog“) | sendet die NASA-Logzeilen per Syslog (UDP) an den Analyse-Server. Startet nach jedem Neustart **AUS** und schaltet sich nach **20 min** oder bei **< 30 kB freiem Speicher** selbst ab (Grund im Log). |
-| `switch.wp_nasa_rohbytes_protokollieren` | zusätzlich die unveränderten Telegrammbytes; wirkt nur bei eingeschaltetem Debug |
+| `switch.wp_nasa_rohbytes_protokollieren` | Rohbyte-Modus: statt dekodierter Einzelzeilen nur noch die unveränderten Telegramme (eine Zeile je Telegramm, ~90 % weniger Verkehr); der Server dekodiert selbst. Wirkt nur bei eingeschaltetem Debug |
 | `sensor.wp_freier_speicher` | freier Heap des ESP (Byte) |
 | `sensor.wp_syslog_verworfene_zeilen` | am ESP verworfene Logzeilen (Sender war belegt) |
 
@@ -13,8 +13,9 @@ Außerhalb der Debug-Fenster werden nur die eingebundenen Sensoren erfasst, unbe
 
 ## Logformat
 
-Jede Syslog-Zeile beginnt nach dem Tag mit `q=<Laufnummer> d=<verworfen> k=<gekürzt>`. Lücken in `q` sind Verluste
-auf dem Transportweg (UDP), `d`/`k` zählen Verluste am ESP. Ab der Fork-Firmware (22.10.2026) gilt außerdem:
+Jede Syslog-Zeile beginnt nach dem Tag mit `q=<Laufnummer>`. Seit 23.10.2026 zählt `q` jede erzeugte Zeile, auch
+solche, die der ESP verwerfen musste: jede Lücke in `q` ist ein Verlust, am ESP oder im WLAN (bis 22.10.2026 zusätzlich
+`d=`/`k=`). Zeilenarten:
 
 | Zeile | Bedeutung |
 |---|---|
@@ -34,6 +35,23 @@ Hinweise; eigene Zuordnungen tragen den Status `vermutet` oder `bestaetigt` mit 
 
 MCP-Werkzeuge: `nasa_kennungen`, `nasa_verlauf`, `nasa_umfeld`, `nasa_beobachtung_setzen`, `nasa_beobachtungen`,
 `nasa_zuordnung_setzen`, `nasa_qualitaet`, `nasa_status`.
+
+## Normalisierte Ablage (seit 23.10.2026)
+
+Aus den Rohtelegrammen schreibt `nasa-katalog` (Schema `nasa`):
+
+| Tabelle | Inhalt |
+|---|---|
+| `geraet` | Busadressen (Absender und Ziel, auch Broadcasts) |
+| `kennung` | Katalog der NASA-Kennungen je Quelle (Fremdnamen, eigene Zuordnung) |
+| `struktur` | Strukturinhalte, jeder nur einmal |
+| `telegramm` | ein Datensatz je Telegramm: Zeit, Sitzung, Nr., Quelle, Ziel, Paket-/Datentyp |
+| `telegramm_wert` | Werte eines Telegramms (1:N), Strukturen als Verweis |
+| `wert_minute` | Minutenwerte je Kennung (automatisch gepflegt) |
+| `ereignis` | Zustandswechsel (Enum-Kennungen) mit vorherigem Wert |
+
+Kompression nach 2 Tagen, Rohtelegramme (`roh`) nur noch für fehlerhafte/unbekannte Telegramme, 30 Tage.
+MCP-Werkzeuge zusätzlich: `nasa_minutenwerte`, `nasa_ereignisse`, `nasa_deutungen`.
 
 ## Vorgehen bei einem gezielten Mitschnitt
 

@@ -34,6 +34,8 @@ logger:
           condition:
             lambda: |-
               if (!id(debug_stream_enabled) || std::string(tag) == "udp") return false;
+              // q zählt jede erzeugte Zeile, auch verworfene: jede Lücke in q ist ein Verlust (ESP oder WLAN)
+              id(syslog_laufnummer)++;
               if (id(syslog_forwarding_busy)) { id(syslog_verworfen)++; return false; }
               return true;
           then:
@@ -58,11 +60,9 @@ logger:
                       clean += (raw[i] == '\n' || raw[i] == '\r') ? ' ' : raw[i];
                     }
                   }
-                  id(syslog_laufnummer)++;
                   std::string packet = "<" + std::to_string(16 * 8 + severity) + ">" + stamp
                                      + " " + App.get_name().c_str() + " " + tag + ": q="
-                                     + std::to_string(id(syslog_laufnummer)) + " d=" + std::to_string(id(syslog_verworfen))
-                                     + " k=" + std::to_string(id(syslog_gekuerzt)) + " " + clean;
+                                     + std::to_string(id(syslog_laufnummer)) + " " + clean;
                   // UDP-Komponente: maximal 508 Byte pro Datagramm; Kürzung wird gezählt.
                   if (packet.size() > 508) { packet.resize(508); id(syslog_gekuerzt)++; }
                   return std::vector<uint8_t>(packet.begin(), packet.end());
@@ -142,7 +142,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@6534c4e9d6565129925f99f083d67ccd7ad76749   # Fork, Branch diagnose
+  - source: github://mab-wien/esphome-samsung-nasa@a88d62d90003c42d1411c58d6053b86bf20d9c20   # Fork, Branch diagnose
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -702,8 +702,9 @@ switch:
       - lambda: |-
           id(debug_start_ms) = millis();
           id(debug_stream_enabled) = true;
-          id(samsung_nasa_controller).set_debug_log_messages(true);
-          id(samsung_nasa_controller).set_debug_log_undefined_messages(true);
+          // im Rohbyte-Modus nur RAW-Zeilen (der Server dekodiert selbst), sonst dekodierte Einzelzeilen
+          id(samsung_nasa_controller).set_debug_log_messages(!id(nasa_rohbytes).state);
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(!id(nasa_rohbytes).state);
       - logger.log:
           level: INFO
           tag: syslog_control
@@ -728,11 +729,17 @@ switch:
     entity_category: diagnostic
     optimistic: true
     restore_mode: ALWAYS_OFF
-    # Wirkt nur bei eingeschaltetem „Debug & Syslog“; unveränderte Telegramme in nummerierten Teilen
+    # Wirkt nur bei eingeschaltetem „Debug & Syslog“: dann nur noch Rohtelegramme (der Server dekodiert), keine Einzelzeilen
     turn_on_action:
-      - lambda: id(samsung_nasa_controller).set_debug_log_messages_raw(true);
+      - lambda: |-
+          id(samsung_nasa_controller).set_debug_log_messages_raw(true);
+          id(samsung_nasa_controller).set_debug_log_messages(false);
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(false);
     turn_off_action:
-      - lambda: id(samsung_nasa_controller).set_debug_log_messages_raw(false);
+      - lambda: |-
+          id(samsung_nasa_controller).set_debug_log_messages_raw(false);
+          id(samsung_nasa_controller).set_debug_log_messages(id(debug_gesamt).state);
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(id(debug_gesamt).state);
   - platform: samsung_nasa
     message: 0x4000
     nasa_device_id: samsung_indoor
