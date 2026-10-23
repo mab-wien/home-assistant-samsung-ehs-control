@@ -476,6 +476,12 @@ number:
     id: fsv_5011
     internal: true
   - platform: samsung_nasa
+    fsv: 5012
+    nasa_device_id: samsung_indoor
+    name: 'FSV 5012 - Smart Grid Kühlung Raumtemperatur (intern)'
+    id: fsv_5012
+    internal: true
+  - platform: samsung_nasa
     fsv: 5013
     nasa_device_id: samsung_indoor
     name: 'FSV 5013 - Smart Grid Heizung Vorlauftemperatur (intern)'
@@ -668,6 +674,18 @@ select:
     name: 'FSV 4051 - Inverterpumpe PWM Regelmodus (intern)'
     id: fsv_4051
     internal: true
+  - platform: samsung_nasa
+    fsv: 5042
+    nasa_device_id: samsung_indoor
+    name: 'FSV 5042 - Wärmequelle bei Betriebsbegrenzung (intern)'
+    id: fsv_5042
+    internal: true
+  - platform: samsung_nasa
+    fsv: 5043
+    nasa_device_id: samsung_indoor
+    name: 'FSV 5043 - Kontaktlogik Benefit kWh (intern)'
+    id: fsv_5043
+    internal: true
 
 switch:
   - platform: template
@@ -808,27 +826,8 @@ switch:
     internal: true
 
 sensor:
-  # S-NET All Read, 22.10.2026: vier bisher fehlende Kennungen.
-  # FSV-Zuordnung aus Fremdkatalog + S-NET-Screenshot, noch kein isolierter Test.
-  # Absichtlich lesende, unskalierte Sensoren; keine Schreibsteuerung.
-  - platform: samsung_nasa
-    message: 0x40A5
-    nasa_device_id: samsung_indoor
-    id: wp_nasa_40a5
-    name: 'NASA 0x40A5 FSV 5042 Waermequelle Betriebsbegrenzung Rohwert'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    filters:
-      - delta: 0  # nur echte Änderungen senden
-  - platform: samsung_nasa
-    message: 0x40A6
-    nasa_device_id: samsung_indoor
-    id: wp_nasa_40a6
-    name: 'NASA 0x40A6 FSV 5043 Kontaktlogik Benefit kWh Rohwert'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    filters:
-      - delta: 0  # nur echte Änderungen senden
+  # S-NET All Read, 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
+  # FSV 5012/5042/5043 kommen seit 23.10.2026 aus der Bibliothek (fsv:), Lesekopien unten.
   - platform: samsung_nasa
     message: 0x412A
     nasa_device_id: samsung_indoor
@@ -838,17 +837,7 @@ sensor:
     accuracy_decimals: 0
     filters:
       - delta: 0  # nur echte Änderungen senden
-  - platform: samsung_nasa
-    message: 0x4274
-    nasa_device_id: samsung_indoor
-    id: wp_nasa_4274
-    name: 'NASA 0x4274 FSV 5012 Raumtemperatur Kuehlung Rohwert'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    state_class: measurement
-    filters:
-      - delta: 0  # nur echte Änderungen senden
-  # Lesekopie: S-NET 30 Grad C entspricht Rohwert 300 (22.10.2026).
+  # Lesekopie FSV 5012 (S-NET 22.10.2026: 30 °C).
   - platform: template
     name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
     id: fsv_5012_readonly
@@ -859,8 +848,8 @@ sensor:
     accuracy_decimals: 1
     update_interval: 10s
     lambda: |-
-      if (!id(wp_nasa_4274).has_state() || isnan(id(wp_nasa_4274).state)) return NAN;
-      return id(wp_nasa_4274).state / 10.0f;
+      if (!id(fsv_5012).has_state()) return NAN;
+      return id(fsv_5012).state;
     filters:
       - delta: 0  # nur echte Änderungen senden
   # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
@@ -4424,29 +4413,23 @@ text_sensor:
     name: 'NASA 0x860D OUTDOOR_MODELINFORMATION'
     entity_category: diagnostic
   # Lesende Anzeigen; keine select-Plattform und damit keine Schreibsteuerung.
-  # FSV 5042: nur 0 = All durch S-NET bestaetigt; andere Codes neutral anzeigen.
+  # FSV 5042/5043: Optionstexte aus der Fork-Bibliothek (S-NET 22.10.2026: 5042 = All, 5043 = High).
   - platform: template
     name: 'FSV 5042 - Waermequelle bei Betriebsbegrenzung'
     id: fsv_5042_readonly
     entity_category: diagnostic
     update_interval: 10s
     lambda: |-
-      if (!id(wp_nasa_40a5).has_state() || isnan(id(wp_nasa_40a5).state)) return {};
-      const int value = static_cast<int>(id(wp_nasa_40a5).state);
-      if (value == 0) return std::string("Alle (All)");
-      return std::string("Unbekannt (") + std::to_string(value) + ")";
-  # FSV 5043: 1 = High im S-NET; 0 = Low gemaess Komponenten-Katalog.
+      if (!id(fsv_5042).has_state()) return {};
+      return id(fsv_5042).current_option().str();
   - platform: template
     name: 'FSV 5043 - Kontaktlogik Benefit kWh'
     id: fsv_5043_readonly
     entity_category: diagnostic
     update_interval: 10s
     lambda: |-
-      if (!id(wp_nasa_40a6).has_state() || isnan(id(wp_nasa_40a6).state)) return {};
-      const int value = static_cast<int>(id(wp_nasa_40a6).state);
-      if (value == 0) return std::string("Low");
-      if (value == 1) return std::string("High");
-      return std::string("Unbekannt (") + std::to_string(value) + ")";
+      if (!id(fsv_5043).has_state()) return {};
+      return id(fsv_5043).current_option().str();
   # --- NASA-Rohwerte (22.10.2026): beobachtete bzw. bei Beormund vordefinierte Kennungen, neutral benannt, unskaliert; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x8003
