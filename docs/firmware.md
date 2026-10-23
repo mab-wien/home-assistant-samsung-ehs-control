@@ -18,6 +18,6 @@ Der zuletzt funktionierende Stand wird zusätzlich als Git-Tag `firmware-JJJJ-MM
 | 23.10.2026 10:52 | 058bee0 | 2026.9.1 (Container auf mab-rog02) | Fork @cee28a4 | OTA vom Server | läuft; FSV 1061–1064 (0x431E–0x4321, Anlage meldet 65535) auskommentiert |
 | 23.10.2026 11:07 | cb6ed26 | 2026.9.1 (Container auf mab-rog02) | Fork @f71483a | OTA vom Server | läuft; Strukturlänge aus Paketlänge (vorher Fremdbytes aus dem Puffer), Text mit Längenbyte (0x061A) |
 | 23.10.2026 11:32 | 982e988 | 2026.9.1 (Container auf mab-rog02) | Fork @6534c4e | OTA vom Server | läuft; WLAN-Modul als Gerät 62.00.91, MAC-Adresse (0x061C, Format mac) als Text-Sensor |
-| 23.10.2026 11:55 | COMMIT | 2026.9.1 (Container auf mab-rog02) | Fork @a88d62d | OTA vom Server | läuft; Rohbyte-Modus sendet nur RAW (Server dekodiert), q zählt jede Zeile, d/k entfernt, Paketköpfe nur im Debug |
+| 23.10.2026 11:55 | 95f583c | 2026.9.1 (Container auf mab-rog02) | Fork @a88d62d | OTA vom Server | läuft; Rohbyte-Modus sendet nur RAW (Server dekodiert), q zählt jede Zeile, d/k entfernt, Paketköpfe nur im Debug |
 
 Seit 22.10.2026 ist die Komponente auf einen festen Commit des Forks festgelegt. Rückweg: Tag `firmware-2026-10-23k` (ältere Tags am 23.10.2026 gelöscht; frühere Stände über den YAML-Commit in der Tabelle).
