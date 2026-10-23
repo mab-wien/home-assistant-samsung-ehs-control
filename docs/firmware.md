@@ -14,6 +14,6 @@ Der zuletzt funktionierende Stand wird zusätzlich als Git-Tag `firmware-JJJJ-MM
 | 23.10.2026 09:40 | 1d9a2e6 | 2026.9.1 (Container auf mab-rog02) | Fork @d0bce2d (Strukturformate) | OTA vom Server | läuft; Main Micom/EEPROM als „DB91-… JJMMTT“, Product Option als „[0]…-[3]…“ (S-NET-Abgleich) |
 | 23.10.2026 10:05 | fb05a52 | 2026.9.1 (Container auf mab-rog02) | Fork @d0bce2d | OTA vom Server | läuft; FSV 5012/5042/5043 aus der Fork-Bibliothek statt eigener Rohwerte (0x4274/0x40A5/0x40A6 entfernt) |
 | 23.10.2026 10:27 | f7d55e4 | 2026.9.1 (Container auf mab-rog02) | Fork @99d84c9 | OTA vom Server | läuft; Normalstand nach Startmitschnitt (Debug wieder AUS beim Start); Modell, Standort, Seriennummern, Inverter-Micom, Fehlerhistorie als Text-Sensoren |
-| 23.10.2026 10:45 | COMMIT | 2026.9.1 (Container auf mab-rog02) | Fork @cee28a4 | OTA vom Server | läuft; Fork-Switch setzt has_state → 13 Ein/Aus-FSV-Lesekopien erstmals mit Wert (S-NET-Export bestätigt) |
+| 23.10.2026 10:45 | 19a6a16 | 2026.9.1 (Container auf mab-rog02) | Fork @cee28a4 | OTA vom Server | läuft; Fork-Switch setzt has_state → 13 Ein/Aus-FSV-Lesekopien erstmals mit Wert (S-NET-Export bestätigt) |
 
 Seit 22.10.2026 ist die Komponente auf einen festen Commit des Forks festgelegt. Rückweg: Tag `firmware-2026-10-23g` (ältere Tags am 23.10.2026 gelöscht; frühere Stände über den YAML-Commit in der Tabelle).
