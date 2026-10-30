@@ -94,6 +94,15 @@ globals:
     type: uint32_t
     restore_value: false
     initial_value: '0'
+  # Diagnose 0x803F/0x8404 (30.10.2026): Zeitpunkt des letzten Empfangs (Unix-Zeit, 0 = noch nicht empfangen)
+  - id: nasa_803f_empfang
+    type: uint32_t
+    restore_value: false
+    initial_value: '0'
+  - id: nasa_8404_empfang
+    type: uint32_t
+    restore_value: false
+    initial_value: '0'
 
 udp:
   id: syslog_udp
@@ -1839,6 +1848,10 @@ sensor:
     accuracy_decimals: 0
     filters:
       - delta: 0  # nur echte Änderungen senden
+    # jeder Empfang (vor dem Filter) setzt den Empfangszeitpunkt
+    on_raw_value:
+      then:
+        - lambda: 'if (id(ha_time).now().is_valid()) id(nasa_803f_empfang) = id(ha_time).now().timestamp;'
   - platform: samsung_nasa
     message: 0x8045
     nasa_device_id: samsung_outdoor
@@ -2528,6 +2541,10 @@ sensor:
     state_class: measurement
     filters:
       - delta: 0  # nur echte Änderungen senden
+    # Gleitkommawert verliert bei Werten > 2^24 die unteren Bits (z. B. Bit 1); exakt: Text-Sensor „NASA 0x8404 Rohwert exakt“
+    on_raw_value:
+      then:
+        - lambda: 'if (id(ha_time).now().is_valid()) id(nasa_8404_empfang) = id(ha_time).now().timestamp;'
   - platform: samsung_nasa
     message: 0x8405
     nasa_device_id: samsung_outdoor
@@ -4204,6 +4221,43 @@ sensor:
 
 
 binary_sensor:
+  # Einzelbits von 0x8404, nur beobachtete Bits, ohne Funktionszuordnung (Auswertung 30.10.2026)
+  - platform: template
+    name: 'NASA 0x8404 Bit 01'
+    id: nasa_8404_bit_01
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 06'
+    id: nasa_8404_bit_06
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 09'
+    id: nasa_8404_bit_09
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 13'
+    id: nasa_8404_bit_13
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 15'
+    id: nasa_8404_bit_15
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 16'
+    id: nasa_8404_bit_16
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 18'
+    id: nasa_8404_bit_18
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 23'
+    id: nasa_8404_bit_23
+    entity_category: diagnostic
+  - platform: template
+    name: 'NASA 0x8404 Bit 26'
+    id: nasa_8404_bit_26
+    entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x4067
     nasa_device_id: samsung_indoor
@@ -4367,6 +4421,47 @@ binary_sensor:
       return id(fan_speed_rpm).state <= 320 && id(target_compressor_frequency).state <= 45;
 
 text_sensor:
+  # 0x8404 exakt (Ganzzahl ohne Gleitkommaverlust) und hexadezimal; Bedeutung offen (Auswertung 30.10.2026)
+  - platform: samsung_nasa
+    message: 0x8404
+    nasa_device_id: samsung_outdoor
+    name: 'NASA 0x8404 Rohwert exakt'
+    id: nasa_8404_exakt
+    entity_category: diagnostic
+    on_value:
+      then:
+        - lambda: |-
+            const uint32_t v = (uint32_t) strtoll(x.c_str(), nullptr, 10);
+            char hex[11];
+            snprintf(hex, sizeof(hex), "0x%08X", (unsigned) v);
+            id(nasa_8404_hex).publish_state(hex);
+            id(nasa_8404_bit_01).publish_state((v >> 1) & 1);
+            id(nasa_8404_bit_06).publish_state((v >> 6) & 1);
+            id(nasa_8404_bit_09).publish_state((v >> 9) & 1);
+            id(nasa_8404_bit_13).publish_state((v >> 13) & 1);
+            id(nasa_8404_bit_15).publish_state((v >> 15) & 1);
+            id(nasa_8404_bit_16).publish_state((v >> 16) & 1);
+            id(nasa_8404_bit_18).publish_state((v >> 18) & 1);
+            id(nasa_8404_bit_23).publish_state((v >> 23) & 1);
+            id(nasa_8404_bit_26).publish_state((v >> 26) & 1);
+  - platform: template
+    name: 'NASA 0x8404 hex'
+    id: nasa_8404_hex
+    entity_category: diagnostic
+    update_interval: never
+  # Letzter Empfang 0x803F/0x8404 (passiv, aus jedem Telegramm); höchstens einmal pro Minute, nur bei neuem Empfang
+  - platform: template
+    name: 'NASA 0x803F letzter Empfang'
+    id: nasa_803f_letzter_empfang
+    device_class: timestamp
+    entity_category: diagnostic
+    update_interval: never
+  - platform: template
+    name: 'NASA 0x8404 letzter Empfang'
+    id: nasa_8404_letzter_empfang
+    device_class: timestamp
+    entity_category: diagnostic
+    update_interval: never
   - platform: samsung_nasa
     message: 0x061C
     nasa_device_id: samsung_wifikit
@@ -4629,6 +4724,19 @@ text_sensor:
 # FSV-Leseanforderungen (KEINE Schreibvorgaenge). Groesse je Batch begrenzt.
 # Bei 80+ FSV Werten kann der ESP32 ueberlastet werden; Vollversion erst nach RAM-Check.
 interval:
+  # Empfangszeitpunkte 0x803F/0x8404 einmal pro Minute veröffentlichen, nur wenn neu
+  - interval: 60s
+    then:
+      - lambda: |-
+          static uint32_t gesendet_803f = 0, gesendet_8404 = 0;
+          if (id(nasa_803f_empfang) != 0 && id(nasa_803f_empfang) != gesendet_803f) {
+            gesendet_803f = id(nasa_803f_empfang);
+            id(nasa_803f_letzter_empfang).publish_state(ESPTime::from_epoch_utc(gesendet_803f).strftime("%Y-%m-%dT%H:%M:%SZ"));
+          }
+          if (id(nasa_8404_empfang) != 0 && id(nasa_8404_empfang) != gesendet_8404) {
+            gesendet_8404 = id(nasa_8404_empfang);
+            id(nasa_8404_letzter_empfang).publish_state(ESPTime::from_epoch_utc(gesendet_8404).strftime("%Y-%m-%dT%H:%M:%SZ"));
+          }
   # Diagnose begrenzen: nach 20 min oder bei < 30 kB freiem Speicher automatisch aus (Grund im Log)
   - interval: 10s
     then:
