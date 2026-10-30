@@ -151,7 +151,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@6183daa0108c5c980d234e69b8331819dfb6d775   # Fork, Branch diagnose-2026.10b (Beormund main + PRs #130 #132 #133 + Diagnose-PR)
+  - source: github://mab-wien/esphome-samsung-nasa@ba87cef81c281ca2cd75a50e8d5776b88127587a   # Fork, Branch diagnose-2026.10b (Beormund main + PRs #130 #132 #133 + Diagnose-PR)
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -1656,24 +1656,16 @@ sensor:
     state_class: measurement
     filters:
       - delta: 0  # nur echte Änderungen senden
+  # Einheit/Skalierung aus der Komponenten-Bibliothek (PR #135 an Beormund, 30.10.2026)
   - platform: samsung_nasa
     message: 0x4211
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4211 IN_CAPACITY_REQUEST'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    state_class: measurement
-    filters:
-      - delta: 0  # nur echte Änderungen senden
+  # Einheit/Skalierung aus der Komponenten-Bibliothek (PR #135 an Beormund, 30.10.2026)
   - platform: samsung_nasa
     message: 0x4212
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4212 IN_CAPACITY_ABSOLUTE'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    state_class: measurement
-    filters:
-      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x4213
     nasa_device_id: samsung_indoor
@@ -2324,15 +2316,11 @@ sensor:
       return id(wp_nasa_8278).state / 10.0f;
     filters:
       - delta: 0  # nur echte Änderungen senden
+  # Einheit/Skalierung aus der Komponenten-Bibliothek (PR #135 an Beormund, 30.10.2026)
   - platform: samsung_nasa
     message: 0x8287
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8287 OUT_INSTALL_CAPA'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    state_class: measurement
-    filters:
-      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x8298
     nasa_device_id: samsung_outdoor
@@ -2487,15 +2475,11 @@ sensor:
     state_class: measurement
     filters:
       - delta: 0  # nur echte Änderungen senden
+  # Einheit/Skalierung aus der Komponenten-Bibliothek (PR #135 an Beormund, 30.10.2026)
   - platform: samsung_nasa
     message: 0x82E3
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82E3 OUT_PRODUCT_OPTION_CAPA'
-    entity_category: diagnostic
-    accuracy_decimals: 0
-    state_class: measurement
-    filters:
-      - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
     message: 0x82E8
     nasa_device_id: samsung_outdoor
@@ -2675,8 +2659,8 @@ sensor:
     device_class: temperature
     state_class: measurement
     accuracy_decimals: 1
+    # Skalierung (int16, ×0,1) kommt seit 30.10.2026 aus der Bibliothek; Bibliotheks- und eigene Filter werden aneinandergehängt
     filters:
-      - multiply: 0.1
       - lambda: |-
           if (!std::isfinite(x) || x < -40.0 || x > 120.0) return NAN;
           return x;
