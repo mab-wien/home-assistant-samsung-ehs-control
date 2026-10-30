@@ -151,7 +151,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@98931f497737cec6db17c050882b6655c8a37aa8   # Fork, Branch diagnose-2026.10b (Beormund main + PRs #130 #132 #133 + Diagnose-PR)
+  - source: github://mab-wien/esphome-samsung-nasa@6183daa0108c5c980d234e69b8331819dfb6d775   # Fork, Branch diagnose-2026.10b (Beormund main + PRs #130 #132 #133 + Diagnose-PR)
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -3141,6 +3141,17 @@ sensor:
     accuracy_decimals: 0
     filters:
       - delta: 0  # nur echte Änderungen senden
+  # 0x422B VAR_IN_TEMP_DISCHARGE_HEAT_TARGET_F (Ziel-Heißgas Heizen, Innengerät), liefert bei uns 65535
+  - platform: samsung_nasa
+    message: 0x422B
+    nasa_device_id: samsung_indoor
+    nasa_mode: STATUS
+    name: 'Heißgas Soll Heizen Innengerät Rohwert'
+    id: target_discharge_heat_raw
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
 
   # Abgeleitete Temperaturdifferenzen, nur waehrend Verdichterbetrieb.
   # Verschiedene Busnachrichten treffen zeitversetzt ein: kein synchroner Messsatz.
@@ -4724,6 +4735,8 @@ text_sensor:
 # FSV-Leseanforderungen (KEINE Schreibvorgaenge). Groesse je Batch begrenzt.
 # Bei 80+ FSV Werten kann der ESP32 ueberlastet werden; Vollversion erst nach RAM-Check.
 interval:
+  # Heißgas-Sollwerte 0x8223/0x422B: gezielte Abfrage am 30.10.2026 getestet, Außen- und Innengerät antworten
+  # mit 65535 (= bei diesem Modell nicht vorhanden). Daher keine regelmäßige Abfrage.
   # Empfangszeitpunkte 0x803F/0x8404 einmal pro Minute veröffentlichen, nur wenn neu
   - interval: 60s
     then:
