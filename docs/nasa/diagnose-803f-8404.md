@@ -9,13 +9,13 @@ Firmware vom 30.10.2026, siehe [firmware.md](../firmware.md).
 |---|---|
 | `sensor.wp_nasa_803f` | 0x803F Rohwert (bestehend, unverändert) |
 | `sensor.wp_nasa_8404` | 0x8404 als Gleitkommawert (bestehend). Verliert bei Werten > 2^24 die unteren Bits, z. B. Bit 1 bei 0x04808202 |
-| `sensor.wp_nasa_8404_rohwert_exakt` (bis zur Umbenennung: `sensor.warmepumpe_warmepumpe_nasa_0x8404_rohwert_exakt`) | 0x8404 als exakte Ganzzahl (Text) |
-| `sensor.warmepumpe_warmepumpe_nasa_0x8404_hex` | 0x8404 hexadezimal, z. B. `0x00800042` |
-| `binary_sensor.warmepumpe_warmepumpe_nasa_0x8404_bit_NN` | Einzelbits 01, 06, 09, 13, 15, 16, 18, 23, 26 (nur bisher beobachtete Bits), ohne Funktionsnamen |
-| `sensor.warmepumpe_warmepumpe_nasa_0x803f_letzter_empfang` | Zeitpunkt des letzten empfangenen Telegramms (Zeitstempel), höchstens einmal pro Minute |
-| `sensor.warmepumpe_warmepumpe_nasa_0x8404_letzter_empfang` | dito für 0x8404 |
+| `sensor.wp_nasa_8404_rohwert_exakt` | 0x8404 als exakte Ganzzahl (Text) |
+| `sensor.wp_nasa_8404_hex` | 0x8404 hexadezimal, z. B. `0x00800042` |
+| `binary_sensor.wp_nasa_8404_bit_NN` | Einzelbits 01, 06, 09, 13, 15, 16, 18, 23, 26 (nur bisher beobachtete Bits), ohne Funktionsnamen |
+| `sensor.wp_nasa_803f_letzter_empfang` | Zeitpunkt des letzten empfangenen Telegramms (Zeitstempel), höchstens einmal pro Minute |
+| `sensor.wp_nasa_8404_letzter_empfang` | dito für 0x8404 |
 
-Die neuen Entitäten tragen noch das automatische Präfix `warmepumpe_warmepumpe_`. Umbenennen auf `wp_nasa_…` geht nur mit Admin-Zugang in HA.
+Die Entitäten wurden am 30.10.2026 auf `wp_nasa_…` umbenannt.
 Unbekannt bleibt unbekannt: Die Bit- und Hex-Entitäten haben bis zum ersten Empfang nach einem Neustart keinen Wert, nicht 0.
 
 Weitere Diagnosewerte waren schon vorhanden und speichern jede Änderung (`delta: 0`, keine Glättung):
