@@ -9,7 +9,7 @@ Firmware vom 30.10.2026, siehe [firmware.md](../firmware.md).
 |---|---|
 | `sensor.wp_nasa_803f` | 0x803F Rohwert (bestehend, unverändert) |
 | `sensor.wp_nasa_8404` | 0x8404 als Gleitkommawert (bestehend). Verliert bei Werten > 2^24 die unteren Bits, z. B. Bit 1 bei 0x04808202 |
-| `sensor.warmepumpe_warmepumpe_nasa_0x8404_rohwert_exakt` | 0x8404 als exakte Ganzzahl (Text) |
+| `sensor.wp_nasa_8404_rohwert_exakt` (bis zur Umbenennung: `sensor.warmepumpe_warmepumpe_nasa_0x8404_rohwert_exakt`) | 0x8404 als exakte Ganzzahl (Text) |
 | `sensor.warmepumpe_warmepumpe_nasa_0x8404_hex` | 0x8404 hexadezimal, z. B. `0x00800042` |
 | `binary_sensor.warmepumpe_warmepumpe_nasa_0x8404_bit_NN` | Einzelbits 01, 06, 09, 13, 15, 16, 18, 23, 26 (nur bisher beobachtete Bits), ohne Funktionsnamen |
 | `sensor.warmepumpe_warmepumpe_nasa_0x803f_letzter_empfang` | Zeitpunkt des letzten empfangenen Telegramms (Zeitstempel), höchstens einmal pro Minute |
