@@ -6,7 +6,7 @@
 # Zugangsdaten nur in secrets.yaml (nicht im Git). Firmware-Protokoll: docs/firmware.md.
 
 esphome:
-  min_version: 2026.5.0
+  min_version: 2026.10.0
   name: !secret name
   friendly_name: !secret name
 
@@ -151,7 +151,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@a88d62d90003c42d1411c58d6053b86bf20d9c20   # Fork, Branch diagnose
+  - source: github://mab-wien/esphome-samsung-nasa@03c6fc9e1454b046a1a7197d49ee3928ca07718a   # Fork, Branch diagnose-2026.10 (Beormund main + Diagnose)
     components: [samsung_nasa]
 
 samsung_nasa:
