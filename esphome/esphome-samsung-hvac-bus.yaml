@@ -151,7 +151,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@03c6fc9e1454b046a1a7197d49ee3928ca07718a   # Fork, Branch diagnose-2026.10 (Beormund main + Diagnose)
+  - source: github://mab-wien/esphome-samsung-nasa@98931f497737cec6db17c050882b6655c8a37aa8   # Fork, Branch diagnose-2026.10b (Beormund main + PRs #130 #132 #133 + Diagnose-PR)
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -4789,7 +4789,7 @@ interval:
           id: [fsv_3051, fsv_4023, fsv_4031, fsv_4032, fsv_4061, fsv_5022, fsv_5041, fsv_5051]
       - delay: 3s
       - samsung_nasa.request_read:
-          id: [fsv_5081, fsv_5091, fsv_5094]
+          id: [fsv_5081, fsv_5091, fsv_5094, fsv_5012, fsv_5042, fsv_5043]  # 5012/5042/5043 ergänzt 30.10.2026: nach ESP-Neustart sonst unbekannt
       - delay: 3s
 #       # 1061-1064: zusaetzliche, nur lesende PROBES mit unbestaetigten NASA-IDs
 #       - samsung_nasa.request_read:
