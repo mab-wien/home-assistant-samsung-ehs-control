@@ -179,7 +179,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@f80c3d776b6815807df29ede518a06b30fa3c73e   # Fork, Branch diagnose-2026.10c (2026.10b + send_structure für 0x461E/0x860B)
+  - source: github://mab-wien/esphome-samsung-nasa@7b4cec7cd3b034107cefb2e59774d18f91bd8d72   # Fork, Branch diagnose-2026.10d (2026.10c + Aktion samsung_nasa.send_structure)
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -4865,9 +4865,15 @@ button:
     icon: mdi:history
     entity_category: diagnostic
     on_press:
-      - lambda: |-
-          ESP_LOGW("fehlerdaten", "Lese 0x461E (Fehlerhistorie) von 20.00.00");
-          id(samsung_nasa_controller).send_structure("20.00.00", 0x461E, 1, {0, 0, 0, 0, 0});
+      - logger.log:
+          level: WARN
+          tag: fehlerdaten
+          format: "Lese 0x461E (Fehlerhistorie) von 20.00.00"
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x461E
+          data_type: read
+          payload: [0x00, 0x00, 0x00, 0x00, 0x00]
   # 0x860B Zyklusdaten vor dem Fehler (Aussengeraet): S-NET sendet dafuer Datentyp 2 (Write) an 10.00.00
   # mit Nutzdaten 00 01 00 00 00 00 als Abrufbefehl; das Aussengeraet streamt 30 Datensaetze (1/min) x 13 Pakete.
   # Exakte Wiederholung des S-NET-Telegramms, aendert laut Mitschnitt keine Einstellung. Mindestabstand 5 min.
@@ -4877,16 +4883,24 @@ button:
     icon: mdi:chart-timeline-variant
     entity_category: diagnostic
     on_press:
-      - lambda: |-
-          static uint32_t letzter = 0;
-          const uint32_t jetzt = millis();
-          if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
-            ESP_LOGW("fehlerdaten", "0x860B nicht gesendet: 5 min Abstand erforderlich");
-            return;
-          }
-          letzter = jetzt;
-          ESP_LOGW("fehlerdaten", "Rufe 0x860B (Zyklusdaten vor Fehler) von 10.00.00 ab");
-          id(samsung_nasa_controller).send_structure("10.00.00", 0x860B, 2, {0x00, 0x01, 0x00, 0x00, 0x00, 0x00});
+      - if:
+          condition:
+            lambda: |-
+              static uint32_t letzter = 0;
+              const uint32_t jetzt = millis();
+              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
+                ESP_LOGW("fehlerdaten", "0x860B nicht gesendet: 5 min Abstand erforderlich");
+                return false;
+              }
+              letzter = jetzt;
+              ESP_LOGW("fehlerdaten", "Rufe 0x860B (Zyklusdaten vor Fehler) von 10.00.00 ab");
+              return true;
+          then:
+            - samsung_nasa.send_structure:
+                nasa_device_id: samsung_outdoor
+                message: 0x860B
+                data_type: write
+                payload: [0x00, 0x01, 0x00, 0x00, 0x00, 0x00]
 
   # Nur lesende NASA-Abfrage; keine Aenderung und kein Reset.
   # Die read()-Methode der Komponente sendet an die NASA-Broadcastadresse.
