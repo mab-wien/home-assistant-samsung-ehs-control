@@ -151,7 +151,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@ba87cef81c281ca2cd75a50e8d5776b88127587a   # Fork, Branch diagnose-2026.10b (Beormund main + PRs #130 #132 #133 + Diagnose-PR)
+  - source: github://mab-wien/esphome-samsung-nasa@f80c3d776b6815807df29ede518a06b30fa3c73e   # Fork, Branch diagnose-2026.10c (2026.10b + send_structure für 0x461E/0x860B)
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -4826,6 +4826,39 @@ button:
           last_attempt = now_ms;
           ESP_LOGW("reset_test", "EXPERIMENT: NASA Request an 10.00.00: 0x8065 = 1; Resetwirkung NICHT bestaetigt");
           id(samsung_nasa_controller).write("10.00.00", 0x8065, 1);
+
+  # Fehlerdaten wie S-NET Pro 2 abfragen (31.10.2026 mitgeschnitten). Antworten nur im Rohbyte-Mitschnitt
+  # (Debug & Syslog + NASA Rohbytes), Auswertung: docker-ki-environment/scripts/wp-860b-dekodieren.py.
+  # 0x461E Fehlerhistorie Innengeraet: NASA READ an 20.00.00, Nutzdaten 5 x 0 (Antwort 46 Byte).
+  # 0x40D6 (Fehlerhistorie loeschen) wird nie gesendet.
+  - platform: template
+    name: 'Fehlerhistorie 0x461E lesen'
+    id: fehlerhistorie_461e_lesen
+    icon: mdi:history
+    entity_category: diagnostic
+    on_press:
+      - lambda: |-
+          ESP_LOGW("fehlerdaten", "Lese 0x461E (Fehlerhistorie) von 20.00.00");
+          id(samsung_nasa_controller).send_structure("20.00.00", 0x461E, 1, {0, 0, 0, 0, 0});
+  # 0x860B Zyklusdaten vor dem Fehler (Aussengeraet): S-NET sendet dafuer Datentyp 2 (Write) an 10.00.00
+  # mit Nutzdaten 00 01 00 00 00 00 als Abrufbefehl; das Aussengeraet streamt 30 Datensaetze (1/min) x 13 Pakete.
+  # Exakte Wiederholung des S-NET-Telegramms, aendert laut Mitschnitt keine Einstellung. Mindestabstand 5 min.
+  - platform: template
+    name: 'Zyklusdaten vor Fehler 0x860B abrufen'
+    id: zyklusdaten_860b_abrufen
+    icon: mdi:chart-timeline-variant
+    entity_category: diagnostic
+    on_press:
+      - lambda: |-
+          static uint32_t letzter = 0;
+          const uint32_t jetzt = millis();
+          if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
+            ESP_LOGW("fehlerdaten", "0x860B nicht gesendet: 5 min Abstand erforderlich");
+            return;
+          }
+          letzter = jetzt;
+          ESP_LOGW("fehlerdaten", "Rufe 0x860B (Zyklusdaten vor Fehler) von 10.00.00 ab");
+          id(samsung_nasa_controller).send_structure("10.00.00", 0x860B, 2, {0x00, 0x01, 0x00, 0x00, 0x00, 0x00});
 
   # Nur lesende NASA-Abfrage; keine Aenderung und kein Reset.
   # Die read()-Methode der Komponente sendet an die NASA-Broadcastadresse.
