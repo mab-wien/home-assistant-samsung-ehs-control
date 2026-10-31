@@ -70,6 +70,18 @@ logger:
                 id(syslog_forwarding_busy) = false;
 
 globals:
+  - id: lese_adresse
+    type: std::string
+    restore_value: no
+  - id: lese_start
+    type: int
+    restore_value: no
+  - id: lese_anzahl
+    type: int
+    restore_value: no
+  - id: lese_pos
+    type: int
+    restore_value: no
   - id: debug_stream_enabled
     type: bool
     restore_value: false
@@ -130,6 +142,22 @@ wifi:
 api:
   encryption:
     key: !secret api_key
+  actions:
+    # Nur lesend: fragt einen Bereich von NASA-Kennungen bei einem Geraet ab (je 8 pro Telegramm, alle 1,5 s).
+    # Antworten im Debug-Syslog (Debug & Syslog ein, Rohbytes aus). Zweck: unbekannte Kennungen finden (FSV 1061-1064).
+    - action: nasa_bereich_lesen
+      variables:
+        adresse: string
+        start: int
+        anzahl: int
+      then:
+        - lambda: |-
+            id(lese_adresse) = adresse;
+            id(lese_start) = start;
+            id(lese_anzahl) = anzahl > 512 ? 512 : (int) anzahl;
+            id(lese_pos) = 0;
+            ESP_LOGW("bereich_lesen", "Lese %d Kennungen ab 0x%04X von %s", id(lese_anzahl), start, adresse.c_str());
+        - script.execute: nasa_bereich_lesen_skript
 
 # OTA with password (REQUIRED)
 ota:
@@ -4871,3 +4899,22 @@ button:
       - lambda: |-
           ESP_LOGW("reset_test", "Nur READ: frage NASA 0x8065 ab; kein WRITE und kein Reset. Antwort im NASA-Log pruefen.");
           id(samsung_nasa_controller).read({0x8065});
+
+script:
+  - id: nasa_bereich_lesen_skript
+    mode: restart
+    then:
+      - while:
+          condition:
+            lambda: return id(lese_pos) < id(lese_anzahl);
+          then:
+            - lambda: |-
+                std::vector<uint16_t> nummern;
+                while (nummern.size() < 8 && id(lese_pos) < id(lese_anzahl)) {
+                  const uint16_t n = id(lese_start) + id(lese_pos)++;
+                  if ((n & 0x0600) != 0x0600)  // Strukturen auslassen
+                    nummern.push_back(n);
+                }
+                if (!nummern.empty())
+                  id(samsung_nasa_controller).read_from(id(lese_adresse), nummern);
+            - delay: 1500ms
