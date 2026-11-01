@@ -4901,6 +4901,33 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x01, 0x00, 0x00, 0x00, 0x00]
+  # 0x860B Betriebsart 3 (ErrorCode): letzte 30 Fehlercodes des Aussengeraets, wie im Debug-Mitschnitt
+  # Antwort 17 Fragmente.
+  # Nur die getesteten Betriebsarten 1-4 und 6 verwenden.
+  - platform: template
+    name: 'Fehlercodes Aussengeraet 0x860B abrufen'
+    id: fehlercodes_860b_abrufen
+    icon: mdi:alert-circle-outline
+    entity_category: diagnostic
+    on_press:
+      - if:
+          condition:
+            lambda: |-
+              static uint32_t letzter = 0;
+              const uint32_t jetzt = millis();
+              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
+                ESP_LOGW("fehlerdaten", "0x860B/3 nicht gesendet: 5 min Abstand erforderlich");
+                return false;
+              }
+              letzter = jetzt;
+              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 3 (Fehlercodes) von 10.00.00 ab");
+              return true;
+          then:
+            - samsung_nasa.send_structure:
+                nasa_device_id: samsung_outdoor
+                message: 0x860B
+                data_type: write
+                payload: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00]
 
   # Nur lesende NASA-Abfrage; keine Aenderung und kein Reset.
   # Die read()-Methode der Komponente sendet an die NASA-Broadcastadresse.
