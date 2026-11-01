@@ -10,10 +10,10 @@ An dieser Anlage:
 |---|---|---|
 | Inneneinheit AE260RNWMGG | 20.00.00 | `samsung_indoor` |
 | Außeneinheit AE140BXYDGG | 10.00.00 | `samsung_outdoor` |
-| WLAN-Modul MIM-H04EN | 62.00.91 (Debug: 62.00.145) | `samsung_wifikit` |
+| WLAN-Modul MIM-H04EN | 62.00.91 (im Debug 62.00.145) | `samsung_wifikit` |
 | Debug-Zugang | 80.ff.00 / 80.ff.01 | – |
 
 Struktur-Sensoren in HA: `wp_modellbezeichnung`, `wp_ausseneinheit_standort`, `wp_ausseneinheit_seriennummer`,
 `wp_inneneinheit_seriennummer`, `wp_inverter_micom`, `wp_nasa_0600`, `wp_nasa_0608_innen`, `wp_nasa_0608_aussen`,
 `wp_nasa_060c`, `wp_nasa_461e` und die MAC des WLAN-Moduls. Sie füllen sich nur, wenn jemand sie abfragt (Debug,
-WLAN-Modul beim Start); der ESP fragt Strukturen bisher nicht selbst an.
+WLAN-Modul beim Start) oder der ESP sie über die Knöpfe unter „Fehlerdaten“ in [`../diagnose.md`](../diagnose.md) anfordert.

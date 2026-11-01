@@ -192,7 +192,7 @@ samsung_nasa:
       id: samsung_indoor
     - address: 10.00.00
       id: samsung_outdoor
-    - address: 62.00.91          # WLAN-Modul MIM-H04EN (Debug: 62.00.145)
+    - address: 62.00.91          # WLAN-Modul MIM-H04EN (im Debug: 62.00.145)
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
@@ -872,7 +872,7 @@ switch:
     internal: true
 
 sensor:
-  # Debug-Abfrage, 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
+  # Debug-Abfrage 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
   # FSV 5012/5042/5043 kommen seit 23.10.2026 aus der Bibliothek (fsv:), Lesekopien unten.
   - platform: samsung_nasa
     message: 0x412A
@@ -3325,7 +3325,7 @@ sensor:
       - delta: 0  # nur echte Änderungen senden
 
   # FSV 1061-1064 am 23.10.2026 auskommentiert: die Anlage antwortet auf 0x431E-0x4321 mit 65535
-  # (= nicht vorhanden, Debug-Mitschnitt). Für eine Setup-Erweiterung wieder einkommentieren.
+  # (= nicht vorhanden laut Debug). Für eine Setup-Erweiterung wieder einkommentieren.
 #   # NEUE FSV 1061-1064: reine LESEPROBES (kein number: / keine Schreibfunktion).
 #   # Das Basisprojekt Beormund unterstuetzt diese FSV noch nicht offiziell.
 #   # Register 0x431E-0x4321 aus einer Community-Datenliste; Zuweisung NICHT bestaetigt.
@@ -4876,7 +4876,7 @@ button:
           payload: [0x00, 0x00, 0x00, 0x00, 0x00]
   # 0x860B Zyklusdaten vor dem Fehler (Aussengeraet): laut Debug-Mitschnitt dafuer Datentyp 2 (Write) an 10.00.00
   # mit Nutzdaten 00 01 00 00 00 00 als Abrufbefehl; das Aussengeraet streamt 30 Datensaetze (1/min) x 13 Pakete.
-  # Exakte Wiederholung des Debug-Telegramms, aendert laut Mitschnitt keine Einstellung. Mindestabstand 5 min.
+  # Exakte Wiederholung des mitgeschnittenen Telegramms, aendert laut Mitschnitt keine Einstellung. Mindestabstand 5 min.
   - platform: template
     name: 'Zyklusdaten vor Fehler 0x860B abrufen'
     id: zyklusdaten_860b_abrufen
@@ -4901,8 +4901,8 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x01, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 3 (ErrorCode): letzte 30 Fehlercodes des Aussengeraets, wie im Debug-Mitschnitt
-  # Antwort 17 Fragmente.
+  # 0x860B Betriebsart 3: Fehlercode-Historie des Aussengeraets (Ringspeicher 200 Eintraege, ohne Zeiten).
+  # Antwort 16 Pakete; Aufbau siehe README der Komponente (Abschnitt 0x860B request modes).
   # Nur die getesteten Betriebsarten 1-4 und 6 verwenden.
   - platform: template
     name: 'Fehlercodes Aussengeraet 0x860B abrufen'
@@ -4928,7 +4928,7 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 2: Testlaufdaten (60 Datensaetze), nur lesend (Debug).
+  # 0x860B Betriebsart 2: Testlaufdaten (60 Datensaetze), nur lesend.
   - platform: template
     name: 'Testlaufdaten Aussengeraet 0x860B abrufen'
     id: testlauf_860b_abrufen
@@ -4953,7 +4953,7 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x02, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 4: Tasten-/Moduswerte (200 Byte), nur lesend (Debug).
+  # 0x860B Betriebsart 4: Tasten-/Moduswerte (200 Byte), nur lesend.
   - platform: template
     name: 'Tastendaten Aussengeraet 0x860B abrufen'
     id: tasten_860b_abrufen
@@ -4978,7 +4978,7 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x04, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 6: Kaeltemitteldaten (6 Datensaetze), nur lesend (Debug).
+  # 0x860B Betriebsart 6: Kaeltemitteldaten (6 Datensaetze), nur lesend.
   - platform: template
     name: 'Kaeltemitteldaten Aussengeraet 0x860B abrufen'
     id: kaeltemittel_860b_abrufen

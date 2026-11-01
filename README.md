@@ -10,7 +10,7 @@ AE140BXYDGG) am internen NASA-Bus (RS485) – Messwerte, FSV-Lesekopien und ausg
 | [`esphome/esphome-samsung-hvac-bus.yaml`](esphome/esphome-samsung-hvac-bus.yaml) | vollständige Gerätekonfiguration (ESP32 M5Stack Atom) |
 | [`esphome/secrets.example.yaml`](esphome/secrets.example.yaml) | Vorlage für `secrets.yaml` (echte Werte nie ins Repo) |
 | [`docs/entitaeten.md`](docs/entitaeten.md) | alle Entitäten mit Name, entity_id (`wp_*`), Quelle und Einheit |
-| [`docs/diagnose.md`](docs/diagnose.md) | Debug-Mitschnitt, Rohbytes, Syslog-Format, NASA-Katalog |
+| [`docs/diagnose.md`](docs/diagnose.md) | Debug-Mitschnitt, Rohbytes, Syslog-Format, NASA-Katalog, Fehlerdaten des Außengeräts |
 | [`docs/firmware.md`](docs/firmware.md) | Protokoll jeder geflashten Firmware (Commit, ESPHome-Version, Komponente) |
 | [`docs/nasa/`](docs/nasa/) | Bestandsabgleich der NASA-Kennungen und beobachtete, noch nicht eingebundene Werte |
 | [`docs/archiv/`](docs/archiv/) | abgeschlossene Umbauten (z. B. Umbenennung auf `wp_*` am 22.10.2026) |
@@ -22,9 +22,12 @@ AE140BXYDGG) am internen NASA-Bus (RS485) – Messwerte, FSV-Lesekopien und ausg
 
 ## Software
 
-- ESPHome 2026.9.1
+- ESPHome 2026.10.1
 - Komponente `samsung_nasa`: Fork [mab-wien/esphome-samsung-nasa](https://github.com/mab-wien/esphome-samsung-nasa)
-  (Basis Beormund), in der YAML auf einen festen Commit gesetzt – Builds sind reproduzierbar
+  (Basis [Beormund/esphome-samsung-nasa](https://github.com/Beormund/esphome-samsung-nasa), Branch `diagnose-2026.10d`),
+  in der YAML auf einen festen Commit gesetzt – Builds sind reproduzierbar. Eigene Erweiterungen gehen als Pull Request
+  an Beormund (u. a. #123, #124, #130–#135, #138, #139, #141).
+- Aktueller Stand und Rückweg: letzte Zeile in [`docs/firmware.md`](docs/firmware.md)
 - Home Assistant über die ESPHome-API (verschlüsselt)
 
 ## Bauen und flashen
@@ -34,8 +37,8 @@ Maßgeblich ist dieses Repository. Kompiliert wird in einem ESPHome-Container (g
 [`docs/firmware.md`](docs/firmware.md) und Git-Tag `firmware-JJJJ-MM-TT` (Rückweg).
 
 ```bash
-docker run --rm -v "$PWD/esphome:/config" esphome/esphome:2026.9.1 compile esphome-samsung-hvac-bus.yaml
-docker run --rm --network host -v "$PWD/esphome:/config" esphome/esphome:2026.9.1 upload esphome-samsung-hvac-bus.yaml --device <IP>
+docker run --rm -v "$PWD/esphome:/config" esphome/esphome:2026.10.1 compile esphome-samsung-hvac-bus.yaml
+docker run --rm --network host -v "$PWD/esphome:/config" esphome/esphome:2026.10.1 upload esphome-samsung-hvac-bus.yaml --device <IP>
 ```
 
 ## Namensschema

@@ -59,3 +59,20 @@ MCP-Werkzeuge zusätzlich: `nasa_minutenwerte`, `nasa_ereignisse`, `nasa_deutung
 2. Zeitmarke setzen, z. B. „FSV 6031 am Bedienteil geöffnet, angezeigt 0“.
 3. Aktion am Bedienteil ausführen.
 4. Mit `nasa_umfeld` alle Wertänderungen und Leseanfragen um die Zeitmarke prüfen. Zeitliche Nähe ist ein Hinweis, kein Beweis.
+
+## Fehlerdaten des Außengeräts (0x860B, 0x461E)
+
+Tasten in Home Assistant (nur lesend, je Taste mindestens 5 min Abstand). Die Antworten erscheinen nur im
+Rohbyte-Mitschnitt: vorher „Debug & Syslog“ und „NASA Rohbytes“ einschalten.
+
+| Taste | Anfrage | Antwort |
+|---|---|---|
+| `button.wp_zyklusdaten_vor_fehler_0x860b_abrufen` | 0x860B Betriebsart 1 an 10.00.00 | 30 Datensätze (1/min) vor dem letzten Fehler, je 13 Pakete |
+| `button.warmepumpe_warmepumpe_fehlercodes_aussengeraet_0x860b_abrufen` | 0x860B Betriebsart 3 | Fehlercode-Historie, 200 Einträge ohne Zeiten |
+| `button.warmepumpe_warmepumpe_testlaufdaten_aussengeraet_0x860b_abrufen` | 0x860B Betriebsart 2 | Testlauf-Daten, 60 Datensätze (bei uns leer) |
+| `button.warmepumpe_warmepumpe_tastendaten_aussengeraet_0x860b_abrufen` | 0x860B Betriebsart 4 | Tasten-/Moduswerte (bei uns leer) |
+| `button.warmepumpe_warmepumpe_kaeltemitteldaten_aussengeraet_0x860b_abrufen` | 0x860B Betriebsart 6 | Kältemitteldaten (bei uns leer) |
+| `button.wp_fehlerhistorie_0x461e_lesen` | 0x461E an 20.00.00 | Fehlerhistorie Innengerät (bisher immer leer) |
+
+Verwendet werden nur die getesteten Betriebsarten 1–4 und 6; es werden nur lesende Abfragen gesendet.
+Aufbau der Antworten: README der Komponente, Abschnitte „0x860B layout“ und „0x860B request modes“.
