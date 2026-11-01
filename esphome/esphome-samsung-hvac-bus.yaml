@@ -179,7 +179,7 @@ uart:
 
 
 external_components:
-  - source: github://mab-wien/esphome-samsung-nasa@7b4cec7cd3b034107cefb2e59774d18f91bd8d72   # Fork, Branch diagnose-2026.10d (2026.10c + Aktion samsung_nasa.send_structure)
+  - source: github://mab-wien/esphome-samsung-nasa@4f2643c02a62decca3c0882f45dbec37957600ac   # Fork, Branch diagnose-2026.10e (2026.10d + write_as mit Datentyp)
     components: [samsung_nasa]
 
 samsung_nasa:
@@ -4854,6 +4854,32 @@ button:
           last_attempt = now_ms;
           ESP_LOGW("reset_test", "EXPERIMENT: NASA Request an 10.00.00: 0x8065 = 1; Resetwirkung NICHT bestaetigt");
           id(samsung_nasa_controller).write("10.00.00", 0x8065, 1);
+
+  # Fehler-Reset laut Debug-Mitschnitt: NASA WRITE (nicht Request) 0x8065 = 2 an 10.00.00.
+  # Wert 1 (obiger Test) setzte beim Reset auch Einstellungen zurück; Wert 2 wird als normaler Fehler-Reset vermutet.
+  # Nur manuell, nur bei E438 und stehendem Verdichter, 60 s Abstand. Nicht automatisch.
+  - platform: template
+    name: 'E438 Reset 0x8065 Wert 2 (Write)'
+    id: e438_reset_write2
+    icon: mdi:restart
+    entity_category: diagnostic
+    on_press:
+      - lambda: |-
+          if (!id(error_code).has_state() || !id(compressor_frequency).has_state() ||
+              id(error_code).state != 438.0f || id(compressor_frequency).state != 0.0f) {
+            ESP_LOGW("reset_test", "Nicht gesendet: benoetigt E438 und Verdichter 0 Hz; Fehler=%.0f, Hz=%.1f",
+                     id(error_code).state, id(compressor_frequency).state);
+            return;
+          }
+          static uint32_t last_attempt = 0;
+          const uint32_t now_ms = millis();
+          if (last_attempt != 0 && (uint32_t)(now_ms - last_attempt) < 60000) {
+            ESP_LOGW("reset_test", "Nicht gesendet: 60 Sekunden Abstand erforderlich");
+            return;
+          }
+          last_attempt = now_ms;
+          ESP_LOGW("reset_test", "NASA Write an 10.00.00: 0x8065 = 2 (Fehler-Reset)");
+          id(samsung_nasa_controller).write_as("10.00.00", 0x8065, 2, 2);
 
   # Fehlerdaten abfragen (31.10.2026 mitgeschnitten). Antworten nur im Rohbyte-Mitschnitt
   # (Debug & Syslog + NASA Rohbytes), Auswertung: docker-ki-environment/scripts/wp-860b-dekodieren.py.
