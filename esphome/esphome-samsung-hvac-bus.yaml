@@ -192,7 +192,7 @@ samsung_nasa:
       id: samsung_indoor
     - address: 10.00.00
       id: samsung_outdoor
-    - address: 62.00.91          # WLAN-Modul MIM-H04EN (im Debug: 62.00.145)
+    - address: 62.00.91          # WLAN-Modul MIM-H04EN (dezimal: 62.00.145)
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
@@ -872,7 +872,7 @@ switch:
     internal: true
 
 sensor:
-  # Debug-Abfrage 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
+  # Abfrage 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
   # FSV 5012/5042/5043 kommen seit 23.10.2026 aus der Bibliothek (fsv:), Lesekopien unten.
   - platform: samsung_nasa
     message: 0x412A
@@ -883,7 +883,7 @@ sensor:
     accuracy_decimals: 0
     filters:
       - delta: 0  # nur echte Änderungen senden
-  # Lesekopie FSV 5012 (Debug 22.10.2026: 30 °C).
+  # Lesekopie FSV 5012 (22.10.2026: 30 °C).
   - platform: template
     name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
     id: fsv_5012_readonly
@@ -2324,7 +2324,7 @@ sensor:
     name: 'NASA 0x8278 OUT_SENSOR_OCT1'
     entity_category: diagnostic
     accuracy_decimals: 0
-  # Debug-Abgleich 22.10.2026: OCT1 = Rohwert / 10; Rohsensor bleibt erhalten.
+  # Abgleich 22.10.2026: OCT1 = Rohwert / 10; Rohsensor bleibt erhalten.
   # Sensorposition nicht bestaetigt, daher keine physische Funktionsbezeichnung.
     state_class: measurement
     filters:
@@ -2677,7 +2677,7 @@ sensor:
     id: water_out
     filters:
       - delta: 0  # nur echte Änderungen senden
-  # Register/Skalierung modellabhaengig: per Debug verifizieren.
+  # Register/Skalierung modellabhaengig: an der Anlage verifizieren.
   - platform: samsung_nasa
     message: 0x4239
     nasa_device_id: samsung_indoor
@@ -2749,7 +2749,7 @@ sensor:
     id: water_law_current
     filters:
       - delta: 0  # nur echte Änderungen senden
-  # Register/Skalierung modellabhaengig: per Debug verifizieren.
+  # Register/Skalierung modellabhaengig: an der Anlage verifizieren.
   - platform: samsung_nasa
     message: 0x42d8
     nasa_device_id: samsung_indoor
@@ -2760,7 +2760,7 @@ sensor:
           if (!std::isfinite(x) || x > 100.0 || x < -40.0) return NAN;
           return x;
       - delta: 0  # nur echte Änderungen senden
-  # Register/Skalierung modellabhaengig: per Debug verifizieren.
+  # Register/Skalierung modellabhaengig: an der Anlage verifizieren.
   - platform: samsung_nasa
     message: 0x42d9
     nasa_device_id: samsung_indoor
@@ -3325,7 +3325,7 @@ sensor:
       - delta: 0  # nur echte Änderungen senden
 
   # FSV 1061-1064 am 23.10.2026 auskommentiert: die Anlage antwortet auf 0x431E-0x4321 mit 65535
-  # (= nicht vorhanden laut Debug). Für eine Setup-Erweiterung wieder einkommentieren.
+  # (= nicht vorhanden). Für eine Setup-Erweiterung wieder einkommentieren.
 #   # NEUE FSV 1061-1064: reine LESEPROBES (kein number: / keine Schreibfunktion).
 #   # Das Basisprojekt Beormund unterstuetzt diese FSV noch nicht offiziell.
 #   # Register 0x431E-0x4321 aus einer Community-Datenliste; Zuweisung NICHT bestaetigt.
@@ -4490,7 +4490,7 @@ text_sensor:
     nasa_device_id: samsung_wifikit
     name: WLAN-Modul MAC-Adresse
     entity_category: diagnostic
-  # Struktur-Kennungen aus dem Startmitschnitt 23.10.2026 (Debug-Abgleich); werden beim Start des ESP abgefragt
+  # Struktur-Kennungen aus dem Startmitschnitt 23.10.2026 ; werden beim Start des ESP abgefragt
   - platform: samsung_nasa
     message: 0x061A
     nasa_device_id: samsung_outdoor
@@ -4578,7 +4578,7 @@ text_sensor:
     name: 'NASA 0x860D OUTDOOR_MODELINFORMATION'
     entity_category: diagnostic
   # Lesende Anzeigen; keine select-Plattform und damit keine Schreibsteuerung.
-  # FSV 5042/5043: Optionstexte aus der Fork-Bibliothek (Debug 22.10.2026: 5042 = All, 5043 = High).
+  # FSV 5042/5043: Optionstexte aus der Fork-Bibliothek (22.10.2026: 5042 = All, 5043 = High).
   - platform: template
     name: 'FSV 5042 - Waermequelle bei Betriebsbegrenzung'
     id: fsv_5042_readonly
@@ -4855,7 +4855,7 @@ button:
           ESP_LOGW("reset_test", "EXPERIMENT: NASA Request an 10.00.00: 0x8065 = 1; Resetwirkung NICHT bestaetigt");
           id(samsung_nasa_controller).write("10.00.00", 0x8065, 1);
 
-  # Fehler-Reset laut Debug-Mitschnitt: NASA WRITE (nicht Request) 0x8065 = 2 an 10.00.00.
+  # Fehler-Reset: NASA WRITE (nicht Request) 0x8065 = 2 an 10.00.00.
   # Wert 1 (obiger Test) setzte beim Reset auch Einstellungen zurück; Wert 2 wird als normaler Fehler-Reset vermutet.
   # Nur manuell, nur bei E438 und stehendem Verdichter, 60 s Abstand. Nicht automatisch.
   - platform: template
@@ -4881,7 +4881,7 @@ button:
           ESP_LOGW("reset_test", "NASA Write an 10.00.00: 0x8065 = 2 (Fehler-Reset)");
           id(samsung_nasa_controller).write_as("10.00.00", 0x8065, 2, 2);
 
-  # Fehlerdaten abfragen (31.10.2026 mitgeschnitten). Antworten nur im Rohbyte-Mitschnitt
+  # Fehlerdaten des Aussengeraets abfragen (Telegramme 31.10.2026 am Bus mitgeschnitten). Antworten nur im Rohbyte-Mitschnitt
   # (Debug & Syslog + NASA Rohbytes), Auswertung: docker-ki-environment/scripts/wp-860b-dekodieren.py.
   # 0x461E Fehlerhistorie Innengeraet: NASA READ an 20.00.00, Nutzdaten 5 x 0 (Antwort 46 Byte).
   # Es werden nur lesende Abfragen gesendet.
@@ -4900,7 +4900,7 @@ button:
           message: 0x461E
           data_type: read
           payload: [0x00, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Zyklusdaten vor dem Fehler (Aussengeraet): laut Debug-Mitschnitt dafuer Datentyp 2 (Write) an 10.00.00
+  # 0x860B Zyklusdaten vor dem Fehler (Aussengeraet): Anfrage als Datentyp 2 (Write) an 10.00.00
   # mit Nutzdaten 00 01 00 00 00 00 als Abrufbefehl; das Aussengeraet streamt 30 Datensaetze (1/min) x 13 Pakete.
   # Exakte Wiederholung des mitgeschnittenen Telegramms, aendert laut Mitschnitt keine Einstellung. Mindestabstand 5 min.
   - platform: template

@@ -10,7 +10,7 @@ An dieser Anlage:
 |---|---|---|
 | Inneneinheit AE260RNWMGG | 20.00.00 | `samsung_indoor` |
 | Außeneinheit AE140BXYDGG | 10.00.00 | `samsung_outdoor` |
-| WLAN-Modul MIM-H04EN | 62.00.91 (im Debug 62.00.145) | `samsung_wifikit` |
+| WLAN-Modul MIM-H04EN | 62.00.91 (dezimal 62.00.145) | `samsung_wifikit` |
 | Debug-Zugang | 80.ff.00 / 80.ff.01 | – |
 
 Struktur-Sensoren in HA: `wp_modellbezeichnung`, `wp_ausseneinheit_standort`, `wp_ausseneinheit_seriennummer`,
