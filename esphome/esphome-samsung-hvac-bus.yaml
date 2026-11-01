@@ -4928,6 +4928,81 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00]
+  # 0x860B Betriebsart 2: Testlaufdaten (60 Datensaetze), nur lesend (Debug).
+  - platform: template
+    name: 'Testlaufdaten Aussengeraet 0x860B abrufen'
+    id: testlauf_860b_abrufen
+    icon: mdi:database-arrow-down
+    entity_category: diagnostic
+    on_press:
+      - if:
+          condition:
+            lambda: |-
+              static uint32_t letzter = 0;
+              const uint32_t jetzt = millis();
+              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
+                ESP_LOGW("fehlerdaten", "0x860B/2 nicht gesendet: 5 min Abstand erforderlich");
+                return false;
+              }
+              letzter = jetzt;
+              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 2 von 10.00.00 ab");
+              return true;
+          then:
+            - samsung_nasa.send_structure:
+                nasa_device_id: samsung_outdoor
+                message: 0x860B
+                data_type: write
+                payload: [0x00, 0x02, 0x00, 0x00, 0x00, 0x00]
+  # 0x860B Betriebsart 4: Tasten-/Moduswerte (200 Byte), nur lesend (Debug).
+  - platform: template
+    name: 'Tastendaten Aussengeraet 0x860B abrufen'
+    id: tasten_860b_abrufen
+    icon: mdi:database-arrow-down
+    entity_category: diagnostic
+    on_press:
+      - if:
+          condition:
+            lambda: |-
+              static uint32_t letzter = 0;
+              const uint32_t jetzt = millis();
+              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
+                ESP_LOGW("fehlerdaten", "0x860B/4 nicht gesendet: 5 min Abstand erforderlich");
+                return false;
+              }
+              letzter = jetzt;
+              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 4 von 10.00.00 ab");
+              return true;
+          then:
+            - samsung_nasa.send_structure:
+                nasa_device_id: samsung_outdoor
+                message: 0x860B
+                data_type: write
+                payload: [0x00, 0x04, 0x00, 0x00, 0x00, 0x00]
+  # 0x860B Betriebsart 6: Kaeltemitteldaten (6 Datensaetze), nur lesend (Debug).
+  - platform: template
+    name: 'Kaeltemitteldaten Aussengeraet 0x860B abrufen'
+    id: kaeltemittel_860b_abrufen
+    icon: mdi:database-arrow-down
+    entity_category: diagnostic
+    on_press:
+      - if:
+          condition:
+            lambda: |-
+              static uint32_t letzter = 0;
+              const uint32_t jetzt = millis();
+              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
+                ESP_LOGW("fehlerdaten", "0x860B/6 nicht gesendet: 5 min Abstand erforderlich");
+                return false;
+              }
+              letzter = jetzt;
+              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 6 von 10.00.00 ab");
+              return true;
+          then:
+            - samsung_nasa.send_structure:
+                nasa_device_id: samsung_outdoor
+                message: 0x860B
+                data_type: write
+                payload: [0x00, 0x06, 0x00, 0x00, 0x00, 0x00]
 
   # Nur lesende NASA-Abfrage; keine Aenderung und kein Reset.
   # Die read()-Methode der Komponente sendet an die NASA-Broadcastadresse.
