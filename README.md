@@ -12,8 +12,7 @@ AE140BXYDGG) am internen NASA-Bus (RS485) – Messwerte, FSV-Lesekopien und ausg
 | [`docs/entitaeten.md`](docs/entitaeten.md) | alle Entitäten mit Name, entity_id (`wp_*`), Quelle und Einheit |
 | [`docs/diagnose.md`](docs/diagnose.md) | Debug-Mitschnitt, Rohbytes, Syslog-Format, NASA-Katalog, Fehlerdaten des Außengeräts |
 | [`docs/firmware.md`](docs/firmware.md) | Protokoll jeder geflashten Firmware (Commit, ESPHome-Version, Komponente) |
-| [`docs/nasa/`](docs/nasa/) | Bestandsabgleich der NASA-Kennungen und beobachtete, noch nicht eingebundene Werte |
-| [`docs/archiv/`](docs/archiv/) | abgeschlossene Umbauten (z. B. Umbenennung auf `wp_*` am 22.10.2026) |
+| [`docs/nasa/`](docs/nasa/) | Erkenntnisse zu NASA-Kennungen, Busadressen, Diagnose E438 |
 
 ## Hardware
 
@@ -50,3 +49,8 @@ FSV-Einstellungen selbst bleiben `internal` (nicht schreibbar aus HA); sichtbar 
 
 Das Projekt kommuniziert direkt mit dem internen Bus der Wärmepumpe. Schreibbare Entitäten wirken unmittelbar auf die
 Anlage. Nutzung auf eigene Verantwortung.
+
+## Hinweis zu Samsung
+
+Unabhängiges Community-Projekt, keine Verbindung zu Samsung und keine Freigabe durch Samsung. Handbücher und
+Service-Unterlagen bitte über den offiziellen Samsung-Support beziehen.

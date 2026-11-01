@@ -1,10 +1,7 @@
 # NASA-Kennungen
 
-- [`bestandsabgleich-2026-10-22.md`](bestandsabgleich-2026-10-22.md): eingebundene Sensoren gegen Beormund-Labels, EHS-Sentinel und den Busmitschnitt vom 20.10.2026 (konfiguriert ohne Daten, auf dem Bus aber nicht eingebunden).
-- [`kennungen-beobachtet-2026-10-20.csv`](kennungen-beobachtet-2026-10-20.csv): alle konfigurierten und beobachteten Kennungen mit Fremdnamen, Beispielwerten (roh, unskaliert) und Quellgerät.
-
-Laufender Katalog mit Verläufen: Dienst `nasa-katalog` auf dem Analyse-Server (siehe [`../diagnose.md`](../diagnose.md)).
-Fremdnamen sind Hinweise, keine bestätigten Zuordnungen.
-- [`bewertung-2026-10-23.md`](bewertung-2026-10-23.md): Darstellung als Kurve, Dauersender, erste Deutungen per Abgleich mit bekannten Sensoren (vermutet).
-- [`deutung-automatisch.md`](deutung-automatisch.md): nächtliche automatische Deutungshilfe (Korrelation, Ereignisse, Zähler) aus 7 Tagen HA-Verlauf.
+- [`erkenntnisse.md`](erkenntnisse.md): gesicherte und vermutete Bedeutungen einzelner Kennungen, Dauersender.
 - [`busadressen-wifi-kit.md`](busadressen-wifi-kit.md): Adressklassen, Anmeldung des WiFi-Kits (PnP, 0x4612-FSV-Abfrage), bestätigte Strukturen.
+- [`diagnose-803f-8404.md`](diagnose-803f-8404.md): Bitfeld 0x8404 und Zähler 0x803F rund um E438.
+
+Fremdnamen sind Hinweise, keine bestätigten Zuordnungen.
