@@ -2641,6 +2641,7 @@ sensor:
   - platform: template
     name: 'Syslog verworfene Zeilen'
     id: diag_syslog_verworfen
+    state_class: measurement
     entity_category: diagnostic
     accuracy_decimals: 0
     update_interval: 60s
@@ -2873,6 +2874,8 @@ sensor:
     nasa_device_id: samsung_outdoor
     name: 'Haupt-EEV1'
     id: main_eev1
+    state_class: measurement
+    unit_of_measurement: 'Schritte'
     filters:
       - delta: 0  # nur echte Änderungen senden
   # Diagnose-Rohregister: Aussage vor Ort verifizieren.
@@ -2881,6 +2884,8 @@ sensor:
     nasa_device_id: samsung_outdoor
     name: 'Haupt-EEV Schritt'
     id: main_eev_step
+    state_class: measurement
+    unit_of_measurement: 'Schritte'
     filters:
       - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
@@ -2904,6 +2909,7 @@ sensor:
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Last'
     id: compressor_load
+    state_class: measurement
     filters:
       - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
@@ -2957,6 +2963,7 @@ sensor:
     nasa_device_id: samsung_outdoor
     name: 'Außeneinheit Lüfterstufe'
     id: fan_step
+    state_class: measurement
     filters:
       - delta: 0  # nur echte Änderungen senden
   - platform: samsung_nasa
@@ -3104,6 +3111,7 @@ sensor:
     nasa_mode: STATUS
     name: 'EVI EEV Ansteuerung Rohwert'
     id: evi_eev_raw
+    state_class: measurement
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -3115,6 +3123,7 @@ sensor:
     nasa_mode: STATUS
     name: 'EVI SOL EEV Ansteuerung Rohwert'
     id: evi_sol_eev_raw
+    state_class: measurement
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
