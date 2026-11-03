@@ -22,10 +22,9 @@ AE140BXYDGG) am internen NASA-Bus (RS485) – Messwerte, FSV-Lesekopien und ausg
 ## Software
 
 - ESPHome 2026.10.1
-- Komponente `samsung_nasa`: Fork [mab-wien/esphome-samsung-nasa](https://github.com/mab-wien/esphome-samsung-nasa)
-  (Basis [Beormund/esphome-samsung-nasa](https://github.com/Beormund/esphome-samsung-nasa), Branch `diagnose-2026.10e`),
-  in der YAML auf einen festen Commit gesetzt – Builds sind reproduzierbar. Eigene Erweiterungen gehen als Pull Request
-  an Beormund (u. a. #123, #124, #130–#135, #138, #139, #141).
+- Komponente `samsung_nasa` von [Beormund/esphome-samsung-nasa](https://github.com/Beormund/esphome-samsung-nasa),
+  in der YAML auf einen festen Commit gesetzt – Builds sind reproduzierbar. Eigene Erweiterungen sind als Pull Requests
+  dort eingeflossen (#123, #124, #130–#135, #138, #139, #141–#143).
 - Aktueller Stand und Rückweg: letzte Zeile in [`docs/firmware.md`](docs/firmware.md)
 - Home Assistant über die ESPHome-API (verschlüsselt)
 
