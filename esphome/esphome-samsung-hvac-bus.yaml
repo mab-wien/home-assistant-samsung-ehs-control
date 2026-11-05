@@ -8,6 +8,13 @@ esphome:
   min_version: 2026.10.0
   name: !secret name
   friendly_name: !secret name
+  on_boot:
+    - priority: 600
+      then:
+        # Fehlercode 0x8235: die Bibliothek setzt delta: 1 vor das eigene delta: 0, damit gehen Wechsel um
+        # genau 1 verloren (z. B. 438 -> 439, 0 -> 1). Ersetzen durch reines delta: 0 (nur echte Änderungen).
+        - lambda: |-
+            id(error_code).set_filters({new sensor::DeltaFilter(0.0f, 0.0f, std::numeric_limits<float>::infinity(), 0.0f)});
 
 esp32:
   board: m5stack-atom
@@ -18,6 +25,7 @@ esp32:
 web_server:
   port: 80
   auth:
+    type: digest  # basic sendet das Passwort leicht umkehrbar; Voreinstellung wird ab ESPHome 2027.1 digest
     username: !secret web_username
     password: !secret web_password
 
@@ -151,11 +159,18 @@ api:
         anzahl: int
       then:
         - lambda: |-
+            // Zuerst leeren: ein return hier verhindert script.execute nicht, das Skript laeuft dann ohne Kennungen.
+            id(lese_anzahl) = 0;
+            id(lese_pos) = 0;
+            if ((adresse != "20.00.00" && adresse != "10.00.00" && adresse != "62.00.91") ||
+                start < 0 || start > 0xFFFF || anzahl < 1 || anzahl > 512 || anzahl > 0x10000 - start) {
+              ESP_LOGW("bereich_lesen", "Abgelehnt: Adresse oder Bereich ungueltig");
+              return;
+            }
             id(lese_adresse) = adresse;
             id(lese_start) = start;
-            id(lese_anzahl) = anzahl > 512 ? 512 : (int) anzahl;
-            id(lese_pos) = 0;
-            ESP_LOGW("bereich_lesen", "Lese %d Kennungen ab 0x%04X von %s", id(lese_anzahl), start, adresse.c_str());
+            id(lese_anzahl) = anzahl;
+            ESP_LOGW("bereich_lesen", "Lese %d Kennungen ab 0x%04X von %s", (int) id(lese_anzahl), (unsigned) start, adresse.c_str());
         - script.execute: nasa_bereich_lesen_skript
 
 # OTA with password (REQUIRED)
@@ -739,12 +754,13 @@ switch:
           id(debug_start_ms) = millis();
           id(debug_stream_enabled) = true;
           // im Rohbyte-Modus nur RAW-Zeilen (der Server dekodiert selbst), sonst dekodierte Einzelzeilen
+          id(samsung_nasa_controller).set_debug_log_messages_raw(id(nasa_rohbytes).state);
           id(samsung_nasa_controller).set_debug_log_messages(!id(nasa_rohbytes).state);
           id(samsung_nasa_controller).set_debug_log_undefined_messages(!id(nasa_rohbytes).state);
       - logger.log:
           level: INFO
           tag: syslog_control
-          format: 'Debug & Syslog EIN - UDP 514'
+          format: 'Debug & Syslog EIN'
     turn_off_action:
       - lambda: |-
           // Versand zuerst sperren: ab jetzt auch keine Warnungen/Fehler an Syslog.
@@ -768,14 +784,15 @@ switch:
     # Wirkt nur bei eingeschaltetem „Debug & Syslog“: dann nur noch Rohtelegramme (der Server dekodiert), keine Einzelzeilen
     turn_on_action:
       - lambda: |-
-          id(samsung_nasa_controller).set_debug_log_messages_raw(true);
+          // Rohzeilen nur bei eingeschaltetem Hauptschalter (sonst greift die automatische Abschaltung nicht)
+          id(samsung_nasa_controller).set_debug_log_messages_raw(id(debug_stream_enabled));
           id(samsung_nasa_controller).set_debug_log_messages(false);
           id(samsung_nasa_controller).set_debug_log_undefined_messages(false);
     turn_off_action:
       - lambda: |-
           id(samsung_nasa_controller).set_debug_log_messages_raw(false);
-          id(samsung_nasa_controller).set_debug_log_messages(id(debug_gesamt).state);
-          id(samsung_nasa_controller).set_debug_log_undefined_messages(id(debug_gesamt).state);
+          id(samsung_nasa_controller).set_debug_log_messages(id(debug_stream_enabled));
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(id(debug_stream_enabled));
   - platform: samsung_nasa
     message: 0x4000
     nasa_device_id: samsung_indoor
@@ -2688,6 +2705,8 @@ sensor:
     name: 'Freier Speicher'
     id: diag_freier_speicher
     unit_of_measurement: B
+    device_class: data_size
+    state_class: measurement
     entity_category: diagnostic
     accuracy_decimals: 0
     update_interval: 60s
@@ -3328,7 +3347,9 @@ sensor:
       // Keine pauschale Heiz-COP-Aussage bei 0 Hz oder fehlenden Leistungen.
       float a = id(instant_power_out).state;
       float b = id(instant_power_in).state;
-      if (id(compressor_frequency).state <= 0 || !std::isfinite(a) || !std::isfinite(b) || b < 100) return NAN;
+      const float hz = id(compressor_frequency).state;
+      if (!id(compressor_frequency).has_state() || !std::isfinite(hz) || hz <= 0 ||
+          !std::isfinite(a) || !std::isfinite(b) || b < 100) return NAN;
       return a / b;
     filters:
       - delta: 0  # nur echte Änderungen senden
@@ -3358,7 +3379,8 @@ sensor:
       float dt = id(water_out).state - id(water_in).state;
       // Nur positive Waermeabgabe im aktiven Verdichterbetrieb ausweisen.
       // Bei Rueckstroemung/Stillstand ist der Wert NICHT die erzeugte WP-Leistung.
-      if (!id(compressor_frequency).has_state() || id(compressor_frequency).state <= 0) return NAN;
+      if (!id(compressor_frequency).has_state() || !std::isfinite(id(compressor_frequency).state) ||
+          id(compressor_frequency).state <= 0) return NAN;
       if (!std::isfinite(q) || !std::isfinite(dt) || q <= 0 || q > 120 || dt <= 0 || dt > 35) return NAN;
       return q * dt * 69.77f; // L/min * Kelvin * 69.77 = W
     filters:
@@ -4496,7 +4518,7 @@ binary_sensor:
     name: 'Nachtfenster aktiv (20–06)'
     lambda: |-
       auto now = id(ha_time).now();
-      if (!now.is_valid()) return false;
+      if (!now.is_valid()) return {};
       return now.hour >= 20 || now.hour < 6;
 
   - platform: template
@@ -4839,7 +4861,7 @@ interval:
                 level: WARN
                 tag: syslog_control
                 format: 'Diagnose automatisch beendet (Laufzeit %u s, freier Speicher %u Byte)'
-                args: ['(millis() - id(debug_start_ms)) / 1000', 'esp_get_free_heap_size()']
+                args: ['(unsigned) ((millis() - id(debug_start_ms)) / 1000)', '(unsigned) esp_get_free_heap_size()']
             - switch.turn_off: debug_gesamt
   - interval: 24h
     startup_delay: 120s
