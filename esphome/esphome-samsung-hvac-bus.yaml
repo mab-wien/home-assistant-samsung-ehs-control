@@ -882,6 +882,62 @@ sensor:
     accuracy_decimals: 0
     filters:
       - delta: 0  # nur echte Änderungen senden
+  # FSV ohne Bibliothekseintrag (05.11.2026), Kennungen am Bus per Read bestaetigt (Antwort = Bedienteilwert).
+  # Nur lesen (sensor), Rohwert ohne Skalierung; Bedeutung laut Bedienteil-Handbuch, nicht am Bus bestaetigt.
+  - platform: samsung_nasa
+    message: 0x4268
+    nasa_device_id: samsung_indoor
+    id: wp_fsv_3034_roh
+    name: 'FSV 3034 Rohwert (0x4268)'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
+  - platform: samsung_nasa
+    message: 0x426F
+    nasa_device_id: samsung_indoor
+    id: wp_fsv_4014_roh
+    name: 'FSV 4014 Rohwert (0x426F)'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
+  - platform: samsung_nasa
+    message: 0x427D
+    nasa_device_id: samsung_indoor
+    id: wp_fsv_5031_roh
+    name: 'FSV 5031 Rohwert (0x427D)'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
+  - platform: samsung_nasa
+    message: 0x427E
+    nasa_device_id: samsung_indoor
+    id: wp_fsv_5032_roh
+    name: 'FSV 5032 Rohwert (0x427E)'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
+  - platform: samsung_nasa
+    message: 0x40B4
+    nasa_device_id: samsung_indoor
+    id: wp_fsv_5061_roh
+    name: 'FSV 5061 Rohwert (0x40B4)'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
+  - platform: samsung_nasa
+    message: 0x4280
+    nasa_device_id: samsung_indoor
+    id: wp_fsv_5071_roh
+    name: 'FSV 5071 Rohwert (0x4280)'
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    filters:
+      - delta: 0  # nur echte Änderungen senden
   # Lesekopie FSV 5012 (22.10.2026: 30 °C).
   - platform: template
     name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
@@ -4823,6 +4879,9 @@ interval:
       - delay: 3s
       - samsung_nasa.request_read:
           id: [fsv_5081, fsv_5091, fsv_5094, fsv_5012, fsv_5042, fsv_5043]  # 5012/5042/5043 ergänzt 30.10.2026: nach ESP-Neustart sonst unbekannt
+      - delay: 3s
+      - samsung_nasa.request_read:
+          id: [wp_fsv_3034_roh, wp_fsv_4014_roh, wp_fsv_5031_roh, wp_fsv_5032_roh, wp_fsv_5061_roh, wp_fsv_5071_roh]  # ergänzt 05.11.2026
       - delay: 3s
 #       # 1061-1064: zusaetzliche, nur lesende PROBES mit unbestaetigten NASA-IDs
 #       - samsung_nasa.request_read:
