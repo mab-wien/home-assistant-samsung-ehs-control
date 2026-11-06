@@ -20,6 +20,8 @@ esphome:
       name: 'FSV 4xxx Heizung und Zusatzheizung'
     - id: fsv_5
       name: 'FSV 5xxx Sonstiges und Smart Grid'
+    - id: fsv_6
+      name: 'FSV 6xxx Außengerät-Steuerung'
   on_boot:
     - priority: 600
       then:
@@ -941,6 +943,82 @@ sensor:
     accuracy_decimals: 0
     filters:
       - delta: 0  # nur echte Änderungen senden
+  # Weitere FSV, gelesen über die FSV-Info-Abfrage 0x4612 (Bibliothek kennt dafür keine eigene Kennung), Bezeichnungen laut Samsung-Bedienhandbuch. Nur lesend.
+  - platform: template
+    name: 'FSV 1061 - Vorlauf-Hysterese Heizen'
+    id: fsvinfo_1061
+    device_id: fsv_1
+    entity_category: diagnostic
+    update_interval: never
+    unit_of_measurement: 'K'
+    accuracy_decimals: 1
+  - platform: template
+    name: 'FSV 1062 - Vorlauf-Hysterese Kühlen'
+    id: fsvinfo_1062
+    device_id: fsv_1
+    entity_category: diagnostic
+    update_interval: never
+    unit_of_measurement: 'K'
+    accuracy_decimals: 1
+  - platform: template
+    name: 'FSV 1063 - Raum-Hysterese Heizen'
+    id: fsvinfo_1063
+    device_id: fsv_1
+    entity_category: diagnostic
+    update_interval: never
+    unit_of_measurement: 'K'
+    accuracy_decimals: 1
+  - platform: template
+    name: 'FSV 1064 - Raum-Hysterese Kühlen'
+    id: fsvinfo_1064
+    device_id: fsv_1
+    entity_category: diagnostic
+    update_interval: never
+    unit_of_measurement: 'K'
+    accuracy_decimals: 1
+  - platform: template
+    name: 'FSV 4054 - Inverterpumpe Mindestansteuerung (Code)'
+    id: fsvinfo_4054
+    device_id: fsv_4
+    entity_category: diagnostic
+    update_interval: never
+    accuracy_decimals: 0
+  - platform: template
+    name: 'FSV 4062 - Zonenpumpe 1 bei Thermo-off (Code)'
+    id: fsvinfo_4062
+    device_id: fsv_4
+    entity_category: diagnostic
+    update_interval: never
+    accuracy_decimals: 0
+  - platform: template
+    name: 'FSV 4063 - Zonenpumpe 2 bei Thermo-off (Code)'
+    id: fsvinfo_4063
+    device_id: fsv_4
+    entity_category: diagnostic
+    update_interval: never
+    accuracy_decimals: 0
+  - platform: template
+    name: 'FSV 6022 - Mindestlaufzeit nach Thermo-on'
+    id: fsvinfo_6022
+    device_id: fsv_6
+    entity_category: diagnostic
+    update_interval: never
+    unit_of_measurement: 'min'
+    accuracy_decimals: 0
+  - platform: template
+    name: 'FSV 6031 - Heizen optionales Thermo-Ein-Aus'
+    id: fsvinfo_6031
+    device_id: fsv_6
+    entity_category: diagnostic
+    update_interval: never
+    accuracy_decimals: 0
+  - platform: template
+    name: 'FSV 6041 - Ausgangstyp Zusatzausgang (Code)'
+    id: fsvinfo_6041
+    device_id: fsv_6
+    entity_category: diagnostic
+    update_interval: never
+    accuracy_decimals: 0
   # Lesekopie FSV 5012 (22.10.2026: 30 °C).
   - platform: template
     name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
@@ -4815,6 +4893,37 @@ text_sensor:
     nasa_device_id: samsung_indoor
     name: 'Fehlerhistorie Innengerät'
     entity_category: diagnostic
+  # FSV-Info 0x4612 (Antwort auf Leseanfrage mit FSV-Nummer): [FSV 2B] 01 [Typ] 01 [Min 2B] [Max 2B] [Wert 2B] 01 00 00 00
+  - platform: samsung_nasa
+    message: 0x4612
+    nasa_device_id: samsung_indoor
+    name: 'FSV-Info Antwort (0x4612)'
+    id: fsv_info_antwort
+    entity_category: diagnostic
+    on_value:
+      - lambda: |-
+          // Antwort als Hex-Text: [FSV 2B] 01 [Typ] [x] [Min 2B] [Max 2B] [Wert 2B] ...; Typ 0x0A = Wert x 0,1
+          std::vector<uint8_t> b;
+          for (size_t i = 0; i + 1 < x.size(); i += 3) b.push_back((uint8_t) strtol(x.substr(i, 2).c_str(), nullptr, 16));
+          if (b.size() < 11) return;
+          const int nr = (b[0] << 8) | b[1];
+          const int16_t roh = (int16_t) ((b[9] << 8) | b[10]);
+          // Typ 0x0A und die Hysterese-FSV 1061-1064 in 0,1 K; -1 (FFFF) = nicht belegt
+          const bool zehntel = b[3] == 0x0A || (nr >= 1061 && nr <= 1064);
+          const float w = roh == -1 ? NAN : (zehntel ? roh / 10.0f : (float) roh);
+          switch (nr) {
+              case 1061: id(fsvinfo_1061).publish_state(w); break;
+              case 1062: id(fsvinfo_1062).publish_state(w); break;
+              case 1063: id(fsvinfo_1063).publish_state(w); break;
+              case 1064: id(fsvinfo_1064).publish_state(w); break;
+              case 4054: id(fsvinfo_4054).publish_state(w); break;
+              case 4062: id(fsvinfo_4062).publish_state(w); break;
+              case 4063: id(fsvinfo_4063).publish_state(w); break;
+              case 6022: id(fsvinfo_6022).publish_state(w); break;
+              case 6031: id(fsvinfo_6031).publish_state(w); break;
+              case 6041: id(fsvinfo_6041).publish_state(w); break;
+              default: break;
+          }
   # --- NASA-Strukturen (23.10.2026): Inhalt als Text, wenn druckbar, sonst Hex; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x0600
@@ -5138,6 +5247,7 @@ interval:
       - samsung_nasa.request_read:
           id: [wp_nasa_8287_capa, wp_nasa_82e3_capa]  # statische Gerätedaten, täglich gelesen (06.11.2026)
       - delay: 3s
+      - script.execute: fsv_info_lesen
 #       # 1061-1064: zusaetzliche, nur lesende PROBES mit unbestaetigten NASA-IDs
 #       - samsung_nasa.request_read:
 #           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
@@ -5196,6 +5306,14 @@ button:
 
   # Fehlerdaten des Aussengeraets abfragen (Telegramme 31.10.2026 am Bus mitgeschnitten). Antworten nur im Rohbyte-Mitschnitt
   # (Debug & Syslog + NASA Rohbytes), Auswertung: docker-ki-environment/scripts/wp-860b-dekodieren.py.
+  # Weitere FSV über FSV-Info lesen (0x4612, NASA READ an 20.00.00, Nutzdaten = FSV-Nummer + 13 x 0), wie das WLAN-Modul beim Start. Nur lesend.
+  - platform: template
+    name: 'FSV über FSV-Info lesen (0x4612)'
+    id: fsv_info_lesen_taste
+    icon: mdi:magnify
+    entity_category: diagnostic
+    on_press:
+      - script.execute: fsv_info_lesen
   # 0x461E Fehlerhistorie Innengeraet: NASA READ an 20.00.00, Nutzdaten 5 x 0 (Antwort 46 Byte).
   # Es werden nur lesende Abfragen gesendet.
   - platform: template
@@ -5267,3 +5385,68 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00]
+
+script:
+  - id: fsv_info_lesen
+    mode: single
+    then:
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x04, 0x25, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x04, 0x26, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x04, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x04, 0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x0F, 0xD6, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x0F, 0xDE, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x0F, 0xDF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x17, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x17, 0x8F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x17, 0x99, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
