@@ -998,6 +998,13 @@ sensor:
     update_interval: never
     accuracy_decimals: 0
   - platform: template
+    name: 'FSV 5033 - TDM Vorrang Klimagerät oder Warmwasser (nur TDM)'
+    id: fsvinfo_5033
+    device_id: fsv_5
+    entity_category: diagnostic
+    update_interval: never
+    accuracy_decimals: 0
+  - platform: template
     name: 'FSV 6022 - Mindestlaufzeit nach Thermo-on'
     id: fsvinfo_6022
     device_id: fsv_6
@@ -4919,6 +4926,7 @@ text_sensor:
               case 4054: id(fsvinfo_4054).publish_state(w); break;
               case 4062: id(fsvinfo_4062).publish_state(w); break;
               case 4063: id(fsvinfo_4063).publish_state(w); break;
+              case 5033: id(fsvinfo_5033).publish_state(w); break;
               case 6022: id(fsvinfo_6022).publish_state(w); break;
               case 6031: id(fsvinfo_6031).publish_state(w); break;
               case 6041: id(fsvinfo_6041).publish_state(w); break;
@@ -5437,6 +5445,12 @@ script:
           message: 0x4612
           data_type: read
           payload: [0x17, 0x86, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+      - delay: 1500ms
+      - samsung_nasa.send_structure:
+          nasa_device_id: samsung_indoor
+          message: 0x4612
+          data_type: read
+          payload: [0x13, 0xA9, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
       - delay: 1500ms
       - samsung_nasa.send_structure:
           nasa_device_id: samsung_indoor
