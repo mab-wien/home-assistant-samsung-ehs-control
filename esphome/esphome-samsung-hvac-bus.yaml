@@ -942,7 +942,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x0202
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x0202 AD_ERROR_CODE1'
+    name: 'Fehlercode Kopie Außengerät'
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1509,7 +1509,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x4046
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x4046 CONTROL_SILENCE'
+    name: 'Leisebetrieb Status'
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1703,7 +1703,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x408A
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x408A IN_2WAY_VALVE'
+    name: 'Ventilstellung Code (3 = Warmwasser)'
     entity_category: diagnostic
     filters:
       - delta: 0  # nur echte Änderungen senden
@@ -1773,7 +1773,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x4125
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x4125 IN_FSV_LOAD_SAVE'
+    name: 'FSV Laden und Speichern Status'
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1781,7 +1781,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x4202
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x4202 IN_TEMP_DISCHARGE_REQUEST'
+    name: 'Angeforderte Austrittstemperatur'
     entity_category: diagnostic
     state_class: measurement
     filters:
@@ -1789,7 +1789,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x4204
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x4204'
+    name: 'Vorlauf Tw2 minus 2 K'
     entity_category: diagnostic
     state_class: measurement
     filters:
@@ -1797,7 +1797,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x420C
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x420C INDOOR_OUTER_TEMP'
+    name: 'Außentemperatur Innengerät Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1807,12 +1807,12 @@ sensor:
   - platform: samsung_nasa
     message: 0x4211
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x4211 IN_CAPACITY_REQUEST'
+    name: 'Angeforderte Leistung Innengerät'
   # Einheit/Skalierung aus der Komponenten-Bibliothek (PR #135 an Beormund, 30.10.2026)
   - platform: samsung_nasa
     message: 0x4212
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x4212 IN_CAPACITY_ABSOLUTE'
+    name: 'Leistung absolut Innengerät'
   - platform: samsung_nasa
     message: 0x4213
     nasa_device_id: samsung_indoor
@@ -1942,7 +1942,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x440F
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x440F ERROR_INOUT'
+    name: 'Fehlercode Kopie Innengerät'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2039,7 +2039,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8062
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8062 OUTDOOR_LOGICAL_DEFROST_STEP'
+    name: 'Abtauschritt logisch'
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2353,7 +2353,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8231
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8231 OUTDOOR_HEATING_PERCENT'
+    name: 'Heizanteil Außengerät'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2390,7 +2390,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8245
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8245 OUTDOOR_OIL_BALANCE_STEP'
+    name: 'Ölausgleich Schritt'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2399,7 +2399,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8247
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8247 OUTDOOR_DEFROST_STEP'
+    name: 'Abtauschritt'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2408,7 +2408,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8248
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8248 OUTDOOR_SAFETY_START'
+    name: 'Sicherheitsstart Schritt'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2485,7 +2485,7 @@ sensor:
     message: 0x8278
     nasa_device_id: samsung_outdoor
     id: wp_nasa_8278
-    name: 'NASA 0x8278 OUT_SENSOR_OCT1'
+    name: 'OCT1 Temperatur Rohwert'
     entity_category: diagnostic
     accuracy_decimals: 0
   # Abgleich 22.10.2026: OCT1 = Rohwert / 10; Rohsensor bleibt erhalten.
@@ -2512,7 +2512,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8287
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8287 OUT_INSTALL_CAPA'
+    name: 'Installationsleistung Außengerät'
     id: wp_nasa_8287_capa
   - platform: samsung_nasa
     message: 0x8298
@@ -2556,7 +2556,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x82A8
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x82A8 OUT_CONTROL_IDU_TOTAL_ABSCAPA'
+    name: 'Innengeräte Gesamtkapazität 1'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2565,7 +2565,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x82A9
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x82A9 OUT_CONTROL_IDU_TOTAL_ABSCAPA2'
+    name: 'Innengeräte Gesamtkapazität 2'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2674,7 +2674,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x82DE
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x82DE OUTDOOR_EVA_IN'
+    name: 'Doppelrohr-Wärmetauscher Temperatur Kopie'
     entity_category: diagnostic
     state_class: measurement
     filters:
@@ -2683,12 +2683,12 @@ sensor:
   - platform: samsung_nasa
     message: 0x82E3
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x82E3 OUT_PRODUCT_OPTION_CAPA'
+    name: 'Nennleistung Außengerät'
     id: wp_nasa_82e3_capa
   - platform: samsung_nasa
     message: 0x82E8
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x82E8 OUT_LOAD_MCU_HR_BYPASS_EEV'
+    name: 'HR-Bypass-EEV'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2725,7 +2725,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8404
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8404'
+    name: 'Zustandsbits Außengerät'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2738,7 +2738,7 @@ sensor:
   - platform: samsung_nasa
     message: 0x8405
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8405 OUTDOOR_COMP1_RUNNING_TIME'
+    name: 'Verdichter Betriebsstunden'
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -4717,13 +4717,13 @@ text_sensor:
   - platform: samsung_nasa
     message: 0x461E
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x461E IN_ERROR_HISTORY'
+    name: 'Fehlerhistorie Innengerät'
     entity_category: diagnostic
   # --- NASA-Strukturen (23.10.2026): Inhalt als Text, wenn druckbar, sonst Hex; Bedeutung unbestätigt ---
   - platform: samsung_nasa
     message: 0x0600
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x0600 AD_OPTION_BASIC'
+    name: 'Produktoption Innengerät'
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0601
@@ -4746,17 +4746,17 @@ text_sensor:
   - platform: samsung_nasa
     message: 0x0608
     nasa_device_id: samsung_indoor
-    name: 'NASA 0x0608 AD_DBCODE_MICOM_MAIN Innen'
+    name: 'Firmware-Stand Innengerät'
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0608
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x0608 AD_DBCODE_MICOM_MAIN Außen'
+    name: 'Firmware-Stand Außengerät'
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x060C
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x060C AD_DBCODE_EEPROM'
+    name: 'EEPROM-Stand Außengerät'
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x4604
@@ -4803,12 +4803,12 @@ text_sensor:
   - platform: samsung_nasa
     message: 0x8003
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x8003 OUT_OPERATION_HEATCOOL'
+    name: 'Betriebszustand Außengerät'
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x800D
     nasa_device_id: samsung_outdoor
-    name: 'NASA 0x800D'
+    name: 'Lüfter Betriebszustand Außengerät'
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x4067
