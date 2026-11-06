@@ -8,6 +8,18 @@ esphome:
   min_version: 2026.10.0
   name: !secret name
   friendly_name: !secret name
+  # FSV-Werte in HA nach Gruppen als eigene Geräte (Untergeräte), 06.11.2026
+  devices:
+    - id: fsv_1
+      name: 'FSV 1xxx Bedienteil-Grenzen'
+    - id: fsv_2
+      name: 'FSV 2xxx Heizkurve'
+    - id: fsv_3
+      name: 'FSV 3xxx Warmwasser'
+    - id: fsv_4
+      name: 'FSV 4xxx Heizung und Zusatzheizung'
+    - id: fsv_5
+      name: 'FSV 5xxx Sonstiges und Smart Grid'
   on_boot:
     - priority: 600
       then:
@@ -874,6 +886,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_fsv_3034_roh
     name: 'FSV 3034 Rohwert (0x4268)'
+    device_id: fsv_3
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -883,6 +896,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_fsv_4014_roh
     name: 'FSV 4014 Rohwert (0x426F)'
+    device_id: fsv_4
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -892,6 +906,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_fsv_5031_roh
     name: 'FSV 5031 Rohwert (0x427D)'
+    device_id: fsv_5
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -901,6 +916,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_fsv_5032_roh
     name: 'FSV 5032 Rohwert (0x427E)'
+    device_id: fsv_5
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -910,6 +926,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_fsv_5061_roh
     name: 'FSV 5061 Rohwert (0x40B4)'
+    device_id: fsv_5
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -919,6 +936,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_fsv_5071_roh
     name: 'FSV 5071 Rohwert (0x4280)'
+    device_id: fsv_5
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -926,6 +944,7 @@ sensor:
   # Lesekopie FSV 5012 (22.10.2026: 30 °C).
   - platform: template
     name: 'FSV 5012 - Smart Grid Kuehlung Raumtemperatur'
+    device_id: fsv_5
     id: fsv_5012_readonly
     entity_category: diagnostic
     device_class: temperature
@@ -3628,6 +3647,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1011 - Kühlbetrieb maximale Vorlauftemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3641,6 +3661,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1012 - Kühlbetrieb minimale Vorlauftemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3654,6 +3675,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1021 - Kühlbetrieb maximale Raumtemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3667,6 +3689,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1022 - Kühlbetrieb minimale Raumtemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3680,6 +3703,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1031 - Heizbetrieb maximale Vorlauftemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3693,6 +3717,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1032 - Heizbetrieb minimale Vorlauftemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3706,6 +3731,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1041 - Heizbetrieb maximale Raumtemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3719,6 +3745,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1042 - Heizbetrieb minimale Raumtemperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3732,6 +3759,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1051 - Warmwasserspeicher maximale Temperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3745,6 +3773,7 @@ sensor:
 
   - platform: template
     name: 'FSV 1052 - Warmwasserspeicher minimale Temperatur'
+    device_id: fsv_1
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3758,6 +3787,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2011 - Heizkurve Außentemperatur bei Kälte'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3771,6 +3801,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2012 - Heizkurve Außentemperatur bei Wärme'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3784,6 +3815,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2021 - Heizkurve WL1 Vorlauf bei Kälte'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3797,6 +3829,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2022 - Heizkurve WL1 Vorlauf bei Wärme'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3810,6 +3843,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2031 - Heizkurve WL2 Vorlauf bei Kälte'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3823,6 +3857,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2032 - Heizkurve WL2 Vorlauf bei Wärme'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3836,6 +3871,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2051 - Kühlkurve Außentemperatur untere Grenze'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3849,6 +3885,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2052 - Kühlkurve Außentemperatur obere Grenze'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3862,6 +3899,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2061 - Kühlkurve WL1 maximale Vorlauftemperatur'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3875,6 +3913,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2062 - Kühlkurve WL1 minimale Vorlauftemperatur'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3888,6 +3927,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2071 - Kühlkurve WL2 maximale Vorlauftemperatur'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3901,6 +3941,7 @@ sensor:
 
   - platform: template
     name: 'FSV 2072 - Kühlkurve WL2 minimale Vorlauftemperatur'
+    device_id: fsv_2
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3914,6 +3955,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3021 - Warmwasser maximale Wärmepumpentemperatur'
+    device_id: fsv_3
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3927,6 +3969,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3022 - Warmwasser Ausschalthysterese'
+    device_id: fsv_3
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3940,6 +3983,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3023 - Warmwasser Einschalthysterese'
+    device_id: fsv_3
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -3953,6 +3997,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3024 - Raumheizung Mindestlaufzeit'
+    device_id: fsv_3
     unit_of_measurement: 'min'
     state_class: measurement
     entity_category: diagnostic
@@ -3965,6 +4010,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3025 - Warmwasser Wärmepumpe maximale Laufzeit'
+    device_id: fsv_3
     unit_of_measurement: 'min'
     state_class: measurement
     entity_category: diagnostic
@@ -3977,6 +4023,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser'
+    device_id: fsv_3
     unit_of_measurement: 'h'
     state_class: measurement
     entity_category: diagnostic
@@ -3989,6 +4036,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3032 - Warmwasser Heizstab Einschaltverzögerung'
+    device_id: fsv_3
     unit_of_measurement: 'min'
     state_class: measurement
     entity_category: diagnostic
@@ -4001,6 +4049,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3033 - Warmwasser Heizstab Temperaturüberschwingung'
+    device_id: fsv_3
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4014,6 +4063,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3043 - Warmwasser thermische Desinfektion Startstunde'
+    device_id: fsv_3
     unit_of_measurement: 'h'
     state_class: measurement
     entity_category: diagnostic
@@ -4026,6 +4076,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3044 - Warmwasser thermische Desinfektion Zieltemperatur'
+    device_id: fsv_3
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4039,6 +4090,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3045 - Warmwasser thermische Desinfektion Dauer'
+    device_id: fsv_3
     unit_of_measurement: 'min'
     state_class: measurement
     entity_category: diagnostic
@@ -4051,6 +4103,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3052 - Warmwasser Timer-Aus Zeitdauer'
+    device_id: fsv_3
     unit_of_measurement: 'min'
     state_class: measurement
     entity_category: diagnostic
@@ -4063,6 +4116,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3046 - Warmwasser thermische Desinfektion Zeitlimit'
+    device_id: fsv_3
     unit_of_measurement: 'h'
     state_class: measurement
     entity_category: diagnostic
@@ -4075,6 +4129,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3081 - Zusatzheizung Stufe 1 Nennleistung'
+    device_id: fsv_3
     unit_of_measurement: 'kW'
     state_class: measurement
     entity_category: diagnostic
@@ -4087,6 +4142,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3082 - Zusatzheizung Stufe 2 Nennleistung'
+    device_id: fsv_3
     unit_of_measurement: 'kW'
     state_class: measurement
     entity_category: diagnostic
@@ -4099,6 +4155,7 @@ sensor:
 
   - platform: template
     name: 'FSV 3083 - Warmwasser Heizstab Nennleistung'
+    device_id: fsv_3
     unit_of_measurement: 'kW'
     state_class: measurement
     entity_category: diagnostic
@@ -4111,6 +4168,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4012 - Außentemperatur für Vorrangregelung'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4124,6 +4182,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4013 - Heizung Abschalttemperatur außen'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4137,6 +4196,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4024 - Zusatzheizung Außentemperaturschwelle'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4150,6 +4210,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4025 - Zusatzheizung Abtauunterstützung Temperaturschwelle'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4163,6 +4224,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4033 - Externe Wärmequelle Außentemperaturschwelle'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4176,6 +4238,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4042 - Mischventil Heizen Sollspreizung'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4189,6 +4252,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4043 - Mischventil Kühlen Sollspreizung'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4202,6 +4266,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4044 - Mischventil Regelfaktor'
+    device_id: fsv_4
     state_class: measurement
     entity_category: diagnostic
     update_interval: 15s
@@ -4213,6 +4278,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4045 - Mischventil Regelintervall'
+    device_id: fsv_4
     unit_of_measurement: 'min'
     state_class: measurement
     entity_category: diagnostic
@@ -4225,6 +4291,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4046 - Mischventil Stellzeit'
+    device_id: fsv_4
     unit_of_measurement: 's'
     state_class: measurement
     entity_category: diagnostic
@@ -4237,6 +4304,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5011 - Smart Grid Kühlung Vorlauftemperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4250,6 +4318,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5013 - Smart Grid Heizung Vorlauftemperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4263,6 +4332,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5014 - Smart Grid Heizung Raumtemperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4276,6 +4346,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5015 - Smart Grid Kühlkurve WL1 Temperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4289,6 +4360,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5016 - Smart Grid Kühlkurve WL2 Temperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4302,6 +4374,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5017 - Smart Grid Heizkurve WL1 Temperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4315,6 +4388,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5018 - Smart Grid Heizkurve WL2 Temperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4328,6 +4402,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5019 - Smart Grid Warmwasser Speichertemperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4341,6 +4416,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5021 - Warmwasser Sparbetrieb Temperaturabsenkung'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4354,6 +4430,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5023 - Warmwasser Sparbetrieb Thermo-Ein Temperatur'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4367,6 +4444,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5082 - Photovoltaik Kühlung Temperaturversatz'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4380,6 +4458,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5083 - Photovoltaik Heizung Temperaturversatz'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4393,6 +4472,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5092 - Smart Grid Heizung Temperaturänderung'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4406,6 +4486,7 @@ sensor:
 
   - platform: template
     name: 'FSV 5093 - Smart Grid Warmwasser Temperaturänderung'
+    device_id: fsv_5
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4418,6 +4499,7 @@ sensor:
       - delta: 0  # nur echte Änderungen senden
   - platform: template
     name: 'FSV 4052 - Inverterpumpe Sollspreizung'
+    device_id: fsv_4
     unit_of_measurement: '°C'
     device_class: temperature
     state_class: measurement
@@ -4431,6 +4513,7 @@ sensor:
 
   - platform: template
     name: 'FSV 4053 - Inverterpumpe Regelfaktor'
+    device_id: fsv_4
     state_class: measurement
     entity_category: diagnostic
     update_interval: 15s
@@ -4537,6 +4620,7 @@ binary_sensor:
     name: 'Plattenwärmetauscher Zusatzheizung Status'
   - platform: template
     name: 'FSV 3031 - Warmwasser Heizstab Freigabe'
+    device_id: fsv_3
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_3031).has_state()) return {};
@@ -4544,6 +4628,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 3041 - Warmwasser thermische Desinfektion aktiv'
+    device_id: fsv_3
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_3041).has_state()) return {};
@@ -4551,6 +4636,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 3051 - Warmwasser Timer-Aus aktiviert'
+    device_id: fsv_3
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_3051).has_state()) return {};
@@ -4558,6 +4644,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 4023 - Zusatzheizung Kältekompensation'
+    device_id: fsv_4
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_4023).has_state()) return {};
@@ -4565,6 +4652,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 4031 - Externe Wärmequelle Freigabe'
+    device_id: fsv_4
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_4031).has_state()) return {};
@@ -4572,6 +4660,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 4032 - Externe Wärmequelle Priorität'
+    device_id: fsv_4
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_4032).has_state()) return {};
@@ -4579,6 +4668,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 4061 - Zonenregelung aktiviert'
+    device_id: fsv_4
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_4061).has_state()) return {};
@@ -4586,6 +4676,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 5022 - Warmwasser Sparbetrieb aktiviert'
+    device_id: fsv_5
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_5022).has_state()) return {};
@@ -4593,6 +4684,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 5041 - Netzbetreiber Fernsteuerung aktiviert'
+    device_id: fsv_5
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_5041).has_state()) return {};
@@ -4600,6 +4692,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 5051 - Verdichter Frequenzbegrenzungsfunktion aktiviert'
+    device_id: fsv_5
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_5051).has_state()) return {};
@@ -4607,6 +4700,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 5081 - Photovoltaiksteuerung aktiviert'
+    device_id: fsv_5
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_5081).has_state()) return {};
@@ -4614,6 +4708,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 5091 - Smart Grid Regelung aktiviert'
+    device_id: fsv_5
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_5091).has_state()) return {};
@@ -4621,6 +4716,7 @@ binary_sensor:
 
   - platform: template
     name: 'FSV 5094 - Smart Grid Warmwasser Betriebsart'
+    device_id: fsv_5
     entity_category: diagnostic
     lambda: |-
       if (!id(fsv_5094).has_state()) return {};
@@ -4785,6 +4881,7 @@ text_sensor:
   # FSV 5042/5043: Optionstexte aus der Fork-Bibliothek (22.10.2026: 5042 = All, 5043 = High).
   - platform: template
     name: 'FSV 5042 - Waermequelle bei Betriebsbegrenzung'
+    device_id: fsv_5
     id: fsv_5042_readonly
     entity_category: diagnostic
     update_interval: 10s
@@ -4793,6 +4890,7 @@ text_sensor:
       return id(fsv_5042).current_option().str();
   - platform: template
     name: 'FSV 5043 - Kontaktlogik Benefit kWh'
+    device_id: fsv_5
     id: fsv_5043_readonly
     entity_category: diagnostic
     update_interval: 10s
@@ -4836,6 +4934,7 @@ text_sensor:
     name: 'Samsung Fehlerbeschreibung'
   - platform: template
     name: 'FSV 2041 - Heizkurve WL1 oder WL2 Auswahl'
+    device_id: fsv_2
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4844,6 +4943,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 2081 - Kühlkurve WL1 oder WL2 Auswahl'
+    device_id: fsv_2
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4852,6 +4952,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 2091 - Externer Raumthermostat Zone 1'
+    device_id: fsv_2
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4860,6 +4961,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 2092 - Externer Raumthermostat Zone 2'
+    device_id: fsv_2
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4868,6 +4970,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 2093 - Raumtemperaturregelung Betriebsart'
+    device_id: fsv_2
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4876,6 +4979,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 3011 - Warmwasserbereitung aktivierte Betriebsart'
+    device_id: fsv_3
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4884,6 +4988,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 3042 - Warmwasser thermische Desinfektion Wochentag'
+    device_id: fsv_3
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4892,6 +4997,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 3061 - Solarthermie oder Warmwasserthermostat aktiviert'
+    device_id: fsv_3
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4900,6 +5006,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 3071 - Dreiwegeventil Ausrichtung'
+    device_id: fsv_3
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4908,6 +5015,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 4011 - Vorrang Raumheizung oder Warmwasser'
+    device_id: fsv_4
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4916,6 +5024,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 4021 - Elektrische Zusatzheizung Betriebsart'
+    device_id: fsv_4
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4924,6 +5033,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 4022 - Zusatzheizung und Warmwasser Heizstab Priorität'
+    device_id: fsv_4
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4932,6 +5042,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 4041 - Mischventil Installation und Betriebsart'
+    device_id: fsv_4
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -4940,6 +5051,7 @@ text_sensor:
 
   - platform: template
     name: 'FSV 4051 - Inverterpumpe PWM Regelmodus'
+    device_id: fsv_4
     entity_category: diagnostic
     update_interval: 15s
     lambda: |-
@@ -5030,15 +5142,7 @@ interval:
 #       - samsung_nasa.request_read:
 #           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
 
-# # Ohne einen neuen Flash koennen diese vier Testadressen erneut angefragt werden.
-# # Button sendet ausschliesslich NASA READ, niemals WRITE.
 button:
-#   - platform: template
-#     name: 'FSV 1061-1064 - Hysterese-Testwerte erneut lesen'
-#     entity_category: diagnostic
-#     on_press:
-#       - samsung_nasa.request_read:
-#           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
 
   # EXPERIMENTELL: NASA 0x8065 = 1; Wirkung als K3-Reset nicht bestaetigt.
   # Ausschliesslich manueller Aufruf. Keine automatische Fehlerquittierung.
@@ -5069,10 +5173,9 @@ button:
   # Wert 1 (obiger Test) setzte beim Reset auch Einstellungen zurück; Wert 2 wird als normaler Fehler-Reset vermutet.
   # Nur manuell, nur bei E438 und stehendem Verdichter, 60 s Abstand. Nicht automatisch.
   - platform: template
-    name: 'E438 Reset 0x8065 Wert 2 (Write)'
+    name: 'Fehler zurücksetzen (E438)'
     id: e438_reset_write2
     icon: mdi:restart
-    entity_category: diagnostic
     on_press:
       - lambda: |-
           if (!id(error_code).has_state() || !id(compressor_frequency).has_state() ||
@@ -5164,90 +5267,3 @@ button:
                 message: 0x860B
                 data_type: write
                 payload: [0x00, 0x03, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 2: Testlaufdaten (60 Datensaetze), nur lesend.
-  - platform: template
-    name: 'Testlaufdaten Aussengeraet 0x860B abrufen'
-    id: testlauf_860b_abrufen
-    icon: mdi:database-arrow-down
-    entity_category: diagnostic
-    on_press:
-      - if:
-          condition:
-            lambda: |-
-              static uint32_t letzter = 0;
-              const uint32_t jetzt = millis();
-              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
-                ESP_LOGW("fehlerdaten", "0x860B/2 nicht gesendet: 5 min Abstand erforderlich");
-                return false;
-              }
-              letzter = jetzt;
-              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 2 von 10.00.00 ab");
-              return true;
-          then:
-            - samsung_nasa.send_structure:
-                nasa_device_id: samsung_outdoor
-                message: 0x860B
-                data_type: write
-                payload: [0x00, 0x02, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 4: Tasten-/Moduswerte (200 Byte), nur lesend.
-  - platform: template
-    name: 'Tastendaten Aussengeraet 0x860B abrufen'
-    id: tasten_860b_abrufen
-    icon: mdi:database-arrow-down
-    entity_category: diagnostic
-    on_press:
-      - if:
-          condition:
-            lambda: |-
-              static uint32_t letzter = 0;
-              const uint32_t jetzt = millis();
-              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
-                ESP_LOGW("fehlerdaten", "0x860B/4 nicht gesendet: 5 min Abstand erforderlich");
-                return false;
-              }
-              letzter = jetzt;
-              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 4 von 10.00.00 ab");
-              return true;
-          then:
-            - samsung_nasa.send_structure:
-                nasa_device_id: samsung_outdoor
-                message: 0x860B
-                data_type: write
-                payload: [0x00, 0x04, 0x00, 0x00, 0x00, 0x00]
-  # 0x860B Betriebsart 6: Kaeltemitteldaten (6 Datensaetze), nur lesend.
-  - platform: template
-    name: 'Kaeltemitteldaten Aussengeraet 0x860B abrufen'
-    id: kaeltemittel_860b_abrufen
-    icon: mdi:database-arrow-down
-    entity_category: diagnostic
-    on_press:
-      - if:
-          condition:
-            lambda: |-
-              static uint32_t letzter = 0;
-              const uint32_t jetzt = millis();
-              if (letzter != 0 && (uint32_t)(jetzt - letzter) < 300000) {
-                ESP_LOGW("fehlerdaten", "0x860B/6 nicht gesendet: 5 min Abstand erforderlich");
-                return false;
-              }
-              letzter = jetzt;
-              ESP_LOGW("fehlerdaten", "Rufe 0x860B Betriebsart 6 von 10.00.00 ab");
-              return true;
-          then:
-            - samsung_nasa.send_structure:
-                nasa_device_id: samsung_outdoor
-                message: 0x860B
-                data_type: write
-                payload: [0x00, 0x06, 0x00, 0x00, 0x00, 0x00]
-
-  # Nur lesende NASA-Abfrage; keine Aenderung und kein Reset.
-  # Die read()-Methode der Komponente sendet an die NASA-Broadcastadresse.
-  - platform: template
-    name: 'NASA 0x8065 nur lesen'
-    id: outdoor_reset_read_test
-    icon: mdi:database-search
-    entity_category: diagnostic
-    on_press:
-      - lambda: |-
-          ESP_LOGW("reset_test", "Nur READ: frage NASA 0x8065 ab; kein WRITE und kein Reset. Antwort im NASA-Log pruefen.");
-          id(samsung_nasa_controller).read({0x8065});

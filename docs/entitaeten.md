@@ -143,7 +143,6 @@ Erzeugt aus `esphome/esphome-samsung-hvac-bus.yaml` und der HA-Registry. Quelle 
 | NASA 0x805E | `–` | Sensor | NASA 0x805E |  |
 | NASA 0x8062 OUTDOOR_LOGICAL_DEFROST_STEP | `–` | Sensor | NASA 0x8062 |  |
 | NASA 0x8063 | `–` | Sensor | NASA 0x8063 |  |
-| NASA 0x8065 nur lesen | `–` | Taste | berechnet (Template) |  |
 | NASA 0x8065 OUTDOOR_SYSTEM_RESET | `–` | Sensor | NASA 0x8065 |  |
 | NASA 0x8066 OUTDOOR_OPMODELIMIT | `–` | Sensor | NASA 0x8066 |  |
 | NASA 0x8075 | `–` | Sensor | NASA 0x8075 |  |
