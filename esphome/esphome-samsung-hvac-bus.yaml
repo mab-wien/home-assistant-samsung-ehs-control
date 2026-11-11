@@ -207,7 +207,7 @@ uart:
 
 
 external_components:
-  - source: github://Beormund/esphome-samsung-nasa@f17460523aff5a5bd0ca136adce33db00cf802c1   # Beormund test (enthält #154–#158, #160 Fix #159)
+  - source: github://Beormund/esphome-samsung-nasa@3f2bede8e0496d594656bde7a2857e942afe9d8d   # Beormund main (enthält #154–#158, #160)
     components: [samsung_nasa]
 
 samsung_nasa:

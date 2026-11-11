@@ -5,7 +5,7 @@ Aktuell auf dem ESP (Stand 11.11.2026):
 | | |
 |---|---|
 | ESPHome | 2026.10.2 (Container `esphome/esphome:2026.10.2`) |
-| Komponente `samsung_nasa` | [Beormund/esphome-samsung-nasa](https://github.com/Beormund/esphome-samsung-nasa) @ `f174605` (Branch `test`, enthält #154–#158 und #160) |
+| Komponente `samsung_nasa` | [Beormund/esphome-samsung-nasa](https://github.com/Beormund/esphome-samsung-nasa) @ `3f2bede` (`main`, enthält #154–#158 und #160) |
 | Absenderadresse | `80.ff.02` (`source_address`) |
 | Druckwerte | Hoch-/Niederdruck in bar (Überdruck) |
 | Flashen | OTA vom Server, siehe [README](../README.md#bauen-und-flashen) |
