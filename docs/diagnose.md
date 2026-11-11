@@ -4,7 +4,7 @@
 
 | Entität | Wirkung |
 |---|---|
-| `switch.wp_debug_syslog` („Debug & Syslog“) | sendet die NASA-Logzeilen per Syslog (UDP) an den Analyse-Server. Startet nach jedem Neustart **AUS** und schaltet sich nach **20 min** oder bei **< 30 kB freiem Speicher** selbst ab (Grund im Log). |
+| `switch.wp_debug_syslog` („Debug & Syslog“) | sendet die NASA-Logzeilen per Syslog (UDP) an den Analyse-Server. Startet nach jedem Neustart **AUS** und schaltet sich nach **20 min** oder bei **< 30 kB freiem Speicher** selbst ab (Grund im Log). Bei < 12 kB frei oder größtem freien Block < 2 kB wird der Versand sofort gesperrt. Stabil bei viel Busverkehr nur im Rohbyte-Modus. |
 | `switch.wp_nasa_rohbytes_protokollieren` | Rohbyte-Modus: statt dekodierter Einzelzeilen nur noch die unveränderten Telegramme (eine Zeile je Telegramm, ~90 % weniger Verkehr); der Server dekodiert selbst. Wirkt nur bei eingeschaltetem Debug |
 | `sensor.wp_freier_speicher` | freier Heap des ESP (Byte) |
 | `sensor.wp_syslog_verworfene_zeilen` | am ESP verworfene Logzeilen (Sender war belegt) |
@@ -68,8 +68,10 @@ Rohbyte-Mitschnitt: vorher „Debug & Syslog“ und „NASA Rohbytes“ einschal
 | Taste | Anfrage | Antwort |
 |---|---|---|
 | `button.wp_zyklusdaten_vor_fehler_0x860b_abrufen` | 0x860B Betriebsart 1 an 10.00.00 | 30 Datensätze (1/min) vor dem letzten Fehler, je 13 Pakete |
-| `button.warmepumpe_warmepumpe_fehlercodes_aussengeraet_0x860b_abrufen` | 0x860B Betriebsart 3 | Fehlercode-Historie, 200 Einträge ohne Zeiten |
-| `button.wp_fehlerhistorie_0x461e_lesen` | 0x461E an 20.00.00 | Fehlerhistorie Innengerät (bisher immer leer) |
+| `button.wp_fehlercodes_aussengeraet_0x860b_abrufen` | 0x860B Betriebsart 3 | Fehlercode-Historie, 200 Einträge ohne Zeiten |
+| `button.wp_fehlerhistorie_0x461e_lesen` | 0x461E an 20.00.00 | Fehlerhistorie Innengerät (bisher immer leer); wird zusätzlich bei jeder Änderung des Fehlercodes automatisch gelesen |
+| `button.wp_geraetedaten_lesen` | Strukturen 0x0600–0x0608, 0x061F (innen), 0x061A/0x0605/0x0607/0x8601 (außen), 0x061C (WLAN-Modul) | Modell, Seriennummern, Standort, Micom-Versionen, MAC; ebenso in der Startrunde |
+| `button.wp_fsv_info_lesen` | 0x4612 an 20.00.00 | FSV, die die Anlage nur über die FSV-Info liefert (z. B. 1061–1064, 4054, 6022, 6031); ebenso stündlich |
 
 Verwendet werden nur die Betriebsarten 1 und 3 (die Speicher 2, 4 und 6 waren bei uns leer, Tasten dafür entfernt); es werden nur lesende Abfragen gesendet.
 Aufbau der Antworten: README der Komponente, Abschnitte „0x860B layout“ und „0x860B request modes“.
@@ -77,4 +79,4 @@ Aufbau der Antworten: README der Komponente, Abschnitte „0x860B layout“ und 
 
 ## Fehler zurücksetzen
 
-`button.warmepumpe_warmepumpe_e438_reset_0x8065_wert_2_write` („Fehler zurücksetzen (E438)“, unter Steuerung): NASA Write 0x8065 = 2 an 10.00.00, nur bei E438 und stehendem Verdichter, 60 s Abstand, nur manuell. Die ältere Taste „E438 Reset-Test 0x8065“ (Wert 1) setzte beim Reset auch Einstellungen zurück und bleibt als Reserve unter Diagnose.
+`button.wp_e438_reset_0x8065_wert_2_write` („Fehler zurücksetzen (E438)“, unter Steuerung): NASA Write 0x8065 = 2 an 10.00.00, nur bei E438 und stehendem Verdichter, 60 s Abstand, nur manuell. Die ältere Taste „E438 Reset-Test 0x8065“ (Wert 1) setzte beim Reset auch Einstellungen zurück und bleibt als Reserve unter Diagnose.

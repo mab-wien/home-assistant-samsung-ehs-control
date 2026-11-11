@@ -1,469 +1,371 @@
 # Entitäten der Wärmepumpe
 
-Stand: Firmware vom 22.10.2026 (411 Entitäten in Home Assistant). Alle entity_ids beginnen mit `wp_`; der Anzeigename in HA ist
-„Wärmepumpe <Name>“. Schreibbare Entitäten (Zahl, Auswahl, Schalter, Taste) wirken direkt auf die Anlage.
+Stand: 11.11.2026 (328 Entitäten in Home Assistant). Alle entity_ids beginnen mit `wp_`; der Anzeigename in HA ist
+„Wärmepumpe <Name>“ bzw. bei FSV „<FSV-Gruppe> <Name>“. Schreibbare Entitäten (Zahl, Auswahl, Schalter, Taste) wirken direkt auf die Anlage.
 
-Erzeugt aus `esphome/esphome-samsung-hvac-bus.yaml` und der HA-Registry. Quelle „NASA 0x…“ = Kennung auf dem Samsung-Bus, „FSV“ = Feldeinstellung.
+Erzeugt aus `esphome/esphome-samsung-hvac-bus.yaml` (validierte Konfiguration) und den Entitäten in Home Assistant. Quelle „NASA 0x…“ = Kennung auf dem Samsung-Bus, „FSV“ = Feldeinstellung. Als `internal` markierte Sensoren (Werte, die diese Anlage nicht liefert, und interne Hilfswerte) fehlen hier, ebenso Auswertungen,
+die ein Server außerhalb dieses Repositorys in HA einspeist (`wp_diagnose_*`, `wp_analyse_*`).
 
-## Diagnose & Bus (219)
-
-| Name | entity_id | Art | Quelle | Einheit |
-|---|---|---|---|---|
-| Debug & Syslog | `–` | Schalter | berechnet (Template) |  |
-| Durchflusssensor Messsignal (NASA) | `–` | Sensor | NASA 0x42E8 |  |
-| E438 Reset-Test 0x8065 | `–` | Taste | berechnet (Template) |  |
-| Fehlercode | `–` | Sensor | NASA 0x8235 |  |
-| Freier Speicher | `–` | Sensor | berechnet (Template) | B |
-| FSV 1051 - Warmwasserspeicher maximale Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1052 - Warmwasserspeicher minimale Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1061-1064 - Hysterese-Testwerte erneut lesen | `–` | Taste | berechnet (Template) |  |
-| FSV 5019 - Smart Grid Warmwasser Speichertemperatur | `–` | Sensor | berechnet (Template) | °C |
-| Inneneinheit Leistungsaufnahme (NASA) | `–` | Sensor | NASA 0x4284 |  |
-| NASA 0x0202 AD_ERROR_CODE1 | `–` | Sensor | NASA 0x0202 |  |
-| NASA 0x0207 AD_INSTALL_NUMBER_INDOOR | `–` | Sensor | NASA 0x0207 |  |
-| NASA 0x0210 NET_ADDRESS | `–` | Sensor | NASA 0x0210 |  |
-| NASA 0x0217 PNP_NET_ADDRESS | `–` | Sensor | NASA 0x0217 |  |
-| NASA 0x0401 AD_ADDRESS_MAIN | `–` | Sensor | NASA 0x0401 |  |
-| NASA 0x0402 AD_ADDRESS_RMC | `–` | Sensor | NASA 0x0402 |  |
-| NASA 0x0408 AD_ADDRESS_SETUP | `–` | Sensor | NASA 0x0408 |  |
-| NASA 0x0409 AD_INSTALL_LEVEL_ALL | `–` | Sensor | NASA 0x0409 |  |
-| NASA 0x040A AD_INSTALL_LEVEL_OPERATION_POWER | `–` | Sensor | NASA 0x040A |  |
-| NASA 0x040B AD_INSTALL_LEVEL_OPERATION_MODE | `–` | Sensor | NASA 0x040B |  |
-| NASA 0x040C AD_INSTALL_LEVEL_FAN_MODE | `–` | Sensor | NASA 0x040C |  |
-| NASA 0x040D AD_INSTALL_LEVEL_FAN_DIRECTION | `–` | Sensor | NASA 0x040D |  |
-| NASA 0x040E AD_INSTALL_LEVEL_TEMP_TARGET | `–` | Sensor | NASA 0x040E |  |
-| NASA 0x0410 AD_INSTALL_LEVEL_OPERATION_MODE_ONLY | `–` | Sensor | NASA 0x0410 |  |
-| NASA 0x0411 AD_INSTALL_LEVEL_COOL_MODE_UPPER | `–` | Sensor | NASA 0x0411 |  |
-| NASA 0x0412 AD_INSTALL_LEVEL_COOL_MODE_LOWER | `–` | Sensor | NASA 0x0412 |  |
-| NASA 0x0413 AD_INSTALL_LEVEL_HEAT_MODE_UPPER | `–` | Sensor | NASA 0x0413 |  |
-| NASA 0x0414 AD_INSTALL_LEVEL_HEAT_MODE_LOWER | `–` | Sensor | NASA 0x0414 |  |
-| NASA 0x0415 AD_INSTALL_LEVEL_CONTACT_CONTROL | `–` | Sensor | NASA 0x0415 |  |
-| NASA 0x0416 AD_INSTALL_LEVEL_KEY_OPERATION_INPUT | `–` | Sensor | NASA 0x0416 |  |
-| NASA 0x0417 | `–` | Sensor | NASA 0x0417 |  |
-| NASA 0x0418 | `–` | Sensor | NASA 0x0418 |  |
-| NASA 0x0419 | `–` | Sensor | NASA 0x0419 |  |
-| NASA 0x041B | `–` | Sensor | NASA 0x041B |  |
-| NASA 0x2000 IM_MASTER | `–` | Sensor | NASA 0x2000 |  |
-| NASA 0x2003 ADDRESSING | `–` | Sensor | NASA 0x2003 |  |
-| NASA 0x2004 PNP | `–` | Sensor | NASA 0x2004 |  |
-| NASA 0x200F NM_NETWORK_POSITINON_LAYER | `–` | Sensor | NASA 0x200F |  |
-| NASA 0x2012 | `–` | Sensor | NASA 0x2012 |  |
-| NASA 0x2015 | `–` | Sensor | NASA 0x2015 |  |
-| NASA 0x20FF | `–` | Sensor | NASA 0x20FF |  |
-| NASA 0x22F7 | `–` | Sensor | NASA 0x22F7 |  |
-| NASA 0x22F8 | `–` | Sensor | NASA 0x22F8 |  |
-| NASA 0x22F9 | `–` | Sensor | NASA 0x22F9 |  |
-| NASA 0x22FA | `–` | Sensor | NASA 0x22FA |  |
-| NASA 0x22FB | `–` | Sensor | NASA 0x22FB |  |
-| NASA 0x22FC | `–` | Sensor | NASA 0x22FC |  |
-| NASA 0x22FD | `–` | Sensor | NASA 0x22FD |  |
-| NASA 0x22FE | `–` | Sensor | NASA 0x22FE |  |
-| NASA 0x22FF | `–` | Sensor | NASA 0x22FF |  |
-| NASA 0x2400 ALL_LAYER_DEVICE_COUNT | `–` | Sensor | NASA 0x2400 |  |
-| NASA 0x2401 | `–` | Sensor | NASA 0x2401 |  |
-| NASA 0x24FB | `–` | Sensor | NASA 0x24FB |  |
-| NASA 0x4006 FANSPEED | `–` | Sensor | NASA 0x4006 |  |
-| NASA 0x400F | `–` | Sensor | NASA 0x400F |  |
-| NASA 0x4010 | `–` | Sensor | NASA 0x4010 |  |
-| NASA 0x4015 | `–` | Sensor | NASA 0x4015 |  |
-| NASA 0x4019 | `–` | Sensor | NASA 0x4019 |  |
-| NASA 0x401B | `–` | Sensor | NASA 0x401B |  |
-| NASA 0x4023 USE_SPI | `–` | Sensor | NASA 0x4023 |  |
-| NASA 0x4024 USE_FILTER_WARNING_TIME | `–` | Sensor | NASA 0x4024 |  |
-| NASA 0x4027 FILTER_WARNING | `–` | Sensor | NASA 0x4027 |  |
-| NASA 0x4029 | `–` | Sensor | NASA 0x4029 |  |
-| NASA 0x402A | `–` | Sensor | NASA 0x402A |  |
-| NASA 0x402B | `–` | Sensor | NASA 0x402B |  |
-| NASA 0x402D | `–` | Sensor | NASA 0x402D |  |
-| NASA 0x4031 | `–` | Sensor | NASA 0x4031 |  |
-| NASA 0x4035 | `–` | Sensor | NASA 0x4035 |  |
-| NASA 0x4038 IN_STATE_HUMIDITY_PERCENT | `–` | Sensor | NASA 0x4038 |  |
-| NASA 0x4043 CONTROL_SPI | `–` | Sensor | NASA 0x4043 |  |
-| NASA 0x4046 CONTROL_SILENCE | `–` | Sensor | NASA 0x4046 |  |
-| NASA 0x4047 | `–` | Sensor | NASA 0x4047 |  |
-| NASA 0x4048 | `–` | Sensor | NASA 0x4048 |  |
-| NASA 0x404F | `–` | Sensor | NASA 0x404F |  |
-| NASA 0x4051 | `–` | Sensor | NASA 0x4051 |  |
-| NASA 0x4059 | `–` | Sensor | NASA 0x4059 |  |
-| NASA 0x405F | `–` | Sensor | NASA 0x405F |  |
-| NASA 0x4060 IN_ALTERNATIVE_MODE | `–` | Sensor | NASA 0x4060 |  |
-| NASA 0x4068 IN_SOLAR_PUMP | `–` | Sensor | NASA 0x4068 |  |
-| NASA 0x4069 IN_THERMOSTAT1 | `–` | Sensor | NASA 0x4069 |  |
-| NASA 0x406A IN_THERMOSTAT2 | `–` | Sensor | NASA 0x406A |  |
-| NASA 0x406B SMART_GRID | `–` | Sensor | NASA 0x406B |  |
-| NASA 0x406D IN_OUTING_MODE | `–` | Sensor | NASA 0x406D |  |
-| NASA 0x4070 IN_DISCHAGE_TEMP_CONTROL | `–` | Sensor | NASA 0x4070 |  |
-| NASA 0x4073 | `–` | Sensor | NASA 0x4073 |  |
-| NASA 0x4074 | `–` | Sensor | NASA 0x4074 |  |
-| NASA 0x4077 | `–` | Sensor | NASA 0x4077 |  |
-| NASA 0x407B | `–` | Sensor | NASA 0x407B |  |
-| NASA 0x407D | `–` | Sensor | NASA 0x407D |  |
-| NASA 0x407E IN_LOUVER_LR_SWING | `–` | Sensor | NASA 0x407E |  |
-| NASA 0x4085 | `–` | Sensor | NASA 0x4085 |  |
-| NASA 0x4086 TEST_MODE_ENABLED | `–` | Sensor | NASA 0x4086 |  |
-| NASA 0x408A IN_2WAY_VALVE | `–` | Sensor | NASA 0x408A |  |
-| NASA 0x40B5 | `–` | Sensor | NASA 0x40B5 |  |
-| NASA 0x40C5 IN_THERMOSTAT_WATER_HEATER | `–` | Sensor | NASA 0x40C5 |  |
-| NASA 0x40C6 | `–` | Sensor | NASA 0x40C6 |  |
-| NASA 0x40E3 | `–` | Sensor | NASA 0x40E3 |  |
-| NASA 0x4117 | `–` | Sensor | NASA 0x4117 |  |
-| NASA 0x411E IN_OPERATION_POWER_ZONE2 | `–` | Sensor | NASA 0x411E |  |
-| NASA 0x4124 IN_SG_READY_MODE_STATE | `–` | Sensor | NASA 0x4124 |  |
-| NASA 0x4125 IN_FSV_LOAD_SAVE | `–` | Sensor | NASA 0x4125 |  |
-| NASA 0x4202 IN_TEMP_DISCHARGE_REQUEST | `–` | Sensor | NASA 0x4202 |  |
-| NASA 0x4204 | `–` | Sensor | NASA 0x4204 |  |
-| NASA 0x420C INDOOR_OUTER_TEMP | `–` | Sensor | NASA 0x420C |  |
-| NASA 0x4211 IN_CAPACITY_REQUEST | `–` | Sensor | NASA 0x4211 |  |
-| NASA 0x4212 IN_CAPACITY_ABSOLUTE | `–` | Sensor | NASA 0x4212 |  |
-| NASA 0x4213 | `–` | Sensor | NASA 0x4213 |  |
-| NASA 0x4217 IN_EEV_VALUE_REAL_1 | `–` | Sensor | NASA 0x4217 |  |
-| NASA 0x4229 IN_MODEL_INFORMATION | `–` | Sensor | NASA 0x4229 |  |
-| NASA 0x423E | `–` | Sensor | NASA 0x423E |  |
-| NASA 0x428C IN_TEMP_MIXING_VALVE_F | `–` | Sensor | NASA 0x428C |  |
-| NASA 0x428D | `–` | Sensor | NASA 0x428D |  |
-| NASA 0x42D6 IN_TEMP_TARGET_ZONE2_F | `–` | Sensor | NASA 0x42D6 |  |
-| NASA 0x42D7 IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F | `–` | Sensor | NASA 0x42D7 |  |
-| NASA 0x42F1 OUT_COMP_FREQ_RATE_CONTROL | `–` | Sensor | NASA 0x42F1 |  |
-| NASA 0x4301 | `–` | Sensor | NASA 0x4301 |  |
-| NASA 0x4401 | `–` | Sensor | NASA 0x4401 |  |
-| NASA 0x440A IN_DEVICE_STAUS_HEATPUMP_BOILER | `–` | Sensor | NASA 0x440A |  |
-| NASA 0x440E | `–` | Sensor | NASA 0x440E |  |
-| NASA 0x440F ERROR_INOUT | `–` | Sensor | NASA 0x440F |  |
-| NASA 0x8003 OUT_OPERATION_HEATCOOL | `–` | Text | NASA 0x8003 |  |
-| NASA 0x8005 | `–` | Sensor | NASA 0x8005 |  |
-| NASA 0x800D | `–` | Text | NASA 0x800D |  |
-| NASA 0x8031 | `–` | Sensor | NASA 0x8031 |  |
-| NASA 0x8032 | `–` | Sensor | NASA 0x8032 |  |
-| NASA 0x8033 | `–` | Sensor | NASA 0x8033 |  |
-| NASA 0x803C OUT_OPERATION_AUTO_INSPECT_STEP | `–` | Sensor | NASA 0x803C |  |
-| NASA 0x803F | `–` | Sensor | NASA 0x803F |  |
-| NASA 0x8045 | `–` | Sensor | NASA 0x8045 |  |
-| NASA 0x8046 OUT_OP_TEST_OP_COMPLETE | `–` | Sensor | NASA 0x8046 |  |
-| NASA 0x8048 | `–` | Sensor | NASA 0x8048 |  |
-| NASA 0x805E | `–` | Sensor | NASA 0x805E |  |
-| NASA 0x8062 OUTDOOR_LOGICAL_DEFROST_STEP | `–` | Sensor | NASA 0x8062 |  |
-| NASA 0x8063 | `–` | Sensor | NASA 0x8063 |  |
-| NASA 0x8065 OUTDOOR_SYSTEM_RESET | `–` | Sensor | NASA 0x8065 |  |
-| NASA 0x8066 OUTDOOR_OPMODELIMIT | `–` | Sensor | NASA 0x8066 |  |
-| NASA 0x8075 | `–` | Sensor | NASA 0x8075 |  |
-| NASA 0x8077 | `–` | Sensor | NASA 0x8077 |  |
-| NASA 0x8078 | `–` | Sensor | NASA 0x8078 |  |
-| NASA 0x8079 | `–` | Sensor | NASA 0x8079 |  |
-| NASA 0x807A | `–` | Sensor | NASA 0x807A |  |
-| NASA 0x807B | `–` | Sensor | NASA 0x807B |  |
-| NASA 0x807C | `–` | Sensor | NASA 0x807C |  |
-| NASA 0x807D | `–` | Sensor | NASA 0x807D |  |
-| NASA 0x807E | `–` | Sensor | NASA 0x807E |  |
-| NASA 0x807F | `–` | Sensor | NASA 0x807F |  |
-| NASA 0x8081 OUTDOOR_EXT_CMD_OPERATION | `–` | Sensor | NASA 0x8081 |  |
-| NASA 0x8083 | `–` | Sensor | NASA 0x8083 |  |
-| NASA 0x808D | `–` | Sensor | NASA 0x808D |  |
-| NASA 0x808E OUT_OP_CHECK_REF_STEP | `–` | Sensor | NASA 0x808E |  |
-| NASA 0x809C OUT_CHECK_REF_RESULT | `–` | Sensor | NASA 0x809C |  |
-| NASA 0x809D OUTDOOR_COOLONLY_MODEL | `–` | Sensor | NASA 0x809D |  |
-| NASA 0x80A7 OUTDOOR_DRED_LEVEL | `–` | Sensor | NASA 0x80A7 |  |
-| NASA 0x80A9 | `–` | Sensor | NASA 0x80A9 |  |
-| NASA 0x80AA | `–` | Sensor | NASA 0x80AA |  |
-| NASA 0x80B1 | `–` | Sensor | NASA 0x80B1 |  |
-| NASA 0x80B2 OUTDOOR_CH_SWITCH_VALUE | `–` | Sensor | NASA 0x80B2 |  |
-| NASA 0x80B6 | `–` | Sensor | NASA 0x80B6 |  |
-| NASA 0x80BC | `–` | Sensor | NASA 0x80BC |  |
-| NASA 0x80BF | `–` | Sensor | NASA 0x80BF |  |
-| NASA 0x80CE | `–` | Sensor | NASA 0x80CE |  |
-| NASA 0x80D8 OUT_EHS_WATEROUT_TYPE | `–` | Sensor | NASA 0x80D8 |  |
-| NASA 0x8200 OUTDOOR_OPMODE_OPTION | `–` | Sensor | NASA 0x8200 |  |
-| NASA 0x8202 OUT_INSTALL_COMP_NUM | `–` | Sensor | NASA 0x8202 |  |
-| NASA 0x8224 | `–` | Sensor | NASA 0x8224 |  |
-| NASA 0x8225 | `–` | Sensor | NASA 0x8225 |  |
-| NASA 0x8227 OUTDOOR_FAN_STEP2 | `–` | Sensor | NASA 0x8227 |  |
-| NASA 0x8231 OUTDOOR_HEATING_PERCENT | `–` | Sensor | NASA 0x8231 |  |
-| NASA 0x823C | `–` | Sensor | NASA 0x823C |  |
-| NASA 0x8243 | `–` | Sensor | NASA 0x8243 |  |
-| NASA 0x8244 OUTDOOR_OIL_RECOVERY_STEP | `–` | Sensor | NASA 0x8244 |  |
-| NASA 0x8245 OUTDOOR_OIL_BALANCE_STEP | `–` | Sensor | NASA 0x8245 |  |
-| NASA 0x8247 OUTDOOR_DEFROST_STEP | `–` | Sensor | NASA 0x8247 |  |
-| NASA 0x8248 OUTDOOR_SAFETY_START | `–` | Sensor | NASA 0x8248 |  |
-| NASA 0x8249 | `–` | Sensor | NASA 0x8249 |  |
-| NASA 0x824B | `–` | Sensor | NASA 0x824B |  |
-| NASA 0x824C | `–` | Sensor | NASA 0x824C |  |
-| NASA 0x825A | `–` | Sensor | NASA 0x825A |  |
-| NASA 0x825B | `–` | Sensor | NASA 0x825B |  |
-| NASA 0x825C | `–` | Sensor | NASA 0x825C |  |
-| NASA 0x825D | `–` | Sensor | NASA 0x825D |  |
-| NASA 0x8278 OUT_SENSOR_OCT1 | `–` | Sensor | NASA 0x8278 |  |
-| NASA 0x8287 OUT_INSTALL_CAPA | `–` | Sensor | NASA 0x8287 |  |
-| NASA 0x8298 OUTDOOR_COOL_SUM_CAPA | `–` | Sensor | NASA 0x8298 |  |
-| NASA 0x829A OUT_SENSOR_SUCTION2_1SEC | `–` | Sensor | NASA 0x829A |  |
-| NASA 0x829B OUTDOOR_CT_RESTRICT_OPTION | `–` | Sensor | NASA 0x829B |  |
-| NASA 0x82A2 | `–` | Sensor | NASA 0x82A2 |  |
-| NASA 0x82A8 OUT_CONTROL_IDU_TOTAL_ABSCAPA | `–` | Sensor | NASA 0x82A8 |  |
-| NASA 0x82A9 OUT_CONTROL_IDU_TOTAL_ABSCAPA2 | `–` | Sensor | NASA 0x82A9 |  |
-| NASA 0x82AA | `–` | Sensor | NASA 0x82AA |  |
-| NASA 0x82B2 | `–` | Sensor | NASA 0x82B2 |  |
-| NASA 0x82B5 | `–` | Sensor | NASA 0x82B5 |  |
-| NASA 0x82B8 OUT_SENSOR_MIDPRESS | `–` | Sensor | NASA 0x82B8 |  |
-| NASA 0x82BC OUT_PROJECT_CODE | `–` | Sensor | NASA 0x82BC |  |
-| NASA 0x82D1 | `–` | Sensor | NASA 0x82D1 |  |
-| NASA 0x82D5 OUTDOOR_UPL_TP_COOL | `–` | Sensor | NASA 0x82D5 |  |
-| NASA 0x82D6 OUTDOOR_UPL_TP_HEAT | `–` | Sensor | NASA 0x82D6 |  |
-| NASA 0x82D7 | `–` | Sensor | NASA 0x82D7 |  |
-| NASA 0x82D8 | `–` | Sensor | NASA 0x82D8 |  |
-| NASA 0x82DE OUTDOOR_EVA_IN | `–` | Sensor | NASA 0x82DE |  |
-| NASA 0x82E3 OUT_PRODUCT_OPTION_CAPA | `–` | Sensor | NASA 0x82E3 |  |
-| NASA 0x82E8 OUT_LOAD_MCU_HR_BYPASS_EEV | `–` | Sensor | NASA 0x82E8 |  |
-| NASA 0x82ED | `–` | Sensor | NASA 0x82ED |  |
-| NASA 0x82F6 | `–` | Sensor | NASA 0x82F6 |  |
-| NASA 0x8401 | `–` | Sensor | NASA 0x8401 |  |
-| NASA 0x8404 | `–` | Sensor | NASA 0x8404 |  |
-| NASA 0x8405 OUTDOOR_COMP1_RUNNING_TIME | `–` | Sensor | NASA 0x8405 |  |
-| NASA 0x8408 | `–` | Sensor | NASA 0x8408 |  |
-| NASA 0x8409 | `–` | Sensor | NASA 0x8409 |  |
-| NASA 0x840B OUT_AUTO_INSPECT_RESULT0 | `–` | Sensor | NASA 0x840B |  |
-| NASA 0x840C OUT_AUTO_INSPECT_RESULT1 | `–` | Sensor | NASA 0x840C |  |
-| NASA 0x8417 OUTDOOR_VARIABLE_SETUP_INFO | `–` | Sensor | NASA 0x8417 |  |
-| NASA 0x841A | `–` | Sensor | NASA 0x841A |  |
-| NASA 0x841F | `–` | Sensor | NASA 0x841F |  |
-| NASA Rohbytes protokollieren | `–` | Schalter | berechnet (Template) |  |
-| Regelzustand Code | `–` | Sensor | NASA 0x8233 |  |
-| Samsung Fehlerbeschreibung | `–` | Text | NASA 0x8235 |  |
-| Syslog verworfene Zeilen | `–` | Sensor | berechnet (Template) |  |
-
-## FSV-Einstellungen (Lesekopien) (92)
+## Diagnose & Bus (104)
 
 | Name | entity_id | Art | Quelle | Einheit |
 |---|---|---|---|---|
-| FSV 1011 - Kühlbetrieb maximale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1012 - Kühlbetrieb minimale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1021 - Kühlbetrieb maximale Raumtemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1022 - Kühlbetrieb minimale Raumtemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1031 - Heizbetrieb maximale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1032 - Heizbetrieb minimale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1041 - Heizbetrieb maximale Raumtemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1042 - Heizbetrieb minimale Raumtemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 1061 - Vorlauftemperatur Hysterese Heizen (Test) | `–` | Sensor | NASA 0x431E | °C |
-| FSV 1062 - Vorlauftemperatur Hysterese Kühlen (Test) | `–` | Sensor | NASA 0x431F | °C |
-| FSV 1063 - Raumtemperatur Hysterese Heizen (Test) | `–` | Sensor | NASA 0x4320 | °C |
-| FSV 1064 - Raumtemperatur Hysterese Kühlen (Test) | `–` | Sensor | NASA 0x4321 | °C |
-| FSV 2011 - Heizkurve Außentemperatur bei Kälte | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2012 - Heizkurve Außentemperatur bei Wärme | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2021 - Heizkurve WL1 Vorlauf bei Kälte | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2022 - Heizkurve WL1 Vorlauf bei Wärme | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2031 - Heizkurve WL2 Vorlauf bei Kälte | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2032 - Heizkurve WL2 Vorlauf bei Wärme | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2041 - Heizkurve WL1 oder WL2 Auswahl | `–` | Text | berechnet (Template) |  |
-| FSV 2051 - Kühlkurve Außentemperatur untere Grenze | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2052 - Kühlkurve Außentemperatur obere Grenze | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2061 - Kühlkurve WL1 maximale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2062 - Kühlkurve WL1 minimale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2071 - Kühlkurve WL2 maximale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2072 - Kühlkurve WL2 minimale Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 2081 - Kühlkurve WL1 oder WL2 Auswahl | `–` | Text | berechnet (Template) |  |
-| FSV 2091 - Externer Raumthermostat Zone 1 | `–` | Text | berechnet (Template) |  |
-| FSV 2092 - Externer Raumthermostat Zone 2 | `–` | Text | berechnet (Template) |  |
-| FSV 2093 - Raumtemperaturregelung Betriebsart | `–` | Text | berechnet (Template) |  |
-| FSV 3011 - Warmwasserbereitung aktivierte Betriebsart | `–` | Text | berechnet (Template) |  |
-| FSV 3021 - Warmwasser maximale Wärmepumpentemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 3022 - Warmwasser Ausschalthysterese | `–` | Sensor | berechnet (Template) | °C |
-| FSV 3023 - Warmwasser Einschalthysterese | `–` | Sensor | berechnet (Template) | °C |
-| FSV 3024 - Raumheizung Mindestlaufzeit | `–` | Sensor | berechnet (Template) | min |
-| FSV 3025 - Warmwasser Wärmepumpe maximale Laufzeit | `–` | Sensor | berechnet (Template) | min |
-| FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser | `–` | Sensor | berechnet (Template) | h |
-| FSV 3031 - Warmwasser Heizstab Freigabe | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 3032 - Warmwasser Heizstab Einschaltverzögerung | `–` | Sensor | berechnet (Template) | min |
-| FSV 3033 - Warmwasser Heizstab Temperaturüberschwingung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 3041 - Warmwasser thermische Desinfektion aktiv | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 3042 - Warmwasser thermische Desinfektion Wochentag | `–` | Text | berechnet (Template) |  |
-| FSV 3043 - Warmwasser thermische Desinfektion Startstunde | `–` | Sensor | berechnet (Template) | h |
-| FSV 3044 - Warmwasser thermische Desinfektion Zieltemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 3045 - Warmwasser thermische Desinfektion Dauer | `–` | Sensor | berechnet (Template) | min |
-| FSV 3046 - Warmwasser thermische Desinfektion Zeitlimit | `–` | Sensor | berechnet (Template) | h |
-| FSV 3051 - Warmwasser Timer-Aus aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 3052 - Warmwasser Timer-Aus Zeitdauer | `–` | Sensor | berechnet (Template) | min |
-| FSV 3061 - Solarthermie oder Warmwasserthermostat aktiviert | `–` | Text | berechnet (Template) |  |
-| FSV 3071 - Dreiwegeventil Ausrichtung | `–` | Text | berechnet (Template) |  |
-| FSV 3081 - Zusatzheizung Stufe 1 Nennleistung | `–` | Sensor | berechnet (Template) | kW |
-| FSV 3082 - Zusatzheizung Stufe 2 Nennleistung | `–` | Sensor | berechnet (Template) | kW |
-| FSV 3083 - Warmwasser Heizstab Nennleistung | `–` | Sensor | berechnet (Template) | kW |
-| FSV 4011 - Vorrang Raumheizung oder Warmwasser | `–` | Text | berechnet (Template) |  |
-| FSV 4012 - Außentemperatur für Vorrangregelung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4013 - Heizung Abschalttemperatur außen | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4021 - Elektrische Zusatzheizung Betriebsart | `–` | Text | berechnet (Template) |  |
-| FSV 4022 - Zusatzheizung und Warmwasser Heizstab Priorität | `–` | Text | berechnet (Template) |  |
-| FSV 4023 - Zusatzheizung Kältekompensation | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 4024 - Zusatzheizung Außentemperaturschwelle | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4025 - Zusatzheizung Abtauunterstützung Temperaturschwelle | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4031 - Externe Wärmequelle Freigabe | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 4032 - Externe Wärmequelle Priorität | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 4033 - Externe Wärmequelle Außentemperaturschwelle | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4041 - Mischventil Installation und Betriebsart | `–` | Text | berechnet (Template) |  |
-| FSV 4042 - Mischventil Heizen Sollspreizung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4043 - Mischventil Kühlen Sollspreizung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4044 - Mischventil Regelfaktor | `–` | Sensor | berechnet (Template) |  |
-| FSV 4045 - Mischventil Regelintervall | `–` | Sensor | berechnet (Template) | min |
-| FSV 4046 - Mischventil Stellzeit | `–` | Sensor | berechnet (Template) | s |
-| FSV 4051 - Inverterpumpe PWM Regelmodus | `–` | Text | berechnet (Template) |  |
-| FSV 4052 - Inverterpumpe Sollspreizung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 4053 - Inverterpumpe Regelfaktor | `–` | Sensor | berechnet (Template) |  |
-| FSV 4061 - Zonenregelung aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 5011 - Smart Grid Kühlung Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5013 - Smart Grid Heizung Vorlauftemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5014 - Smart Grid Heizung Raumtemperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5015 - Smart Grid Kühlkurve WL1 Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5016 - Smart Grid Kühlkurve WL2 Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5017 - Smart Grid Heizkurve WL1 Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5018 - Smart Grid Heizkurve WL2 Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5021 - Warmwasser Sparbetrieb Temperaturabsenkung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5022 - Warmwasser Sparbetrieb aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 5023 - Warmwasser Sparbetrieb Thermo-Ein Temperatur | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5041 - Netzbetreiber Fernsteuerung aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 5051 - Verdichter Frequenzbegrenzungsfunktion aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 5081 - Photovoltaiksteuerung aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 5082 - Photovoltaik Kühlung Temperaturversatz | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5083 - Photovoltaik Heizung Temperaturversatz | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5091 - Smart Grid Regelung aktiviert | `–` | Binärsensor | berechnet (Template) |  |
-| FSV 5092 - Smart Grid Heizung Temperaturänderung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5093 - Smart Grid Warmwasser Temperaturänderung | `–` | Sensor | berechnet (Template) | °C |
-| FSV 5094 - Smart Grid Warmwasser Betriebsart | `–` | Binärsensor | berechnet (Template) |  |
+| Abtauschritt | `sensor.wp_nasa_8247` | Sensor | NASA 0x8247 |  |
+| Abtauschritt logisch | `sensor.wp_nasa_8062` | Sensor | NASA 0x8062 |  |
+| Angeforderte Austrittstemperatur | `sensor.wp_nasa_4202` | Sensor | NASA 0x4202 | °C |
+| Angeforderte Leistung Innengerät | `sensor.wp_nasa_4211` | Sensor | NASA 0x4211 | kW |
+| Außeneinheit Seriennummer | `sensor.wp_ausseneinheit_seriennummer` | Text | NASA 0x0607 |  |
+| Außeneinheit Standort | `sensor.wp_ausseneinheit_standort` | Text | NASA 0x0605 |  |
+| Außentemperatur Innengerät Rohwert | `sensor.wp_nasa_420c` | Sensor | NASA 0x420C |  |
+| Betriebszustand Außengerät | `sensor.wp_nasa_8003` | Text | NASA 0x8003 |  |
+| Debug & Syslog | `switch.wp_debug_syslog` | Schalter | berechnet (Template) |  |
+| Doppelrohr-Wärmetauscher Temperatur Kopie | `sensor.wp_nasa_82de` | Sensor | NASA 0x82DE | °C |
+| Durchflusssensor Messsignal (NASA) | `sensor.wp_durchflusssensor_messsignal_nasa` | Sensor | NASA 0x42E8 | V |
+| E438 Reset-Test 0x8065 | `button.wp_e438_reset_test_0x8065` | Taste | berechnet (Template) |  |
+| EEPROM-Stand Außengerät | `sensor.wp_nasa_060c` | Text | NASA 0x060C |  |
+| Fehler zurücksetzen (E438) | `button.wp_e438_reset_0x8065_wert_2_write` | Taste | berechnet (Template) |  |
+| Fehlercode | `sensor.wp_fehlercode` | Sensor | NASA 0x8235 |  |
+| Fehlercode Kopie Außengerät | `sensor.wp_nasa_0202` | Sensor | NASA 0x0202 |  |
+| Fehlercode Kopie Innengerät | `sensor.wp_nasa_440f` | Sensor | NASA 0x440F |  |
+| Fehlercodes Aussengeraet 0x860B abrufen | `button.wp_fehlercodes_aussengeraet_0x860b_abrufen` | Taste | berechnet (Template) |  |
+| Fehlerhistorie 0x461E lesen | `button.wp_fehlerhistorie_0x461e_lesen` | Taste | berechnet (Template) |  |
+| Fehlerhistorie Innengerät | `sensor.wp_nasa_461e` | Text | NASA 0x461E |  |
+| Firmware-Stand Außengerät | `sensor.wp_nasa_0608_aussen` | Text | NASA 0x0608 |  |
+| Firmware-Stand Innengerät | `sensor.wp_nasa_0608_innen` | Text | NASA 0x0608 |  |
+| Freier Speicher | `sensor.wp_freier_speicher` | Sensor | berechnet (Template) | B |
+| FSV-Info Antwort (0x4612) | `sensor.wp_fsv_info_antwort_0x4612` | Text | NASA 0x4612 |  |
+| Gerätedaten lesen | `button.wp_geraetedaten_lesen` | Taste | berechnet (Template) |  |
+| Heizanteil Außengerät | `sensor.wp_nasa_8231` | Sensor | NASA 0x8231 |  |
+| Heißgas Soll Heizen Innengerät Rohwert | `sensor.wp_heissgas_soll_heizen_innengeraet_rohwert` | Sensor | NASA 0x422B |  |
+| HR-Bypass-EEV | `sensor.wp_nasa_82e8` | Sensor | NASA 0x82E8 |  |
+| Inneneinheit Leistungsaufnahme (NASA) | `sensor.wp_inneneinheit_leistungsaufnahme_nasa` | Sensor | NASA 0x4284 | W |
+| Inneneinheit Seriennummer | `sensor.wp_inneneinheit_seriennummer` | Text | NASA 0x0607 |  |
+| Innengeräte Gesamtkapazität 1 | `sensor.wp_nasa_82a8` | Sensor | NASA 0x82A8 |  |
+| Innengeräte Gesamtkapazität 2 | `sensor.wp_nasa_82a9` | Sensor | NASA 0x82A9 |  |
+| Installationsleistung Außengerät | `sensor.wp_nasa_8287` | Sensor | NASA 0x8287 | HP |
+| Inverter Micom | `sensor.wp_inverter_micom` | Text | NASA 0x8601 |  |
+| Leisebetrieb Status | `sensor.wp_nasa_4046` | Sensor | NASA 0x4046 |  |
+| Leistung absolut Innengerät | `sensor.wp_nasa_4212` | Sensor | NASA 0x4212 | kW |
+| Lüfter Betriebszustand Außengerät | `sensor.wp_nasa_800d` | Text | NASA 0x800D |  |
+| Modellbezeichnung | `sensor.wp_modellbezeichnung` | Text | NASA 0x061A |  |
+| NASA 0x0418 | `sensor.wp_nasa_0418` | Sensor | NASA 0x0418 |  |
+| NASA 0x22F7 | `sensor.wp_nasa_22f7` | Sensor | NASA 0x22F7 |  |
+| NASA 0x22FB | `sensor.wp_nasa_22fb` | Sensor | NASA 0x22FB |  |
+| NASA 0x22FC | `sensor.wp_nasa_22fc` | Sensor | NASA 0x22FC |  |
+| NASA 0x22FD | `sensor.wp_nasa_22fd` | Sensor | NASA 0x22FD |  |
+| NASA 0x22FE | `sensor.wp_nasa_22fe` | Sensor | NASA 0x22FE |  |
+| NASA 0x402A | `sensor.wp_nasa_402a` | Sensor | NASA 0x402A |  |
+| NASA 0x4059 | `sensor.wp_nasa_4059` | Sensor | NASA 0x4059 |  |
+| NASA 0x4213 | `sensor.wp_nasa_4213` | Sensor | NASA 0x4213 |  |
+| NASA 0x4301 | `sensor.wp_nasa_4301` | Sensor | NASA 0x4301 |  |
+| NASA 0x4401 | `sensor.wp_nasa_4401` | Sensor | NASA 0x4401 |  |
+| NASA 0x440E | `sensor.wp_nasa_440e` | Sensor | NASA 0x440E |  |
+| NASA 0x8005 | `sensor.wp_nasa_8005` | Sensor | NASA 0x8005 |  |
+| NASA 0x8031 | `sensor.wp_nasa_8031` | Sensor | NASA 0x8031 |  |
+| NASA 0x8032 | `sensor.wp_nasa_8032` | Sensor | NASA 0x8032 |  |
+| NASA 0x8033 | `sensor.wp_nasa_8033` | Sensor | NASA 0x8033 |  |
+| NASA 0x803F | `sensor.wp_nasa_803f` | Sensor | NASA 0x803F |  |
+| NASA 0x803F letzter Empfang | `sensor.wp_nasa_803f_letzter_empfang` | Text | berechnet (Template) |  |
+| NASA 0x805E | `sensor.wp_nasa_805e` | Sensor | NASA 0x805E |  |
+| NASA 0x8063 | `sensor.wp_nasa_8063` | Sensor | NASA 0x8063 |  |
+| NASA 0x8077 | `sensor.wp_nasa_8077` | Sensor | NASA 0x8077 |  |
+| NASA 0x8078 | `sensor.wp_nasa_8078` | Sensor | NASA 0x8078 |  |
+| NASA 0x8079 | `sensor.wp_nasa_8079` | Sensor | NASA 0x8079 |  |
+| NASA 0x807F | `sensor.wp_nasa_807f` | Sensor | NASA 0x807F |  |
+| NASA 0x8224 | `sensor.wp_nasa_8224` | Sensor | NASA 0x8224 |  |
+| NASA 0x8225 | `sensor.wp_nasa_8225` | Sensor | NASA 0x8225 |  |
+| NASA 0x823C | `sensor.wp_nasa_823c` | Sensor | NASA 0x823C |  |
+| NASA 0x8243 | `sensor.wp_nasa_8243` | Sensor | NASA 0x8243 |  |
+| NASA 0x8249 | `sensor.wp_nasa_8249` | Sensor | NASA 0x8249 |  |
+| NASA 0x824B | `sensor.wp_nasa_824b` | Sensor | NASA 0x824B |  |
+| NASA 0x824C | `sensor.wp_nasa_824c` | Sensor | NASA 0x824C |  |
+| NASA 0x82A2 | `sensor.wp_nasa_82a2` | Sensor | NASA 0x82A2 |  |
+| NASA 0x82B2 | `sensor.wp_nasa_82b2` | Sensor | NASA 0x82B2 |  |
+| NASA 0x82B5 | `sensor.wp_nasa_82b5` | Sensor | NASA 0x82B5 |  |
+| NASA 0x82ED | `sensor.wp_nasa_82ed` | Sensor | NASA 0x82ED |  |
+| NASA 0x82F6 | `sensor.wp_nasa_82f6` | Sensor | NASA 0x82F6 |  |
+| NASA 0x8404 Bit 01 | `binary_sensor.wp_nasa_8404_bit_01` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 06 | `binary_sensor.wp_nasa_8404_bit_06` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 09 | `binary_sensor.wp_nasa_8404_bit_09` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 13 | `binary_sensor.wp_nasa_8404_bit_13` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 15 | `binary_sensor.wp_nasa_8404_bit_15` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 16 | `binary_sensor.wp_nasa_8404_bit_16` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 18 | `binary_sensor.wp_nasa_8404_bit_18` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 23 | `binary_sensor.wp_nasa_8404_bit_23` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 Bit 26 | `binary_sensor.wp_nasa_8404_bit_26` | Binärsensor | berechnet (Template) |  |
+| NASA 0x8404 hex | `sensor.wp_nasa_8404_hex` | Text | berechnet (Template) |  |
+| NASA 0x8404 letzter Empfang | `sensor.wp_nasa_8404_letzter_empfang` | Text | berechnet (Template) |  |
+| NASA 0x8404 Rohwert exakt | `sensor.wp_nasa_8404_rohwert_exakt` | Text | NASA 0x8404 |  |
+| NASA 0x8408 | `sensor.wp_nasa_8408` | Sensor | NASA 0x8408 |  |
+| NASA 0x8608 | `sensor.wp_nasa_8608` | Text | NASA 0x8608 |  |
+| NASA Rohbytes protokollieren | `switch.wp_nasa_rohbytes_protokollieren` | Schalter | berechnet (Template) |  |
+| Nennleistung Außengerät | `sensor.wp_nasa_82e3` | Sensor | NASA 0x82E3 | kW |
+| OCT1 Temperatur | `sensor.wp_oct1_temperatur` | Sensor | berechnet (Template) | °C |
+| OCT1 Temperatur Rohwert | `sensor.wp_nasa_8278` | Sensor | NASA 0x8278 |  |
+| Produktoption Innengerät | `sensor.wp_nasa_0600` | Text | NASA 0x0600 |  |
+| Regelzustand Code | `sensor.wp_regelzustand_code` | Sensor | NASA 0x8233 |  |
+| Samsung Fehlerbeschreibung | `sensor.wp_samsung_fehlerbeschreibung` | Text | NASA 0x8235 |  |
+| Sicherheitsstart Schritt | `sensor.wp_nasa_8248` | Sensor | NASA 0x8248 |  |
+| Syslog verworfene Zeilen | `sensor.wp_syslog_verworfene_zeilen` | Sensor | berechnet (Template) |  |
+| Ventilstellung Code (3 = Warmwasser) | `sensor.wp_nasa_408a` | Sensor | NASA 0x408A |  |
+| Verdichter Betriebsstunden | `sensor.wp_nasa_8405` | Sensor | NASA 0x8405 |  |
+| Vorlauf Tw2 minus 2 K | `sensor.wp_nasa_4204` | Sensor | NASA 0x4204 | °C |
+| WLAN-Modul MAC-Adresse | `sensor.wp_wlan_modul_mac_adresse` | Text | NASA 0x061C |  |
+| Zustandsbits Außengerät | `sensor.wp_nasa_8404` | Sensor | NASA 0x8404 |  |
+| Zyklusdaten vor Fehler 0x860B abrufen | `button.wp_zyklusdaten_vor_fehler_0x860b_abrufen` | Taste | berechnet (Template) |  |
+| Ölausgleich Schritt | `sensor.wp_nasa_8245` | Sensor | NASA 0x8245 |  |
 
-## Kältekreis & Verdichter (35)
-
-| Name | entity_id | Art | Quelle | Einheit |
-|---|---|---|---|---|
-| Ansaug Überhitzung berechnet | `–` | Sensor | berechnet (Template) | K |
-| Außeneinheit Lüfterstufe | `–` | Sensor | NASA 0x8226 |  |
-| Doppelrohr Wärmetauscher Temperatur | `–` | Sensor | NASA 0x821C |  |
-| EVI Bypassventil Status | `–` | Binärsensor | NASA 0x8021 |  |
-| EVI EEV Ansteuerung Rohwert | `–` | Sensor | NASA 0x822E |  |
-| EVI Einspritzkreislauf Austrittstemperatur | `–` | Sensor | NASA 0x8220 |  |
-| EVI Einspritzkreislauf Eintrittstemperatur | `–` | Sensor | NASA 0x821E |  |
-| EVI SOL EEV Ansteuerung Rohwert | `–` | Sensor | NASA 0x82FC |  |
-| EVI SOL1 Status Rohwert | `–` | Sensor | NASA 0x8022 |  |
-| EVI SOL2 Status Rohwert | `–` | Sensor | NASA 0x8023 |  |
-| EVI Temperaturdifferenz Austritt minus Eintritt | `–` | Sensor | berechnet (Template) | K |
-| Haupt-EEV Schritt | `–` | Sensor | NASA 0x823F |  |
-| Haupt-EEV1 | `–` | Sensor | NASA 0x8229 |  |
-| Heißgas Solltemperatur Rohwert | `–` | Sensor | NASA 0x8223 |  |
-| Heißgas Überhitzung berechnet | `–` | Sensor | berechnet (Template) | K |
-| Heißgasventil Status | `–` | Binärsensor | NASA 0x8017 |  |
-| Hochdruck | `–` | Sensor | NASA 0x8206 |  |
-| Kältekreis Hochdruck Sättigungstemperatur | `–` | Sensor | NASA 0x829F |  |
-| Kältekreis Niederdruck Sättigungstemperatur | `–` | Sensor | NASA 0x82A0 |  |
-| Kältemittel Flüssigkeitsventil Status | `–` | Binärsensor | NASA 0x8019 |  |
-| Kältemittel Vierwegeventil Status | `–` | Binärsensor | NASA 0x801A |  |
-| Lüfter Drehzahl | `–` | Sensor | NASA 0x823D |  |
-| Niederdruck | `–` | Sensor | NASA 0x8208 |  |
-| Verdampfer Temperatur | `–` | Sensor | NASA 0x8234 | °C |
-| Verdichter angeforderte Frequenz | `–` | Sensor | NASA 0x8236 |  |
-| Verdichter Ansaugtemperatur | `–` | Sensor | NASA 0x821A |  |
-| Verdichter Frequenz | `–` | Sensor | NASA 0x8238 |  |
-| Verdichter Gehäusetemperatur TOP1 | `–` | Sensor | NASA 0x8280 |  |
-| Verdichter Heißgastemperatur | `–` | Sensor | NASA 0x820A |  |
-| Verdichter in Betrieb | `–` | Binärsensor | NASA 0x8010 |  |
-| Verdichter Last | `–` | Sensor | NASA 0x8239 |  |
-| Verdichter Zielfrequenz | `–` | Sensor | NASA 0x8237 |  |
-| Verdichter Überhitzungsfühler DSH1 Temperatur | `–` | Sensor | NASA 0x827A |  |
-| Wechselrichter Gleichspannungszwischenkreis | `–` | Sensor | NASA 0x823B |  |
-| Wechselrichter Leistungsmodul IPM1 Temperatur | `–` | Sensor | NASA 0x8254 |  |
-
-## Heizwasser & Heizkurve (21)
+## FSV-Einstellungen (Lesekopien) (112)
 
 | Name | entity_id | Art | Quelle | Einheit |
 |---|---|---|---|---|
-| Heizkurve Vorlauf Soll | `–` | Sensor | NASA 0x427F |  |
-| Heizkurvenversatz | `–` | Zahl (schreibbar) | NASA 0x4248 |  |
-| Heizwasser berechnete thermische Leistung | `–` | Sensor | berechnet (Template) | W |
-| Heizwasser Rücklauf Tw1 | `–` | Sensor | NASA 0x4236 |  |
-| Heizwasser Rücklauf Tw1 Außeneinheit Spiegelwert | `–` | Sensor | NASA 0x82DF |  |
-| Heizwasser Spreizung Vorlauf minus Rücklauf | `–` | Sensor | berechnet (Template) | K |
-| Heizwasser Temperatur nach Zusatzheizer Tw3 | `–` | Sensor | NASA 0x4239 | °C |
-| Heizwasser Volumenstrom | `–` | Sensor | NASA 0x42E9 |  |
-| Heizwasser Vorlauf Tw2 | `–` | Sensor | NASA 0x4238 |  |
-| Heizwasser Vorlaufabweichung Ist minus Soll | `–` | Sensor | berechnet (Template) | K |
-| Heizwasserpumpe aktiv | `–` | Binärsensor | NASA 0x4089 |  |
-| Heizwasserpumpe PWM Ansteuerung | `–` | Sensor | NASA 0x40C4 |  |
-| Raum Solltemperatur | `–` | Zahl (schreibbar) | NASA 0x4201 |  |
-| Raumtemperatur | `–` | Sensor | berechnet (Template) | °C |
-| Vorlauf Solltemperatur | `–` | Zahl (schreibbar) | NASA 0x4247 |  |
-| Vorlauf Solltemperatur (Anzeige) | `–` | Sensor | berechnet (Template) | °C |
-| Vorlauftemperatur als Regelreferenz aktiv | `–` | Binärsensor | NASA 0x406F |  |
-| Vorlauftemperatur Samsung | `–` | Sensor | NASA 0x82E0 |  |
-| Zone 1 Vorlauf Soll | `–` | Sensor | NASA 0x42D8 |  |
-| Zone 2 Raumtemperatur | `–` | Sensor | NASA 0x42D4 |  |
-| Zone 2 Vorlauf Soll | `–` | Sensor | NASA 0x42D9 |  |
+| FSV 1011 - Kühlbetrieb maximale Vorlauftemperatur | `sensor.wp_fsv_1011` | Sensor | berechnet (Template) | °C |
+| FSV 1012 - Kühlbetrieb minimale Vorlauftemperatur | `sensor.wp_fsv_1012` | Sensor | berechnet (Template) | °C |
+| FSV 1021 - Kühlbetrieb maximale Raumtemperatur | `sensor.wp_fsv_1021` | Sensor | berechnet (Template) | °C |
+| FSV 1022 - Kühlbetrieb minimale Raumtemperatur | `sensor.wp_fsv_1022` | Sensor | berechnet (Template) | °C |
+| FSV 1031 - Heizbetrieb maximale Vorlauftemperatur | `sensor.wp_fsv_1031` | Sensor | berechnet (Template) | °C |
+| FSV 1032 - Heizbetrieb minimale Vorlauftemperatur | `sensor.wp_fsv_1032` | Sensor | berechnet (Template) | °C |
+| FSV 1041 - Heizbetrieb maximale Raumtemperatur | `sensor.wp_fsv_1041` | Sensor | berechnet (Template) | °C |
+| FSV 1042 - Heizbetrieb minimale Raumtemperatur | `sensor.wp_fsv_1042` | Sensor | berechnet (Template) | °C |
+| FSV 1051 - Warmwasserspeicher maximale Temperatur | `sensor.wp_fsv_1051` | Sensor | berechnet (Template) | °C |
+| FSV 1052 - Warmwasserspeicher minimale Temperatur | `sensor.wp_fsv_1052` | Sensor | berechnet (Template) | °C |
+| FSV 1061 - Vorlauf-Hysterese Heizen | `sensor.wp_fsv_1061` | Sensor | berechnet (Template) | K |
+| FSV 1062 - Vorlauf-Hysterese Kühlen | `sensor.wp_fsv_1062` | Sensor | berechnet (Template) | K |
+| FSV 1063 - Raum-Hysterese Heizen | `sensor.wp_fsv_1063` | Sensor | berechnet (Template) | K |
+| FSV 1064 - Raum-Hysterese Kühlen | `sensor.wp_fsv_1064` | Sensor | berechnet (Template) | K |
+| FSV 2011 - Heizkurve Außentemperatur bei Kälte | `sensor.wp_fsv_2011` | Sensor | berechnet (Template) | °C |
+| FSV 2012 - Heizkurve Außentemperatur bei Wärme | `sensor.wp_fsv_2012` | Sensor | berechnet (Template) | °C |
+| FSV 2021 - Heizkurve WL1 Vorlauf bei Kälte | `sensor.wp_fsv_2021` | Sensor | berechnet (Template) | °C |
+| FSV 2022 - Heizkurve WL1 Vorlauf bei Wärme | `sensor.wp_fsv_2022` | Sensor | berechnet (Template) | °C |
+| FSV 2031 - Heizkurve WL2 Vorlauf bei Kälte | `sensor.wp_fsv_2031` | Sensor | berechnet (Template) | °C |
+| FSV 2032 - Heizkurve WL2 Vorlauf bei Wärme | `sensor.wp_fsv_2032` | Sensor | berechnet (Template) | °C |
+| FSV 2041 - Heizkurve WL1 oder WL2 Auswahl | `sensor.wp_fsv_2041` | Text | berechnet (Template) |  |
+| FSV 2051 - Kühlkurve Außentemperatur untere Grenze | `sensor.wp_fsv_2051` | Sensor | berechnet (Template) | °C |
+| FSV 2052 - Kühlkurve Außentemperatur obere Grenze | `sensor.wp_fsv_2052` | Sensor | berechnet (Template) | °C |
+| FSV 2061 - Kühlkurve WL1 maximale Vorlauftemperatur | `sensor.wp_fsv_2061` | Sensor | berechnet (Template) | °C |
+| FSV 2062 - Kühlkurve WL1 minimale Vorlauftemperatur | `sensor.wp_fsv_2062` | Sensor | berechnet (Template) | °C |
+| FSV 2071 - Kühlkurve WL2 maximale Vorlauftemperatur | `sensor.wp_fsv_2071` | Sensor | berechnet (Template) | °C |
+| FSV 2072 - Kühlkurve WL2 minimale Vorlauftemperatur | `sensor.wp_fsv_2072` | Sensor | berechnet (Template) | °C |
+| FSV 2081 - Kühlkurve WL1 oder WL2 Auswahl | `sensor.wp_fsv_2081` | Text | berechnet (Template) |  |
+| FSV 2091 - Externer Raumthermostat Zone 1 | `sensor.wp_fsv_2091` | Text | berechnet (Template) |  |
+| FSV 2092 - Externer Raumthermostat Zone 2 | `sensor.wp_fsv_2092` | Text | berechnet (Template) |  |
+| FSV 2093 - Raumtemperaturregelung Betriebsart | `sensor.wp_fsv_2093` | Text | berechnet (Template) |  |
+| FSV 3011 - Warmwasserbereitung aktivierte Betriebsart | `sensor.wp_fsv_3011` | Text | berechnet (Template) |  |
+| FSV 3021 - Warmwasser maximale Wärmepumpentemperatur | `sensor.wp_fsv_3021` | Sensor | berechnet (Template) | °C |
+| FSV 3022 - Warmwasser Ausschalthysterese | `sensor.wp_fsv_3022` | Sensor | berechnet (Template) | °C |
+| FSV 3023 - Warmwasser Einschalthysterese | `sensor.wp_fsv_3023` | Sensor | berechnet (Template) | °C |
+| FSV 3024 - Raumheizung Mindestlaufzeit | `sensor.wp_fsv_3024` | Sensor | berechnet (Template) | min |
+| FSV 3025 - Warmwasser Wärmepumpe maximale Laufzeit | `sensor.wp_fsv_3025` | Sensor | berechnet (Template) | min |
+| FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser | `sensor.wp_fsv_3026` | Sensor | berechnet (Template) | h |
+| FSV 3031 - Warmwasser Heizstab Freigabe | `binary_sensor.wp_fsv_3031` | Binärsensor | berechnet (Template) |  |
+| FSV 3032 - Warmwasser Heizstab Einschaltverzögerung | `sensor.wp_fsv_3032` | Sensor | berechnet (Template) | min |
+| FSV 3033 - Warmwasser Heizstab Temperaturüberschwingung | `sensor.wp_fsv_3033` | Sensor | berechnet (Template) | °C |
+| FSV 3034 Rohwert (0x4268) | `sensor.wp_fsv_3034_rohwert` | Sensor | NASA 0x4268 |  |
+| FSV 3041 - Warmwasser thermische Desinfektion aktiv | `binary_sensor.wp_fsv_3041` | Binärsensor | berechnet (Template) |  |
+| FSV 3042 - Warmwasser thermische Desinfektion Wochentag | `sensor.wp_fsv_3042` | Text | berechnet (Template) |  |
+| FSV 3043 - Warmwasser thermische Desinfektion Startstunde | `sensor.wp_fsv_3043` | Sensor | berechnet (Template) | h |
+| FSV 3044 - Warmwasser thermische Desinfektion Zieltemperatur | `sensor.wp_fsv_3044` | Sensor | berechnet (Template) | °C |
+| FSV 3045 - Warmwasser thermische Desinfektion Dauer | `sensor.wp_fsv_3045` | Sensor | berechnet (Template) | min |
+| FSV 3046 - Warmwasser thermische Desinfektion Zeitlimit | `sensor.wp_fsv_3046` | Sensor | berechnet (Template) | h |
+| FSV 3051 - Warmwasser Timer-Aus aktiviert | `binary_sensor.wp_fsv_3051` | Binärsensor | berechnet (Template) |  |
+| FSV 3052 - Warmwasser Timer-Aus Zeitdauer | `sensor.wp_fsv_3052` | Sensor | berechnet (Template) | min |
+| FSV 3061 - Solarthermie oder Warmwasserthermostat aktiviert | `sensor.wp_fsv_3061` | Text | berechnet (Template) |  |
+| FSV 3071 - Dreiwegeventil Ausrichtung | `sensor.wp_fsv_3071` | Text | berechnet (Template) |  |
+| FSV 3081 - Zusatzheizung Stufe 1 Nennleistung | `sensor.wp_fsv_3081` | Sensor | berechnet (Template) | kW |
+| FSV 3082 - Zusatzheizung Stufe 2 Nennleistung | `sensor.wp_fsv_3082` | Sensor | berechnet (Template) | kW |
+| FSV 3083 - Warmwasser Heizstab Nennleistung | `sensor.wp_fsv_3083` | Sensor | berechnet (Template) | kW |
+| FSV 4011 - Vorrang Raumheizung oder Warmwasser | `sensor.wp_fsv_4011` | Text | berechnet (Template) |  |
+| FSV 4012 - Außentemperatur für Vorrangregelung | `sensor.wp_fsv_4012` | Sensor | berechnet (Template) | °C |
+| FSV 4013 - Heizung Abschalttemperatur außen | `sensor.wp_fsv_4013` | Sensor | berechnet (Template) | °C |
+| FSV 4014 Rohwert (0x426F) | `sensor.wp_fsv_4014_rohwert` | Sensor | NASA 0x426F |  |
+| FSV 4021 - Elektrische Zusatzheizung Betriebsart | `sensor.wp_fsv_4021` | Text | berechnet (Template) |  |
+| FSV 4022 - Zusatzheizung und Warmwasser Heizstab Priorität | `sensor.wp_fsv_4022` | Text | berechnet (Template) |  |
+| FSV 4023 - Zusatzheizung Kältekompensation | `binary_sensor.wp_fsv_4023` | Binärsensor | berechnet (Template) |  |
+| FSV 4024 - Zusatzheizung Außentemperaturschwelle | `sensor.wp_fsv_4024` | Sensor | berechnet (Template) | °C |
+| FSV 4025 - Zusatzheizung Abtauunterstützung Temperaturschwelle | `sensor.wp_fsv_4025` | Sensor | berechnet (Template) | °C |
+| FSV 4031 - Externe Wärmequelle Freigabe | `binary_sensor.wp_fsv_4031` | Binärsensor | berechnet (Template) |  |
+| FSV 4032 - Externe Wärmequelle Priorität | `binary_sensor.wp_fsv_4032` | Binärsensor | berechnet (Template) |  |
+| FSV 4033 - Externe Wärmequelle Außentemperaturschwelle | `sensor.wp_fsv_4033` | Sensor | berechnet (Template) | °C |
+| FSV 4041 - Mischventil Installation und Betriebsart | `sensor.wp_fsv_4041` | Text | berechnet (Template) |  |
+| FSV 4042 - Mischventil Heizen Sollspreizung | `sensor.wp_fsv_4042` | Sensor | berechnet (Template) | °C |
+| FSV 4043 - Mischventil Kühlen Sollspreizung | `sensor.wp_fsv_4043` | Sensor | berechnet (Template) | °C |
+| FSV 4044 - Mischventil Regelfaktor | `sensor.wp_fsv_4044` | Sensor | berechnet (Template) |  |
+| FSV 4045 - Mischventil Regelintervall | `sensor.wp_fsv_4045` | Sensor | berechnet (Template) | min |
+| FSV 4046 - Mischventil Stellzeit | `sensor.wp_fsv_4046` | Sensor | berechnet (Template) | s |
+| FSV 4051 - Inverterpumpe PWM Regelmodus | `sensor.wp_fsv_4051` | Text | berechnet (Template) |  |
+| FSV 4052 - Inverterpumpe Sollspreizung | `sensor.wp_fsv_4052` | Sensor | berechnet (Template) | °C |
+| FSV 4053 - Inverterpumpe Regelfaktor | `sensor.wp_fsv_4053` | Sensor | berechnet (Template) |  |
+| FSV 4054 - Inverterpumpe Mindestansteuerung (Code) | `sensor.wp_fsv_4054` | Sensor | berechnet (Template) |  |
+| FSV 4061 - Zonenregelung aktiviert | `binary_sensor.wp_fsv_4061` | Binärsensor | berechnet (Template) |  |
+| FSV 4062 - Zonenpumpe 1 bei Thermo-off (Code) | `sensor.wp_fsv_4062` | Sensor | berechnet (Template) |  |
+| FSV 4063 - Zonenpumpe 2 bei Thermo-off (Code) | `sensor.wp_fsv_4063` | Sensor | berechnet (Template) |  |
+| FSV 5011 - Smart Grid Kühlung Vorlauftemperatur | `sensor.wp_fsv_5011` | Sensor | berechnet (Template) | °C |
+| FSV 5012 - Smart Grid Kuehlung Raumtemperatur | `sensor.wp_fsv_5012` | Sensor | berechnet (Template) | °C |
+| FSV 5013 - Smart Grid Heizung Vorlauftemperatur | `sensor.wp_fsv_5013` | Sensor | berechnet (Template) | °C |
+| FSV 5014 - Smart Grid Heizung Raumtemperatur | `sensor.wp_fsv_5014` | Sensor | berechnet (Template) | °C |
+| FSV 5015 - Smart Grid Kühlkurve WL1 Temperatur | `sensor.wp_fsv_5015` | Sensor | berechnet (Template) | °C |
+| FSV 5016 - Smart Grid Kühlkurve WL2 Temperatur | `sensor.wp_fsv_5016` | Sensor | berechnet (Template) | °C |
+| FSV 5017 - Smart Grid Heizkurve WL1 Temperatur | `sensor.wp_fsv_5017` | Sensor | berechnet (Template) | °C |
+| FSV 5018 - Smart Grid Heizkurve WL2 Temperatur | `sensor.wp_fsv_5018` | Sensor | berechnet (Template) | °C |
+| FSV 5019 - Smart Grid Warmwasser Speichertemperatur | `sensor.wp_fsv_5019` | Sensor | berechnet (Template) | °C |
+| FSV 5021 - Warmwasser Sparbetrieb Temperaturabsenkung | `sensor.wp_fsv_5021` | Sensor | berechnet (Template) | °C |
+| FSV 5022 - Warmwasser Sparbetrieb aktiviert | `binary_sensor.wp_fsv_5022` | Binärsensor | berechnet (Template) |  |
+| FSV 5023 - Warmwasser Sparbetrieb Thermo-Ein Temperatur | `sensor.wp_fsv_5023` | Sensor | berechnet (Template) | °C |
+| FSV 5031 Rohwert (0x427D) | `sensor.wp_fsv_5031_rohwert` | Sensor | NASA 0x427D |  |
+| FSV 5032 Rohwert (0x427E) | `sensor.wp_fsv_5032_rohwert` | Sensor | NASA 0x427E |  |
+| FSV 5033 - TDM Vorrang Klimagerät oder Warmwasser (nur TDM) | `sensor.wp_fsv_5033` | Sensor | berechnet (Template) |  |
+| FSV 5041 - Netzbetreiber Fernsteuerung aktiviert | `binary_sensor.wp_fsv_5041` | Binärsensor | berechnet (Template) |  |
+| FSV 5042 - Waermequelle bei Betriebsbegrenzung | `sensor.wp_fsv_5042` | Text | berechnet (Template) |  |
+| FSV 5043 - Kontaktlogik Benefit kWh | `sensor.wp_fsv_5043` | Text | berechnet (Template) |  |
+| FSV 5051 - Verdichter Frequenzbegrenzungsfunktion aktiviert | `binary_sensor.wp_fsv_5051` | Binärsensor | berechnet (Template) |  |
+| FSV 5061 Rohwert (0x40B4) | `sensor.wp_fsv_5061_rohwert` | Sensor | NASA 0x40B4 |  |
+| FSV 5071 Rohwert (0x4280) | `sensor.wp_fsv_5071_rohwert` | Sensor | NASA 0x4280 |  |
+| FSV 5081 - Photovoltaiksteuerung aktiviert | `binary_sensor.wp_fsv_5081` | Binärsensor | berechnet (Template) |  |
+| FSV 5082 - Photovoltaik Kühlung Temperaturversatz | `sensor.wp_fsv_5082` | Sensor | berechnet (Template) | °C |
+| FSV 5083 - Photovoltaik Heizung Temperaturversatz | `sensor.wp_fsv_5083` | Sensor | berechnet (Template) | °C |
+| FSV 5091 - Smart Grid Regelung aktiviert | `binary_sensor.wp_fsv_5091` | Binärsensor | berechnet (Template) |  |
+| FSV 5092 - Smart Grid Heizung Temperaturänderung | `sensor.wp_fsv_5092` | Sensor | berechnet (Template) | °C |
+| FSV 5093 - Smart Grid Warmwasser Temperaturänderung | `sensor.wp_fsv_5093` | Sensor | berechnet (Template) | °C |
+| FSV 5094 - Smart Grid Warmwasser Betriebsart | `binary_sensor.wp_fsv_5094` | Binärsensor | berechnet (Template) |  |
+| FSV 6022 - Mindestlaufzeit nach Thermo-on | `sensor.wp_fsv_6022` | Sensor | berechnet (Template) | min |
+| FSV 6031 - Heizen optionales Thermo-Ein-Aus | `sensor.wp_fsv_6031` | Sensor | berechnet (Template) |  |
+| FSV Laden und Speichern Status | `sensor.wp_nasa_4125` | Sensor | NASA 0x4125 |  |
+| FSV über FSV-Info lesen (0x4612) | `button.wp_fsv_info_lesen` | Taste | berechnet (Template) |  |
+
+## Kältekreis & Verdichter (32)
+
+| Name | entity_id | Art | Quelle | Einheit |
+|---|---|---|---|---|
+| Ansaug Überhitzung berechnet | `sensor.wp_ansaug_ueberhitzung_berechnet` | Sensor | berechnet (Template) | K |
+| Außeneinheit Lüfterstufe | `sensor.wp_ausseneinheit_luefterstufe` | Sensor | NASA 0x8226 |  |
+| Doppelrohr Wärmetauscher Temperatur | `sensor.wp_doppelrohr_waermetauscher_temperatur` | Sensor | NASA 0x821C | °C |
+| EVI Bypassventil Status | `binary_sensor.wp_evi_bypassventil_status` | Binärsensor | NASA 0x8021 |  |
+| EVI EEV Ansteuerung Rohwert | `sensor.wp_evi_eev_ansteuerung_rohwert` | Sensor | NASA 0x822E |  |
+| EVI Einspritzkreislauf Austrittstemperatur | `sensor.wp_evi_einspritzkreislauf_austrittstemperatur` | Sensor | NASA 0x8220 | °C |
+| EVI Einspritzkreislauf Eintrittstemperatur | `sensor.wp_evi_einspritzkreislauf_eintrittstemperatur` | Sensor | NASA 0x821E | °C |
+| EVI SOL EEV Ansteuerung Rohwert | `sensor.wp_evi_sol_eev_ansteuerung_rohwert` | Sensor | NASA 0x82FC |  |
+| EVI Temperaturdifferenz Austritt minus Eintritt | `sensor.wp_evi_temperaturdifferenz_austritt_minus_eintritt` | Sensor | berechnet (Template) | K |
+| Haupt-EEV Schritt | `sensor.wp_haupt_eev_schritt` | Sensor | NASA 0x823F | Schritte |
+| Haupt-EEV1 | `sensor.wp_haupt_eev1` | Sensor | NASA 0x8229 | Schritte |
+| Heißgas Überhitzung berechnet | `sensor.wp_heissgas_ueberhitzung_berechnet` | Sensor | berechnet (Template) | K |
+| Heißgasventil Status | `binary_sensor.wp_heissgasventil_status` | Binärsensor | NASA 0x8017 |  |
+| Hochdruck | `sensor.wp_hochdruck` | Sensor | NASA 0x8206 | bar |
+| Kältekreis Hochdruck Sättigungstemperatur | `sensor.wp_kaeltekreis_hochdruck_saettigungstemperatur` | Sensor | NASA 0x829F | °C |
+| Kältekreis Niederdruck Sättigungstemperatur | `sensor.wp_kaeltekreis_niederdruck_saettigungstemperatur` | Sensor | NASA 0x82A0 | °C |
+| Kältemittel Flüssigkeitsventil Status | `binary_sensor.wp_kaeltemittel_fluessigkeitsventil_status` | Binärsensor | NASA 0x8019 |  |
+| Kältemittel Vierwegeventil Status | `binary_sensor.wp_kaeltemittel_vierwegeventil_status` | Binärsensor | NASA 0x801A |  |
+| Lüfter Drehzahl | `sensor.wp_luefter_drehzahl` | Sensor | NASA 0x823D | RPM |
+| Niederdruck | `sensor.wp_niederdruck` | Sensor | NASA 0x8208 | bar |
+| Verdampfer Temperatur | `sensor.wp_verdampfer_temperatur` | Sensor | NASA 0x8234 | °C |
+| Verdichter angeforderte Frequenz | `sensor.wp_verdichter_angeforderte_frequenz` | Sensor | NASA 0x8236 | Hz |
+| Verdichter Ansaugtemperatur | `sensor.wp_verdichter_ansaugtemperatur` | Sensor | NASA 0x821A | °C |
+| Verdichter Frequenz | `sensor.wp_verdichter_frequenz` | Sensor | NASA 0x8238 | Hz |
+| Verdichter Gehäusetemperatur TOP1 | `sensor.wp_verdichter_gehaeusetemperatur_top1` | Sensor | NASA 0x8280 | °C |
+| Verdichter Heißgastemperatur | `sensor.wp_verdichter_heissgastemperatur` | Sensor | NASA 0x820A | °C |
+| Verdichter in Betrieb | `binary_sensor.wp_verdichter_in_betrieb` | Binärsensor | NASA 0x8010 |  |
+| Verdichter Last | `sensor.wp_verdichter_last` | Sensor | NASA 0x8239 |  |
+| Verdichter Zielfrequenz | `sensor.wp_verdichter_zielfrequenz` | Sensor | NASA 0x8237 | Hz |
+| Verdichter Überhitzungsfühler DSH1 Temperatur | `sensor.wp_verdichter_ueberhitzungsfuehler_dsh1_temperatur` | Sensor | NASA 0x827A | °C |
+| Wechselrichter Gleichspannungszwischenkreis | `sensor.wp_wechselrichter_gleichspannungszwischenkreis` | Sensor | NASA 0x823B | V |
+| Wechselrichter Leistungsmodul IPM1 Temperatur | `sensor.wp_wechselrichter_leistungsmodul_ipm1_temperatur` | Sensor | NASA 0x8254 | °C |
+
+## Heizwasser & Heizkurve (19)
+
+| Name | entity_id | Art | Quelle | Einheit |
+|---|---|---|---|---|
+| Heizkurve Vorlauf Soll | `sensor.wp_heizkurve_vorlauf_soll` | Sensor | NASA 0x427F | °C |
+| Heizkurvenversatz | `number.wp_heizkurvenversatz` | Zahl | NASA 0x4248 | °C |
+| Heizwasser berechnete thermische Leistung | `sensor.wp_heizwasser_berechnete_thermische_leistung` | Sensor | berechnet (Template) | W |
+| Heizwasser Rücklauf Tw1 | `sensor.wp_heizwasser_ruecklauf_tw1` | Sensor | NASA 0x4236 | °C |
+| Heizwasser Rücklauf Tw1 Außeneinheit Spiegelwert | `sensor.wp_heizwasser_ruecklauf_tw1_ausseneinheit_spiegelwert` | Sensor | NASA 0x82DF | °C |
+| Heizwasser Spreizung Vorlauf minus Rücklauf | `sensor.wp_heizwasser_spreizung_vorlauf_minus_ruecklauf` | Sensor | berechnet (Template) | K |
+| Heizwasser Temperatur nach Zusatzheizer Tw3 | `sensor.wp_heizwasser_temperatur_nach_zusatzheizer_tw3` | Sensor | NASA 0x4239 | °C |
+| Heizwasser Volumenstrom | `sensor.wp_heizwasser_volumenstrom` | Sensor | NASA 0x42E9 | L/min |
+| Heizwasser Vorlauf Tw2 | `sensor.wp_heizwasser_vorlauf_tw2` | Sensor | NASA 0x4238 | °C |
+| Heizwasser Vorlaufabweichung Ist minus Soll | `sensor.wp_heizwasser_vorlaufabweichung_ist_minus_soll` | Sensor | berechnet (Template) | K |
+| Heizwasserpumpe aktiv | `binary_sensor.wp_heizwasserpumpe_aktiv` | Binärsensor | NASA 0x4089 |  |
+| Heizwasserpumpe PWM Ansteuerung | `sensor.wp_heizwasserpumpe_pwm_ansteuerung` | Sensor | NASA 0x40C4 | % |
+| Raum Solltemperatur | `number.wp_raum_solltemperatur` | Zahl | NASA 0x4201 | °C |
+| Raumtemperatur | `sensor.wp_raumtemperatur` | Sensor | berechnet (Template) | °C |
+| Vorlauf Solltemperatur | `number.wp_vorlauf_solltemperatur` | Zahl | NASA 0x4247 | °C |
+| Vorlauf Solltemperatur (Anzeige) | `sensor.wp_vorlauf_solltemperatur_anzeige` | Sensor | berechnet (Template) | °C |
+| Vorlauftemperatur als Regelreferenz aktiv | `binary_sensor.wp_vorlauftemperatur_als_regelreferenz_aktiv` | Binärsensor | NASA 0x406F |  |
+| Vorlauftemperatur Samsung | `sensor.wp_vorlauftemperatur_samsung` | Sensor | NASA 0x82E0 | °C |
+| Zone 2 Raumtemperatur | `sensor.wp_zone_2_raumtemperatur` | Sensor | NASA 0x42D4 | °C |
 
 ## Warmwasser (7)
 
 | Name | entity_id | Art | Quelle | Einheit |
 |---|---|---|---|---|
-| Dreiwegeventil Warmwasserstellung | `–` | Binärsensor | NASA 0x4067 |  |
-| Warmwasser Betriebsart | `–` | Auswahl (schreibbar) | NASA 0x4066 |  |
-| Warmwasser Ein | `–` | Schalter | NASA 0x4065 |  |
-| Warmwasser Heizstab Status | `–` | Binärsensor | NASA 0x4087 |  |
-| Warmwasser Solltemperatur | `–` | Zahl (schreibbar) | NASA 0x4235 |  |
-| Warmwasser Solltemperatur (Anzeige) | `–` | Sensor | berechnet (Template) | °C |
-| Warmwasser Temperatur | `–` | Sensor | NASA 0x4237 |  |
+| Dreiwegeventil Warmwasserstellung | `binary_sensor.wp_dreiwegeventil_warmwasserstellung` | Binärsensor | NASA 0x4067 |  |
+| Warmwasser Betriebsart | `select.wp_warmwasser_betriebsart` | Auswahl | NASA 0x4066 |  |
+| Warmwasser Ein | `switch.wp_warmwasser_ein` | Schalter | NASA 0x4065 |  |
+| Warmwasser Heizstab Status | `binary_sensor.wp_warmwasser_heizstab_status` | Binärsensor | NASA 0x4087 |  |
+| Warmwasser Solltemperatur | `number.wp_warmwasser_solltemperatur` | Zahl | NASA 0x4235 | °C |
+| Warmwasser Solltemperatur (Anzeige) | `sensor.wp_warmwasser_solltemperatur_anzeige` | Sensor | berechnet (Template) | °C |
+| Warmwasser Temperatur | `sensor.wp_warmwasser_temperatur` | Sensor | NASA 0x4237 | °C |
 
-## Energie & Leistung (15)
+## Energie & Leistung (30)
 
 | Name | entity_id | Art | Quelle | Einheit |
 |---|---|---|---|---|
-| Außeneinheit Energie gesamt | `–` | Sensor | NASA 0x8414 |  |
-| Außeneinheit gemeldete Leistung | `–` | Sensor | NASA 0x8240 |  |
-| Außeneinheit Leistung | `–` | Sensor | NASA 0x8411 |  |
-| Außeneinheit Spannung | `–` | Sensor | NASA 0x24FC |  |
-| Außeneinheit Strom | `–` | Sensor | NASA 0x8217 |  |
-| Außenwärmetauscher Austrittstemperatur | `–` | Sensor | NASA 0x8218 |  |
-| COP gesamt | `–` | Sensor | berechnet (Template) | COP |
-| COP momentan | `–` | Sensor | berechnet bei frischem Paar 0x4426/0x8413 |  |
-| Wärme Heizen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Wärme Warmwasser | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Wärme davon Abtauen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Wärme Pause und unbekannt | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Strom Heizen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Strom Warmwasser | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Strom davon Abtauen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Strom Pause | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Strom unbekannt | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | kWh |
-| Verdichter Laufzeit Heizen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | h |
-| Verdichter Laufzeit Warmwasser | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | h |
-| Verdichter Laufzeit davon Abtauen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | h |
-| Verdichter Pausenzeit | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) | h |
-| Verdichter Starts Heizen | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) |  |
-| Verdichter Starts Warmwasser | `–` | Sensor | berechnet (energie_toepfe.h, ab Start, total_increasing) |  |
-| Inneneinheit Wärmetauscher Austrittstemperatur | `–` | Sensor | NASA 0x4206 |  |
-| Inneneinheit Wärmetauscher Eintrittstemperatur | `–` | Sensor | NASA 0x4205 |  |
-| Leistungsaufnahme | `–` | Sensor | NASA 0x8413 |  |
-| Plattenwärmetauscher Zusatzheizung Status | `–` | Binärsensor | NASA 0x80D7 |  |
-| Strom verbraucht gesamt | `–` | Sensor | NASA 0x8414 |  |
-| Wärme erzeugt gesamt | `–` | Sensor | NASA 0x4427 |  |
-| Wärmeleistung | `–` | Sensor | NASA 0x4426 |  |
+| Außeneinheit Energie gesamt | `sensor.wp_ausseneinheit_energie_gesamt` | Sensor | NASA 0x8414 | kWh |
+| Außeneinheit gemeldete Leistung | `sensor.wp_ausseneinheit_gemeldete_leistung` | Sensor | NASA 0x8240 | kW |
+| Außeneinheit Leistung | `sensor.wp_ausseneinheit_leistung` | Sensor | NASA 0x8411 | W |
+| Außeneinheit Spannung | `sensor.wp_ausseneinheit_spannung` | Sensor | NASA 0x24FC | V |
+| Außeneinheit Strom | `sensor.wp_ausseneinheit_strom` | Sensor | NASA 0x8217 | A |
+| Außenwärmetauscher Austrittstemperatur | `sensor.wp_aussenwaermetauscher_austrittstemperatur` | Sensor | NASA 0x8218 | °C |
+| COP gesamt | `sensor.wp_cop_gesamt` | Sensor | berechnet (Template) | COP |
+| COP momentan | `sensor.wp_cop_momentan` | Sensor | berechnet (Template) |  |
+| Inneneinheit Wärmetauscher Austrittstemperatur | `sensor.wp_inneneinheit_waermetauscher_austrittstemperatur` | Sensor | NASA 0x4206 | °C |
+| Inneneinheit Wärmetauscher Eintrittstemperatur | `sensor.wp_inneneinheit_waermetauscher_eintrittstemperatur` | Sensor | NASA 0x4205 | °C |
+| Leistungsaufnahme | `sensor.wp_leistungsaufnahme` | Sensor | NASA 0x8413 | W |
+| Plattenwärmetauscher Zusatzheizung Status | `binary_sensor.wp_plattenwaermetauscher_zusatzheizung_status` | Binärsensor | NASA 0x80D7 |  |
+| Strom davon Abtauen | `sensor.wp_strom_davon_abtauen` | Sensor | berechnet (Template) | kWh |
+| Strom Heizen | `sensor.wp_strom_heizen` | Sensor | berechnet (Template) | kWh |
+| Strom Pause | `sensor.wp_strom_pause` | Sensor | berechnet (Template) | kWh |
+| Strom unbekannt | `sensor.wp_strom_unbekannt` | Sensor | berechnet (Template) | kWh |
+| Strom verbraucht gesamt | `sensor.wp_strom_verbraucht_gesamt` | Sensor | NASA 0x8414 | kWh |
+| Strom Warmwasser | `sensor.wp_strom_warmwasser` | Sensor | berechnet (Template) | kWh |
+| Verdichter Laufzeit davon Abtauen | `sensor.wp_verdichter_laufzeit_davon_abtauen` | Sensor | berechnet (Template) | h |
+| Verdichter Laufzeit Heizen | `sensor.wp_verdichter_laufzeit_heizen` | Sensor | berechnet (Template) | h |
+| Verdichter Laufzeit Warmwasser | `sensor.wp_verdichter_laufzeit_warmwasser` | Sensor | berechnet (Template) | h |
+| Verdichter Pausenzeit | `sensor.wp_verdichter_pausenzeit` | Sensor | berechnet (Template) | h |
+| Verdichter Starts Heizen | `sensor.wp_verdichter_starts_heizen` | Sensor | berechnet (Template) |  |
+| Verdichter Starts Warmwasser | `sensor.wp_verdichter_starts_warmwasser` | Sensor | berechnet (Template) |  |
+| Wärme davon Abtauen | `sensor.wp_waerme_davon_abtauen` | Sensor | berechnet (Template) | kWh |
+| Wärme erzeugt gesamt | `sensor.wp_waerme_erzeugt_gesamt` | Sensor | NASA 0x4427 | kWh |
+| Wärme Heizen | `sensor.wp_waerme_heizen` | Sensor | berechnet (Template) | kWh |
+| Wärme Pause und unbekannt | `sensor.wp_waerme_pause_und_unbekannt` | Sensor | berechnet (Template) | kWh |
+| Wärme Warmwasser | `sensor.wp_waerme_warmwasser` | Sensor | berechnet (Template) | kWh |
+| Wärmeleistung | `sensor.wp_waermeleistung` | Sensor | NASA 0x4426 | W |
 
 ## Betrieb & Status (22)
 
 | Name | entity_id | Art | Quelle | Einheit |
 |---|---|---|---|---|
-| Abtauung Ablaufcode | `–` | Sensor | NASA 0x8061 |  |
-| Abtauung Ablaufstatus | `–` | Text | NASA 0x8061 |  |
-| Abtauung aktiv | `–` | Binärsensor | NASA 0x402E |  |
-| Aktive Betriebsstunden seit Inbetriebnahme | `–` | Sensor | NASA 0x4424 |  |
-| Automatische Reinigung | `–` | Schalter | NASA 0x4111 |  |
-| Außeneinheit Betriebszustand | `–` | Text | NASA 0x8001 |  |
-| Außeneinheit Bodenheizung Status | `–` | Binärsensor | NASA 0x80AF |  |
-| Außeneinheit Servicebetriebsart | `–` | Text | NASA 0x8000 |  |
-| Außeneinheit Servicebetriebsart Code | `–` | Sensor | NASA 0x8000 |  |
-| Außentemperatur | `–` | Sensor | NASA 0x8204 |  |
-| Betriebsmodus | `–` | Auswahl (schreibbar) | NASA 0x4001 |  |
-| Betriebsmodus Code | `–` | Sensor | NASA 0x8001 |  |
-| Dreiwegeventil Stellung | `–` | Text | NASA 0x4067 |  |
-| Elektrische Zusatzheizung Status | `–` | Binärsensor | NASA 0x406C |  |
-| Heizung Ein | `–` | Schalter | NASA 0x4000 |  |
-| Inneneinheit Betriebsart | `–` | Text | NASA 0x4002 |  |
-| Inneneinheit Betriebsart Code | `–` | Sensor | NASA 0x4002 |  |
-| Leisebetrieb aktiv (abgeleitet) | `–` | Binärsensor | berechnet (Template) |  |
-| Nachtfenster aktiv (20–06) | `–` | Binärsensor | berechnet (Template) |  |
-| Tage seit Inbetriebnahme | `–` | Sensor | NASA 0x4423 |  |
-| Temperaturreferenz | `–` | Auswahl (schreibbar) | NASA 0x406F |  |
-| Thermoanforderung aktiv | `–` | Binärsensor | NASA 0x4028 |  |
+| Abtauung Ablaufcode | `sensor.wp_abtauung_ablaufcode` | Sensor | NASA 0x8061 |  |
+| Abtauung Ablaufstatus | `sensor.wp_abtauung_ablaufstatus` | Text | NASA 0x8061 |  |
+| Abtauung aktiv | `binary_sensor.wp_abtauung_aktiv` | Binärsensor | NASA 0x402E |  |
+| Aktive Betriebsstunden seit Inbetriebnahme | `sensor.wp_aktive_betriebsstunden_seit_inbetriebnahme` | Sensor | NASA 0x4424 | h |
+| Automatische Reinigung | `switch.wp_automatische_reinigung` | Schalter | NASA 0x4111 |  |
+| Außeneinheit Betriebszustand | `sensor.wp_ausseneinheit_betriebszustand` | Text | NASA 0x8001 |  |
+| Außeneinheit Bodenheizung Status | `binary_sensor.wp_ausseneinheit_bodenheizung_status` | Binärsensor | NASA 0x80AF |  |
+| Außeneinheit Servicebetriebsart | `sensor.wp_ausseneinheit_servicebetriebsart` | Text | NASA 0x8000 |  |
+| Außeneinheit Servicebetriebsart Code | `sensor.wp_ausseneinheit_servicebetriebsart_code` | Sensor | NASA 0x8000 |  |
+| Außentemperatur | `sensor.wp_aussentemperatur` | Sensor | NASA 0x8204 | °C |
+| Betriebsmodus | `select.wp_betriebsmodus` | Auswahl | NASA 0x4001 |  |
+| Betriebsmodus Code | `sensor.wp_betriebsmodus_code` | Sensor | NASA 0x8001 |  |
+| Dreiwegeventil Stellung | `sensor.wp_dreiwegeventil_stellung` | Text | NASA 0x4067 |  |
+| Elektrische Zusatzheizung Status | `binary_sensor.wp_elektrische_zusatzheizung_status` | Binärsensor | NASA 0x406C |  |
+| Heizung Ein | `switch.wp_heizung_ein` | Schalter | NASA 0x4000 |  |
+| Inneneinheit Betriebsart | `sensor.wp_inneneinheit_betriebsart` | Text | NASA 0x4002 |  |
+| Inneneinheit Betriebsart Code | `sensor.wp_inneneinheit_betriebsart_code` | Sensor | NASA 0x4002 |  |
+| Leisebetrieb aktiv (abgeleitet) | `binary_sensor.wp_leisebetrieb_aktiv_abgeleitet` | Binärsensor | berechnet (Template) |  |
+| Nachtfenster aktiv (20–06) | `binary_sensor.wp_nachtfenster_aktiv_20_06` | Binärsensor | berechnet (Template) |  |
+| Tage seit Inbetriebnahme | `sensor.wp_tage_seit_inbetriebnahme` | Sensor | NASA 0x4423 | d |
+| Temperaturreferenz | `select.wp_temperaturreferenz` | Auswahl | NASA 0x406F |  |
+| Thermoanforderung aktiv | `binary_sensor.wp_thermoanforderung_aktiv` | Binärsensor | NASA 0x4028 |  |
 
 ## Climate
 
@@ -471,3 +373,4 @@ Erzeugt aus `esphome/esphome-samsung-hvac-bus.yaml` und der HA-Registry. Quelle 
 |---|---|---|---|---|
 | Warmwasser | `climate.wp_warmwasser` | Climate | 0x4065 Ein/Aus, 0x4237 Ist, 0x4235 Soll, 0x4066 Preset, 0x4067 Aktion | °C |
 | Heizung | `climate.wp_heizung` | Climate | 0x4000 Ein/Aus, 0x4238 Vorlauf, 0x4028 Aktion | °C |
+

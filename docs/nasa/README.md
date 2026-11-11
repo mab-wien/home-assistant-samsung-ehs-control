@@ -16,5 +16,6 @@ Jeder Wert hat zwei Merkmale, ermittelt aus 14 Tagen Busverlauf (Zahl der Werte 
 | Relevanz | relevant (benannte Werte, Bedienung), Diagnose (Rohwert, ändert sich im Betrieb, Bedeutung unbestätigt), ohne Funktion (in dieser Anlage konstant oder nie gesendet) |
 
 Rohwerte „ohne Funktion“ sind im YAML `internal: true`: keine HA-Entität, der ESP empfängt sie weiter, im Debug-Mitschnitt bleiben sie sichtbar.
-Benannte Werte ohne Funktion (z. B. Zone 2, nicht vorhandene Fühler) bleiben in HA, weil Auswertungen sie nutzen.
+Benannte Werte ohne Funktion (z. B. Zone 2, nicht vorhandene Fühler) bleiben in HA, wenn Auswertungen sie nutzen. Werte, auf die
+diese Anlage gar nicht antwortet (65535), sind seit 11.11.2026 ebenfalls `internal` (Liste in [`../firmware.md`](../firmware.md)).
 Statische Werte werden beim Start und einmal täglich gelesen; Zähler haben `total_increasing`.
