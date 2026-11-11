@@ -1,0 +1,18 @@
+secrets.yaml
+esphome/secrets.yaml
+.esphome/
+*.bin
+# lokale Zugangsdaten, Mitschnitte, Exporte, Herstellerunterlagen, private Arbeitsdateien
+*.secret
+.env
+*.log
+*.pcap
+*.bundle
+*.pdf
+*.xls
+*.xlsx
+*.csv
+docs/archiv/
+docs/nasa/deutung-automatisch.md
+private/
+mitschnitte/
