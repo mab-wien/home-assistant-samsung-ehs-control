@@ -22,6 +22,9 @@ esphome:
       name: 'FSV 5xxx Sonstiges und Smart Grid'
     - id: fsv_6
       name: 'FSV 6xxx Außengerät-Steuerung'
+    # NASA-Rohwerte (Bedeutung unbestätigt/vermutet) gesammelt, 11.11.2026; Anzeigenamen nur in HA vergeben
+    - id: nasa_roh
+      name: 'NASA Rohwerte (Diagnose)'
   on_boot:
     - priority: -100
       then:
@@ -909,6 +912,7 @@ sensor:
     nasa_device_id: samsung_indoor
     id: wp_nasa_412a
     name: 'NASA 0x412A FSV 2094 unbekannt Rohwert'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1081,6 +1085,7 @@ sensor:
     message: 0x0202
     nasa_device_id: samsung_outdoor
     name: 'Fehlercode Kopie Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1090,6 +1095,7 @@ sensor:
     message: 0x0207
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x0207 AD_INSTALL_NUMBER_INDOOR'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1100,6 +1106,7 @@ sensor:
     message: 0x0210
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0210 NET_ADDRESS'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1110,6 +1117,7 @@ sensor:
     message: 0x0217
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x0217 PNP_NET_ADDRESS'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1120,6 +1128,7 @@ sensor:
     message: 0x0401
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0401 AD_ADDRESS_MAIN'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1130,6 +1139,7 @@ sensor:
     message: 0x0402
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0402 AD_ADDRESS_RMC'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1140,6 +1150,7 @@ sensor:
     message: 0x0408
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0408 AD_ADDRESS_SETUP'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1150,6 +1161,7 @@ sensor:
     message: 0x0409
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0409 AD_INSTALL_LEVEL_ALL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1160,6 +1172,7 @@ sensor:
     message: 0x040A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x040A AD_INSTALL_LEVEL_OPERATION_POWER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1170,6 +1183,7 @@ sensor:
     message: 0x040B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x040B AD_INSTALL_LEVEL_OPERATION_MODE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1180,6 +1194,7 @@ sensor:
     message: 0x040C
     nasa_device_id: samsung_indoor
     name: 'NASA 0x040C AD_INSTALL_LEVEL_FAN_MODE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1190,6 +1205,7 @@ sensor:
     message: 0x040D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x040D AD_INSTALL_LEVEL_FAN_DIRECTION'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1200,6 +1216,7 @@ sensor:
     message: 0x040E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x040E AD_INSTALL_LEVEL_TEMP_TARGET'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1210,6 +1227,7 @@ sensor:
     message: 0x0410
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x0410 AD_INSTALL_LEVEL_OPERATION_MODE_ONLY'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1220,6 +1238,7 @@ sensor:
     message: 0x0411
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0411 AD_INSTALL_LEVEL_COOL_MODE_UPPER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1230,6 +1249,7 @@ sensor:
     message: 0x0412
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0412 AD_INSTALL_LEVEL_COOL_MODE_LOWER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1240,6 +1260,7 @@ sensor:
     message: 0x0413
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0413 AD_INSTALL_LEVEL_HEAT_MODE_UPPER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1250,6 +1271,7 @@ sensor:
     message: 0x0414
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0414 AD_INSTALL_LEVEL_HEAT_MODE_LOWER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1260,6 +1282,7 @@ sensor:
     message: 0x0415
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0415 AD_INSTALL_LEVEL_CONTACT_CONTROL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1270,6 +1293,7 @@ sensor:
     message: 0x0416
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0416 AD_INSTALL_LEVEL_KEY_OPERATION_INPUT'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1280,6 +1304,7 @@ sensor:
     message: 0x0417
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0417'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1290,6 +1315,7 @@ sensor:
     message: 0x0418
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0418'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1299,6 +1325,7 @@ sensor:
     message: 0x0419
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0419'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1309,6 +1336,7 @@ sensor:
     message: 0x041B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x041B'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1319,6 +1347,7 @@ sensor:
     message: 0x2000
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2000 IM_MASTER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1328,6 +1357,7 @@ sensor:
     message: 0x2003
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2003 ADDRESSING'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1337,6 +1367,7 @@ sensor:
     message: 0x2004
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2004 PNP'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1346,6 +1377,7 @@ sensor:
     message: 0x200F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x200F NM_NETWORK_POSITINON_LAYER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1355,6 +1387,7 @@ sensor:
     message: 0x2012
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2012'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1364,6 +1397,7 @@ sensor:
     message: 0x2015
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2015'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1373,6 +1407,7 @@ sensor:
     message: 0x20FF
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x20FF'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1382,6 +1417,7 @@ sensor:
     message: 0x22F7
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22F7'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1391,6 +1427,7 @@ sensor:
     message: 0x22F8
     nasa_device_id: samsung_indoor
     name: 'NASA 0x22F8'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1401,6 +1438,7 @@ sensor:
     message: 0x22F9
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22F9'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1411,6 +1449,7 @@ sensor:
     message: 0x22FA
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22FA'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1421,6 +1460,7 @@ sensor:
     message: 0x22FB
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22FB'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1430,6 +1470,7 @@ sensor:
     message: 0x22FC
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22FC'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1439,6 +1480,7 @@ sensor:
     message: 0x22FD
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22FD'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1448,6 +1490,7 @@ sensor:
     message: 0x22FE
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22FE'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1457,6 +1500,7 @@ sensor:
     message: 0x22FF
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x22FF'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1467,6 +1511,7 @@ sensor:
     message: 0x2400
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2400 ALL_LAYER_DEVICE_COUNT'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1477,6 +1522,7 @@ sensor:
     message: 0x2401
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x2401'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1487,6 +1533,7 @@ sensor:
     message: 0x24FB
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x24FB'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1497,6 +1544,7 @@ sensor:
     message: 0x4006
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4006 FANSPEED'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1506,6 +1554,7 @@ sensor:
     message: 0x400F
     nasa_device_id: samsung_indoor
     name: 'NASA 0x400F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1515,6 +1564,7 @@ sensor:
     message: 0x4010
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4010'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1524,6 +1574,7 @@ sensor:
     message: 0x4015
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4015'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1533,6 +1584,7 @@ sensor:
     message: 0x4019
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4019'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1542,6 +1594,7 @@ sensor:
     message: 0x401B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x401B'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1551,6 +1604,7 @@ sensor:
     message: 0x4023
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4023 USE_SPI'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1560,6 +1614,7 @@ sensor:
     message: 0x4024
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4024 USE_FILTER_WARNING_TIME'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1569,6 +1624,7 @@ sensor:
     message: 0x4027
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4027 FILTER_WARNING'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1578,6 +1634,7 @@ sensor:
     message: 0x4029
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4029'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1587,6 +1644,7 @@ sensor:
     message: 0x402A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x402A'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1595,6 +1653,7 @@ sensor:
     message: 0x402B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x402B'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1604,6 +1663,7 @@ sensor:
     message: 0x402D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x402D'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1613,6 +1673,7 @@ sensor:
     message: 0x4031
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4031'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1622,6 +1683,7 @@ sensor:
     message: 0x4035
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4035'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1631,6 +1693,7 @@ sensor:
     message: 0x4038
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4038 IN_STATE_HUMIDITY_PERCENT'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     filters:
@@ -1639,6 +1702,7 @@ sensor:
     message: 0x4043
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4043 CONTROL_SPI'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1648,6 +1712,7 @@ sensor:
     message: 0x4046
     nasa_device_id: samsung_indoor
     name: 'Leisebetrieb Status'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1656,6 +1721,7 @@ sensor:
     message: 0x4047
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4047'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1665,6 +1731,7 @@ sensor:
     message: 0x4048
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4048'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1674,6 +1741,7 @@ sensor:
     message: 0x404F
     nasa_device_id: samsung_indoor
     name: 'NASA 0x404F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1683,6 +1751,7 @@ sensor:
     message: 0x4051
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4051'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1692,6 +1761,7 @@ sensor:
     message: 0x4059
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4059'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1700,6 +1770,7 @@ sensor:
     message: 0x405F
     nasa_device_id: samsung_indoor
     name: 'NASA 0x405F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1709,6 +1780,7 @@ sensor:
     message: 0x4060
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4060 IN_ALTERNATIVE_MODE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1718,6 +1790,7 @@ sensor:
     message: 0x4068
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4068 IN_SOLAR_PUMP'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1727,6 +1800,7 @@ sensor:
     message: 0x4069
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4069 IN_THERMOSTAT1'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     filters:
@@ -1735,6 +1809,7 @@ sensor:
     message: 0x406A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x406A IN_THERMOSTAT2'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     filters:
@@ -1743,6 +1818,7 @@ sensor:
     message: 0x406B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x406B SMART_GRID'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1752,6 +1828,7 @@ sensor:
     message: 0x406D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x406D IN_OUTING_MODE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1761,6 +1838,7 @@ sensor:
     message: 0x4070
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4070 IN_DISCHAGE_TEMP_CONTROL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1770,6 +1848,7 @@ sensor:
     message: 0x4073
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4073'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1779,6 +1858,7 @@ sensor:
     message: 0x4074
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4074'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1788,6 +1868,7 @@ sensor:
     message: 0x4077
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4077'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1797,6 +1878,7 @@ sensor:
     message: 0x407B
     nasa_device_id: samsung_indoor
     name: 'NASA 0x407B'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1806,6 +1888,7 @@ sensor:
     message: 0x407D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x407D'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1815,6 +1898,7 @@ sensor:
     message: 0x407E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x407E IN_LOUVER_LR_SWING'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1824,6 +1908,7 @@ sensor:
     message: 0x4085
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4085'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1833,6 +1918,7 @@ sensor:
     message: 0x4086
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4086 TEST_MODE_ENABLED'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1842,6 +1928,7 @@ sensor:
     message: 0x408A
     nasa_device_id: samsung_indoor
     name: 'Ventilstellung Code (3 = Warmwasser)'
+    device_id: nasa_roh
     entity_category: diagnostic
     filters:
       - delta: 0  # nur echte Änderungen senden
@@ -1849,6 +1936,7 @@ sensor:
     message: 0x40B5
     nasa_device_id: samsung_indoor
     name: 'NASA 0x40B5'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1858,6 +1946,7 @@ sensor:
     message: 0x40C5
     nasa_device_id: samsung_indoor
     name: 'NASA 0x40C5 IN_THERMOSTAT_WATER_HEATER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1867,6 +1956,7 @@ sensor:
     message: 0x40C6
     nasa_device_id: samsung_indoor
     name: 'NASA 0x40C6'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1876,6 +1966,7 @@ sensor:
     message: 0x40E3
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x40E3'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1885,6 +1976,7 @@ sensor:
     message: 0x4117
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4117'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1894,6 +1986,7 @@ sensor:
     message: 0x411E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x411E IN_OPERATION_POWER_ZONE2'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1903,6 +1996,7 @@ sensor:
     message: 0x4124
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4124 IN_SG_READY_MODE_STATE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1912,6 +2006,7 @@ sensor:
     message: 0x4125
     nasa_device_id: samsung_indoor
     name: 'FSV Laden und Speichern Status'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -1920,6 +2015,7 @@ sensor:
     message: 0x4202
     nasa_device_id: samsung_indoor
     name: 'Angeforderte Austrittstemperatur'
+    device_id: nasa_roh
     entity_category: diagnostic
     state_class: measurement
     filters:
@@ -1928,6 +2024,7 @@ sensor:
     message: 0x4204
     nasa_device_id: samsung_indoor
     name: 'Vorlauf Tw2 minus 2 K'
+    device_id: nasa_roh
     entity_category: diagnostic
     state_class: measurement
     filters:
@@ -1936,6 +2033,7 @@ sensor:
     message: 0x420C
     nasa_device_id: samsung_indoor
     name: 'Außentemperatur Innengerät Rohwert'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1946,15 +2044,18 @@ sensor:
     message: 0x4211
     nasa_device_id: samsung_indoor
     name: 'Angeforderte Leistung Innengerät'
+    device_id: nasa_roh
   # Einheit/Skalierung aus der Komponenten-Bibliothek (PR #135 an Beormund, 30.10.2026)
   - platform: samsung_nasa
     message: 0x4212
     nasa_device_id: samsung_indoor
     name: 'Leistung absolut Innengerät'
+    device_id: nasa_roh
   - platform: samsung_nasa
     message: 0x4213
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4213'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -1964,6 +2065,7 @@ sensor:
     message: 0x4217
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4217 IN_EEV_VALUE_REAL_1'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1974,6 +2076,7 @@ sensor:
     message: 0x4229
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4229 IN_MODEL_INFORMATION'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1984,6 +2087,7 @@ sensor:
     message: 0x423E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x423E'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -1994,6 +2098,7 @@ sensor:
     message: 0x428C
     nasa_device_id: samsung_indoor
     name: 'NASA 0x428C IN_TEMP_MIXING_VALVE_F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2004,6 +2109,7 @@ sensor:
     message: 0x428D
     nasa_device_id: samsung_indoor
     name: 'NASA 0x428D'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2014,6 +2120,7 @@ sensor:
     message: 0x42D6
     nasa_device_id: samsung_indoor
     name: 'NASA 0x42D6 IN_TEMP_TARGET_ZONE2_F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2024,6 +2131,7 @@ sensor:
     message: 0x42D7
     nasa_device_id: samsung_indoor
     name: 'NASA 0x42D7 IN_TEMP_WATER_OUTLET_TARGET_ZONE2_F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2034,6 +2142,7 @@ sensor:
     message: 0x42F1
     nasa_device_id: samsung_indoor
     name: 'NASA 0x42F1 OUT_COMP_FREQ_RATE_CONTROL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2044,6 +2153,7 @@ sensor:
     message: 0x4301
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4301'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2053,6 +2163,7 @@ sensor:
     message: 0x4401
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4401'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2062,6 +2173,7 @@ sensor:
     message: 0x440A
     nasa_device_id: samsung_indoor
     name: 'NASA 0x440A IN_DEVICE_STAUS_HEATPUMP_BOILER'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2072,6 +2184,7 @@ sensor:
     message: 0x440E
     nasa_device_id: samsung_indoor
     name: 'NASA 0x440E'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2081,6 +2194,7 @@ sensor:
     message: 0x440F
     nasa_device_id: samsung_indoor
     name: 'Fehlercode Kopie Innengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2090,6 +2204,7 @@ sensor:
     message: 0x8005
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8005'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2098,6 +2213,7 @@ sensor:
     message: 0x8031
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8031'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2106,6 +2222,7 @@ sensor:
     message: 0x8032
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8032'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2114,6 +2231,7 @@ sensor:
     message: 0x8033
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8033'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2122,6 +2240,7 @@ sensor:
     message: 0x803C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x803C OUT_OPERATION_AUTO_INSPECT_STEP'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2131,6 +2250,7 @@ sensor:
     message: 0x803F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x803F'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2143,6 +2263,7 @@ sensor:
     message: 0x8045
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8045'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2152,6 +2273,7 @@ sensor:
     message: 0x8046
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8046 OUT_OP_TEST_OP_COMPLETE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2161,6 +2283,7 @@ sensor:
     message: 0x8048
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8048'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2170,6 +2293,7 @@ sensor:
     message: 0x805E
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x805E'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2178,6 +2302,7 @@ sensor:
     message: 0x8062
     nasa_device_id: samsung_outdoor
     name: 'Abtauschritt logisch'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2186,6 +2311,7 @@ sensor:
     message: 0x8063
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8063'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2194,6 +2320,7 @@ sensor:
     message: 0x8065
     nasa_device_id: samsung_indoor
     name: 'NASA 0x8065 OUTDOOR_SYSTEM_RESET'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2203,6 +2330,7 @@ sensor:
     message: 0x8066
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8066 OUTDOOR_OPMODELIMIT'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2212,6 +2340,7 @@ sensor:
     message: 0x8075
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8075'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2221,6 +2350,7 @@ sensor:
     message: 0x8077
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8077'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2229,6 +2359,7 @@ sensor:
     message: 0x8078
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8078'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2237,6 +2368,7 @@ sensor:
     message: 0x8079
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8079'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2245,6 +2377,7 @@ sensor:
     message: 0x807A
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807A'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2254,6 +2387,7 @@ sensor:
     message: 0x807B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807B'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2263,6 +2397,7 @@ sensor:
     message: 0x807C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807C'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2272,6 +2407,7 @@ sensor:
     message: 0x807D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807D'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2281,6 +2417,7 @@ sensor:
     message: 0x807E
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807E'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2290,6 +2427,7 @@ sensor:
     message: 0x807F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x807F'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     filters:
@@ -2298,6 +2436,7 @@ sensor:
     message: 0x8081
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8081 OUTDOOR_EXT_CMD_OPERATION'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2307,6 +2446,7 @@ sensor:
     message: 0x8083
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8083'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2316,6 +2456,7 @@ sensor:
     message: 0x808D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x808D'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2325,6 +2466,7 @@ sensor:
     message: 0x808E
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x808E OUT_OP_CHECK_REF_STEP'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2334,6 +2476,7 @@ sensor:
     message: 0x809C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x809C OUT_CHECK_REF_RESULT'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2343,6 +2486,7 @@ sensor:
     message: 0x809D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x809D OUTDOOR_COOLONLY_MODEL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2352,6 +2496,7 @@ sensor:
     message: 0x80A7
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80A7 OUTDOOR_DRED_LEVEL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2361,6 +2506,7 @@ sensor:
     message: 0x80A9
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80A9'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2370,6 +2516,7 @@ sensor:
     message: 0x80AA
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80AA'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2379,6 +2526,7 @@ sensor:
     message: 0x80B1
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80B1'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2388,6 +2536,7 @@ sensor:
     message: 0x80B2
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80B2 OUTDOOR_CH_SWITCH_VALUE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2397,6 +2546,7 @@ sensor:
     message: 0x80B6
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80B6'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2406,6 +2556,7 @@ sensor:
     message: 0x80BC
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80BC'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2415,6 +2566,7 @@ sensor:
     message: 0x80BF
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80BF'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2424,6 +2576,7 @@ sensor:
     message: 0x80CE
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80CE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2433,6 +2586,7 @@ sensor:
     message: 0x80D8
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x80D8 OUT_EHS_WATEROUT_TYPE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2442,6 +2596,7 @@ sensor:
     message: 0x8200
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8200 OUTDOOR_OPMODE_OPTION'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2452,6 +2607,7 @@ sensor:
     message: 0x8202
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8202 OUT_INSTALL_COMP_NUM'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2462,6 +2618,7 @@ sensor:
     message: 0x8224
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8224'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     # Numerischer RAW-Verlauf; Bedeutung/Skalierung noch nicht bestaetigt.
@@ -2473,6 +2630,7 @@ sensor:
     message: 0x8225
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8225'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2482,6 +2640,7 @@ sensor:
     message: 0x8227
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8227 OUTDOOR_FAN_STEP2'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2492,6 +2651,7 @@ sensor:
     message: 0x8231
     nasa_device_id: samsung_outdoor
     name: 'Heizanteil Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2501,6 +2661,7 @@ sensor:
     message: 0x823C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x823C'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2510,6 +2671,7 @@ sensor:
     message: 0x8243
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8243'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2519,6 +2681,7 @@ sensor:
     message: 0x8244
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8244 OUTDOOR_OIL_RECOVERY_STEP'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2529,6 +2692,7 @@ sensor:
     message: 0x8245
     nasa_device_id: samsung_outdoor
     name: 'Ölausgleich Schritt'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2538,6 +2702,7 @@ sensor:
     message: 0x8247
     nasa_device_id: samsung_outdoor
     name: 'Abtauschritt'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2547,6 +2712,7 @@ sensor:
     message: 0x8248
     nasa_device_id: samsung_outdoor
     name: 'Sicherheitsstart Schritt'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2556,6 +2722,7 @@ sensor:
     message: 0x8249
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8249'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2565,6 +2732,7 @@ sensor:
     message: 0x824B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x824B'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2574,6 +2742,7 @@ sensor:
     message: 0x824C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x824C'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2583,6 +2752,7 @@ sensor:
     message: 0x825A
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x825A'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2593,6 +2763,7 @@ sensor:
     message: 0x825B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x825B'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2603,6 +2774,7 @@ sensor:
     message: 0x825C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x825C'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2613,6 +2785,7 @@ sensor:
     message: 0x825D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x825D'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2624,6 +2797,7 @@ sensor:
     nasa_device_id: samsung_outdoor
     id: wp_nasa_8278
     name: 'OCT1 Temperatur Rohwert'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
   # Abgleich 22.10.2026: OCT1 = Rohwert / 10; Rohsensor bleibt erhalten.
@@ -2651,11 +2825,13 @@ sensor:
     message: 0x8287
     nasa_device_id: samsung_outdoor
     name: 'Installationsleistung Außengerät'
+    device_id: nasa_roh
     id: wp_nasa_8287_capa
   - platform: samsung_nasa
     message: 0x8298
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8298 OUTDOOR_COOL_SUM_CAPA'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2666,6 +2842,7 @@ sensor:
     message: 0x829A
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x829A OUT_SENSOR_SUCTION2_1SEC'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2676,6 +2853,7 @@ sensor:
     message: 0x829B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x829B OUTDOOR_CT_RESTRICT_OPTION'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2686,6 +2864,7 @@ sensor:
     message: 0x82A2
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82A2'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2695,6 +2874,7 @@ sensor:
     message: 0x82A8
     nasa_device_id: samsung_outdoor
     name: 'Innengeräte Gesamtkapazität 1'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2704,6 +2884,7 @@ sensor:
     message: 0x82A9
     nasa_device_id: samsung_outdoor
     name: 'Innengeräte Gesamtkapazität 2'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2713,6 +2894,7 @@ sensor:
     message: 0x82AA
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82AA'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2723,6 +2905,7 @@ sensor:
     message: 0x82B2
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82B2'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     # Numerischer RAW-Verlauf; Bedeutung/Skalierung noch nicht bestaetigt.
@@ -2734,6 +2917,7 @@ sensor:
     message: 0x82B5
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82B5'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2743,6 +2927,7 @@ sensor:
     message: 0x82B8
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82B8 OUT_SENSOR_MIDPRESS'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2753,6 +2938,7 @@ sensor:
     message: 0x82BC
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82BC OUT_PROJECT_CODE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2763,6 +2949,7 @@ sensor:
     message: 0x82D1
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82D1'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2773,6 +2960,7 @@ sensor:
     message: 0x82D5
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82D5 OUTDOOR_UPL_TP_COOL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2783,6 +2971,7 @@ sensor:
     message: 0x82D6
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82D6 OUTDOOR_UPL_TP_HEAT'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2793,6 +2982,7 @@ sensor:
     message: 0x82D7
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82D7'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2803,6 +2993,7 @@ sensor:
     message: 0x82D8
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82D8'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2813,6 +3004,7 @@ sensor:
     message: 0x82DE
     nasa_device_id: samsung_outdoor
     name: 'Doppelrohr-Wärmetauscher Temperatur Kopie'
+    device_id: nasa_roh
     entity_category: diagnostic
     state_class: measurement
     filters:
@@ -2822,11 +3014,13 @@ sensor:
     message: 0x82E3
     nasa_device_id: samsung_outdoor
     name: 'Nennleistung Außengerät'
+    device_id: nasa_roh
     id: wp_nasa_82e3_capa
   - platform: samsung_nasa
     message: 0x82E8
     nasa_device_id: samsung_outdoor
     name: 'HR-Bypass-EEV'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2836,6 +3030,7 @@ sensor:
     message: 0x82ED
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82ED'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2845,6 +3040,7 @@ sensor:
     message: 0x82F6
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x82F6'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2854,6 +3050,7 @@ sensor:
     message: 0x8401
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8401'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2864,6 +3061,7 @@ sensor:
     message: 0x8404
     nasa_device_id: samsung_outdoor
     name: 'Zustandsbits Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2877,6 +3075,7 @@ sensor:
     message: 0x8405
     nasa_device_id: samsung_outdoor
     name: 'Verdichter Betriebsstunden'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2886,6 +3085,7 @@ sensor:
     message: 0x8408
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8408'
+    device_id: nasa_roh
     entity_category: diagnostic
     accuracy_decimals: 0
     state_class: measurement
@@ -2895,6 +3095,7 @@ sensor:
     message: 0x8409
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8409'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2905,6 +3106,7 @@ sensor:
     message: 0x840B
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x840B OUT_AUTO_INSPECT_RESULT0'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2915,6 +3117,7 @@ sensor:
     message: 0x840C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x840C OUT_AUTO_INSPECT_RESULT1'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2925,6 +3128,7 @@ sensor:
     message: 0x8417
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8417 OUTDOOR_VARIABLE_SETUP_INFO'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2935,6 +3139,7 @@ sensor:
     message: 0x841A
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x841A'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -2945,6 +3150,7 @@ sensor:
     message: 0x841F
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x841F'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
     accuracy_decimals: 0
@@ -4820,38 +5026,47 @@ binary_sensor:
   # Einzelbits von 0x8404, nur beobachtete Bits, ohne Funktionszuordnung (Auswertung 30.10.2026)
   - platform: template
     name: 'NASA 0x8404 Bit 01'
+    device_id: nasa_roh
     id: nasa_8404_bit_01
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 06'
+    device_id: nasa_roh
     id: nasa_8404_bit_06
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 09'
+    device_id: nasa_roh
     id: nasa_8404_bit_09
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 13'
+    device_id: nasa_roh
     id: nasa_8404_bit_13
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 15'
+    device_id: nasa_roh
     id: nasa_8404_bit_15
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 16'
+    device_id: nasa_roh
     id: nasa_8404_bit_16
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 18'
+    device_id: nasa_roh
     id: nasa_8404_bit_18
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 23'
+    device_id: nasa_roh
     id: nasa_8404_bit_23
     entity_category: diagnostic
   - platform: template
     name: 'NASA 0x8404 Bit 26'
+    device_id: nasa_roh
     id: nasa_8404_bit_26
     entity_category: diagnostic
   - platform: samsung_nasa
@@ -5043,6 +5258,7 @@ text_sensor:
     message: 0x8404
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8404 Rohwert exakt'
+    device_id: nasa_roh
     id: nasa_8404_exakt
     entity_category: diagnostic
     on_value:
@@ -5063,18 +5279,21 @@ text_sensor:
             id(nasa_8404_bit_26).publish_state((v >> 26) & 1);
   - platform: template
     name: 'NASA 0x8404 hex'
+    device_id: nasa_roh
     id: nasa_8404_hex
     entity_category: diagnostic
     update_interval: never
   # Letzter Empfang 0x803F/0x8404 (passiv, aus jedem Telegramm); höchstens einmal pro Minute, nur bei neuem Empfang
   - platform: template
     name: 'NASA 0x803F letzter Empfang'
+    device_id: nasa_roh
     id: nasa_803f_letzter_empfang
     device_class: timestamp
     entity_category: diagnostic
     update_interval: never
   - platform: template
     name: 'NASA 0x8404 letzter Empfang'
+    device_id: nasa_roh
     id: nasa_8404_letzter_empfang
     device_class: timestamp
     entity_category: diagnostic
@@ -5114,6 +5333,7 @@ text_sensor:
     message: 0x461E
     nasa_device_id: samsung_indoor
     name: 'Fehlerhistorie Innengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   # FSV-Info 0x4612 (Antwort auf Leseanfrage mit FSV-Nummer): [FSV 2B] 01 [Typ] 01 [Min 2B] [Max 2B] [Wert 2B] 01 00 00 00
   - platform: samsung_nasa
@@ -5152,61 +5372,72 @@ text_sensor:
     message: 0x0600
     nasa_device_id: samsung_indoor
     name: 'Produktoption Innengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0601
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0601 AD_OPTION_INSTALL'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0602
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0602 AD_OPTION_INSTALL_2'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0603
     nasa_device_id: samsung_indoor
     name: 'NASA 0x0603 AD_OPTION_CYCLE'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0608
     nasa_device_id: samsung_indoor
     name: 'Firmware-Stand Innengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x0608
     nasa_device_id: samsung_outdoor
     name: 'Firmware-Stand Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x060C
     nasa_device_id: samsung_outdoor
     name: 'EEPROM-Stand Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x4604
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4604 IN_INSTALL_INDOOR_SETUP_INFO'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x8608
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x8608'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x860C
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x860C'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x860D
     nasa_device_id: samsung_outdoor
     name: 'NASA 0x860D OUTDOOR_MODELINFORMATION'
+    device_id: nasa_roh
     internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
     entity_category: diagnostic
   # Lesende Anzeigen; keine select-Plattform und damit keine Schreibsteuerung.
@@ -5234,11 +5465,13 @@ text_sensor:
     message: 0x8003
     nasa_device_id: samsung_outdoor
     name: 'Betriebszustand Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x800D
     nasa_device_id: samsung_outdoor
     name: 'Lüfter Betriebszustand Außengerät'
+    device_id: nasa_roh
     entity_category: diagnostic
   - platform: samsung_nasa
     message: 0x4067
