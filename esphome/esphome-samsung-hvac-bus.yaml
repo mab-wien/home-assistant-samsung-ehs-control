@@ -227,7 +227,7 @@ samsung_nasa:
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
-# fuer den Nutzer freigegeben; zusaetzliche FSV-Daten intern und als Lesekopien.
+# fuer den Nutzer freigegeben (dazu FSV 4052); zusaetzliche FSV-Daten intern und als Lesekopien.
 
 number:
   - platform: samsung_nasa
@@ -632,9 +632,10 @@ number:
   - platform: samsung_nasa
     fsv: 4052
     nasa_device_id: samsung_indoor
-    name: 'FSV 4052 - Inverterpumpe Sollspreizung (intern)'
+    name: 'FSV 4052 - Inverterpumpe Sollspreizung'
     id: fsv_4052
-    internal: true
+    device_id: fsv_4
+    entity_category: config
 
   - platform: samsung_nasa
     fsv: 4053

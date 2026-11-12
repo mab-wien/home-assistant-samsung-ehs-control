@@ -1,6 +1,6 @@
 # Firmware-Stand
 
-Aktuell auf dem ESP (Stand 11.11.2026):
+Aktuell auf dem ESP (Stand 12.11.2026):
 
 | | |
 |---|---|
@@ -9,6 +9,7 @@ Aktuell auf dem ESP (Stand 11.11.2026):
 | Absenderadresse | `80.ff.02` (`source_address`) |
 | Druckwerte | Hoch-/Niederdruck in bar (Überdruck) |
 | Flashen | OTA vom Server, siehe [README](../README.md#bauen-und-flashen) |
+| Schreibbare FSV | FSV 4052 (Inverterpumpe Sollspreizung, 2–8 K) als Zahl in HA |
 | Ergebnis | läuft, nach dem Start alle Werte vorhanden, Fehlercode 0 |
 
 Nicht übermittelte Werte: Zone 1/2 Vorlauf-Soll, EVI SOL1/2, Heißgas-Solltemperatur und FSV 6041 sind in der YAML
