@@ -227,7 +227,7 @@ samsung_nasa:
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
-# fuer den Nutzer freigegeben (dazu FSV 4052, 2093 und 2091 als deutsche Template-Auswahl); zusaetzliche FSV-Daten intern und als Lesekopien.
+# fuer den Nutzer freigegeben (dazu FSV 4013, 4052, 2093 und 2091 als deutsche Template-Auswahl); zusaetzliche FSV-Daten intern und als Lesekopien.
 
 number:
   - platform: samsung_nasa
@@ -488,9 +488,10 @@ number:
   - platform: samsung_nasa
     fsv: 4013
     nasa_device_id: samsung_indoor
-    name: 'FSV 4013 - Heizung Abschalttemperatur außen (intern)'
+    name: 'FSV 4013 - Heizgrenze (Heizung aus über Außentemperatur)'
     id: fsv_4013
-    internal: true
+    device_id: fsv_4
+    entity_category: config
   - platform: samsung_nasa
     fsv: 4024
     nasa_device_id: samsung_indoor
