@@ -2042,6 +2042,7 @@ sensor:
     message: 0x4202
     nasa_device_id: samsung_indoor
     name: 'Angeforderte Austrittstemperatur'
+    id: outlet_target_requested  # tatsächliches Vorlauf-Ziel ans Außengerät (Heizkurve bzw. fester Sollwert)
     device_id: nasa_roh
     entity_category: diagnostic
     state_class: measurement
@@ -4035,7 +4036,9 @@ sensor:
     state_class: measurement
     accuracy_decimals: 1
     update_interval: 30s
+    # 0x4202 = wirksames Ziel (im Thermostatbetrieb Heizkurve, nicht das feste Heat-Soll 0x4247)
     lambda: |-
+      if (id(outlet_target_requested).has_state()) return id(outlet_target_requested).state;
       return id(outlet_target).state;
     filters:
       - delta: 0  # nur echte Änderungen senden
@@ -4151,7 +4154,9 @@ sensor:
     accuracy_decimals: 2
     update_interval: 15s
     lambda: |-
-      if (!id(water_out).has_state() || !id(outlet_target).has_state()) return NAN;
+      if (!id(water_out).has_state()) return NAN;
+      if (id(outlet_target_requested).has_state()) return id(water_out).state - id(outlet_target_requested).state;
+      if (!id(outlet_target).has_state()) return NAN;
       return id(water_out).state - id(outlet_target).state;
     filters:
       - delta: 0  # nur echte Änderungen senden
