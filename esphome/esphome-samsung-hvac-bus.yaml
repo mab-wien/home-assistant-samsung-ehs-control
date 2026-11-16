@@ -227,7 +227,7 @@ samsung_nasa:
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
-# fuer den Nutzer freigegeben (dazu FSV 4052, 2091 und 2093); zusaetzliche FSV-Daten intern und als Lesekopien.
+# fuer den Nutzer freigegeben (dazu FSV 4052, 2093 und 2091 als deutsche Template-Auswahl); zusaetzliche FSV-Daten intern und als Lesekopien.
 
 number:
   - platform: samsung_nasa
@@ -676,9 +676,9 @@ select:
   - platform: samsung_nasa
     fsv: 2091
     nasa_device_id: samsung_indoor
-    name: 'FSV 2091 - Externer Raumthermostat Zone 1'
+    name: 'FSV 2091 - Externer Raumthermostat Zone 1 (intern)'
     id: fsv_2091
-    device_id: fsv_2
+    internal: true  # in HA als deutsche Auswahl fsv_2091_auswahl (Bibliotheks-Texte nicht änderbar)
   - platform: samsung_nasa
     fsv: 2092
     nasa_device_id: samsung_indoor
@@ -757,6 +757,31 @@ select:
     name: 'FSV 5043 - Kontaktlogik Benefit kWh (intern)'
     id: fsv_5043
     internal: true
+  # FSV 2091 mit Texten nach MIM-E03EN-Handbuch S. 28; Index = FSV-Wert, schreibt über fsv_2091
+  - platform: template
+    name: 'FSV 2091 - Externer Raumthermostat Zone 1'
+    id: fsv_2091_auswahl
+    device_id: fsv_2
+    entity_category: config
+    icon: mdi:thermostat
+    update_interval: 15s
+    options:
+      - '0 – kein Thermostat'
+      - '1 – nur Thermostat'
+      - '2 – Thermostat oder Heizkurve, Pumpe aus'
+      - '3 – Thermostat oder Heizkurve, Pumpe ein'
+      - '4 – Thermostat oder Heizkurve, Pumpe 3 Min ein / 7 Min aus'
+    lambda: |-
+      if (!id(fsv_2091).has_state()) return {};
+      auto i = id(fsv_2091).active_index();
+      if (!i.has_value()) return {};
+      auto o = id(fsv_2091_auswahl).at(*i);
+      if (!o.has_value()) return {};
+      return std::string(*o);
+    set_action:
+      - select.set_index:
+          id: fsv_2091
+          index: !lambda 'return id(fsv_2091_auswahl).index_of(x).value_or(0);'
 
 switch:
   - platform: template
