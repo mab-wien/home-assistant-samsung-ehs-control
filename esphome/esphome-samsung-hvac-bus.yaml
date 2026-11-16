@@ -1802,7 +1802,7 @@ sensor:
     nasa_device_id: samsung_indoor
     name: 'NASA 0x4069 IN_THERMOSTAT1'
     device_id: nasa_roh
-    internal: true  # ohne Funktion in dieser Anlage (Einordnung 06.11.2026)
+    # Thermostat-Eingang Zone 1 (B20/B22): 0 aus, 1 Kühlen, 2 Heizen – sichtbar für Thermostatbetrieb (FSV 2091)
     entity_category: diagnostic
     filters:
       - delta: 0  # nur echte Änderungen senden
