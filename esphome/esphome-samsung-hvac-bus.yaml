@@ -227,7 +227,7 @@ samsung_nasa:
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
-# fuer den Nutzer freigegeben (dazu FSV 4052 und 2093); zusaetzliche FSV-Daten intern und als Lesekopien.
+# fuer den Nutzer freigegeben (dazu FSV 4052, 2091 und 2093); zusaetzliche FSV-Daten intern und als Lesekopien.
 
 number:
   - platform: samsung_nasa
@@ -676,9 +676,9 @@ select:
   - platform: samsung_nasa
     fsv: 2091
     nasa_device_id: samsung_indoor
-    name: 'FSV 2091 - Externer Raumthermostat Zone 1 (intern)'
+    name: 'FSV 2091 - Externer Raumthermostat Zone 1'
     id: fsv_2091
-    internal: true
+    device_id: fsv_2
   - platform: samsung_nasa
     fsv: 2092
     nasa_device_id: samsung_indoor
