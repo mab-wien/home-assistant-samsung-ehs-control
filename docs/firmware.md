@@ -9,7 +9,7 @@ Aktuell auf dem ESP (Stand 16.11.2026):
 | Absenderadresse | `80.ff.02` (`source_address`) |
 | Druckwerte | Hoch-/Niederdruck in bar (Überdruck) |
 | Flashen | OTA vom Server, siehe [README](../README.md#bauen-und-flashen) |
-| Schreibbare FSV | FSV 4013 (Heizgrenze außen, 10–35 °C) und FSV 4052 (Inverterpumpe Sollspreizung, 2–8 K) als Zahl, FSV 2093 (Raumtemperaturregelung Betriebsart, 1–4) und FSV 2091 (Externer Raumthermostat Zone 1, 0–4, deutsche Texte nach MIM-E03EN-Handbuch S. 28) als Auswahl in HA |
+| Schreibbare FSV | FSV 3026 (max. Heizzeit zwischen WW, 0,5–10 h; Anzeige rundet wegen Ganzzahl-Division unter 1 h auf 0), FSV 3032 (Heizstab-Verzögerung, 20–95 min), FSV 4013 (Heizgrenze außen, 10–35 °C) und FSV 4052 (Inverterpumpe Sollspreizung, 2–8 K) als Zahl, FSV 2093 (Raumtemperaturregelung Betriebsart, 1–4) und FSV 2091 (Externer Raumthermostat Zone 1, 0–4, deutsche Texte nach MIM-E03EN-Handbuch S. 28) als Auswahl in HA |
 | Ergebnis | läuft, nach dem Start alle Werte vorhanden, Fehlercode 0 |
 
 Thermostat-Eingang Zone 1 (NASA 0x4069, Klemmen B20/B22) seit 16.11.2026 wieder in HA (`sensor.nasa_rohwerte_diagnose_nasa_0x4069_in_thermostat1`,

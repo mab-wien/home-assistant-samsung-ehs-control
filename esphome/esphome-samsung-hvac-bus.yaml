@@ -227,7 +227,7 @@ samsung_nasa:
       id: samsung_wifikit
 
 # ACHTUNG: number/select/switch sind bei Beormund schreibfaehig. Nur Bestandssteuerungen
-# fuer den Nutzer freigegeben (dazu FSV 4013, 4052, 2093 und 2091 als deutsche Template-Auswahl); zusaetzliche FSV-Daten intern und als Lesekopien.
+# fuer den Nutzer freigegeben (dazu FSV 3026, 3032, 4013, 4052, 2093 und 2091 als deutsche Template-Auswahl); zusaetzliche FSV-Daten intern und als Lesekopien.
 
 number:
   - platform: samsung_nasa
@@ -416,15 +416,17 @@ number:
   - platform: samsung_nasa
     fsv: 3026
     nasa_device_id: samsung_indoor
-    name: 'FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser (intern)'
+    name: 'FSV 3026 - Raumheizung maximale Laufzeit zwischen Warmwasser'
     id: fsv_3026
-    internal: true
+    device_id: fsv_3
+    entity_category: config
   - platform: samsung_nasa
     fsv: 3032
     nasa_device_id: samsung_indoor
-    name: 'FSV 3032 - Warmwasser Heizstab Einschaltverzögerung (intern)'
+    name: 'FSV 3032 - Warmwasser Heizstab Einschaltverzögerung'
     id: fsv_3032
-    internal: true
+    device_id: fsv_3
+    entity_category: config
   - platform: samsung_nasa
     fsv: 3033
     nasa_device_id: samsung_indoor
