@@ -26,3 +26,11 @@ Nicht übermittelte Werte: Zone 1/2 Vorlauf-Soll, EVI SOL1/2, Heißgas-Solltempe
 Erste Werte 08:26: 80B7 = 255, 82B0 = 29, 82B1 = 65400 (−136), 82AC = 299, 82AD = 65515 (−21), 8283 = 365, 8257 = 43,
 übrige 0/65535. Ein Versuch mit 107 Kennungen per Rundsendung (07:19–08:13) brachte keine Antworten und senkte den
 freien Speicher auf ~25 KB (Syslog sperrte) – zurückgebaut.
+
+### Neu/unbekannt, Runde 2 (17.11.2026)
+
+Zusätzlich 0x824A, 0x8289, 0x828A, 0x828B, 0x828C, 0x8297, 0x829E, 0x826A, 0x827B, 0x827D, 0x82AB (in Debug-Abfragen
+veränderlich) sowie 0x840D als exakter Hex-Text (`numeric_format: hex`; als Float-Sensor gingen bei 32 Bit die unteren
+Bits verloren). Alle 24 Kennungen gezielt an 10.00.00 in drei Gruppen alle 600 s gelesen. Kein Änderungsfilter mehr:
+jede Antwort wird veröffentlicht, HA führt die Empfangszeit als `last_reported` (gilt nicht für den Hex-Text, der nur
+bei Änderung sendet). Rohwerte unskaliert, Bedeutung unbestätigt.
