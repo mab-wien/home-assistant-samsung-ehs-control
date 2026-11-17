@@ -5933,6 +5933,49 @@ interval:
 #           id: [fsv_1061_probe, fsv_1062_probe, fsv_1063_probe, fsv_1064_probe]
 
 button:
+  # Einmal-Abfrage weiterer Kennungen (gezielt an 10.00.00, nur lesend); Antworten erscheinen im Debug-Mitschnitt
+  # als 'Undefined'. Vorher 'Debug & Syslog' einschalten.
+  - platform: template
+    name: 'Unbekannte Kennungen einmal lesen'
+    id: unbekannte_kennungen_lesen
+    icon: mdi:magnify-scan
+    entity_category: diagnostic
+    on_press:
+      - lambda: |-
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(true);
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x40A8, 0x40EA, 0x4109, 0x415A, 0x428E, 0x428F, 0x441C, 0x8002, 0x8004, 0x8006});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x8007, 0x8008, 0x8009, 0x800A, 0x800B, 0x800E, 0x8030, 0x8036, 0x8043, 0x8057});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x805F, 0x806B, 0x806C, 0x806D, 0x806E, 0x806F, 0x8070, 0x8071, 0x8072, 0x8073});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x8074, 0x8076, 0x8082, 0x8084, 0x8085, 0x8086, 0x8087, 0x8088, 0x8089, 0x808B});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x808C, 0x8090, 0x8091, 0x8093, 0x8094, 0x809B, 0x80C0, 0x80C2, 0x80C4, 0x80CF});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x80DF, 0x8246, 0x824A, 0x824F, 0x8258, 0x8259, 0x825E, 0x8269, 0x826A, 0x827B});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x827D, 0x8284, 0x8285, 0x8288, 0x8289, 0x828A, 0x828B, 0x828C, 0x828D, 0x828E});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x828F, 0x8290, 0x8291, 0x8292, 0x8293, 0x8294, 0x8295, 0x8296, 0x8297, 0x829C});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x829D, 0x829E, 0x82A1, 0x82A6, 0x82AB, 0x82AF, 0x82B4, 0x82B9, 0x82E2, 0x840A});
+      - delay: 4s
+      - lambda: |-
+          id(samsung_nasa_controller).read_from("10.00.00", {0x840D, 0x8418, 0x841B, 0x841C, 0x841D});
+      - delay: 4s
+      - delay: 20s
+      - lambda: |-
+          id(samsung_nasa_controller).set_debug_log_undefined_messages(false);
 
   # EXPERIMENTELL: NASA 0x8065 = 1; Wirkung als K3-Reset nicht bestaetigt.
   # Ausschliesslich manueller Aufruf. Keine automatische Fehlerquittierung.
