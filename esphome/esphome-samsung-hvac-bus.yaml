@@ -934,6 +934,116 @@ switch:
     internal: true
 
 sensor:
+  # Neu/unbekannt (17.11.2026, Test): Kennungen aus Bus-Abfrage, die das Außengerät nicht von sich aus sendet.
+  # Gezielt (addressed) an 10.00.00 alle 10 min gelesen, nur lesend; Bedeutung später aus den Verläufen.
+  - platform: samsung_nasa
+    message: 0x80B7
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x80B7 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_80b7
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x82B0
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x82B0 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_82b0
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x82B1
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x82B1 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_82b1
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x82AC
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x82AC (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_82ac
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x82AD
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x82AD (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_82ad
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x823A
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x823A (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_823a
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x8283
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x8283 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_8283
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x82C6
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x82C6 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_82c6
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x82F3
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x82F3 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_82f3
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x8299
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x8299 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_8299
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x808A
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x808A (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_808a
+    entity_category: diagnostic
+    filters:
+      - delta: 0
+  - platform: samsung_nasa
+    message: 0x8257
+    nasa_device_id: samsung_outdoor
+    name: 'Neu 0x8257 (unbekannt)'
+    device_id: nasa_roh
+    id: wp_neu_8257
+    entity_category: diagnostic
+    filters:
+      - delta: 0
   # Abfrage 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
   # FSV 5012/5042/5043 kommen seit 23.10.2026 aus der Bibliothek (fsv:), Lesekopien unten.
   - platform: samsung_nasa
@@ -5771,6 +5881,12 @@ climate:
         current_temperature: 0.1
 
 interval:
+  # Neu/unbekannt: alle 10 min gezielt beim Außengerät lesen (nur lesend)
+  - interval: 600s
+    then:
+      - samsung_nasa.request_read:
+          addressed: true
+          id: [wp_neu_80b7, wp_neu_82b0, wp_neu_82b1, wp_neu_82ac, wp_neu_82ad, wp_neu_823a, wp_neu_8283, wp_neu_82c6, wp_neu_82f3, wp_neu_8299, wp_neu_808a, wp_neu_8257]
   # Heißgas-Sollwerte 0x8223/0x422B: gezielte Abfrage am 30.10.2026 getestet, Außen- und Innengerät antworten
   # mit 65535 (= bei diesem Modell nicht vorhanden). Daher keine regelmäßige Abfrage.
   # Empfangszeitpunkte 0x803F/0x8404 einmal pro Minute veröffentlichen, nur wenn neu

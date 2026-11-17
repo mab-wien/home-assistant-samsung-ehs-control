@@ -17,3 +17,12 @@ Thermostat-Eingang Zone 1 (NASA 0x4069, Klemmen B20/B22) seit 16.11.2026 wieder 
 
 Nicht übermittelte Werte: Zone 1/2 Vorlauf-Soll, EVI SOL1/2, Heißgas-Solltemperatur und FSV 6041 sind in der YAML
 `internal`, weil diese Anlage darauf keinen Wert liefert (65535 bzw. keine Antwort).
+
+## Neu/unbekannt (17.11.2026)
+
+12 Kennungen, die das Außengerät nur auf gezielte Anfrage beantwortet (`request_read` mit `addressed: true` an
+10.00.00, alle 10 min, nur lesend): 0x80B7, 0x82B0, 0x82B1, 0x82AC, 0x82AD, 0x823A, 0x8283, 0x82C6, 0x82F3, 0x8299,
+0x808A, 0x8257. In HA als „Neu 0x… (unbekannt)“ unter den Rohwerten; Bedeutung wird aus den Verläufen bestimmt.
+Erste Werte 08:26: 80B7 = 255, 82B0 = 29, 82B1 = 65400 (−136), 82AC = 299, 82AD = 65515 (−21), 8283 = 365, 8257 = 43,
+übrige 0/65535. Ein Versuch mit 107 Kennungen per Rundsendung (07:19–08:13) brachte keine Antworten und senkte den
+freien Speicher auf ~25 KB (Syslog sperrte) – zurückgebaut.
