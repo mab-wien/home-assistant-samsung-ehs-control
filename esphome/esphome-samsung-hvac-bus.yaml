@@ -943,6 +943,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_824a
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x8289
     nasa_device_id: samsung_outdoor
@@ -950,6 +951,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_8289
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x828A
     nasa_device_id: samsung_outdoor
@@ -957,6 +959,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_828a
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x828B
     nasa_device_id: samsung_outdoor
@@ -964,6 +967,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_828b
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x828C
     nasa_device_id: samsung_outdoor
@@ -971,6 +975,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_828c
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x8297
     nasa_device_id: samsung_outdoor
@@ -978,6 +983,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_8297
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x829E
     nasa_device_id: samsung_outdoor
@@ -985,6 +991,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_829e
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x826A
     nasa_device_id: samsung_outdoor
@@ -992,6 +999,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_826a
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x827B
     nasa_device_id: samsung_outdoor
@@ -999,6 +1007,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_827b
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x827D
     nasa_device_id: samsung_outdoor
@@ -1006,6 +1015,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_827d
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82AB
     nasa_device_id: samsung_outdoor
@@ -1013,6 +1023,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82ab
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   # Neu/unbekannt (17.11.2026, Test): Kennungen aus Bus-Abfrage, die das Außengerät nicht von sich aus sendet.
   # Gezielt (addressed) an 10.00.00 alle 10 min gelesen, nur lesend; Bedeutung später aus den Verläufen.
   - platform: samsung_nasa
@@ -1022,6 +1033,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_80b7
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82B0
     nasa_device_id: samsung_outdoor
@@ -1029,6 +1041,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82b0
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82B1
     nasa_device_id: samsung_outdoor
@@ -1036,6 +1049,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82b1
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82AC
     nasa_device_id: samsung_outdoor
@@ -1043,6 +1057,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82ac
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82AD
     nasa_device_id: samsung_outdoor
@@ -1050,6 +1065,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82ad
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x823A
     nasa_device_id: samsung_outdoor
@@ -1057,6 +1073,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_823a
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x8283
     nasa_device_id: samsung_outdoor
@@ -1064,6 +1081,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_8283
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82C6
     nasa_device_id: samsung_outdoor
@@ -1071,6 +1089,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82c6
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x82F3
     nasa_device_id: samsung_outdoor
@@ -1078,6 +1097,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_82f3
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x8299
     nasa_device_id: samsung_outdoor
@@ -1085,6 +1105,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_8299
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x808A
     nasa_device_id: samsung_outdoor
@@ -1092,6 +1113,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_808a
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   - platform: samsung_nasa
     message: 0x8257
     nasa_device_id: samsung_outdoor
@@ -1099,6 +1121,7 @@ sensor:
     device_id: nasa_roh
     id: wp_neu_8257
     entity_category: diagnostic
+    force_update: true  # jede Antwort in HA schreiben (Empfangszeit), auch bei gleichem Wert
   # Abfrage 22.10.2026: FSV 2094 (0x412A) fehlt in der Fork-Bibliothek, daher als Rohwert.
   # FSV 5012/5042/5043 kommen seit 23.10.2026 aus der Bibliothek (fsv:), Lesekopien unten.
   - platform: samsung_nasa

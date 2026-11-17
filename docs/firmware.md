@@ -34,3 +34,6 @@ veränderlich) sowie 0x840D als exakter Hex-Text (`numeric_format: hex`; als Flo
 Bits verloren). Alle 24 Kennungen gezielt an 10.00.00 in drei Gruppen alle 600 s gelesen. Kein Änderungsfilter mehr:
 jede Antwort wird veröffentlicht, HA führt die Empfangszeit als `last_reported` (gilt nicht für den Hex-Text, der nur
 bei Änderung sendet). Rohwerte unskaliert, Bedeutung unbestätigt.
+Nachtrag: Damit HA auch unveränderte Antworten speichert, haben die 23 Sensoren `force_update: true`
+(sonst verwirft HA gleiche Werte und die Empfangszeit bleibt stehen). Geprüft: 0x80B7 (konstant 255) wird alle 10 min neu
+gestempelt.
