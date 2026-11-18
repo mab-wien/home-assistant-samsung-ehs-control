@@ -6138,6 +6138,33 @@ button:
                 value: 2
                 data_type: write
 
+  # Heizwasserpumpe: Eine feste Drehzahl-Vorgabe über 0x40C4 (Werte 25–100) bleibt im Innengerät gespeichert und
+  # übersteuert die Regelung nach Sollspreizung (FSV 4052). 255 hebt die Vorgabe auf. Nur manuell, 60 s Abstand.
+  - platform: template
+    name: 'Heizwasserpumpe auf Automatik (0x40C4 = 255)'
+    id: pumpe_pwm_automatik
+    icon: mdi:pump
+    entity_category: config
+    on_press:
+      - if:
+          condition:
+            lambda: |-
+              static uint32_t last_attempt = 0;
+              const uint32_t now_ms = millis();
+              if (last_attempt != 0 && (uint32_t)(now_ms - last_attempt) < 60000) {
+                ESP_LOGW("pumpe", "Nicht gesendet: 60 Sekunden Abstand erforderlich");
+                return false;
+              }
+              last_attempt = now_ms;
+              ESP_LOGW("pumpe", "NASA Write an 20.00.00: 0x40C4 = 255 (feste Pumpendrehzahl aufheben)");
+              return true;
+          then:
+            - samsung_nasa.request_write_as:
+                nasa_device_id: samsung_indoor
+                message: 0x40c4
+                value: 255
+                data_type: write
+
   # Fehlerdaten des Aussengeraets abfragen (Telegramme 31.10.2026 am Bus mitgeschnitten). Antworten nur im Rohbyte-Mitschnitt
   # (Debug & Syslog + NASA Rohbytes), Auswertung: docker-ki-environment/scripts/wp-860b-dekodieren.py.
   # Weitere FSV über FSV-Info lesen (0x4612, NASA READ an 20.00.00, Nutzdaten = FSV-Nummer + 13 x 0), wie das WLAN-Modul beim Start. Nur lesend.
