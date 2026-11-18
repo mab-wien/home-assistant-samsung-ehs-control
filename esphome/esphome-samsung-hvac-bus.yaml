@@ -5982,6 +5982,11 @@ interval:
       - samsung_nasa.request_read:
           addressed: true
           id: [wp_neu_828c, wp_neu_8297, wp_neu_829e, wp_neu_826a, wp_neu_827b, wp_neu_827d, wp_neu_82ab, wp_neu_840d]
+      - delay: 3s
+      # EVI-Magnetventile 0x8022/0x8023 werden nicht mehr von sich aus gesendet
+      - samsung_nasa.request_read:
+          addressed: true
+          id: [evi_sol1_raw, evi_sol2_raw]
   # Heißgas-Sollwerte 0x8223/0x422B: gezielte Abfrage am 30.10.2026 getestet, Außen- und Innengerät antworten
   # mit 65535 (= bei diesem Modell nicht vorhanden). Daher keine regelmäßige Abfrage.
   # Empfangszeitpunkte 0x803F/0x8404 einmal pro Minute veröffentlichen, nur wenn neu
